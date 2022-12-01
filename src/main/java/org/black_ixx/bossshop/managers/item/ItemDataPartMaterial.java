@@ -1,5 +1,6 @@
 package org.black_ixx.bossshop.managers.item;
 
+import com.francobm.magicosmetics.api.MagicAPI;
 import dev.lone.itemsadder.api.CustomStack;
 import io.lumine.mythic.bukkit.MythicBukkit;
 import org.black_ixx.bossshop.core.BSBuy;
@@ -9,8 +10,6 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
-import su.nightexpress.quantumrpg.QuantumRPG;
-import su.nightexpress.quantumrpg.api.QuantumAPI;
 
 import java.util.List;
 
@@ -41,7 +40,7 @@ public class ItemDataPartMaterial extends ItemDataPart {
                         if (i != null){
                             return i;
                         }else {
-                            ClassManager.manager.getBugFinder().warn("Mistake in Config: '"+ id + "' is not a valid ItemsAdder item");
+                            ClassManager.manager.getBugFinder().warn("Mistake in Config: '"+ id + "' is not a valid ItemsAdder item.");
                             return item;
                         }
                     case "MythicMobs":
@@ -50,14 +49,24 @@ public class ItemDataPartMaterial extends ItemDataPart {
                         if (mi != null){
                             return mi;
                         }else {
-                            ClassManager.manager.getBugFinder().warn("Mistake in Config: '"+ id + "' is not a valid MythicMobs item");
+                            ClassManager.manager.getBugFinder().warn("Mistake in Config: '"+ id + "' is not a valid MythicMobs item.");
+                            return item;
+                        }
+                    case "MagicCosmetics":
+                    case "magiccosmetics":
+                        ItemStack ci = MagicAPI.getCosmeticItem(id);
+                        if (ci != null){
+                            return ci;
+                        }else {
+                            ClassManager.manager.getBugFinder().warn("Mistake in Config: '"+ id + "' is not a valid MagicCosmetics item.");
                             return item;
                         }
                     case "ProRPGItems":
                     case "prorpgitems":
                         //planing, it's hard to get item stack now.
                     default:
-                        ClassManager.manager.getBugFinder().warn("Mistake in Config: '"+ plugin + "' is not a valid plugin");
+                        ClassManager.manager.getBugFinder().warn("Mistake in Config: '"+ plugin + "' is not a valid plugin, or is not supported.");
+                        return item;
                 }
             }
         }

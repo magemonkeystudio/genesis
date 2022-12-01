@@ -51,10 +51,6 @@ public class PointsManager {
                 this.pa = new BSPointsPluginTokenEnchant();
                 break;
 
-            case TOKENMANAGER:
-                this.pa = new BSPointsPluginTokenManager();
-                break;
-
             case Jobs:
                 this.pa = new BSPointsPluginJobs();
                 break;
@@ -122,7 +118,6 @@ public class PointsManager {
         ENJIN_MINECRAFT_PLUGIN(new String[]{"EnjinMinecraftPlugin", "Enjin", "EMP"}),
         POINTSAPI(new String[]{"PointsAPI", "PAPI"}),
         TOKENENCHANT(new String[]{"TokenEnchant", "TE", "TokenEnchants"}),
-        TOKENMANAGER(new String[]{"TokenManager", "TM"}),
         Jobs(new String[]{"Jobs", "JobsReborn"}),
         MYSQL_TOKENS(new String[]{"MySQL-Tokens", "MySQL-Token"}),
         VOTINGPLUGIN(new String[]{"VotingPlugin", "VP"}),
@@ -130,10 +125,10 @@ public class PointsManager {
         Gringotts(new String[]{"Gringotts"}),
         CUSTOM(new String[0]);
 
-        private String[] nicknames;
+        private final String[] nicknames;
         private String custom_name;
 
-        private PointsPlugin(String[] nicknames) {
+        PointsPlugin(String[] nicknames) {
             this.nicknames = nicknames;
         }
 
