@@ -41,6 +41,10 @@
 
     <repositories>
         <repository>
+            <id>rosewood-repo</id>
+            <url>https://repo.rosewooddev.io/repository/public/</url>
+        </repository>
+        <repository>
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
         </repository>
@@ -69,17 +73,28 @@
         <repository>
             <id>bundabrg-repo</id>
             <url>https://repo.worldguard.com.au/repository/maven-public</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
         </repository>
     </repositories>
 
     <dependencies>
-        <!-- Add Kingdoms support -->
+        <!-- Adds player points support -->
+        <dependency>
+            <groupId>org.black_ixx</groupId>
+            <artifactId>playerpoints</artifactId>
+            <version>3.2.5</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Adds EpicSpawners support -->
+        <dependency>
+            <groupId>com.songoda</groupId>
+            <artifactId>EpicSpawners</artifactId>
+            <version>7.3.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/EpicSpawners-7.3.0.jar</systemPath>
+        </dependency>
+
+        <!-- Adds Kingdoms support -->
         <dependency>
             <groupId>CryptoMorin</groupId>
             <artifactId>Kingdoms</artifactId>
@@ -181,14 +196,6 @@
             <groupId>me.clip</groupId>
             <artifactId>placeholderapi</artifactId>
             <version>2.10.3</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- Adds player points support -->
-        <dependency>
-            <groupId>org.black_ixx</groupId>
-            <artifactId>PlayerPoints</artifactId>
-            <version>2.1.4</version>
             <scope>provided</scope>
         </dependency>
 

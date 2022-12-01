@@ -13,7 +13,7 @@ public class BSPointsPluginPlayerPoints extends BSPointsPlugin {
 
         Plugin plugin = Bukkit.getServer().getPluginManager().getPlugin("PlayerPoints");
         if (plugin != null) {
-            pp = (PlayerPoints.class.cast(plugin));
+            pp = ((PlayerPoints) plugin);
         }
     }
 
