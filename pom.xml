@@ -79,6 +79,15 @@
     </repositories>
 
     <dependencies>
+        <!-- Add Kingdoms support -->
+        <dependency>
+            <groupId>CryptoMorin</groupId>
+            <artifactId>Kingdoms</artifactId>
+            <version>1.14.18.2</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/KingdomsX-1.14.18.2.jar</systemPath>
+        </dependency>
+
         <!-- Adds MagicCosmetics support -->
         <dependency>
             <groupId>com.github.FrancoBM12</groupId>

@@ -55,6 +55,10 @@ public class PointsManager {
                 this.pa = new BSPointsPluginJobs();
                 break;
 
+            case KINGDOMS:
+                this.pa = new BSPointsPluginKingdoms();
+                break;
+
             case MYSQL_TOKENS:
                 this.pa = new BSPointsPluginMySQL_Tokens();
                 break;
@@ -119,6 +123,7 @@ public class PointsManager {
         POINTSAPI(new String[]{"PointsAPI", "PAPI"}),
         TOKENENCHANT(new String[]{"TokenEnchant", "TE", "TokenEnchants"}),
         Jobs(new String[]{"Jobs", "JobsReborn"}),
+        KINGDOMS(new String[]{"Kingdoms", "Kingdom"}),
         MYSQL_TOKENS(new String[]{"MySQL-Tokens", "MySQL-Token"}),
         VOTINGPLUGIN(new String[]{"VotingPlugin", "VP"}),
         GadetsMenu(new String[]{"GadgetsMenu"}),

@@ -37,7 +37,7 @@ public abstract class BSShop {
 
     private int inventory_size = 9;
     private int manual_inventory_rows;
-    private int shop_id = 0;
+    private final int shop_id;
 
     private int highest_page; //Might not be correct but is used in case of a fix inventory having multiple pages
 
