@@ -8,6 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -25,9 +26,7 @@ public class ItemDataPartLore extends ItemDataPart {
         if (lore == null) {
             lore = new ArrayList<>();
         }
-        for (String part : parts) {
-            lore.add(part);
-        }
+        Collections.addAll(lore, parts);
         meta.setLore(lore);
         item.setItemMeta(meta);
         return item;

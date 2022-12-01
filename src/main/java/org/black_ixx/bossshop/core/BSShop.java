@@ -42,7 +42,7 @@ public abstract class BSShop {
     private int highest_page; //Might not be correct but is used in case of a fix inventory having multiple pages
 
 
-    private Set<BSBuy> items = new LinkedHashSet<>();
+    private final Set<BSBuy> items = new LinkedHashSet<>();
 
     //////////////////////////// <- Constructor
 

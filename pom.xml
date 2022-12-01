@@ -41,6 +41,15 @@
 
     <repositories>
         <repository>
+            <id>sonatype</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+        </repository>
+        <repository>
+            <id>nexus</id>
+            <name>Lumine Releases</name>
+            <url>https://mvn.lumine.io/repository/maven-public/</url>
+        </repository>
+        <repository>
             <id>BenCodez Repo</id>
             <url>https://nexus.bencodez.com/repository/maven-public/</url>
         </repository>
@@ -70,6 +79,39 @@
     </repositories>
 
     <dependencies>
+        <!-- Adds prorpgitems support -->
+        <dependency>
+            <groupId>com.promcteam</groupId>
+            <artifactId>prorpgitems</artifactId>
+            <version>1.0.3.17-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Adds MythicMobs api -->
+        <dependency>
+            <groupId>io.lumine</groupId>
+            <artifactId>Mythic-Dist</artifactId>
+            <version>5.2.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Adds itemsadder support -->
+        <dependency>
+            <groupId>com.github.LoneDev6</groupId>
+            <artifactId>api-itemsadder</artifactId>
+            <version>3.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Adds gringotts support -->
+        <dependency>
+            <groupId>org.gestern</groupId>
+            <artifactId>Gringotts</artifactId>
+            <version>2.12.3</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/gringotts-2.12.3.jar</systemPath>
+        </dependency>
+
         <!-- Platform -->
         <dependency>
             <groupId>org.spigotmc</groupId>
@@ -162,14 +204,6 @@
             <groupId>com.github.Realizedd</groupId>
             <artifactId>TokenManager</artifactId>
             <version>3.2.3</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- Adds tokens support -->
-        <dependency>
-            <groupId>com.masterderpydoge.tokens</groupId>
-            <artifactId>TokenCore</artifactId>
-            <version>1.4</version>
             <scope>provided</scope>
         </dependency>
 

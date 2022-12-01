@@ -10,7 +10,7 @@ import java.util.OptionalLong;
 public class BSPointsPluginTokenManager extends BSPointsPlugin {
 
 
-    private TokenManagerPlugin tm;
+    private final TokenManagerPlugin tm;
 
     public BSPointsPluginTokenManager() {
         super("TokenManager", "TM");

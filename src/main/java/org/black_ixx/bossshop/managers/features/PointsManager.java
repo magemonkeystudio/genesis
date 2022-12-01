@@ -63,16 +63,16 @@ public class PointsManager {
                 this.pa = new BSPointsPluginMySQL_Tokens();
                 break;
 
-            case MYSQLTOKENS:
-                this.pa = new BSPointsPluginMySQLTokens();
-                break;
-
             case VOTINGPLUGIN:
                 this.pa = new BSPointsPluginVotingPlugin();
                 break;
 
             case GadetsMenu:
                 this.pa = new BSPointsPluginGadgetsMenu();
+                break;
+
+            case Gringotts:
+                this.pa = new BSPointsPluginGringotts();
                 break;
 
             case NONE:
@@ -125,11 +125,9 @@ public class PointsManager {
         TOKENMANAGER(new String[]{"TokenManager", "TM"}),
         Jobs(new String[]{"Jobs", "JobsReborn"}),
         MYSQL_TOKENS(new String[]{"MySQL-Tokens", "MySQL-Token"}),
-        MYSQLTOKENS(new String[]{"MySQLTokens", "MySQLToken"}),
         VOTINGPLUGIN(new String[]{"VotingPlugin", "VP"}),
-        KINGDOMS(new String[]{"Kingdoms", "Kingdom"}),
         GadetsMenu(new String[]{"GadgetsMenu"}),
-        //COINS(new String[] { "Coins"}),
+        Gringotts(new String[]{"Gringotts"}),
         CUSTOM(new String[0]);
 
         private String[] nicknames;
