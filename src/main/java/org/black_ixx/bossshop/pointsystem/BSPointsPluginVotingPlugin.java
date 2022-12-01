@@ -1,6 +1,7 @@
 package org.black_ixx.bossshop.pointsystem;
 
 import com.Ben12345rocks.VotingPlugin.Objects.User;
+import com.bencodez.votingplugin.user.UserManager;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
@@ -14,8 +15,7 @@ public class BSPointsPluginVotingPlugin extends BSPointsPlugin {
     @Override
     public double getPoints(OfflinePlayer player) {
         if (player instanceof Player) {
-            User user = new User((Player) player);
-            return user.getPoints();
+            return UserManager.getInstance().getVotingPluginUser(player).getPoints();
         } else {
             return 0;
         }
@@ -24,8 +24,7 @@ public class BSPointsPluginVotingPlugin extends BSPointsPlugin {
     @Override
     public double setPoints(OfflinePlayer player, double points) {
         if (player instanceof Player) {
-            User user = new User((Player) player);
-            user.setPoints((int) points);
+            UserManager.getInstance().getVotingPluginUser(player).setPoints((int) points);
             return points;
         } else {
             return 0;
@@ -35,9 +34,8 @@ public class BSPointsPluginVotingPlugin extends BSPointsPlugin {
     @Override
     public double takePoints(OfflinePlayer player, double points) {
         if (player instanceof Player) {
-            User user = new User((Player) player);
-            user.removePoints((int) points);
-            return getPoints(player);
+            UserManager.getInstance().getVotingPluginUser(player).removePoints((int) points);
+            return points;
         } else {
             return 0;
         }
@@ -46,8 +44,7 @@ public class BSPointsPluginVotingPlugin extends BSPointsPlugin {
     @Override
     public double givePoints(OfflinePlayer player, double points) {
         if (player instanceof Player) {
-            User user = new User((Player) player);
-            user.addPoints((int) points);
+            UserManager.getInstance().getVotingPluginUser(player).addPoints((int) points);
             return getPoints(player);
         } else {
             return 0;

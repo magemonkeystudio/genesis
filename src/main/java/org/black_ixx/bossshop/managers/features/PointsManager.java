@@ -71,10 +71,6 @@ public class PointsManager {
                 this.pa = new BSPointsPluginVotingPlugin();
                 break;
 
-            case KINGDOMS:
-                this.pa = new BSPointsPluginKingdoms();
-                break;
-
             case GadetsMenu:
                 this.pa = new BSPointsPluginGadgetsMenu();
                 break;
@@ -82,10 +78,6 @@ public class PointsManager {
             case NONE:
                 this.pa = new BSPointsPluginNone();
                 break;
-
-			/*case COINS:
-			this.pa = new BSPointsPluginCoins();
-			break;*/
 
             case CUSTOM:
                 BSPointsPlugin customPoints = BSPointsAPI.get(p.getCustom());
