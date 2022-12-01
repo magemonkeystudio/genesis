@@ -5,18 +5,17 @@ import org.black_ixx.bossshop.managers.ClassManager;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
+import org.bukkit.Tag;
 import org.bukkit.block.banner.Pattern;
 import org.bukkit.block.banner.PatternType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BannerMeta;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ItemDataPartBanner extends ItemDataPart {
 
-    @SuppressWarnings("deprecation")
     @Override
     public ItemStack transform(ItemStack item, String used_name, String argument) {
         if (Bukkit.getVersion().contains("1.8") || Bukkit.getVersion().contains("1.9")) {  //TODO: ADD Documentation and test this feature out
@@ -24,26 +23,23 @@ public class ItemDataPartBanner extends ItemDataPart {
                 ClassManager.manager.getBugFinder().severe("Mistake in Config: '" + argument + "' is not a valid '" + used_name + "'.");
                 return item;
             }
+            String[] parts = argument.split("#", 2);
             BannerMeta meta = (BannerMeta) item.getItemMeta();
-            String[] bdata = argument.split("\\+");
-            DyeColor basecolor = DyeColor.valueOf(bdata[0]);
-            if (basecolor != null) {
-                List<Pattern> patterns = new ArrayList<>();
-                for (int y = 1; y < bdata.length; y++) {
-                    try {
-                        String[] bpattern = bdata[y].split("-");
-                        DyeColor patterncolor = DyeColor.valueOf(bpattern[0]);
-                        PatternType patterntype = PatternType.getByIdentifier(bpattern[1]);
-                        Pattern pattern = new Pattern(patterncolor, patterntype);
-                        patterns.add(pattern);
-                    } catch (Exception e) {
-                    }
-                }
-                meta.setBaseColor(basecolor);
-                meta.setPatterns(patterns);
-            }
+            DyeColor basecolor = DyeColor.valueOf(parts[0]);
+            meta.addPattern(new Pattern(basecolor, PatternType.valueOf(parts[1])));
             item.setItemMeta(meta);
             return item;
+        }else {
+            if (!Tag.BANNERS.isTagged(item.getType())) {
+                ClassManager.manager.getBugFinder().severe("Mistake in Config: '" + argument + "' is not a valid '" + used_name + "'.");
+                return item;
+            }
+            BannerMeta meta = (BannerMeta) item.getItemMeta();
+            String[] parts = argument.split("#", 2);
+            DyeColor color = DyeColor.valueOf(parts[0]);
+            Pattern pattern = new Pattern(color, PatternType.valueOf(parts[1].toUpperCase()));
+            meta.addPattern(pattern);
+            item.setItemMeta(meta);
         }
         return item;
     }
@@ -66,7 +62,12 @@ public class ItemDataPartBanner extends ItemDataPart {
 
     @Override
     public List<String> read(ItemStack i, List<String> output) {
-        //TODO
+        BannerMeta meta = (BannerMeta) i.getItemMeta();
+        if (!meta.getPatterns().isEmpty()) {
+            for (Pattern p : meta.getPatterns()){
+                output.add("banner:"+p.getColor().name()+"#"+p.getPattern().name());
+            }
+        }
         return output;
     }
 

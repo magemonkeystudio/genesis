@@ -90,7 +90,7 @@ public abstract class BSShop {
     public String getValidDisplayName(Player p, BSShopHolder holder) {
         String displayname = this.displayname;
         displayname = ClassManager.manager.getStringManager().transform(displayname, null, this, holder, p);
-        return displayname.length() > 32 ? displayname.substring(0, 32) : displayname;
+        return displayname.length() > 40 ? displayname.substring(0, 40) : displayname;
     }
 
     public String getSignText() {
@@ -277,10 +277,8 @@ public abstract class BSShop {
 
         if (remember_current_shop) {
             InventoryView openinventory = p.getOpenInventory();
-            if (openinventory != null) {
-                if (openinventory.getTopInventory().getHolder() instanceof BSShopHolder) {
-                    oldshopholder = (BSShopHolder) openinventory.getTopInventory().getHolder();
-                }
+            if (openinventory.getTopInventory().getHolder() instanceof BSShopHolder) {
+                oldshopholder = (BSShopHolder) openinventory.getTopInventory().getHolder();
             }
         }
 

@@ -17,7 +17,8 @@ public abstract class BSPriceType {
             Money,
             Nothing,
             Points,
-            Exp;
+            Exp,
+            ThirdCurrencyVariable;
 
     private static List<BSPriceType> types;
     private String[] names = createNames();
