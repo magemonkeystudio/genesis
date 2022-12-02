@@ -49,10 +49,6 @@
             <url>https://repo.glaremasters.me/repository/public/</url>
         </repository>
         <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
-        <repository>
             <id>placeholderapi</id>
             <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
         </repository>
@@ -73,6 +69,21 @@
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
+
+        <!-- Silk Spawners Repo -->
+        <repository>
+            <id>SilkSpawners-Repo</id>
+            <url>https://repo.dustplanet.de/artifactory/libs-release-local</url>
+        </repository>
+        <!-- TeamVK (TokenEnchantAPI) -->
+        <repository>
+            <id>teamvk-repo</id>
+            <url>https://raw.githubusercontent.com/TeamVK/maven-repository/master/release/</url>
+        </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -81,32 +92,6 @@
             <groupId>org.black_ixx</groupId>
             <artifactId>playerpoints</artifactId>
             <version>3.2.5</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- Adds EpicSpawners support -->
-        <dependency>
-            <groupId>com.songoda</groupId>
-            <artifactId>EpicSpawners</artifactId>
-            <version>7.3.0</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/EpicSpawners-7.3.0.jar</systemPath>
-        </dependency>
-
-        <!-- Adds Kingdoms support -->
-        <dependency>
-            <groupId>CryptoMorin</groupId>
-            <artifactId>Kingdoms</artifactId>
-            <version>1.14.18.2</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/KingdomsX-1.14.18.2.jar</systemPath>
-        </dependency>
-
-        <!-- Adds MagicCosmetics support -->
-        <dependency>
-            <groupId>com.github.FrancoBM12</groupId>
-            <artifactId>API-MagicCosmetics</artifactId>
-            <version>1.9.85</version>
             <scope>provided</scope>
         </dependency>
 
@@ -130,23 +115,6 @@
             <artifactId>Mythic-Dist</artifactId>
             <version>5.2.0</version>
             <scope>provided</scope>
-        </dependency>
-
-        <!-- Adds itemsadder support -->
-        <dependency>
-            <groupId>com.github.LoneDev6</groupId>
-            <artifactId>api-itemsadder</artifactId>
-            <version>3.0.0</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- Adds gringotts support -->
-        <dependency>
-            <groupId>org.gestern</groupId>
-            <artifactId>Gringotts</artifactId>
-            <version>2.12.3</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/gringotts-2.12.3.jar</systemPath>
         </dependency>
 
         <!-- Platform -->
@@ -220,19 +188,74 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Adds enjin support
-        <dependency>
-            <groupId>com.enjin</groupId>
-            <artifactId>EnjinMinecraftPlugin</artifactId>
-            <version>3.5.7</version>
-            <scope>provided</scope>
-        </dependency>-->
-
         <!-- Adds token enchant support -->
         <dependency>
             <groupId>com.vk2gpz.tokenenchant</groupId>
             <artifactId>TokenEnchantAPI</artifactId>
             <version>18.37.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Adds silk spawners support -->
+        <dependency>
+            <groupId>de.dustplanet</groupId>
+            <artifactId>silkspawners</artifactId>
+            <version>7.3.0</version>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>*</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- Used for language utils -->
+        <dependency>
+            <groupId>com.meowj</groupId>
+            <artifactId>LangUtils</artifactId>
+            <version>1.6.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Adds Kingdoms support -->
+        <dependency>
+            <groupId>com.github.cryptomorin</groupId>
+            <artifactId>kingdoms</artifactId>
+            <version>1.13.9</version><!-- 1.14.x versions are not on Maven yet-->
+        </dependency>
+
+        <!-- Jitpack dependencies -->
+        <!-- Adds MagicCosmetics support -->
+        <dependency>
+            <groupId>com.github.FrancoBM12</groupId>
+            <artifactId>API-MagicCosmetics</artifactId>
+            <version>1.9.85</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Adds itemsadder support -->
+        <dependency>
+            <groupId>com.github.LoneDev6</groupId>
+            <artifactId>api-itemsadder</artifactId>
+            <version>3.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Adds EpicSpawners support -->
+        <dependency>
+            <groupId>com.github.songoda</groupId>
+            <artifactId>EpicSpawners</artifactId>
+            <version>master-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+
+
+        <!-- Adds gringotts support -->
+        <dependency>
+            <groupId>com.github.nikosgram</groupId>
+            <artifactId>gringotts</artifactId>
+            <version>2.12.3</version>
             <scope>provided</scope>
         </dependency>
 
@@ -242,24 +265,7 @@
             <artifactId>GadgetsMenu</artifactId>
             <version>4.7.5</version>
             <scope>system</scope>
-            <systemPath>${basedir}/lib/GadgetsMenu.jar</systemPath>
-        </dependency>
-
-        <!-- Adds silk spawners support -->
-        <dependency>
-            <groupId>de.dustplanet.silkspawners.SilkSpawners</groupId>
-            <artifactId>SilkSpawners</artifactId>
-            <version>7.3.1</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/SilkSpawners.jar</systemPath>
-        </dependency>
-
-        <!-- Used for language utils -->
-        <dependency>
-            <groupId>com.meowj</groupId>
-            <artifactId>LangUtils</artifactId>
-            <version>1.6.1</version>
-            <scope>provided</scope>
+            <systemPath>${project.basedir}/lib/GadgetsMenu.jar</systemPath>
         </dependency>
     </dependencies>
 </project>

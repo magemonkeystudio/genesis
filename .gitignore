@@ -3,7 +3,6 @@
 .classpath
 .project
 /.idea/
-/lib/
 *.iml
 dependency-reduced-pom.xml
 .floo*
