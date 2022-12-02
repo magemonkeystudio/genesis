@@ -41,6 +41,10 @@
 
     <repositories>
         <repository>
+            <id>sonatype</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+        </repository>
+        <repository>
             <id>repo</id>
             <url>https://repo.glaremasters.me/repository/public/</url>
         </repository>
@@ -55,10 +59,6 @@
         <repository>
             <id>rosewood-repo</id>
             <url>https://repo.rosewooddev.io/repository/public/</url>
-        </repository>
-        <repository>
-            <id>sonatype</id>
-            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
         </repository>
         <repository>
             <id>nexus</id>
@@ -115,6 +115,12 @@
             <groupId>com.promcteam</groupId>
             <artifactId>prorpgitems</artifactId>
             <version>1.0.3.17-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.promcteam</groupId>
+            <artifactId>promccore</artifactId>
+            <version>1.0.3.10-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
 
@@ -230,13 +236,14 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Adds gadgets menu support
+        <!-- Adds gadgets menu support -->
         <dependency>
             <groupId>com.yapzhenyie.GadgetsMenu</groupId>
             <artifactId>GadgetsMenu</artifactId>
-            <version>4.3.32</version>
-            <scope>provided</scope>
-        </dependency>-->
+            <version>4.7.5</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/GadgetsMenu.jar</systemPath>
+        </dependency>
 
         <!-- Adds silk spawners support -->
         <dependency>
