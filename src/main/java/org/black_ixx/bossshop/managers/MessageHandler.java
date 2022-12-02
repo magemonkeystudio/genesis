@@ -4,6 +4,7 @@ import org.black_ixx.bossshop.BossShop;
 import org.black_ixx.bossshop.core.BSBuy;
 import org.black_ixx.bossshop.core.BSShop;
 import org.black_ixx.bossshop.core.BSShopHolder;
+import org.black_ixx.bossshop.managers.config.FileHandler;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -11,20 +12,18 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Objects;
 
 public class MessageHandler {
     private final BossShop plugin;
-    private final String fileName = "messages.yml";
-    private final File file;
-    private FileConfiguration config = null;
+    private String fileName = "lang"+File.separator+"en_us.yml";;
+    private FileConfiguration config;
 
     public MessageHandler(final BossShop plugin) {
         this.plugin = plugin;
-        this.file = new File(plugin.getDataFolder().getAbsolutePath(), fileName);
-        config = YamlConfiguration.loadConfiguration(this.file);
+        setupLocate();
     }
 
     /**
@@ -32,9 +31,7 @@ public class MessageHandler {
      * @return config
      */
     public FileConfiguration getConfig() {
-        if (config == null)
-            reloadConfig();
-
+        if (config == null) reloadConfig();
         return config;
     }
 
@@ -42,22 +39,11 @@ public class MessageHandler {
      * Reload the config file
      */
     public void reloadConfig() {
-        config = YamlConfiguration.loadConfiguration(file);
-        InputStream defConfigStream = plugin.getResource(fileName);
+        setupLocate();
+        InputStream defConfigStream = plugin.getResource("lang/"+fileName);
         if (defConfigStream != null) {
             YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(new InputStreamReader(defConfigStream));
             config.setDefaults(defConfig);
-        }
-    }
-
-    /**
-     * Save the config
-     */
-    public void saveConfig() {
-        try {
-            getConfig().save(file);
-        } catch (IOException e) {
-            ClassManager.manager.getBugFinder().warn("Could not save message config to " + file);
         }
     }
 
@@ -103,13 +89,13 @@ public class MessageHandler {
     public void sendMessage(String node, CommandSender sender, String offline_target, Player target, BSShop shop, BSShopHolder holder, BSBuy item) {
         if (sender != null) {
 
-            if (node == null || node == "") {
+            if (node == null || node.equals("")) {
                 return;
             }
 
             String message = get(node, target, shop, holder, item);
 
-            if (message == null || message.isEmpty() || message.length() < 2) {
+            if (message == null || message.length() < 2) {
                 return;
             }
 
@@ -129,7 +115,7 @@ public class MessageHandler {
     public void sendMessageDirect(String message, CommandSender sender) {
         if (sender != null) {
 
-            if (message == null || message.isEmpty() || message.length() < 2) {
+            if (message == null || message.length() < 2) {
                 return;
             }
 
@@ -168,5 +154,31 @@ public class MessageHandler {
         return ClassManager.manager.getStringManager().transform(message, item, shop, holder, target);
     }
 
+    public void setupLocate(){
+        String LangCode = ClassManager.manager.getSettings().getLanguage();
+        if(Objects.equals(LangCode,null)||LangCode.equals("")){
+            LangCode = "en-US";
+            plugin.getConfig().set("Language","en-US");
+        }
+        fileName = "lang/"+LangCode+".yml";
+        File file = new File(plugin.getDataFolder(), fileName);
+        if(!file.exists()){
+            LangCode = "en-US";
+            plugin.getConfig().set("Language","en-US");
+            FileHandler fh = new FileHandler();
+            File lang = new File(plugin.getDataFolder(),"lang"+File.separator+"en-US.yml");
+            if(!lang.exists()) {
+                fh.exportLanguages(plugin);
+                fileName = "lang/"+LangCode+".yml";
+                file = new File(plugin.getDataFolder(),"lang"+File.separator+fileName);
+                config = YamlConfiguration.loadConfiguration(file);
+                return;
+            }
+            fileName = "lang/"+LangCode+".yml";
+            file = new File(plugin.getDataFolder(),"lang"+File.separator+fileName);
+            ClassManager.manager.getBugFinder().warn("The corresponding message file cannot be found and fallback to en-US. (maybe you didn't put the message file in the plugin folder, or didn't have the message file)");
 
+        }
+        config = YamlConfiguration.loadConfiguration(file);
+    }
 }

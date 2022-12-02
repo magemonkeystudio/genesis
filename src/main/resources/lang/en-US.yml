@@ -1,0 +1,77 @@
+Main:
+  NoPermission: '&cYou are not allowed to do this!'
+  AlreadyBought: '&cYou already purchased that!'
+  ShopNotExisting: '&cThat shop is not existing...'
+  ShopItemNotExisting: '&cThat shop item is not existing...'
+  OpenShop: ''
+  OpenShopOtherPlayer: '&6Opening Shop &c%shop% &6for %player%&6.'
+  CloseShopOtherPlayer: '&6Closed inventory of %player%&6.'
+  CloseShop: ''
+  InventoryFull: '&cYour inventory does not have enough free space left!'
+  PlayerNotFound: '&cPlayer %name% not found!'
+  ClickSpamWarning: '&cPlease wait for an other %time_left% seconds until you can use this again.'
+  OffensiveClickSpamWarning: '&4Warning: Please do not click that fast.'
+  OffensiveClickSpamKick: '&4Kicked for clickspam.'
+  NeedItemInHand: '&cYou need an item in your main hand in order to be able to execute this command.'
+  PrintedItemInfo: '&6All item information has successfully been saved here: &7''/plugins/BossShopPro/ItemDataStorage.yml''&6.'
+  ListAndSeparator: ' & '
+  ListOrSeparator: ' or '
+  WorldNotExisting: "&cThat world is not existing..."
+  StartReload: "&eStarting BossShop reload..."
+  ReloadFinish: "&eDone!"
+Economy:
+  NoAccount: '&cYou don''t have an economy account!'
+ShopCreate:
+  Success: "&aThe file has been saved to &7/plugins/BossShopPro/shops&a."
+  Success2: "&cPlease reload the plugin to read the newly generated shop file."
+  FileExists: "&cThe same file already exists. The file will be overwritten."
+  #Do not modify these two strings at will, otherwise the file cannot be saved.
+  Title: "Creating shop %shop%(Close it to save file)"
+  TitleHead: "Creating shop"
+Command:
+  Help1: "&c/BossShop - Opens main shop"
+  Help2: "&c/BossShop <shop> [input] - Opens named shop"
+  Help3: "&c/BossShop open <Shop> <Player> [input] - Opens named shop for the named player"
+  Help4: "&c/BossShop close [Player] - Closes inventory of the named player"
+  Help5: "&c/BossShop simulate <player> <shop> <shopitem> - Simulates click"
+  Help6: "&c/BossShop reload - Reloads the Plugin"
+  Help7: "&c/BossShop read - Prints out itemdata of item in main hand"
+  Help8: "&c/BossShop create <shop> <title> - create a shop"
+  Help: "&c/BossShop help - Prints this"
+NotEnough:
+  Money: '&cYou don''t have enough Money!'
+  Item: '&cYou don''t have enough Items!'
+  Points: '&cYou don''t have enough Points!'
+  Exp: '&cYou don''t have enough EXP!'
+  Or: '&cYou don''t have enough resources!'
+Enchantment:
+  Invalid: '&cYou can''t enchant the item in your main hand with this enchantment!'
+  EmptyHand: '&cYou need to have an item in your hand!'
+Display:
+  Exp: '%levels% Exp Levels'
+  Money: '%money% Money'
+  Points: '%points% Points'
+  Item: '%items%'
+  ItemAll: 'all %item%'
+  ItemAllBuy: 'a filled inventory of %item%'
+  ItemAllEach: '%value% each'
+  Nothing: 'nothing'
+  BungeeCordServer: 'Server teleport to %server%'
+  BungeeCordCommand: 'BungeeCord commands: %commands%'
+  Close: 'Close shop'
+  Command: 'Console commands: %commands%'
+  Custom: 'Unknown'
+  Enchantment: 'Enchantment: %type% level %level%'
+  Permission: 'Permissions: %permissions%'
+  PlayerCommand: 'Commands: %commands%'
+  PlayerCommandOp: 'Commands: %commands%'
+  Shop: 'Open shop %shop%'
+  Page: 'Open shop page %page%'
+  Teleport: 'Teleport to %world% x:%x% y:%y% z:%z%'
+  TeleportWorld: 'Teleport to %world%'
+Time:
+  Seconds: '%time% seconds'
+  Minutes: '%time% minutes'
+  Hours: '%time% hours'
+  Days: '%time% days'
+  Weeks: '%time% weeks'

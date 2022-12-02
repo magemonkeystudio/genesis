@@ -27,7 +27,7 @@ public class Settings {
             SOUND_SHOP_CHANGE_SHOP = 12;
 
     private boolean signs, money, points, vault, permissions, bungeecord, pointsdisplay, moneydisplay, serverpinging, load_subfolders, transactionslog, check_stacksize, exp_use_level,
-            shopcommands, serverpinging_fixconnector, itemall_show_final_reward, inventory_full_drop_items, purchase_async, allow_selling_damaged_items;
+            shopcommands, serverpinging_fixconnector, itemall_show_final_reward, inventory_full_drop_items, purchase_async, allow_selling_damaged_items, reload_after_create_shop;
     private boolean metrics = true;
     private int serverpinging_delay, serverpinging_waittime, serverpinging_timeout, autorefresh_delay, max_line_length, number_grouping_size, input_timeout;
     private String mainshop, number_locale;
@@ -36,7 +36,8 @@ public class Settings {
 
     private boolean debug;
 
-    private Map<Integer, SettingsProperty> properties = new LinkedHashMap<Integer, SettingsProperty>();
+    private final Map<Integer, SettingsProperty> properties = new LinkedHashMap<>();
+    private String language;
 
 
     /**
@@ -403,4 +404,15 @@ public class Settings {
         input_timeout = i;
     }
 
+    public boolean getReloadAfterCreateShop() {return reload_after_create_shop;}
+
+    public void setReloadAfterCreateShop(boolean b){
+        reload_after_create_shop = b;
+    }
+
+    public String getLanguage() {return language;}
+
+    public void setLanguage(String l) {
+        language = l;
+    }
 }

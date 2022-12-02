@@ -11,9 +11,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import su.nightexpress.quantumrpg.QuantumRPG;
-import su.nightexpress.quantumrpg.api.QuantumAPI;
+import su.nightexpress.quantumrpg.modules.ModuleItem;
 
 import java.util.List;
+import java.util.Objects;
 
 public class ItemDataPartMaterial extends ItemDataPart {
 
@@ -65,8 +66,13 @@ public class ItemDataPartMaterial extends ItemDataPart {
                         }
                     case "ProRPGItems":
                     case "prorpgitems":
-                        
-                        //planing, it's hard to get item stack now.
+                        ModuleItem pri = Objects.requireNonNull(QuantumRPG.instance.getModuleCache().getTierManager()).getItemById(id);
+                        if (pri != null){
+                            return pri.create();
+                        }else {
+                            ClassManager.manager.getBugFinder().warn("Mistake in Config: '"+ id + "' is not a valid ProRPGItems item.");
+                            return item;
+                        }
                     default:
                         ClassManager.manager.getBugFinder().warn("Mistake in Config: '"+ plugin + "' is not a valid plugin, or is not supported.");
                         return item;

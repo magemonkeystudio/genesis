@@ -42,6 +42,8 @@ public class ConfigHandler {
         settings.setExpUseLevel(config.getBoolean("ExpUseLevels"));
         settings.setAllowSellingDamagedItems(config.getBoolean("AllowSellingDamagedItems"));
         settings.setInputTimeout(config.getInt("InputTimeout"));
+        settings.setReloadAfterCreateShop(config.getBoolean("ReloadAfterCreateShop"));
+        settings.setLanguage(config.getString("Language"));
 
         if (config.getBoolean("BungeeCord")) {
             settings.setBungeeCordServerEnabled(true); //Do it that way because maybe in config it is set to false but still required and enabled by something else

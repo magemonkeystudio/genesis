@@ -3,6 +3,7 @@ package org.black_ixx.bossshop.managers;
 
 import org.black_ixx.bossshop.core.BSBuy;
 import org.black_ixx.bossshop.core.BSShop;
+import org.black_ixx.bossshop.managers.features.ShopCreator;
 import org.black_ixx.bossshop.managers.item.ItemDataPart;
 import org.black_ixx.bossshop.misc.Misc;
 import org.bukkit.Bukkit;
@@ -121,13 +122,26 @@ public class CommandManager implements CommandExecutor {
                     return true;
                 }
 
-                if (args.length >= 3 && args[0].equalsIgnoreCase("open")) {
-
-                    if (args.length < 2) {
-                        sendCommandList(sender);
-                        return false;
+                if(args[0].equalsIgnoreCase("create") & args.length==3){
+                    if(sender.hasPermission("BossShop.create")){
+                        Player p;
+                        if(sender instanceof Player) {
+                            p = (Player) sender;
+                        }else {
+                            return false;
+                        }
+                        ShopCreator sc = new ShopCreator(ClassManager.manager.getPlugin(), ClassManager.manager.getMessageHandler());
+                        //replace !sp! as space
+                        String shopTitle = args[2].replaceAll("!sp!", " ");
+                        sc.startCreate(p, args[1], shopTitle);
+                        return true;
+                    } else {
+                        ClassManager.manager.getMessageHandler().sendMessage("Main.NoPermission", sender);
                     }
+                    return false;
+                }
 
+                if (args.length >= 3 && args[0].equalsIgnoreCase("open")) {
                     String shopname = args[1].toLowerCase();
                     BSShop shop = ClassManager.manager.getShops().getShop(shopname);
                     String name = args[2];
@@ -211,6 +225,8 @@ public class CommandManager implements CommandExecutor {
         s.sendMessage(ChatColor.RED + "/BossShop reload - Reloads the Plugin");
         if (s instanceof Player) {
             s.sendMessage(ChatColor.RED + "/BossShop read - Prints out itemdata of item in main hand");
+            s.sendMessage(ChatColor.RED + "/BossShop create <shopName> <shopName> - create a shop(" +
+                    "You can use '!sp!' to replace space)");
         }
     }
 

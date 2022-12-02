@@ -1,6 +1,5 @@
 package org.black_ixx.bossshop;
 
-
 import org.black_ixx.bossshop.api.BossShopAPI;
 import org.black_ixx.bossshop.api.BossShopAddon;
 import org.black_ixx.bossshop.core.BSShop;
@@ -11,6 +10,7 @@ import org.black_ixx.bossshop.listeners.PlayerListener;
 import org.black_ixx.bossshop.listeners.SignListener;
 import org.black_ixx.bossshop.managers.ClassManager;
 import org.black_ixx.bossshop.managers.CommandManager;
+import org.black_ixx.bossshop.managers.config.ConfigKeyCompleter;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -70,7 +70,12 @@ public class BossShop extends JavaPlugin {
         pl = new PlayerListener(this);
         getServer().getPluginManager().registerEvents(pl, this);
 
+        ////////////////<- File key complete
 
+        ConfigKeyCompleter.checkConfig();
+        ConfigKeyCompleter.checkLanguages();
+
+        ////////////////
         new BukkitRunnable() {
             @Override
             public void run() {

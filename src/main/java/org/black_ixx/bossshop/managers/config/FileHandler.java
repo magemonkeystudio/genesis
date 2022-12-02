@@ -45,6 +45,15 @@ public class FileHandler {
         }
     }
 
+    public void exportLanguages(BossShop plugin){
+        if (!new File(plugin.getDataFolder() + File.separator + "lang/en_us.yml").exists()) {
+            plugin.saveResource("lang/en_us.yml",false);
+        }
+        if (!new File(plugin.getDataFolder() + File.separator + "lang/zh_cn.yml").exists()) {
+            plugin.saveResource("lang/zh_cn.yml",false);
+        }
+    }
+
     public void copyDefaultsFromJar(BossShopAddon addon, String filename) {
         copyDefaultsFromJar(addon, addon.getBossShop(), filename, "addons/" + addon.getAddonName() + "/" + filename);
     }

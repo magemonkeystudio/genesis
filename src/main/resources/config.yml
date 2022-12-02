@@ -16,6 +16,18 @@
 #
 #
 #
+# Language:
+#
+# Supported languages:
+# en-US by black_ixx
+# zh-CN by lijinhong11
+Language: "en-US"
+#
+#
+# ReloadAfterCreateShop:
+#
+ReloadAfterCreateShop: false
+#
 #
 # EnableSigns:
 # If set EnableSigns to 'false' BossShop signs will be disabled.
