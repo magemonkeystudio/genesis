@@ -1,0 +1,77 @@
+Main:
+  NoPermission: '&c你不能这么做！'
+  AlreadyBought: '&c你已经购买了它！'
+  ShopNotExisting: '&c那个商店不存在。。。'
+  ShopItemNotExisting: '&c那个商店物品不存在。。。'
+  OpenShop: ''
+  OpenShopOtherPlayer: '&6正在给玩家%player%打开商店&c%shop%&6。。。'
+  CloseShopOtherPlayer: '&6已关闭玩家%player%正在打开的商店&6。。。'
+  CloseShop: ''
+  InventoryFull: '&c您的背包没有足够的可用空间！'
+  PlayerNotFound: '&c玩家 %name% 未找到！'
+  ClickSpamWarning: '&c请等待另一个%time_left%秒，直到您可以再次使用它。'
+  OffensiveClickSpamWarning: '&4警告：请不要点击太快。'
+  OffensiveClickSpamKick: '&4因点击过多被踢。'
+  NeedItemInHand: '&c您需要在主手上放一个物品才能执行此指令！'
+  PrintedItemInfo: '&6所有物品信息已成功保存在此处： &7''/plugins/BossShopPro/ItemDataStorage.yml''&6。'
+  ListAndSeparator: ' & '
+  ListOrSeparator: ' 或 '
+  WorldNotExisting: "&c那个世界不存在。。。"
+  StartReload: "&eBossShopPro正在开始重载。。。"
+  ReloadFinish: "&e完成！"
+Economy:
+  NoAccount: '&c你没有经济账户！'
+ShopCreate:
+  Success: "&a文件已保存至 &7/plugins/BossShopPro/shops&a下。"
+  Success2: "&c请重载插件才能读取新生成的商店文件。"
+  FileExists: "&c相同的文件已存在，将会覆盖文件。"
+  #这两个字符串不要随意修改,否则无法保存文件。
+  Title: "&8正在创建商店 %shop%(关闭以保存文件)"
+  TitleHead: "&8正在创建商店"
+Command:
+  Help1: "&c/BossShop - 打开主商店"
+  Help2: "&c/BossShop <商店名> [输入内容] - 打开指定的商店"
+  Help3: "&c/BossShop open <商店名> <玩家名> [输入内容] - 给一个指定的玩家打开一个指定的商店"
+  Help4: "&c/BossShop close [玩家名] - 给一个指定的玩家关闭商店"
+  Help5: "&c/BossShop simulate <玩家名> <商店名> <商店物品> - 模拟点击"
+  Help6: "&c/BossShop reload - 重载插件"
+  Help7: "&c/BossShop read - 输出你主手拿着的物品的物品数据"
+  Help8: "&c/BossShop create <商店名> <标题> - 创建一个商店"
+  Help: "&c/BossShop help - 输出这个"
+NotEnough:
+  Money: '&c你没有足够的钱！'
+  Item: '&c你没有足够的物品!'
+  Points: '&c你没有足够的点券！'
+  Exp: '&c你没有足够的经验！'
+  Or: '&c你没有足够的资源！'
+Enchantment:
+  Invalid: '&c你不能附魔拿在主手的物品!'
+  EmptyHand: '&c你的手上必须要拿着一个东西！'
+Display:
+  Exp: '%levels% 经验等级'
+  Money: '%money% 金币'
+  Points: '%points% 点券'
+  Item: '%items%'
+  ItemAll: '全部的 %item%'
+  ItemAllBuy: '一背包的 %item%'
+  ItemAllEach: '%value% 每个'
+  Nothing: '没有什么'
+  BungeeCordServer: '传送至 %server%'
+  BungeeCordCommand: 'BungeeCord 指令： %commands%'
+  Close: '关闭商店'
+  Command: '控制台指令： %commands%'
+  Custom: '未知'
+  Enchantment: '附魔： %type% 等级 %level%'
+  Permission: '权限： %permissions%'
+  PlayerCommand: '指令： %commands%'
+  PlayerCommandOp: '指令： %commands%'
+  Shop: '打开商店 %shop%'
+  Page: '打开商店页码 %page%'
+  Teleport: '传送至 %world% x:%x% y:%y% z:%z%'
+  TeleportWorld: '传送至 %world%'
+Time:
+  Seconds: '%time% 秒'
+  Minutes: '%time% 分钟'
+  Hours: '%time% 小时'
+  Days: '%time% 天'
+  Weeks: '%time% 周'

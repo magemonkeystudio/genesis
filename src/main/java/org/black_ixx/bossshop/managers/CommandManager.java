@@ -12,12 +12,16 @@ import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class CommandManager implements CommandExecutor {
+public class CommandManager implements TabExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String arg, String[] args) {
@@ -217,17 +221,66 @@ public class CommandManager implements CommandExecutor {
     }
 
     private void sendCommandList(CommandSender s) {
-        s.sendMessage(ChatColor.RED + "/BossShop - Opens  main shop");
-        s.sendMessage(ChatColor.RED + "/BossShop <shop> [input] - Opens named shop");
-        s.sendMessage(ChatColor.RED + "/BossShop open <Shop> <Player> [input] - Opens named shop for the named player");
-        s.sendMessage(ChatColor.RED + "/BossShop close [Player] - Closes inventory of the named player");
-        s.sendMessage(ChatColor.RED + "/BossShop simulate <player> <shop> <shopitem> - Simulates click");
-        s.sendMessage(ChatColor.RED + "/BossShop reload - Reloads the Plugin");
+        MessageHandler mh = ClassManager.manager.getMessageHandler();
+        mh.sendMessage("Command.Help1",s);
+        mh.sendMessage("Command.Help2",s);
+        mh.sendMessage("Command.Help3",s);
+        mh.sendMessage("Command.Help4",s);
+        mh.sendMessage("Command.Help5",s);
+        mh.sendMessage("Command.Help6",s);
         if (s instanceof Player) {
-            s.sendMessage(ChatColor.RED + "/BossShop read - Prints out itemdata of item in main hand");
-            s.sendMessage(ChatColor.RED + "/BossShop create <shopName> <shopName> - create a shop(" +
-                    "You can use '!sp!' to replace space)");
+            mh.sendMessage("Command.Help7",s);
+            mh.sendMessage("Command.Help8",s);
         }
+        mh.sendMessage("Command.Help",s);
     }
 
+    @Override
+    public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        List<String> arglist = new ArrayList<>();
+        if(args.length == 1){
+            if(sender.hasPermission("BossShop.open.command")||sender.hasPermission("BossShop.open")) {
+                arglist.add("open");
+                if(sender instanceof Player){
+                    arglist.add("<shop>");
+                }
+            }
+            arglist.add("help");
+            if(sender.hasPermission("BossShop.close")) {
+                arglist.add("close");
+            }
+            if(sender instanceof Player) {
+                if(sender.hasPermission("BossShop.read")) {
+                    arglist.add("read");
+                }
+                if(sender.hasPermission("BossShop.create")) {
+                    arglist.add("create");
+                }
+            }
+            if(sender.hasPermission("BossShop.reload")) {
+                arglist.add("reload");
+            }
+            if(sender.hasPermission("BossShop.simulate")) {
+                arglist.add("simulate");
+            }
+        }
+        // for list shop and players
+        if(args.length==2) {
+            switch (args[1]) {
+                case "open":
+                    if (sender.hasPermission("BossShop.open.command") || sender.hasPermission("BossShop.open")) {
+                        for (int i : ClassManager.manager.getShops().getShops().keySet()) {
+                            arglist.add(ClassManager.manager.getShops().getShop(i).getShopName());
+                        }
+                    }
+                case "close":
+                    if(sender.hasPermission("BossShop.close")) {
+                        for (Player p : Bukkit.getOnlinePlayers()){
+                            arglist.add(p.getName());
+                        }
+                    }
+            }
+        }
+        return arglist;
+    }
 }

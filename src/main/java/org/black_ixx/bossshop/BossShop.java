@@ -50,12 +50,15 @@ public class BossShop extends JavaPlugin {
 
         if (getCommand("bs") != null) {
             getCommand("bs").setExecutor(commander);
+            getCommand("bs").setTabCompleter(commander);
         }
         if (getCommand("bossshop") != null) {
             getCommand("bossshop").setExecutor(commander);
+            getCommand("bossshop").setTabCompleter(commander);
         }
         if (getCommand("shop") != null) {
             getCommand("shop").setExecutor(commander);
+            getCommand("shop").setTabCompleter(commander);
         }
 
 
@@ -70,11 +73,6 @@ public class BossShop extends JavaPlugin {
         pl = new PlayerListener(this);
         getServer().getPluginManager().registerEvents(pl, this);
 
-        ////////////////<- File key complete
-
-        ConfigKeyCompleter.checkConfig();
-        ConfigKeyCompleter.checkLanguages();
-
         ////////////////
         new BukkitRunnable() {
             @Override
@@ -82,7 +80,12 @@ public class BossShop extends JavaPlugin {
                 new InbuiltAddonLoader().load(BossShop.this);
                 getClassManager().setupDependentClasses();
             }
-        }.runTaskLaterAsynchronously(this, 5);
+        }.runTaskLaterAsynchronously(this, 3);
+
+        ////////////////<- File key complete
+
+        ConfigKeyCompleter.checkConfig();
+        ConfigKeyCompleter.checkLanguages();
     }
 
     @Override
