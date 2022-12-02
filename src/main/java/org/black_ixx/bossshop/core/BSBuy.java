@@ -21,6 +21,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 
 public class BSBuy {
@@ -29,7 +30,7 @@ public class BSBuy {
     private BSShop shop;
     private HashMap<Plugin, Object> special_information;
 
-    private boolean fix_item; // In order for an item to not be fix it must contain a player-dependent placeholder (detected by StringManager.checkStringForFeatures)
+    private boolean fix_item; // In order for an item to not be fixed it must contain a player-dependent placeholder (detected by StringManager.checkStringForFeatures)
     private ItemStack item;
     private String name;
     private BSInputType inputtype; // null by default. A value if players need to enter input before they can purchase the item.
@@ -54,16 +55,14 @@ public class BSBuy {
         this.priceT = priceT;
         this.rewardT = rewardT;
 
-        if (permission != null && permission != "") {
+        if (permission != null && !permission.equals("")) {
             this.permission = permission;
             if (permission.startsWith("[") && permission.endsWith("]")) {
                 if (permission.length() > 2) {
                     String group = permission.substring(1, permission.length() - 1);
-                    if (group != null) {
-                        ClassManager.manager.getSettings().setVaultEnabled(true);
-                        this.permission = group;
-                        perm_is_group = true;
-                    }
+                    ClassManager.manager.getSettings().setVaultEnabled(true);
+                    this.permission = group;
+                    perm_is_group = true;
                 }
             }
         }
@@ -193,10 +192,7 @@ public class BSBuy {
         if (permission == null) {
             return false;
         }
-        if (permission.equalsIgnoreCase("")) {
-            return false;
-        }
-        return true;
+        return !permission.equalsIgnoreCase("");
     }
 
     public boolean isExtraPermissionGroup(ClickType clicktype) {
@@ -274,7 +270,7 @@ public class BSBuy {
                 }
             }
 
-            boolean possibly_customizable = shop == null ? true : shop.isCustomizable();
+            boolean possibly_customizable = shop == null || shop.isCustomizable();
             if (possibly_customizable) {
                 if (p != null) { //When shop is customizable, the variables needs to be adapted to the player
                     rewardMessage = rewardT.getDisplayReward(p, this, reward, null);
@@ -282,20 +278,20 @@ public class BSBuy {
                 }
             }
 
-            if (priceMessage != null && priceMessage != "" && priceMessage.length() > 0) {
+            if (priceMessage != null && priceMessage.length() > 0) {
                 msg = msg.replace("%price%", priceMessage);
             }
-            if (rewardMessage != null && rewardMessage != "" && rewardMessage.length() > 0) {
+            if (rewardMessage != null && rewardMessage.length() > 0) {
                 msg = msg.replace("%reward%", rewardMessage);
             }
         }
 
         //Not working with these variables anymore. They are still included and set to "" in order to make previous shops still look good and stay compatible.
-        if (priceT != null && priceT.name() != "" && priceT.name().length() > 0) {
+        if (priceT != null && !Objects.equals(priceT.name(), "") && priceT.name().length() > 0) {
             msg = msg.replace(" %pricetype%", "");
             msg = msg.replace("%pricetype%", "");
         }
-        if (rewardT != null && rewardT.name() != "" && rewardT.name().length() > 0) {
+        if (rewardT != null && !Objects.equals(rewardT.name(), "") && rewardT.name().length() > 0) {
             msg = msg.replace(" %rewardtype%", "");
             msg = msg.replace("%rewardtype%", "");
         }
@@ -436,7 +432,6 @@ public class BSBuy {
      * @param event      Click event which caused purchase. Can be null (for example when click is simulated).
      * @param plugin     Bossshop plugin.
      */
-    @Deprecated
     public void purchaseTask(final Player p, final BSShop shop, final BSShopHolder holder, final ClickType clicktype, final BSRewardType rewardtype, final BSPriceType pricetype, final InventoryClickEvent event, final BossShop plugin) {
         if (inputtype != null) {
             inputtype.forceInput(p, shop, this, holder, clicktype, rewardtype, pricetype, event, plugin);
@@ -516,7 +511,7 @@ public class BSBuy {
 
         //Update message
         if (message != null) {
-            if (o != null && o != "" && message.contains("%left%")) {
+            if (o != null && !o.equals("") && message.contains("%left%")) {
                 message = message.replace("%left%", o);
             }
             message = plugin.getClassManager().getStringManager().transform(message, this, shop, holder, p); //Transform message before taking price because then ItemAll works fine

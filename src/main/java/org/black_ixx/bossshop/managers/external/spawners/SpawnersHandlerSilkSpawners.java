@@ -1,6 +1,5 @@
 package org.black_ixx.bossshop.managers.external.spawners;
 
-
 import de.dustplanet.util.SilkUtil;
 import org.black_ixx.bossshop.managers.misc.InputReader;
 import org.bukkit.entity.EntityType;
@@ -9,7 +8,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class SpawnersHandlerSilkSpawners implements ISpawnerHandler, ISpawnEggHandler {
 
-    private SilkUtil util;
+    private final SilkUtil util;
 
 
     public SpawnersHandlerSilkSpawners() {
@@ -35,13 +34,11 @@ public class SpawnersHandlerSilkSpawners implements ISpawnerHandler, ISpawnEggHa
 
     public String readSpawner(ItemStack i) {
         short entityid = util.getStoredSpawnerItemEntityID(i);
-        String creaturename = util.getCreatureName(entityid);
-        return creaturename;
+        return util.getCreatureName(entityid);
     }
 
     public String readEgg(ItemStack i) {
         short entityid = util.getStoredEggEntityID(i);
-        String creaturename = util.getCreatureName(entityid);
-        return creaturename;
+        return util.getCreatureName(entityid);
     }
 }

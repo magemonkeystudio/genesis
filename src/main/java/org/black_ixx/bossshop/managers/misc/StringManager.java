@@ -34,11 +34,6 @@ public class StringManager {
         if (s == null) {
             return null;
         }
-        Matcher matcher = hexPattern.matcher(s);
-        while (matcher.find()) {
-            String color = s.substring(matcher.start(), matcher.end());
-            s = s.replace(color, "" + net.md_5.bungee.api.ChatColor.of(color));
-        }
 
         s = s.replace("[<3]", "❤");
         s = s.replace("[*]", "★");
@@ -65,7 +60,7 @@ public class StringManager {
         s = s.replace("[up]", "↑");
         s = s.replace("[down]", "↓");
 
-        s = ChatColor.translateAlternateColorCodes('&', s);
+        s = colorize(s);
 
         if (ClassManager.manager.getSettings().getServerPingingEnabled(true)) {
             s = ClassManager.manager.getServerPingingManager().transform(s);
@@ -79,6 +74,15 @@ public class StringManager {
         return s;
     }
 
+    private String colorize(String string) {
+        Pattern pattern = Pattern.compile("#[a-fA-F0-9]{6}");
+        for (Matcher matcher = pattern.matcher(string); matcher.find(); matcher = pattern.matcher(string)) {
+            String color = string.substring(matcher.start(), matcher.end());
+            string = string.replace(color, net.md_5.bungee.api.ChatColor.of(color)+"");
+        }
+        string = ChatColor.translateAlternateColorCodes('&', string);
+        return string;
+    }
 
     public String transform(String s, BSBuy item, BSShop shop, BSShopHolder holder, Player target) {
         if (s == null) {
@@ -122,7 +126,7 @@ public class StringManager {
 
             if (s.contains("%balance%") && ClassManager.manager.getVaultHandler() != null) {
                 if (ClassManager.manager.getVaultHandler().getEconomy() != null) {
-                    double balance = ClassManager.manager.getVaultHandler().getEconomy().getBalance(target.getName());
+                    double balance = ClassManager.manager.getVaultHandler().getEconomy().getBalance(target);
                     s = s.replace("%balance%", MathTools.displayNumber(balance, BSPriceType.Money));
                 }
             }
@@ -153,12 +157,8 @@ public class StringManager {
 
 
     public boolean checkStringForFeatures(BSShop shop, BSBuy buy, ItemStack menu_item, String s) { //Returns true if this would make a shop customizable
-        boolean b = false;
+        boolean b = s.matches(hexPattern.pattern());
 
-
-        if (s.matches(hexPattern.pattern())) {
-            b = true;
-        }
 
         if (s.contains("%")) {
 

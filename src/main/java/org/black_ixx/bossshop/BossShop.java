@@ -20,7 +20,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class BossShop extends JavaPlugin {
 
     public final static String NAME = "BossShopPro";
-    String USER = "%%__USER__%%";
     private ClassManager manager;
     private InventoryListener il;
 
@@ -192,6 +191,4 @@ public class BossShop extends JavaPlugin {
             }
         }
     }
-
-
 }

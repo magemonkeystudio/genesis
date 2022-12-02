@@ -31,20 +31,12 @@ public class PointsManager {
         }
 
         switch (p) {
-            case COMMANDPOINTS:
-                this.pa = new BSPointsPluginCommandPoints();
-                break;
-
             case ENJIN_MINECRAFT_PLUGIN:
                 this.pa = new BSPointsPluginEnjin();
                 break;
 
             case PLAYERPOINTS:
                 this.pa = new BSPointsPluginPlayerPoints();
-                break;
-
-            case POINTSAPI:
-                this.pa = new BSPointsPluginPointsAPI();
                 break;
 
             case TOKENENCHANT:
@@ -57,10 +49,6 @@ public class PointsManager {
 
             case KINGDOMS:
                 this.pa = new BSPointsPluginKingdoms();
-                break;
-
-            case MYSQL_TOKENS:
-                this.pa = new BSPointsPluginMySQL_Tokens();
                 break;
 
             case VOTINGPLUGIN:
@@ -118,13 +106,10 @@ public class PointsManager {
     public enum PointsPlugin {
         NONE(new String[]{"none", "nothing"}),
         PLAYERPOINTS(new String[]{"PlayerPoints", "PlayerPoint", "PP"}),
-        COMMANDPOINTS(new String[]{"CommandPoints", "CommandPoint", "CP"}),
         ENJIN_MINECRAFT_PLUGIN(new String[]{"EnjinMinecraftPlugin", "Enjin", "EMP"}),
-        POINTSAPI(new String[]{"PointsAPI", "PAPI"}),
         TOKENENCHANT(new String[]{"TokenEnchant", "TE", "TokenEnchants"}),
         Jobs(new String[]{"Jobs", "JobsReborn"}),
         KINGDOMS(new String[]{"Kingdoms", "Kingdom"}),
-        MYSQL_TOKENS(new String[]{"MySQL-Tokens", "MySQL-Token"}),
         VOTINGPLUGIN(new String[]{"VotingPlugin", "VP"}),
         GadetsMenu(new String[]{"GadgetsMenu"}),
         Gringotts(new String[]{"Gringotts"}),

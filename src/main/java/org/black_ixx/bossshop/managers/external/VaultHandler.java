@@ -39,12 +39,11 @@ public class VaultHandler {
 
     private void setupPermissions() {
         RegisteredServiceProvider<Permission> rsp = Bukkit.getServer().getServicesManager().getRegistration(Permission.class);
-        perms = rsp.getProvider();
-        if (perms == null) {
+        if (rsp == null) {
             ClassManager.manager.getBugFinder().warn("No Permissions Plugin was found... You need one if you want to work with Permissions or Permission Groups! Get it there: http://plugins.bukkit.org/");
             return;
         }
-
+        perms = rsp.getProvider();
     }
 
     ///////////////////////////////////////

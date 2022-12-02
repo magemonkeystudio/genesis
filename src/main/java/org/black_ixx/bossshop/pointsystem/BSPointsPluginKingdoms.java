@@ -36,15 +36,7 @@ public class BSPointsPluginKingdoms extends BSPointsPlugin{
 
     @Override
     public double takePoints(OfflinePlayer player, double points) {
-        KingdomPlayer kp = KingdomPlayer.getKingdomPlayer(player);
-        if (kp.getKingdom() != null) {
-            Kingdom kingdom = kp.getKingdom();
-            if (kingdom != null) {
-                kingdom.setResourcePoints((long)(getPoints(player) - points));
-                return kingdom.getResourcePoints();
-            }
-        }
-        return 0;
+        return setPoints(player, (long) (getPoints(player) - points));
     }
 
     @Override

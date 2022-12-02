@@ -5,7 +5,6 @@ import com.enjin.rpc.mappings.mappings.general.RPCData;
 import com.enjin.rpc.mappings.services.PointService;
 import org.bukkit.OfflinePlayer;
 
-
 public class BSPointsPluginEnjin extends BSPointsPlugin {
 
     public BSPointsPluginEnjin() {
