@@ -10,6 +10,8 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
+import su.nightexpress.quantumrpg.QuantumRPG;
+import su.nightexpress.quantumrpg.api.QuantumAPI;
 
 import java.util.List;
 
@@ -63,6 +65,7 @@ public class ItemDataPartMaterial extends ItemDataPart {
                         }
                     case "ProRPGItems":
                     case "prorpgitems":
+                        
                         //planing, it's hard to get item stack now.
                     default:
                         ClassManager.manager.getBugFinder().warn("Mistake in Config: '"+ plugin + "' is not a valid plugin, or is not supported.");

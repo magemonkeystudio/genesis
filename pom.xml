@@ -242,8 +242,9 @@
         <dependency>
             <groupId>de.dustplanet.silkspawners.SilkSpawners</groupId>
             <artifactId>SilkSpawners</artifactId>
-            <version>5.0.2</version>
-            <scope>provided</scope>
+            <version>7.3.1</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/SilkSpawners.jar</systemPath>
         </dependency>
 
         <!-- Used for language utils -->
