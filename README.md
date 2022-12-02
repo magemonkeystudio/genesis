@@ -1,3 +1,5 @@
+[![Build](https://github.com/promcteam/BossShopPro/actions/workflows/publish.yml/badge.svg?branch=dev)](https://s01.oss.sonatype.org/content/repositories/snapshots/com/promcteam/bossshoppro)
+
 # BossShopPro
 
 BossShopPro is one of the most player-friendly and multifunctional GUI plugins ever! Say goodbye to all the annoying command- or sign shops!
