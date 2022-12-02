@@ -1,4 +1,4 @@
-[![Build](https://github.com/promcteam/bosshoppro/actions/workflows/publish.yml/badge.svg?branch=dev)](https://s01.oss.sonatype.org/content/repositories/snapshots/com/promcteam/bossshoppro)
+[![Build](https://github.com/promcteam/BossShopPro/actions/workflows/publish.yml/badge.svg?branch=dev)](https://s01.oss.sonatype.org/content/repositories/snapshots/com/promcteam/bossshoppro)
 
 # BossShopPro
 
