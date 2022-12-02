@@ -36,7 +36,7 @@ public abstract class ItemDataPart {
             UNBREAKING,
             BOOK,
             BOOKPAGE,
-            BANNER; //UNSUPPORTED BY READITEM
+            BANNER;
 
     private static List<ItemDataPart> types;
     private final String[] names = createNames();
@@ -223,6 +223,5 @@ public abstract class ItemDataPart {
     public boolean needsArgument() {
         return true; //Can be overriden
     }
-
 
 }
