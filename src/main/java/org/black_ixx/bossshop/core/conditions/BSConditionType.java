@@ -40,11 +40,13 @@ public abstract class BSConditionType {
             WORLD,
             WEATHER,
             PLACEHOLDERNUMBER,
-            PLACEHOLDERMATCH;
+            PLACEHOLDERMATCH,
+            CLIENTVERSION,
+            PAPIADDON_INSTALLED;
 
 
     private static List<BSConditionType> types;
-    private String[] names = createNames();
+    private final String[] names = createNames();
 
     public static void loadTypes() {
         types = new ArrayList<>();
@@ -77,6 +79,8 @@ public abstract class BSConditionType {
         WEATHER = registerType(new BSConditionTypeWeather());
         PLACEHOLDERNUMBER = registerType(new BSConditionTypePlaceholderNumber());
         PLACEHOLDERMATCH = registerType(new BSConditionTypePlaceholderMatch());
+        CLIENTVERSION = registerType(new BSConditionTypeClientVersion());
+        PAPIADDON_INSTALLED = registerType(new BSConditionTypePlaceHolderAPIAddonInstalled());
     }
 
     public static BSConditionType registerType(BSConditionType type) {
@@ -124,8 +128,6 @@ public abstract class BSConditionType {
 
     public abstract boolean meetsCondition(BSShopHolder holder, BSBuy shopitem, Player p, String conditiontype, String condition);
 
-
-    @Deprecated
     public abstract String[] createNames();
 
     public abstract String[] showStructure();

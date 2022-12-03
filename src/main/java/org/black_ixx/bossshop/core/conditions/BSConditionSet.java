@@ -9,7 +9,7 @@ import java.util.List;
 
 public class BSConditionSet implements BSCondition {
 
-    private List<BSCondition> conditions;
+    private final List<BSCondition> conditions;
 
 
     public BSConditionSet() {
