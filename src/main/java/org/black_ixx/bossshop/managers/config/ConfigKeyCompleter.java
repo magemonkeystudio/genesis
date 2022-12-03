@@ -28,7 +28,7 @@ public class ConfigKeyCompleter {
         assert is != null;
         File f = new File(ClassManager.manager.getPlugin().getDataFolder(),"lang/en_us.yml");
         File f2;
-        try {f2 = File.createTempFile("en_us-lang-cache","yml");//make cache
+        try {f2 = File.createTempFile("en-US-lang-cache","yml");//make cache
             copyInputStreamToFile(is, f2);
         } catch (IOException e) {
             throw new RuntimeException(e);}
