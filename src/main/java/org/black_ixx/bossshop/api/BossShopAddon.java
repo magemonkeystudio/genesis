@@ -1,7 +1,6 @@
 package org.black_ixx.bossshop.api;
 
 import org.black_ixx.bossshop.BossShop;
-import org.black_ixx.bossshop.misc.ClassTools;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -9,9 +8,6 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public abstract class BossShopAddon extends JavaPlugin {
-
-
-    String USER = "%%__USER__%%";
     private BossShop bs;
     private boolean b = false;
 

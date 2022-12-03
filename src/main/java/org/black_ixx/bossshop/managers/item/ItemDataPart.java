@@ -2,12 +2,11 @@ package org.black_ixx.bossshop.managers.item;
 
 import org.black_ixx.bossshop.core.BSBuy;
 import org.black_ixx.bossshop.managers.ClassManager;
+import org.black_ixx.bossshop.misc.ClassAndVerTools;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public abstract class ItemDataPart {
@@ -68,11 +67,15 @@ public abstract class ItemDataPart {
         BANNER = registerType(new ItemDataPartBanner());
         BOOK = registerType(new ItemDataPartWrittenBookInformation());
         BOOKPAGE = registerType(new ItemDataPartWrittenBookPage());
-        AXOLOTL = registerType(new ItemDataPartAxolotl());
+        if (ClassAndVerTools.isHighThanOrEquals(17)) {
+            AXOLOTL = registerType(new ItemDataPartAxolotl());
+        }
+        if (ClassAndVerTools.isHighThanOrEquals(14)) {
+            SUSPICIOUSSTEW = registerType(new ItemDataPartSuspiciousStew());
+            KNOWLEDGEBOOK = registerType(new ItemDataPartKnowledgeBook());
+            TROPICALFISH = registerType(new ItemDataPartTropicalFish());
+        }
         GLOWING = registerType(new ItemDataPartGlowing());
-        KNOWLEDGEBOOK = registerType(new ItemDataPartKnowledgeBook());
-        SUSPICIOUSSTEW = registerType(new ItemDataPartTropicalFish());
-        TROPICALFISH = registerType(new ItemDataPartTropicalFish());
     }
 
     public static ItemDataPart registerType(ItemDataPart type) {
