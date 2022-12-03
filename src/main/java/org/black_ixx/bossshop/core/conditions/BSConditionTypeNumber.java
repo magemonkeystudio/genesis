@@ -10,10 +10,12 @@ public abstract class BSConditionTypeNumber extends BSConditionType {
 
     @Override
     public boolean meetsCondition(BSShopHolder holder, BSBuy shopitem, Player p, String conditiontype, String condition) {
-        double n = getNumber(shopitem, holder, p);
+        double n = 0;
+        try { n = getNumber(shopitem, holder, p);
+        }catch (Exception ignored){}
 
         if (condition.contains("#") && condition.contains("%")) {
-            String parts[] = condition.split("#", 2);
+            String[] parts = condition.split("#", 2);
             condition = parts[0];
             int divisor = InputReader.getInt(parts[1].replace("%", ""), 1);
             n %= divisor;
@@ -69,6 +71,6 @@ public abstract class BSConditionTypeNumber extends BSConditionType {
         return new String[]{"over:[double]", "under:[double]", "equals:[double]", "between:[double]:[double]"};
     }
 
-    public abstract double getNumber(BSBuy shopitem, BSShopHolder holder, Player p);
+    public abstract double getNumber(BSBuy shopitem, BSShopHolder holder, Player p) throws NoSuchFieldException, IllegalAccessException;
 
 }
