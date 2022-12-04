@@ -119,7 +119,7 @@ public abstract class BossShopAddon extends JavaPlugin {
 
     protected double getWorth(String s) {
         try {
-            if (s == null || s == "" || s.length() < 1) {
+            if (s == null || s.length() < 1) {
                 return 0;
             }
             double x = 0;
@@ -146,14 +146,7 @@ public abstract class BossShopAddon extends JavaPlugin {
      * @return new storage for an addon
      */
     public BSAddonStorage createStorage(Plugin plugin, String name) {
-        int type = BSAddonStorage.TYPE_LOCAL_FILE; //Maybe add an option to store data elsewhere in future
-
-        switch (type) {
-            case BSAddonStorage.TYPE_LOCAL_FILE:
-                return new BSAddonConfig(plugin, name);
-        }
-
-        return null;
+        return new BSAddonConfig(plugin, name);
     }
 
     /////// //// //// //// //// ////
