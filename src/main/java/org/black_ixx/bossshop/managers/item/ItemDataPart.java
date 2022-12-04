@@ -67,10 +67,10 @@ public abstract class ItemDataPart {
         BANNER = registerType(new ItemDataPartBanner());
         BOOK = registerType(new ItemDataPartWrittenBookInformation());
         BOOKPAGE = registerType(new ItemDataPartWrittenBookPage());
-        if (ClassAndVerTools.isHighThanOrEquals(17)) {
+        if (ClassAndVerTools.VerIsGreaterThanOrEqualTo(17)) {
             AXOLOTL = registerType(new ItemDataPartAxolotl());
         }
-        if (ClassAndVerTools.isHighThanOrEquals(14)) {
+        if (ClassAndVerTools.VerIsGreaterThanOrEqualTo(14)) {
             SUSPICIOUSSTEW = registerType(new ItemDataPartSuspiciousStew());
             KNOWLEDGEBOOK = registerType(new ItemDataPartKnowledgeBook());
             TROPICALFISH = registerType(new ItemDataPartTropicalFish());
