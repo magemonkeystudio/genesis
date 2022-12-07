@@ -3,6 +3,7 @@ package org.black_ixx.bossshop.managers.item;
 import org.black_ixx.bossshop.core.BSBuy;
 import org.black_ixx.bossshop.managers.ClassManager;
 import org.black_ixx.bossshop.misc.ClassAndVerTools;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -40,7 +41,8 @@ public abstract class ItemDataPart {
             GLOWING,
             KNOWLEDGEBOOK,
             SUSPICIOUSSTEW,
-            TROPICALFISH;
+            TROPICALFISH,
+            NBTTAG;
 
     private static List<ItemDataPart> types;
     private final String[] names = createNames();
@@ -74,6 +76,9 @@ public abstract class ItemDataPart {
             SUSPICIOUSSTEW = registerType(new ItemDataPartSuspiciousStew());
             KNOWLEDGEBOOK = registerType(new ItemDataPartKnowledgeBook());
             TROPICALFISH = registerType(new ItemDataPartTropicalFish());
+        }
+        if (ClassAndVerTools.VerIsGreaterThanOrEqualTo(8)) {
+            NBTTAG = registerType(new ItemDataPartNBTTag());
         }
         GLOWING = registerType(new ItemDataPartGlowing());
     }

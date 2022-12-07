@@ -41,7 +41,6 @@ public abstract class BSConditionType {
             WEATHER,
             PLACEHOLDERNUMBER,
             PLACEHOLDERMATCH,
-            CLIENTVERSION,
             PAPIADDON_INSTALLED;
 
 
@@ -79,7 +78,6 @@ public abstract class BSConditionType {
         WEATHER = registerType(new BSConditionTypeWeather());
         PLACEHOLDERNUMBER = registerType(new BSConditionTypePlaceholderNumber());
         PLACEHOLDERMATCH = registerType(new BSConditionTypePlaceholderMatch());
-        CLIENTVERSION = registerType(new BSConditionTypeClientVersion());
         PAPIADDON_INSTALLED = registerType(new BSConditionTypePlaceHolderAPIAddonInstalled());
     }
 
