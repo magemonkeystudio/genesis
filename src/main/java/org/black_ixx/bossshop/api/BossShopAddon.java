@@ -1,5 +1,6 @@
 package org.black_ixx.bossshop.api;
 
+import org.apache.commons.lang.StringUtils;
 import org.black_ixx.bossshop.BossShop;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -119,7 +120,7 @@ public abstract class BossShopAddon extends JavaPlugin {
 
     protected double getWorth(String s) {
         try {
-            if (s == null || s.isBlank()) {
+            if (s == null || StringUtils.isBlank(s)) {
                 return 0;
             }
             double x = 0;
