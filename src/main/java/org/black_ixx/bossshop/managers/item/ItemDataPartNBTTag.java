@@ -3,7 +3,6 @@ package org.black_ixx.bossshop.managers.item;
 import de.tr7zw.changeme.nbtapi.NBTItem;
 import org.black_ixx.bossshop.core.BSBuy;
 import org.black_ixx.bossshop.managers.ClassManager;
-import org.black_ixx.bossshop.misc.ClassAndVerTools;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -50,10 +49,14 @@ public class ItemDataPartNBTTag extends ItemDataPart{
                     Object o = parts[2];
                     i.setObject(parts[1], o);
                     break;
+                default:
+                    ClassManager.manager.getBugFinder().severe("Mistake in Config: '" + parts[0] +
+                            "': Wrong data type. The currently supported data types are INT, LONG, STRING, FLOAT, BOOLEAN, DOUBLE, BYTE, SHORT, UUID and OBJECT(OBJ)");
+                    return item;
             }
             return i.getItem();
         }else {
-            ClassManager.manager.getBugFinder().severe("Mistake in Config: '" + argument +"'. If you want to use nbt tags, please install NBTAPI(https://www.spigotmc.org/resources/nbt-api.7939/)!");
+            ClassManager.manager.getBugFinder().severe("Mistake in Config: '" + argument +"': If you want to use nbt tags, please install NBTAPI(https://www.spigotmc.org/resources/nbt-api.7939/)!");
             return item;
         }
     }

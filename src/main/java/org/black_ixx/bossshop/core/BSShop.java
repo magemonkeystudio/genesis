@@ -92,7 +92,7 @@ public abstract class BSShop {
         String displayname = this.displayname;
         String displayname2 = ChatColor.stripColor(displayname);
         displayname = ClassManager.manager.getStringManager().transform(displayname, null, this, holder, p);
-        return displayname2.length() > 40 ? displayname2.substring(0, 40) : displayname;
+        return displayname2.length() > 45 ? displayname2.substring(0, 45) : displayname;
     }
 
     public String getSignText() {
