@@ -119,7 +119,7 @@ public abstract class BossShopAddon extends JavaPlugin {
 
     protected double getWorth(String s) {
         try {
-            if (s == null || s.length() < 1) {
+            if (s == null || s.isBlank()) {
                 return 0;
             }
             double x = 0;

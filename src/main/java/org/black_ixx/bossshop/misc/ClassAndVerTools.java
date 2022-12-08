@@ -12,7 +12,7 @@ public class ClassAndVerTools {
         }
     }
 
-    public static boolean VerIsGreaterThanOrEqualTo(int i){
+    public static boolean verIsAtLeast(int i){
         String version = Bukkit.getServer().getBukkitVersion().split("-")[0];
         int version2 = Integer.parseInt(version.split("\\.")[1]);
         return version2 >= i;

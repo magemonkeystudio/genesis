@@ -6,6 +6,11 @@ import org.bukkit.entity.Player;
 
 public class BSConditionTypeShopPage extends BSConditionTypeNumber {
     @Override
+    public boolean meetsCondition(BSShopHolder holder, BSBuy shopitem, Player p, String conditiontype, String condition) {
+        return super.meetsCondition(holder, shopitem, p, conditiontype, transformLine(holder, condition));
+    }
+
+    @Override
     public double getNumber(BSBuy shopitem, BSShopHolder holder, Player p) {
         return holder.getDisplayPage();
     }
@@ -26,7 +31,7 @@ public class BSConditionTypeShopPage extends BSConditionTypeNumber {
     }
 
 
-    public String transformLine(BSShopHolder holder, BSBuy shopitem, Player p, String s) {
+    public String transformLine(BSShopHolder holder, String s) {
         s = s.replace("%maxpage%", String.valueOf(holder.getDisplayHighestPage()));
         s = s.replace("%maxshoppage%", String.valueOf(holder.getDisplayHighestPage()));
         return s;

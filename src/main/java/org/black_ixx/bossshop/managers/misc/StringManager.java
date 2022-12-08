@@ -76,7 +76,7 @@ public class StringManager {
     }
 
     private String colorize(String string) {
-        if (ClassAndVerTools.VerIsGreaterThanOrEqualTo(16)) {
+        if (ClassAndVerTools.verIsAtLeast(16)) {
             Pattern pattern = Pattern.compile("#[a-fA-F0-9]{6}");
             for (Matcher matcher = pattern.matcher(string); matcher.find(); matcher = pattern.matcher(string)) {
                 String color = string.substring(matcher.start(), matcher.end());
