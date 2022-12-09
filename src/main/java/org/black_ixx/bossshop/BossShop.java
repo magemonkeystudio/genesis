@@ -17,7 +17,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class BossShop extends JavaPlugin {foobar
+public class BossShop extends JavaPlugin {
 
     public final static String NAME = "BossShopPro";
     private ClassManager manager;
