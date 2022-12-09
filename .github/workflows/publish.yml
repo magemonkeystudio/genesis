@@ -28,9 +28,10 @@ jobs:
 #        env:
 #          GITHUB_TOKEN_REF: ${{ secrets.GH_PAT_FOR_ACTIONS_TOKEN }}
       - name: Publish to Maven Central
+        id: publish-maven
         env:
           MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-        run: mvn clean deploy -P gpg,publish -DcreateChecksum=true
+        run: mvn clean deploy -P gpg,publish -DcreateChecksum=true 2>&1 | tee log.txt
 #      - name: Publish artifact on GitHub Packages
 #        run: mvn clean deploy -e -DskipTests
 #        env:
