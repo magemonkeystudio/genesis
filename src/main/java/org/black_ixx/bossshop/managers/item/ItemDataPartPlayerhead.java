@@ -9,11 +9,9 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
-import org.bukkit.inventory.meta.tags.ItemTagType;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.util.List;
-import java.util.Objects;
 
 public class ItemDataPartPlayerhead extends ItemDataPart {
 
@@ -84,8 +82,7 @@ public class ItemDataPartPlayerhead extends ItemDataPart {
                     return false;
                 }
 
-                return Objects.equals(ms.getOwningPlayer(), mp.getOwningPlayer());
-
+                return ms.getOwningPlayer().getUniqueId().equals(mp.getOwningPlayer().getUniqueId());
             }
         }
         return true;
