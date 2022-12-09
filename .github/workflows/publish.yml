@@ -36,4 +36,4 @@ jobs:
 #        env:
 #          GITHUB_TOKEN: ${{ secrets.DEPLOY_KEY }}
       - name: Notify Discord
-        run: python ./.github/notify_published.py ${{ secrets.BSP_WEBHOOK }}
+        run: pip install simplejson && python ./.github/notify_published.py ${{ secrets.BSP_WEBHOOK }}
