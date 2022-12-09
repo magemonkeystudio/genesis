@@ -14,7 +14,7 @@ public class ItemDataPartNBTTag extends ItemDataPart{
     public ItemStack transform(ItemStack item, String used_name, String argument) {
         NBTItem i = new NBTItem(item);
         String[] parts = argument.split("#");
-        switch (parts[0]) {
+        switch (parts[0].toUpperCase()) {
             case "INT":
                 i.setInteger(parts[1], Integer.valueOf(parts[2]));
                 break;
