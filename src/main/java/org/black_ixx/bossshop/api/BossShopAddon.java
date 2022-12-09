@@ -1,7 +1,6 @@
 package org.black_ixx.bossshop.api;
 
 import org.black_ixx.bossshop.BossShop;
-import org.black_ixx.bossshop.misc.ClassTools;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -9,11 +8,8 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public abstract class BossShopAddon extends JavaPlugin {
-
-
-    String USER = "%%__USER__%%";
     private BossShop bs;
-    private boolean b = false;
+    private boolean  b = false;
 
     /////// //// //// //// //// ////
 
@@ -77,6 +73,7 @@ public abstract class BossShopAddon extends JavaPlugin {
 
     /**
      * Called to reload the addon
+     *
      * @param sender the execute of the command
      */
     public void reload(CommandSender sender) { //Can be overwritten
@@ -88,6 +85,7 @@ public abstract class BossShopAddon extends JavaPlugin {
 
     /**
      * Prints a serve statement in the logger
+     *
      * @param msg the message to log
      */
     public void printSevere(String msg) {
@@ -96,6 +94,7 @@ public abstract class BossShopAddon extends JavaPlugin {
 
     /**
      * Prints a warning in the warning logger
+     *
      * @param msg the message to log
      */
     public void printWarning(String msg) {
@@ -104,6 +103,7 @@ public abstract class BossShopAddon extends JavaPlugin {
 
     /**
      * Prints information in the info logger
+     *
      * @param msg message to log
      */
     public void printInfo(String msg) {
@@ -112,6 +112,7 @@ public abstract class BossShopAddon extends JavaPlugin {
 
     /**
      * Get an instance of the BossShop class
+     *
      * @return instance of class
      */
     public final BossShop getBossShop() {
@@ -123,10 +124,10 @@ public abstract class BossShopAddon extends JavaPlugin {
 
     protected double getWorth(String s) {
         try {
-            if (s == null || s == "" || s.length() < 1) {
+            if (s == null || s.isBlank()) {
                 return 0;
             }
-            double x = 0;
+            double   x     = 0;
             String[] parts = s.replace(".", ":").split(":");
             x += Integer.parseInt(parts[0].trim());
             if (parts.length == 2) {
@@ -145,31 +146,27 @@ public abstract class BossShopAddon extends JavaPlugin {
 
     /**
      * Creates store for an addon
+     *
      * @param plugin the plugin addon
-     * @param name the name of the addon
+     * @param name   the name of the addon
      * @return new storage for an addon
      */
     public BSAddonStorage createStorage(Plugin plugin, String name) {
-        int type = BSAddonStorage.TYPE_LOCAL_FILE; //Maybe add an option to store data elsewhere in future
-
-        switch (type) {
-            case BSAddonStorage.TYPE_LOCAL_FILE:
-                return new BSAddonConfig(plugin, name);
-        }
-
-        return null;
+        return new BSAddonConfig(plugin, name);
     }
 
     /////// //// //// //// //// ////
 
     /**
      * Get the name of the addon
+     *
      * @return name of addon
      */
     public abstract String getAddonName();
 
     /**
      * Get the version required for the addon to work
+     *
      * @return version required
      */
     public abstract String getRequiredBossShopVersion();

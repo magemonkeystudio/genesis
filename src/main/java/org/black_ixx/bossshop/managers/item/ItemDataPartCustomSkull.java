@@ -2,16 +2,18 @@ package org.black_ixx.bossshop.managers.item;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
-import org.apache.commons.codec.binary.Base64;
 import org.black_ixx.bossshop.core.BSBuy;
 import org.black_ixx.bossshop.managers.ClassManager;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.profile.PlayerProfile;
 
 import java.lang.reflect.Field;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -24,21 +26,30 @@ public class ItemDataPartCustomSkull extends ItemDataPart {
             return i;
         }
 
-        ItemMeta skullMeta = i.getItemMeta();
-        GameProfile profile = new GameProfile(UUID.randomUUID(), null);
-
-        Property property = input.contains("http://textures.minecraft.net/texture") ? getPropertyURL(input) : getProperty(input);
-        profile.getProperties().put("textures", property);
-        Field profileField = null;
-        try {
-            profileField = skullMeta.getClass().getDeclaredField("profile");
-        } catch (NoSuchFieldException | SecurityException e) {
-            e.printStackTrace();
+        SkullMeta skullMeta = (SkullMeta) i.getItemMeta();
+        if (input.contains("http://textures.minecraft.net/texture")) {
+            try {
+                PlayerProfile pprofile = Bukkit.createPlayerProfile(UUID.randomUUID());
+                pprofile.getTextures().setSkin(new URL(input));
+                skullMeta.setOwnerProfile(pprofile);
+                i.setItemMeta(skullMeta);
+                return i;
+            } catch (MalformedURLException e) {
+                throw new RuntimeException("Could not convert url to texture: " + input, e);
+            }
         }
-        profileField.setAccessible(true);
+
+        GameProfile profile = new GameProfile(UUID.randomUUID(), null);
+        // TODO Use NBT to set skull texture b64
+        Property property = getProperty(input);
+        profile.getProperties().put("textures", property);
+
         try {
+            Field profileField = skullMeta.getClass().getDeclaredField("profile");
+            profileField.setAccessible(true);
             profileField.set(skullMeta, profile);
-        } catch (IllegalArgumentException | IllegalAccessException e) {
+        } catch (NoSuchFieldException | SecurityException | IllegalAccessException e) {
+            ClassManager.manager.getBugFinder().warn("Could not set profile texture.");
             e.printStackTrace();
         }
         i.setItemMeta(skullMeta);
@@ -49,15 +60,10 @@ public class ItemDataPartCustomSkull extends ItemDataPart {
         return new Property("textures", texture);
     }
 
-    private static Property getPropertyURL(String url) {
-        byte[] encodedData = Base64.encodeBase64(String.format("{textures:{SKIN:{url:\"%s\"}}}", url).getBytes());
-        return new Property("textures", new String(encodedData));
-    }
-
     public static String readSkullTexture(ItemStack i) {
         if (i.getType() == Material.PLAYER_HEAD) {
-            SkullMeta meta = (SkullMeta) i.getItemMeta();
-            Field profileField = null;
+            SkullMeta meta         = (SkullMeta) i.getItemMeta();
+            Field     profileField = null;
             try {
                 profileField = meta.getClass().getDeclaredField("profile");
                 profileField.setAccessible(true);

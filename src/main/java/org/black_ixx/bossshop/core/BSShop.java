@@ -1,5 +1,6 @@
 package org.black_ixx.bossshop.core;
 
+import net.md_5.bungee.api.ChatColor;
 import org.black_ixx.bossshop.BossShop;
 import org.black_ixx.bossshop.events.BSChoosePageLayoutEvent;
 import org.black_ixx.bossshop.managers.ClassManager;
@@ -88,9 +89,7 @@ public abstract class BSShop {
     }
 
     public String getValidDisplayName(Player p, BSShopHolder holder) {
-        String displayname = this.displayname;
-        displayname = ClassManager.manager.getStringManager().transform(displayname, null, this, holder, p);
-        return displayname.length() > 40 ? displayname.substring(0, 40) : displayname;
+        return ClassManager.manager.getStringManager().transform(this.displayname, null, this, holder, p);
     }
 
     public String getSignText() {

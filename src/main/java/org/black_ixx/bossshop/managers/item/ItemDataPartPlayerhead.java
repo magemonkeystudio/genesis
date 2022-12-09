@@ -9,7 +9,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
-import org.bukkit.inventory.meta.tags.ItemTagType;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.List;
 
@@ -26,14 +26,10 @@ public class ItemDataPartPlayerhead extends ItemDataPart {
 
         if (ClassManager.manager.getStringManager().checkStringForFeatures(null, null, null, argument)) {
             NamespacedKey key = new NamespacedKey(ClassManager.manager.getPlugin(), "skullOwnerPlaceholder");
-            meta.getCustomTagContainer().setCustomTag(key, ItemTagType.STRING, argument); //argument = placeholder
+            meta.getPersistentDataContainer().set(key, PersistentDataType.STRING, argument); //argument = placeholder
         } else {
             OfflinePlayer player = Bukkit.getOfflinePlayer(argument);
-            if (player != null) {
-                meta.setOwningPlayer(player);
-            } else {
-                meta.setOwner(argument);
-            }
+            meta.setOwningPlayer(player);
         }
 
         item.setItemMeta(meta);
@@ -86,8 +82,7 @@ public class ItemDataPartPlayerhead extends ItemDataPart {
                     return false;
                 }
 
-                return ms.getOwner().equalsIgnoreCase(mp.getOwner());
-
+                return ms.getOwningPlayer().getUniqueId().equals(mp.getOwningPlayer().getUniqueId());
             }
         }
         return true;

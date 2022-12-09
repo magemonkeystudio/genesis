@@ -44,7 +44,7 @@ public abstract class BSConditionType {
 
 
     private static List<BSConditionType> types;
-    private String[] names = createNames();
+    private final String[] names = createNames();
 
     public static void loadTypes() {
         types = new ArrayList<>();
@@ -124,8 +124,6 @@ public abstract class BSConditionType {
 
     public abstract boolean meetsCondition(BSShopHolder holder, BSBuy shopitem, Player p, String conditiontype, String condition);
 
-
-    @Deprecated
     public abstract String[] createNames();
 
     public abstract String[] showStructure();
