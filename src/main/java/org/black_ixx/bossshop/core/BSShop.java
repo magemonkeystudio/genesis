@@ -89,10 +89,7 @@ public abstract class BSShop {
     }
 
     public String getValidDisplayName(Player p, BSShopHolder holder) {
-        String displayname = this.displayname;
-        String displayname2 = ChatColor.stripColor(displayname);
-        displayname = ClassManager.manager.getStringManager().transform(displayname, null, this, holder, p);
-        return displayname2.length() > 45 ? displayname.substring(0, 45) : displayname;
+        return ClassManager.manager.getStringManager().transform(this.displayname, null, this, holder, p);
     }
 
     public String getSignText() {

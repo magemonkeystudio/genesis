@@ -166,14 +166,6 @@
             <version>1.18-R0.1-SNAPSHOT</version>
         </dependency>
 
-        <!-- Used for skull -->
-        <dependency>
-            <groupId>org.bukkit</groupId>
-            <artifactId>craftbukkit</artifactId>
-            <version>1.13.2-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -301,6 +293,12 @@
             <version>4.7.5</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/GadgetsMenu.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.mojang</groupId>
+            <artifactId>authlib</artifactId>
+            <version>3.11.50</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

@@ -2,8 +2,7 @@ package org.black_ixx.bossshop.managers.item;
 
 import org.black_ixx.bossshop.core.BSBuy;
 import org.black_ixx.bossshop.managers.ClassManager;
-import org.black_ixx.bossshop.misc.ClassAndVerTools;
-import org.bukkit.Bukkit;
+import org.black_ixx.bossshop.misc.VersionManager;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -69,15 +68,15 @@ public abstract class ItemDataPart {
         BANNER = registerType(new ItemDataPartBanner());
         BOOK = registerType(new ItemDataPartWrittenBookInformation());
         BOOKPAGE = registerType(new ItemDataPartWrittenBookPage());
-        if (ClassAndVerTools.verIsAtLeast(17)) {
+        if (VersionManager.isAtLeast(17)) {
             AXOLOTL = registerType(new ItemDataPartAxolotl());
         }
-        if (ClassAndVerTools.verIsAtLeast(14)) {
+        if (VersionManager.isAtLeast(14)) {
             SUSPICIOUSSTEW = registerType(new ItemDataPartSuspiciousStew());
             KNOWLEDGEBOOK = registerType(new ItemDataPartKnowledgeBook());
             TROPICALFISH = registerType(new ItemDataPartTropicalFish());
         }
-        if (ClassAndVerTools.verIsAtLeast(8)) {
+        if (VersionManager.isAtLeast(8)) {
             NBTTAG = registerType(new ItemDataPartNBTTag());
         }
         GLOWING = registerType(new ItemDataPartGlowing());

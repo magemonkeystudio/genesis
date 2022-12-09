@@ -40,8 +40,7 @@ public abstract class BSConditionType {
             WORLD,
             WEATHER,
             PLACEHOLDERNUMBER,
-            PLACEHOLDERMATCH,
-            PAPIADDON_INSTALLED;
+            PLACEHOLDERMATCH;
 
 
     private static List<BSConditionType> types;
@@ -78,7 +77,6 @@ public abstract class BSConditionType {
         WEATHER = registerType(new BSConditionTypeWeather());
         PLACEHOLDERNUMBER = registerType(new BSConditionTypePlaceholderNumber());
         PLACEHOLDERMATCH = registerType(new BSConditionTypePlaceholderMatch());
-        PAPIADDON_INSTALLED = registerType(new BSConditionTypePlaceHolderAPIAddonInstalled());
     }
 
     public static BSConditionType registerType(BSConditionType type) {
