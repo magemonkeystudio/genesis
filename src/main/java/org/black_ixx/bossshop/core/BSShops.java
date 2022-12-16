@@ -21,8 +21,8 @@ public class BSShops {
     /////////////////////////////// <- Variables
     private int id = 0;
     public BSShops(BossShop plugin, Settings settings) {
-        shops = new HashMap<Integer, BSShop>();
-        shopsIds = new HashMap<String, Integer>();
+        shops = new HashMap<>();
+        shopsIds = new HashMap<>();
 
         File folder = new File(plugin.getDataFolder().getAbsolutePath() + File.separator + "shops" + File.separator);
         new FileHandler().exportShops(plugin);
@@ -106,21 +106,19 @@ public class BSShops {
         boolean remember_current_shop = true;
 
         InventoryView view = p.getOpenInventory();
-        if (view != null) {
-            if (view.getTopInventory().getHolder() instanceof BSShopHolder) {
-                BSShopHolder holder = (BSShopHolder) view.getTopInventory().getHolder();
-                BSShopHolder old_shopholder = holder.getPreviousShopHolder();
-                if (old_shopholder != null) {
-                    //Going back to previous shop
-                    if (old_shopholder.getShop() == shop) {
-                        page = old_shopholder.getPage();
+        if (view.getTopInventory().getHolder() instanceof BSShopHolder) {
+            BSShopHolder holder = (BSShopHolder) view.getTopInventory().getHolder();
+            BSShopHolder old_shopholder = holder.getPreviousShopHolder();
+            if (old_shopholder != null) {
+                //Going back to previous shop
+                if (old_shopholder.getShop() == shop) {
+                    page = old_shopholder.getPage();
 
-                        /* If going back to parent shop, children shop should not be remembered
-                         *  That way it can be prevented that all previous shops are kept in memory when players keep switching between shops
-                         *  Note: This might cause confusion in some causes because some pages are restored and some are not.
-                         */
-                        remember_current_shop = false;
-                    }
+                    /* If going back to parent shop, children shop should not be remembered
+                     *  That way it can be prevented that all previous shops are kept in memory when players keep switching between shops
+                     *  Note: This might cause confusion in some causes because some pages are restored and some are not.
+                     */
+                    remember_current_shop = false;
                 }
             }
         }
@@ -154,7 +152,7 @@ public class BSShops {
     }
 
     public BSShop getShop(int id) {
-        return shops.containsKey(id) ? shops.get(id) : null;
+        return shops.getOrDefault(id, null);
     }
 
     public BSShop getShopFast(int id) {
@@ -164,7 +162,7 @@ public class BSShops {
     public int getShopId(String name) {
         name = name.toLowerCase();
         if (!shopsIds.containsKey(name)) {
-            //ClassManager.manager.getBugFinder().warn("Was not able to get the Id of the "+name+" Shop.");
+            //ClassManager.manager.getBugFinder().warn("Was not able to get id of the "+name+" Shop.");
             return -1; //Was return 0 before. Changed because I think then it returns no shop for sure!
         }
         return shopsIds.get(name);

@@ -10,13 +10,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -162,7 +160,7 @@ public class CommandManager implements TabExecutor {
                     }
 
                     if (shop == null) {
-                        ClassManager.manager.getMessageHandler().sendMessage("Main.ShopNotExisting", sender, null, p, shop, null, null);
+                        ClassManager.manager.getMessageHandler().sendMessage("Main.ShopNotExisting", sender, null, p, null, null, null);
                         return false;
                     }
 
@@ -195,29 +193,28 @@ public class CommandManager implements TabExecutor {
     }
 
 
-    private boolean playerCommandOpenShop(CommandSender sender, Player target, String shop, String argument) {
+    private void playerCommandOpenShop(CommandSender sender, Player target, String shop, String argument) {
         if (sender == target) {
             if (!(sender.hasPermission("BossShop.open") || sender.hasPermission("BossShop.open.command") || sender.hasPermission("BossShop.open.command." + shop))) {
                 ClassManager.manager.getMessageHandler().sendMessage("Main.NoPermission", sender);
-                return false;
+                return;
             }
         } else {
             if (!sender.hasPermission("BossShop.open.other")) {
                 ClassManager.manager.getMessageHandler().sendMessage("Main.NoPermission", sender);
-                return false;
+                return;
             }
         }
         if (argument != null) {
             ClassManager.manager.getPlayerDataHandler().enteredInput(target, argument);
         }
         if (ClassManager.manager == null) {
-            return false;
+            return;
         }
         if (ClassManager.manager.getShops() == null) {
-            return false;
+            return;
         }
         ClassManager.manager.getShops().openShop(target, shop);
-        return true;
     }
 
     private void sendCommandList(CommandSender s) {
