@@ -46,11 +46,11 @@ public class FileHandler {
     }
 
     public void exportLanguages(BossShop plugin){
-        if (!new File(plugin.getDataFolder() + File.separator + "lang/en-us.yml").exists()) {
-            plugin.saveResource("lang/en-us.yml",false);
+        if (!new File(plugin.getDataFolder() + File.separator + "lang/en-US.yml").exists()) {
+            plugin.saveResource("lang/en-US.yml",false);
         }
-        if (!new File(plugin.getDataFolder() + File.separator + "lang/zh-cn.yml").exists()) {
-            plugin.saveResource("lang/zh-cn.yml",false);
+        if (!new File(plugin.getDataFolder() + File.separator + "lang/zh-CN.yml").exists()) {
+            plugin.saveResource("lang/zh-CN.yml",false);
         }
     }
 

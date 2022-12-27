@@ -24,9 +24,9 @@ public class ConfigKeyCompleter {
         addKeys(f, f2);
     }
     private static void checkEnUsLanguage(){
-        InputStream is = ClassManager.manager.getPlugin().getResource("lang/en_us.yml");
+        InputStream is = ClassManager.manager.getPlugin().getResource("lang/en-US.yml");
         assert is != null;
-        File f = new File(ClassManager.manager.getPlugin().getDataFolder(),"lang/en_us.yml");
+        File f = new File(ClassManager.manager.getPlugin().getDataFolder(),"lang/en-US.yml");
         File f2;
         try {f2 = File.createTempFile("en_us-lang-cache","yml");//make cache
             copyInputStreamToFile(is, f2);
@@ -54,7 +54,7 @@ public class ConfigKeyCompleter {
         checkZhCnLanguage();
     }
     private static void checkZhCnLanguage(){
-        InputStream is = ClassManager.manager.getPlugin().getResource("lang/zh_cn.yml");
+        InputStream is = ClassManager.manager.getPlugin().getResource("lang/zh-CN.yml");
         assert is != null;
         File f = new File(ClassManager.manager.getPlugin().getDataFolder(),"lang/zh-CN.yml");
         File f2;
