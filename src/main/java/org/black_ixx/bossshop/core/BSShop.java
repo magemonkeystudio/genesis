@@ -1,6 +1,5 @@
 package org.black_ixx.bossshop.core;
 
-import net.md_5.bungee.api.ChatColor;
 import org.black_ixx.bossshop.BossShop;
 import org.black_ixx.bossshop.events.BSChoosePageLayoutEvent;
 import org.black_ixx.bossshop.managers.ClassManager;

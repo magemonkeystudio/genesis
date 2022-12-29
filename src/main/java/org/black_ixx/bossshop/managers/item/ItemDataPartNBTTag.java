@@ -44,8 +44,7 @@ public class ItemDataPartNBTTag extends ItemDataPart{
                 break;
             case "OBJ":
             case "OBJECT":
-                Object o = parts[2];
-                i.setObject(parts[1], o);
+                i.setObject(parts[1], parts[2]);
                 break;
             default:
                 ClassManager.manager.getBugFinder().severe("Mistake in Config: '" + parts[0] +

@@ -21,10 +21,10 @@ public class MathTools {
 
     public static void init(String loc, int grouping_size) {
         try {
-            String[] parts = loc.split("_");
-            Locale l = Locale.forLanguageTag(loc);
+            String[] parts = loc.split("-");
+            Locale l;
             if (parts.length >= 2) {
-                l = new Locale(parts[0].trim(), parts[1].trim());
+                l = new Locale(parts[0].trim(), parts[1].trim().toUpperCase());
             } else {
                 l = new Locale(parts[0].trim());
             }
