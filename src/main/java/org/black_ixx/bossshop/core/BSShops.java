@@ -20,6 +20,7 @@ public class BSShops {
 
     /////////////////////////////// <- Variables
     private int id = 0;
+
     public BSShops(BossShop plugin, Settings settings) {
         shops = new HashMap<>();
         shopsIds = new HashMap<>();
@@ -27,21 +28,21 @@ public class BSShops {
         File folder = new File(plugin.getDataFolder().getAbsolutePath() + File.separator + "shops" + File.separator);
         new FileHandler().exportShops(plugin);
 
-        boolean enable_shop_commands = loadShops(folder, settings, "");
-        ClassManager.manager.getSettings().setShopCommandsEnabled(enable_shop_commands);
+        boolean enableShopCommands = loadShops(folder, settings, "");
+        ClassManager.manager.getSettings().setShopCommandsEnabled(enableShopCommands);
 
         BossShop.log("Loaded " + shops.size() + " Shops!");
     }
 
-    private boolean loadShops(File folder, Settings settings, String parent_path) {
-        boolean enable_shop_commands = false;
+    private boolean loadShops(File folder, Settings settings, String parentPath) {
+        boolean enableShopCommands = false;
 
         for (File f : folder.listFiles()) {
             if (f != null) {
                 if (f.isDirectory()) {
                     if (settings.getLoadSubfoldersEnabled()) {
                         if (loadShops(f, settings, f.getName() + File.separator)) {
-                            enable_shop_commands = true;
+                            enableShopCommands = true;
                         }
                     }
                     continue;
@@ -49,17 +50,17 @@ public class BSShops {
 
                 if (f.isFile()) {
                     if (f.getName().contains(".yml")) {
-                        BSShop shop = loadShop(f, parent_path);
+                        BSShop shop = loadShop(f, parentPath);
 
                         if (shop.getCommands() != null) {
-                            enable_shop_commands = true;
+                            enableShopCommands = true;
                         }
                     }
 
                 }
             }
         }
-        return enable_shop_commands;
+        return enableShopCommands;
     }
 
     /////////////////////////////// <- Load Shop
@@ -74,8 +75,8 @@ public class BSShops {
         shopsIds.put(shop.getShopName().toLowerCase(), shop.getShopId());
     }
 
-    public BSShop loadShop(File f, String parent_path) {
-        String name = parent_path + f.getName();
+    public BSShop loadShop(File f, String parentPath) {
+        String name = parentPath + f.getName();
         BSShop shop = new BSConfigShop(createId(), name, this);
 
         addShop(shop);
@@ -102,29 +103,29 @@ public class BSShops {
     }
 
     public void openShop(Player p, BSShop shop) {
-        int page = 0;
-        boolean remember_current_shop = true;
+        int     page                  = 0;
+        boolean rememberCurrentShop = true;
 
         InventoryView view = p.getOpenInventory();
-        if (view.getTopInventory().getHolder() instanceof BSShopHolder) {
-            BSShopHolder holder = (BSShopHolder) view.getTopInventory().getHolder();
-            BSShopHolder old_shopholder = holder.getPreviousShopHolder();
-            if (old_shopholder != null) {
+        if (view != null && view.getTopInventory() != null && view.getTopInventory().getHolder() instanceof BSShopHolder) {
+            BSShopHolder holder         = (BSShopHolder) view.getTopInventory().getHolder();
+            BSShopHolder oldShopHolder = holder.getPreviousShopHolder();
+            if (oldShopHolder != null) {
                 //Going back to previous shop
-                if (old_shopholder.getShop() == shop) {
-                    page = old_shopholder.getPage();
+                if (oldShopHolder.getShop() == shop) {
+                    page = oldShopHolder.getPage();
 
                     /* If going back to parent shop, children shop should not be remembered
                      *  That way it can be prevented that all previous shops are kept in memory when players keep switching between shops
                      *  Note: This might cause confusion in some causes because some pages are restored and some are not.
                      */
-                    remember_current_shop = false;
+                    rememberCurrentShop = false;
                 }
             }
         }
 
 
-        shop.openInventory(p, page, remember_current_shop);
+        shop.openInventory(p, page, rememberCurrentShop);
     }
 
     public BSShop getShop(String name) {
@@ -135,13 +136,13 @@ public class BSShops {
         return getShopFast(getShopId(name));
     }
 
-    public BSShop getShopByCommand(String player_command) {
-        if (player_command != null && player_command.length() > 0) {
+    public BSShop getShopByCommand(String playerCommand) {
+        if (playerCommand != null && playerCommand.length() > 0) {
             for (BSShop shop : shops.values()) {
                 String[] commands = shop.getCommands();
                 if (commands != null) {
                     for (String command : commands) {
-                        if (command.equalsIgnoreCase(player_command)) {
+                        if (command.equalsIgnoreCase(playerCommand)) {
                             return shop;
                         }
                     }
@@ -192,20 +193,20 @@ public class BSShops {
 
     ////////////////////////////////////////////////////////////////////////////
 
-    public void refreshShops(boolean mode_serverpinging) {
+    public void refreshShops(boolean serverPinging) {
         for (Player p : Bukkit.getOnlinePlayers()) { //If players have a customizable inventory open it needs an update
             if (ClassManager.manager.getPlugin().getAPI().isValidShop(p.getOpenInventory())) {
-                Inventory open_inventory = p.getOpenInventory().getTopInventory();
-                BSShopHolder h = (BSShopHolder) open_inventory.getHolder();
+                Inventory    openInventory = p.getOpenInventory().getTopInventory();
+                BSShopHolder h              = (BSShopHolder) openInventory.getHolder();
 
                 if (h.getShop().isCustomizable()) {
-                    if (!mode_serverpinging) {
+                    if (!serverPinging) {
                         if (ClassManager.manager.getSettings().getServerPingingEnabled(true)) {
                             if (ClassManager.manager.getServerPingingManager().containsServerpinging(h.getShop())) {
                                 continue;
                             }
                         }
-                        h.getShop().updateInventory(open_inventory, h, p, ClassManager.manager, h.getPage(), h.getHighestPage(), true);
+                        h.getShop().updateInventory(openInventory, h, p, ClassManager.manager, h.getPage(), h.getHighestPage(), true);
                     }
                 }
             }

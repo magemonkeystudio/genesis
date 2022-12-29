@@ -18,7 +18,7 @@ import java.util.Objects;
 
 public class MessageHandler {
     private final BossShop plugin;
-    private String fileName = "lang"+File.separator+"en_us.yml";;
+    private String fileName = "lang"+File.separator+"en-us.yml";
     private FileConfiguration config;
 
     public MessageHandler(final BossShop plugin) {
@@ -157,16 +157,16 @@ public class MessageHandler {
     public void setupLocate(){
         String LangCode = ClassManager.manager.getSettings().getLanguage();
         if(Objects.equals(LangCode,null)||LangCode.equals("")){
-            LangCode = "en-US";
-            plugin.getConfig().set("Language","en-US");
+            LangCode = "en-us";
+            plugin.getConfig().set("Language","en-us");
         }
         fileName = "lang/"+LangCode+".yml";
         File file = new File(plugin.getDataFolder(), fileName);
         if(!file.exists()){
-            LangCode = "en-US";
-            plugin.getConfig().set("Language","en-US");
+            LangCode = "en-us";
+            plugin.getConfig().set("Language","en-us");
             FileHandler fh = new FileHandler();
-            File lang = new File(plugin.getDataFolder(),"lang"+File.separator+"en-US.yml");
+            File lang = new File(plugin.getDataFolder(),"lang"+File.separator+"en-us.yml");
             if(!lang.exists()) {
                 fh.exportLanguages(plugin);
                 fileName = "lang/"+LangCode+".yml";
@@ -176,7 +176,7 @@ public class MessageHandler {
             }
             fileName = "lang/"+LangCode+".yml";
             file = new File(plugin.getDataFolder(),"lang"+File.separator+fileName);
-            ClassManager.manager.getBugFinder().warn("The corresponding message file cannot be found and fallback to en-US. (maybe you didn't put the message file in the plugin folder, or didn't have the message file)");
+            ClassManager.manager.getBugFinder().warn("The corresponding message file cannot be found and fallback to en-us. (maybe you didn't put the message file in the plugin folder, or didn't have the message file)");
 
         }
         config = YamlConfiguration.loadConfiguration(file);

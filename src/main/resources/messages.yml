@@ -57,4 +57,4 @@ Time:
 #You can make BossShopPro translate every enchantment and item into any language included in Vanilla minecraft.
 #Optional & requires LangUtils to be installed (https://www.spigotmc.org/resources/1-10-x-1-9-x-1-8-x-1-7-10-language-utils.8859/)
 #Here you can find a list of locale ids: http://www.oracle.com/technetwork/java/javase/javase7locales-334809.html
-Locale: en_US
+Locale: en-us

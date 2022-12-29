@@ -19,9 +19,9 @@
 # Language:
 #
 # Supported languages:
-# en-US by black_ixx
-# zh-CN by lijinhong11
-Language: "en-US"
+# en-us by black_ixx
+# zh-cn by lijinhong11
+Language: "en-us"
 #
 #
 # ReloadAfterCreateShop:
@@ -148,13 +148,13 @@ PointsDisplay:
 # Check out following page for more information: https://docs.oracle.com/javase/tutorial/i18n/format/decimalFormat.html
 ## Locale:
 ## Examples:
-## en_US -> 123,456.78
+## en-us -> 123,456.78
 ## de_DE -> 123.456,78
 ## Some formats are not displayed properly by the minecraft client because of the way it renders text.
 #
 ## GroupingSize: Here you can modify the grouping size of numbers (the amount of digits between separators). Set it to -1 if you want to disable grouping.
 NumberDisplay:
-  Locale: en_US
+  Locale: en-us
   GroupingSize: 3
 #
 #
