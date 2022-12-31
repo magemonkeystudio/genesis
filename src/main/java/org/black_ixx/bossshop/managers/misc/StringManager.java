@@ -77,9 +77,8 @@ public class StringManager {
 
     private String colorize(String string) {
         if (VersionManager.isAtLeast(16)) {
-            Pattern pattern = Pattern.compile("#[a-fA-F0-9]{6}");
-            for (Matcher matcher = pattern.matcher(string); matcher.find(); matcher = pattern.matcher(string)) {
-                String color = string.substring(matcher.start(), matcher.end());
+            for (Matcher matcher = hexPattern.matcher(string); matcher.find(); matcher = hexPattern.matcher(string)) {
+                String color = matcher.group(1);
                 string = string.replace(color, net.md_5.bungee.api.ChatColor.of(color) + "");
             }
         }

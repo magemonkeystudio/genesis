@@ -4,7 +4,7 @@ api-version: 1.13
 description: The BOSS Shop Plugin *PRO VERSION*
 author: Black_ixx, ProMCTeam
 main: org.black_ixx.bossshop.BossShop
-softdepend: [ProRPGItems, ItemsAdder ,MagicCosmetics, MythicMobs, PlayerShops GUI, ItemShops, ThirdCurrency, GuiShopManager, LimitedUses, TrickyShops, Vault, PlayerPoints, Jobs, Gringotts, VotingPlugin, SilkSpawners, PlaceholderAPI]
+softdepend: [ProRPGItems, ItemsAdder, MagicCosmetics, MythicMobs, PlayerShops GUI, ItemShops, ThirdCurrency, GuiShopManager, LimitedUses, TrickyShops, Vault, PlayerPoints, Jobs, Gringotts, VotingPlugin, SilkSpawners, PlaceholderAPI]
 #libraries: [ org.apache.commons:commons-lang3:3.12.0 ]
 commands:
   bs:
