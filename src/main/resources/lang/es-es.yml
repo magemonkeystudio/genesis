@@ -1,0 +1,77 @@
+# Spanish translations courtesy of FunkyNico
+Main:
+  NoPermission: '&cNo tienes permitido hacer esto!'
+  AlreadyBought: '&cYa has adquirido eso!'
+  ShopNotExisting: '&cEsa tienda no existe...'
+  ShopItemNotExisting: '&cEse objeto en la tienda no existe...'
+  OpenShop: ''
+  OpenShopOtherPlayer: '&6Abriendo tienda &c%shop% &6para %player%&6.'
+  CloseShopOtherPlayer: '&6Inventario de %player% &6cerrado.'
+  CloseShop: ''
+  InventoryFull: '&cTú inventario no tiene suficiente espacio libre disponible!'
+  PlayerNotFound: '&cEl jugador %name% no ha sido encontrado!'
+  ClickSpamWarning: '&cPor favor, espera durante otros %time_left% segundos antes de volver a usar eso.'
+  OffensiveClickSpamWarning: '&4Advertencia: Por favor, no hagas clic así de rápido.'
+  OffensiveClickSpamKick: '&4Expulsado por hacer spam de clic.'
+  NeedItemInHand: '&cPrimero necesitas un objeto en tú mano principal para poder hacer eso.'
+  PrintedItemInfo: '&6Toda la información de los objetos ha sido guardada exitósamente aquí: &7''/plugins/BossShopPro/ItemDataStorage.yml''&6.'
+  ListAndSeparator: ' & '
+  ListOrSeparator: ' o '
+  WorldNotExisting: "&cEse mundo no existe..."
+  StartReload: "&eIniciando reinicio de BossShop..."
+  ReloadFinish: "&eHecho!"
+Economy:
+  NoAccount: '&cNo tienes una cuenta de dinero!'
+ShopCreate:
+  Success: "&aEl archivo ha sido guardado en &7/plugins/BossShopPro/shops&a."
+  Success2: "&cPor favor, reinicia el plugin para leer el nuevo archivo de tienda generado."
+  FileExists: "&cEl mismo archivo ya existe. El archivo será sobreescrito."
+  Title: "Creando tienda %shop% (Ciérralo para guardar el archivo)"
+  TitleHead: "Creando tienda"
+Command:
+  Help1: "&c/BossShop - Abre la tienda principal"
+  Help2: "&c/BossShop <tienda> [entrada] - Abre la tienda nombrada"
+  Help3: "&c/BossShop open <Tienda> <Jugador> [entrada] - Abre la tienda nombrada al jugador específicado"
+  Help4: "&c/BossShop close [Jugador] - Cierra el inventario del jugador específicado"
+  Help5: "&c/BossShop simulate <jugador> <tienda> <item-de-la-tienda> - Simula un clic"
+  Help6: "&c/BossShop reload - Recarga el Plugin"
+  Help7: "&c/BossShop read - Muestra la información del objeto en tú mano principal"
+  Help8: "&c/BossShop create <tienda> <título> - crea una tienda"
+  Help: "&c/BossShop help - Muestra esto"
+NotEnough:
+  Money: '&cNo tienes suficiente Dinero!'
+  Item: '&cNo tienes suficientes Objetos!'
+  Points: '&cNo tienes suficientes Puntos!'
+  Exp: '&cNo tienes suficiente EXP!'
+  Or: '&cNo tienes suficientes recursos!'
+Enchantment:
+  Invalid: '&cNo puedes encantar el objeto de tú mano principal con este encantamiento!'
+  EmptyHand: '&cDebes tener un objeto en tú mano principal!'
+Display:
+  Exp: '%levels% Nivles de Exp'
+  Money: '%money% Dinero'
+  Points: '%points% Puntos'
+  Item: '%items%'
+  ItemAll: 'todos los %item%'
+  ItemAllBuy: 'un inventario lleno de %item%'
+  ItemAllEach: '%value% cada uno'
+  Nothing: 'nada'
+  BungeeCordServer: 'Teletransporte de Server a %server%'
+  BungeeCordCommand: 'Comandos de BungeeCord: %commands%'
+  Close: 'Cerrar tienda'
+  Command: 'Comandos de Consola: %commands%'
+  Custom: 'Desconocido'
+  Enchantment: 'Encantamiento: %type% nivel %level%'
+  Permission: 'Permisos: %permissions%'
+  PlayerCommand: 'Comandos: %commands%'
+  PlayerCommandOp: 'Comandos: %commands%'
+  Shop: 'Abrir tienda %shop%'
+  Page: 'Abrir la página %page% de la tienda'
+  Teleport: 'Teletransportar a %world% x:%x% y:%y% z:%z%'
+  TeleportWorld: 'Teletransportar a %world%'
+Time:
+  Seconds: '%time% segundos'
+  Minutes: '%time% minutos'
+  Hours: '%time% horas'
+  Days: '%time% días'
+  Weeks: '%time% semanas'
