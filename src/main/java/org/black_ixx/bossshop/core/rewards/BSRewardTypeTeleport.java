@@ -21,7 +21,7 @@ public class BSRewardTypeTeleport extends BSRewardType{
         if (str != null&&!str.isBlank()){
             return true;
         }
-        ClassManager.manager.getBugFinder().severe("Was not able to create ShopItem " + item_name + "! The reward object needs no to be a empty string.");
+        ClassManager.manager.getBugFinder().severe("Was not able to create ShopItem " + item_name + "! The reward object cannot be an empty string.");
         return false;
     }
 
@@ -54,7 +54,7 @@ public class BSRewardTypeTeleport extends BSRewardType{
             }
             else ClassManager.manager.getMessageHandler().sendMessage("Main.WorldNotExisting",p);
         } else {
-            ClassManager.manager.getBugFinder().warn("Unable to teleport "+p.getName()+" to "+reward+". Maybe the string use wrong format.");
+            ClassManager.manager.getBugFinder().warn("Unable to teleport "+p.getName()+" to "+reward+". The string's format may be incorrect.");
         }
     }
 

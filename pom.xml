@@ -8,7 +8,7 @@
     <description>Create virtual chest shops</description>
 
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>11</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <nexus.url>https://s01.oss.sonatype.org</nexus.url>
     </properties>
@@ -280,8 +280,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.0</version>
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
+                    <source>11</source>
+                    <target>11</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
