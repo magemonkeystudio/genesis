@@ -26,7 +26,7 @@ ShopCreate:
   Success2: "&c请重载插件才能读取新生成的商店文件。"
   FileExists: "&c相同的文件已存在，将会覆盖文件。"
   #这两个字符串不要随意修改,否则无法保存文件。
-  Title: "&8正在创建商店 %shop%(关闭以保存文件)"
+  Title: "&8正在创建商店 %shop% (关闭以保存文件)"
   TitleHead: "&8正在创建商店"
 Command:
   Help1: "&c/BossShop - 打开主商店"

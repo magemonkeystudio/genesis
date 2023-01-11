@@ -25,8 +25,7 @@ ShopCreate:
   Success: "&aThe file has been saved to &7/plugins/BossShopPro/shops&a."
   Success2: "&cPlease reload the plugin to read the newly generated shop file."
   FileExists: "&cThe same file already exists. The file will be overwritten."
-  #Do not modify these two strings at will, otherwise the file cannot be saved.
-  Title: "Creating shop %shop%(Close it to save file)"
+  Title: "Creating shop %shop% (Close it to save file)"
   TitleHead: "Creating shop"
 Command:
   Help1: "&c/BossShop - Opens main shop"

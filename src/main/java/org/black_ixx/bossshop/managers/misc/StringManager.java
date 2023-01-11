@@ -36,30 +36,30 @@ public class StringManager {
             return null;
         }
 
-        s = s.replace("[<3]", "❤");
-        s = s.replace("[*]", "★");
-        s = s.replace("[**]", "✹");
-        s = s.replace("[o]", "●");
-        s = s.replace("[v]", "✔");
-        s = s.replace("[+]", "♦");
-        s = s.replace("[x]", "✦");
-        s = s.replace("[%]", "♠");
-        s = s.replace("[%%]", "♣");
-        s = s.replace("[radioactive]", "☢");
-        s = s.replace("[peace]", "☮");
-        s = s.replace("[moon]", "☾");
-        s = s.replace("[crown]", "♔");
-        s = s.replace("[snowman]", "☃");
-        s = s.replace("[tools]", "⚒");
-        s = s.replace("[swords]", "⚔");
-        s = s.replace("[note]", "♩ ");
-        s = s.replace("[block]", "█");
-        s = s.replace("[triangle]", "▲");
-        s = s.replace("[warn]", "⚠");
-        s = s.replace("[left]", "←");
-        s = s.replace("[right]", "→");
-        s = s.replace("[up]", "↑");
-        s = s.replace("[down]", "↓");
+        s = s.replace("[<3]", "❤")
+                .replace("[*]", "★")
+                .replace("[**]", "✹")
+                .replace("[o]", "●")
+                .replace("[v]", "✔")
+                .replace("[+]", "♦")
+                .replace("[x]", "✦")
+                .replace("[%]", "♠")
+                .replace("[%%]", "♣")
+                .replace("[radioactive]", "☢")
+                .replace("[peace]", "☮")
+                .replace("[moon]", "☾")
+                .replace("[crown]", "♔")
+                .replace("[snowman]", "☃")
+                .replace("[tools]", "⚒")
+                .replace("[swords]", "⚔")
+                .replace("[note]", "♩ ")
+                .replace("[block]", "█")
+                .replace("[triangle]", "▲")
+                .replace("[warn]", "⚠")
+                .replace("[left]", "←")
+                .replace("[right]", "→")
+                .replace("[up]", "↑")
+                .replace("[down]", "↓");
 
         s = colorize(s);
 
@@ -77,9 +77,8 @@ public class StringManager {
 
     private String colorize(String string) {
         if (VersionManager.isAtLeast(16)) {
-            Pattern pattern = Pattern.compile("#[a-fA-F0-9]{6}");
-            for (Matcher matcher = pattern.matcher(string); matcher.find(); matcher = pattern.matcher(string)) {
-                String color = string.substring(matcher.start(), matcher.end());
+            for (Matcher matcher = hexPattern.matcher(string); matcher.find(); matcher = hexPattern.matcher(string)) {
+                String color = matcher.group(1);
                 string = string.replace(color, net.md_5.bungee.api.ChatColor.of(color) + "");
             }
         }
