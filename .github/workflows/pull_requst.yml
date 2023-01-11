@@ -2,7 +2,7 @@ name: PR Check
 
 on:
   pull_request_target:
-    branches: [ dev, master ]
+    branches: [ dev, main ]
 
 jobs:
   deploy:
