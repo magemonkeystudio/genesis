@@ -164,7 +164,10 @@ public abstract class ItemDataPart {
             if (!compare_amount && part == AMOUNT) {
                 continue;
             }
-            try {return part.isSimilar(shop_item, player_item, buy, p);
+            try {
+                if (!part.isSimilar(shop_item, player_item, buy, p)) {
+                    return false;
+                }
             } catch (Exception | NoSuchMethodError e) { //Seems like that ItemDataPart is not supported yet
             }
         }
