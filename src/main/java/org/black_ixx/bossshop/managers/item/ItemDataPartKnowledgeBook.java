@@ -26,6 +26,10 @@ public class ItemDataPartKnowledgeBook extends ItemDataPart{
 
     @Override
     public boolean isSimilar(ItemStack shop_item, ItemStack player_item, BSBuy buy, Player p) {
+        //TODO: implement comparison of two knowledge books.
+        if (shop_item.getType() != Material.KNOWLEDGE_BOOK && player_item.getType() != Material.KNOWLEDGE_BOOK) {
+            return true;
+        }
         return false;
     }
 
