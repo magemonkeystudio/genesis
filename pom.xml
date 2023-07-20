@@ -220,20 +220,20 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Adds EpicSpawners support -->
+        <!-- Adds EpicSpawners support
         <dependency>
             <groupId>com.songoda</groupId>
             <artifactId>EpicSpawners</artifactId>
             <version>7.1.2</version>
             <scope>provided</scope>
-        </dependency>
+        </dependency> -->
 
         <!-- Jitpack dependencies -->
         <!-- Adds MagicCosmetics support -->
         <dependency>
             <groupId>com.github.FrancoBM12</groupId>
             <artifactId>API-MagicCosmetics</artifactId>
-            <version>1.9.85</version>
+            <version>2.2.2</version>
             <scope>provided</scope>
         </dependency>
 
@@ -342,7 +342,7 @@
                     <plugin>
                         <groupId>org.sonatype.plugins</groupId>
                         <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.6.13</version>
+                        <version>1.6.8</version>
                         <extensions>true</extensions>
                         <configuration>
                             <serverId>central</serverId>
@@ -381,7 +381,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
-                        <version>3.2.1</version>
+                        <version>3.1.0</version>
                         <executions>
                             <execution>
                                 <id>attach-sources</id>
