@@ -127,7 +127,9 @@ public abstract class BossShopAddon extends JavaPlugin {
             if (s == null || s.isBlank()) {
                 return 0;
             }
-            double   x     = 0;
+            s = s.replace("-SNAPSHOT", "");
+
+            double   x = 0;
             String[] parts = s.replace(".", ":").split(":");
             x += Integer.parseInt(parts[0].trim());
             if (parts.length == 2) {

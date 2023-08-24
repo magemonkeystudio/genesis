@@ -30,10 +30,7 @@ public class ItemDataPartGlowing extends ItemDataPart {
     public boolean isSimilar(ItemStack shop_item, ItemStack player_item, BSBuy buy, Player p) {
         ItemMeta shop = shop_item.getItemMeta();
         ItemMeta player = player_item.getItemMeta();
-        if(shop.hasEnchant(Enchantment.OXYGEN) && shop.hasItemFlag(ItemFlag.HIDE_ENCHANTS)){
-            return player.hasEnchant(Enchantment.OXYGEN) && player.hasItemFlag(ItemFlag.HIDE_ENCHANTS);
-        }
-        return false;
+        return (shop.hasEnchant(Enchantment.OXYGEN) && shop.hasItemFlag(ItemFlag.HIDE_ENCHANTS)) == (player.hasEnchant(Enchantment.OXYGEN) && player.hasItemFlag(ItemFlag.HIDE_ENCHANTS));
     }
 
     @Override

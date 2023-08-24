@@ -59,6 +59,15 @@
             <id>teamvk-repo</id>
             <url>https://raw.githubusercontent.com/TeamVK/maven-repository/master/release/</url>
         </repository>
+        <!-- EpicSpawners -->
+        <repository>
+            <id>songoda-public</id>
+            <url>https://repo.songoda.com/repository/public/</url>
+        </repository>
+        <repository>
+            <id>bencodez repo</id>
+            <url>https://nexus.bencodez.com/repository/maven-public/</url>
+        </repository>
         <repository>
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
@@ -91,7 +100,7 @@
         <dependency>
             <groupId>com.promcteam</groupId>
             <artifactId>promccore</artifactId>
-            <version>1.0.3.10-SNAPSHOT</version>
+            <version>1.0.6-R0.4-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
 
@@ -107,7 +116,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.18.2-R0.1-SNAPSHOT</version>
+            <version>1.19.4-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
 
@@ -115,7 +124,7 @@
         <dependency>
             <groupId>net.md-5</groupId>
             <artifactId>bungeecord-api</artifactId>
-            <version>1.18-R0.1-SNAPSHOT</version>
+            <version>1.19-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
 
@@ -128,9 +137,9 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.12.0</version>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
         </dependency>
 
         <!-- Used for data handling -->
@@ -169,7 +178,7 @@
         <dependency>
             <groupId>com.bencodez</groupId>
             <artifactId>votingplugin</artifactId>
-            <version>6.9.5</version>
+            <version>6.12.1</version>
             <scope>provided</scope>
         </dependency>
 
@@ -211,6 +220,14 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- Adds EpicSpawners support -->
+        <dependency>
+            <groupId>com.songoda</groupId>
+            <artifactId>EpicSpawners</artifactId>
+            <version>7.1.2</version>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- Jitpack dependencies -->
         <!-- Adds MagicCosmetics support -->
         <dependency>
@@ -227,15 +244,6 @@
             <version>3.0.0</version>
             <scope>provided</scope>
         </dependency>
-
-        <!-- Adds EpicSpawners support -->
-        <dependency>
-            <groupId>com.github.songoda</groupId>
-            <artifactId>EpicSpawners</artifactId>
-            <version>master-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-
 
         <!-- Adds gringotts support -->
         <dependency>
