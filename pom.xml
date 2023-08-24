@@ -61,8 +61,8 @@
         </repository>
         <!-- EpicSpawners -->
         <repository>
-            <id>songoda-public</id>
-            <url>https://repo.songoda.com/repository/public/</url>
+            <id>craftaro-public</id>
+            <url>https://repo.craftaro.com/repository/minecraft-plugins-snapshot/</url>
         </repository>
         <repository>
             <id>bencodez repo</id>
@@ -222,9 +222,9 @@
 
         <!-- Adds EpicSpawners support -->
         <dependency>
-            <groupId>com.songoda</groupId>
-            <artifactId>EpicSpawners</artifactId>
-            <version>7.1.2</version>
+            <groupId>com.craftaro</groupId>
+            <artifactId>EpicSpawners-API</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
 
