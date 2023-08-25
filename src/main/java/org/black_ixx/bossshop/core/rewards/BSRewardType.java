@@ -29,7 +29,8 @@ public abstract class BSRewardType {
             Points,
             Shop,
             ShopBack,
-            ShopPage;
+            ShopPage,
+            Teleport;
 
     private static List<BSRewardType> types;
     private String[] names = createNames();
@@ -54,6 +55,7 @@ public abstract class BSRewardType {
         Points = registerType(new BSRewardTypePoints());
         Shop = registerType(new BSRewardTypeShop());
         ShopPage = registerType(new BSRewardTypeShopPage());
+        Teleport = registerType(new BSRewardTypeTeleport());
     }
 
     public static BSRewardType registerType(BSRewardType type) {
