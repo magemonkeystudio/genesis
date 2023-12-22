@@ -15,10 +15,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class ItemDataPartCustomSkull extends ItemDataPart {
 
@@ -28,6 +25,7 @@ public class ItemDataPartCustomSkull extends ItemDataPart {
         }
 
         SkullMeta skullMeta = (SkullMeta) i.getItemMeta();
+        if (skullMeta == null) return i;
         if (input.contains("http://textures.minecraft.net/texture")) {
             try {
                 PlayerProfile pprofile = Bukkit.createPlayerProfile(UUID.randomUUID());
@@ -47,12 +45,18 @@ public class ItemDataPartCustomSkull extends ItemDataPart {
         profile.getProperties().put("textures", property);
 
         try {
-            Field profileField = skullMeta.getClass().getDeclaredField("profile");
-            profileField.setAccessible(true);
-            profileField.set(skullMeta, profile);
-        } catch (NoSuchFieldException | SecurityException | IllegalAccessException e) {
-            ClassManager.manager.getBugFinder().warn("Could not set profile texture.");
-            e.printStackTrace();
+            PlayerProfile playerProfile = Bukkit.createPlayerProfile(id);
+            String decoded = new String(Base64.getDecoder().decode(input));
+            playerProfile.getTextures().setSkin(new URL(decoded.substring("{\"textures\":{\"SKIN\":{\"url\":\"".length(), decoded.length() - "\"}}}".length())));
+        } catch (MalformedURLException | NoClassDefFoundError | NoSuchMethodError e) {
+            try {
+                Field profileField = skullMeta.getClass().getDeclaredField("profile");
+                profileField.setAccessible(true);
+                profileField.set(skullMeta, profile);
+            } catch (NoSuchFieldException | SecurityException | IllegalAccessException e1) {
+                ClassManager.manager.getBugFinder().warn("Could not set profile texture.");
+                e1.printStackTrace();
+            }
         }
         i.setItemMeta(skullMeta);
         return i;
