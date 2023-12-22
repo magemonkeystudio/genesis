@@ -75,20 +75,6 @@
     </repositories>
 
     <dependencies>
-        <!-- Adds maven plugins -->
-        <dependency>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-source-plugin</artifactId>
-            <version>3.3.0</version>
-            <type>maven-plugin</type>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-gpg-plugin</artifactId>
-            <version>3.1.0</version>
-            <type>maven-plugin</type>
-        </dependency>
-
         <!-- Adds nbt support -->
         <dependency>
             <groupId>de.tr7zw</groupId>
