@@ -39,17 +39,15 @@ public class ItemDataPartCustomSkull extends ItemDataPart {
         }
 
         UUID id = UUID.randomUUID();
-        GameProfile profile = new GameProfile(id, id.toString());
-        // TODO Use NBT to set skull texture b64
-        Property property = getProperty(input);
-        profile.getProperties().put("textures", property);
-
         try {
             PlayerProfile playerProfile = Bukkit.createPlayerProfile(id);
             String decoded = new String(Base64.getDecoder().decode(input));
             playerProfile.getTextures().setSkin(new URL(decoded.substring("{\"textures\":{\"SKIN\":{\"url\":\"".length(), decoded.length() - "\"}}}".length())));
-        } catch (MalformedURLException | NoClassDefFoundError | NoSuchMethodError e) {
+            skullMeta.setOwnerProfile(playerProfile);
+        } catch (MalformedURLException | NoClassDefFoundError | NoSuchMethodError | IllegalArgumentException e) {
             try {
+                GameProfile profile = new GameProfile(id, id.toString());
+                profile.getProperties().put("textures", getProperty(input));
                 Field profileField = skullMeta.getClass().getDeclaredField("profile");
                 profileField.setAccessible(true);
                 profileField.set(skullMeta, profile);
