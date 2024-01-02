@@ -1,5 +1,9 @@
 package org.black_ixx.bossshop.managers.misc;
 
+import com.google.gson.JsonParseException;
+import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.chat.ComponentSerializer;
 import org.black_ixx.bossshop.managers.ClassManager;
 import org.black_ixx.bossshop.misc.Enchant;
 import org.black_ixx.bossshop.misc.MathTools;
@@ -9,6 +13,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentWrapper;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -287,6 +292,33 @@ public class InputReader {
             }
         }
         return null;
+    }
+
+    /**
+     * Reads a ChatComponent from its raw json string.
+     * @param rawJson JSON String containing the chat components,
+     *                may be a single component or an array of components
+     * @return a single BaseComponent. If the provided JSON String is an array,
+     *         a single {@link TextComponent} will be returned,
+     *         with the components in the String attached as extras.
+     *         Null if a {@link JsonParseException} is caught in the process.
+     */
+    @Nullable
+    public static BaseComponent readChatComponent(String rawJson) {
+        try {
+            BaseComponent[] array = ComponentSerializer.parse(rawJson);
+            if (array.length == 0) {
+                return new TextComponent();
+            } else if (array.length == 1) {
+                return array[0];
+            } else {
+                BaseComponent component = new TextComponent();
+                for (BaseComponent baseComponent : array) { component.addExtra(baseComponent); }
+                return component;
+            }
+        } catch (JsonParseException e) {
+            return null;
+        }
     }
 
 }

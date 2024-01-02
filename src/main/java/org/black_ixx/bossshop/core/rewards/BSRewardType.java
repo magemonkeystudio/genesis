@@ -21,6 +21,7 @@ public abstract class BSRewardType {
             Exp,
             Item,
             ItemAll,
+            Message,
             Money,
             Nothing,
             Permission,
@@ -47,6 +48,7 @@ public abstract class BSRewardType {
         Exp = registerType(new BSRewardTypeExp());
         Item = registerType(new BSRewardTypeItem());
         ItemAll = registerType(new BSRewardTypeItemAll());
+        Message = registerType(new BSRewardTypeMessage());
         Money = registerType(new BSRewardTypeMoney());
         Nothing = registerType(new BSRewardTypeNothing());
         Permission = registerType(new BSRewardTypePermission());

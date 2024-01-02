@@ -68,6 +68,7 @@ Display:
   Page: 'Open shop page %page%'
   Teleport: 'Teleport to %world% x:%x% y:%y% z:%z%'
   TeleportWorld: 'Teleport to %world%'
+  Message: 'Messages: %messages%'
 Time:
   Seconds: '%time% seconds'
   Minutes: '%time% minutes'
