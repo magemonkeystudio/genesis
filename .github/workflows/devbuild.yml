@@ -16,8 +16,8 @@ jobs:
           token: ${{ secrets.ACTIONS_PAT }}
       - name: Configure git
         run: |
-          git config --global user.name "Auto Bot"
-          git config --global user.email "<>"
+          git config user.name "Auto Bot"
+          git config user.email "<>"
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
@@ -41,8 +41,6 @@ jobs:
           exit $result_code
       - name: Tag release version
         run: |
-          git add .
-          git commit -m "[ci skip] Deploy dev version $version"
           version=$(mvn org.apache.maven.plugins:maven-help-plugin:3.1.0:evaluate -Dexpression=project.version -q -DforceStdout)
           git tag -a $version -m "Dev $version"
       - name: Update version
