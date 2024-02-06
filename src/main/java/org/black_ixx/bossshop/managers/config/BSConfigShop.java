@@ -184,6 +184,37 @@ public class BSConfigShop extends BSShop {
                 ClassManager.manager.getBuyItemHandler().loadItem(c, this, key);
             }
         }
+
+        if (config.isSet("InventoryFill")) {
+            Material material;
+            try {
+                material = Material.valueOf(config.getString("InventoryFill").toUpperCase());
+            } catch (Exception ignored) {
+                material = Material.BLACK_STAINED_GLASS_PANE;
+                BossShop.log("Your InventoryFill parameter is invalid and was replaced with its default: " + config.getString("InventoryFill"));
+            }
+            for (int i = 0; i < getInventorySize(); i++) {
+                if(isFilled(i))
+                    continue;
+                BSBuy buy = new BSBuy(BSRewardType.Nothing, BSPriceType.Nothing, null, null, null, i, null, "internal_placeholder_" + i, null, null, null);
+                ItemStack fillerItem = new ItemStack(material);
+
+                // Maybe there already is an existing method for it?
+                ItemMeta meta = fillerItem.getItemMeta();
+                meta.setDisplayName(" ");
+                fillerItem.setItemMeta(meta);
+                buy.setItem(fillerItem, false);
+
+                this.addShopItem(buy, buy.getItem(), ClassManager.manager);
+            }
+        }
+    }
+
+    private boolean isFilled(int location) {
+        for(BSBuy buy : this.getItems())
+            if(buy.getInventoryLocation() == location)
+                return true;
+        return false;
     }
 
     @Override
