@@ -8,6 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+import org.gradle.internal.impldep.bsh.classpath.ClassManagerImpl;
 
 import java.util.List;
 
@@ -46,9 +47,10 @@ public class BSRewardTypePlayerCommandOp extends BSRewardType {
             try {
                 p.setOp(true);
                 executeCommands(p, buy, commands);
-                p.setOp(false);
             } catch (Exception e) {
+                ClassManager.manager.getBugFinder().severe("Catch an exception while executing opcommands on item " + buy.getName() + "! Please check it. Details:");
                 e.printStackTrace();
+            } finally {
                 p.setOp(false);
             }
         }
