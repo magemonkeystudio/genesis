@@ -43,9 +43,15 @@ public class BSRewardTypePlayerCommandOp extends BSRewardType {
         if (p.isOp()) {
             executeCommands(p, buy, commands);
         } else {
-            p.setOp(true);
-            executeCommands(p, buy, commands);
-            p.setOp(false);
+            try {
+                p.setOp(true);
+                executeCommands(p, buy, commands);
+            } catch (Exception e) {
+                ClassManager.manager.getBugFinder().severe("Catch an exception while executing opcommands on item " + buy.getName() + "! Please check it. Details:");
+                e.printStackTrace();
+            } finally {
+                p.setOp(false);
+            }
         }
 
         if (p.getOpenInventory() != null & !ClassManager.manager.getPlugin().getAPI().isValidShop(p.getOpenInventory())) {
