@@ -8,7 +8,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
-import org.gradle.internal.impldep.bsh.classpath.ClassManagerImpl;
 
 import java.util.List;
 
