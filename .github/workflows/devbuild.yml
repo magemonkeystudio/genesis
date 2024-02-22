@@ -2,8 +2,8 @@ name: Dev Build
 
 on:
   push:
-    branches: [ main ]
-    paths: [ src/**, pom.xml, .github/workflows/publish.yml ]
+    branches: [ dev ]
+    paths: [ src/** ]
 
 jobs:
   deploy:
@@ -11,8 +11,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        name: Checkout repo
+        with:
+          token: ${{ secrets.ACTIONS_PAT }}
+      - name: Configure git
+        run: |
+          git config user.name "Auto Bot"
+          git config user.email "<>"
       - name: Set up JDK 17
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
           java-version: 17
@@ -25,21 +32,24 @@ jobs:
         with:
           githubServer: false
           servers: '[{"id": "ossrh", "username": "Travja", "password": "${{ secrets.SONATYPE_DEPLOY_KEY }}"}]'
-#      - name: Build with Maven
-#        run: mvn clean package -e
-#        env:
-#          GITHUB_TOKEN_REF: ${{ secrets.GH_PAT_FOR_ACTIONS_TOKEN }}
       - name: Publish to Maven Central
-        id: publish-maven
         env:
           MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
         run: |
           mvn clean deploy -P gpg,publish -DcreateChecksum=true 2>&1 | tee log.txt
           result_code=${PIPESTATUS[0]}
           exit $result_code
-#      - name: Publish artifact on GitHub Packages
-#        run: mvn clean deploy -e -DskipTests
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.DEPLOY_KEY }}
+      - name: Tag release version
+        run: |
+          version=$(mvn org.apache.maven.plugins:maven-help-plugin:3.1.0:evaluate -Dexpression=project.version -q -DforceStdout)
+          git tag -a $version -m "Dev $version"
+      - name: Update version
+        run: python ./.github/update_version.py true
+      - name: Push to git
+        run: |
+          git add .
+          git commit -m "[ci skip] Update dev version"
+          git push
+          git push --tags
       - name: Notify Discord
-        run: pip install simplejson && python ./.github/notify_published.py ${{ secrets.BSP_WEBHOOK }}
+        run: pip install simplejson && python ./.github/notify_published.py ${{ secrets.BSP_WEBHOOK }} true

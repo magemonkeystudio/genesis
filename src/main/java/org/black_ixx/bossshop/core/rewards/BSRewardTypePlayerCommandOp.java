@@ -4,10 +4,8 @@ import org.black_ixx.bossshop.core.BSBuy;
 import org.black_ixx.bossshop.managers.ClassManager;
 import org.black_ixx.bossshop.managers.misc.InputReader;
 import org.black_ixx.bossshop.managers.misc.StringManipulationLib;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
-import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
 import java.util.List;
 
@@ -62,14 +60,7 @@ public class BSRewardTypePlayerCommandOp extends BSRewardType {
 
     private void executeCommands(Player p, BSBuy buy, List<String> commands) {
         for (String s : commands) {
-            String command = ClassManager.manager.getStringManager().transform(s, buy, null, null, p);
-            PlayerCommandPreprocessEvent event = new PlayerCommandPreprocessEvent(p, "/" + command);
-
-            Bukkit.getPluginManager().callEvent(event);
-
-            if (!event.isCancelled()) {
-                p.performCommand(event.getMessage().substring(1));
-            }
+            p.performCommand(ClassManager.manager.getStringManager().transform(s, buy, null, null, p));
         }
     }
 
