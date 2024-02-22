@@ -40,8 +40,6 @@ jobs:
           mvn clean deploy -P gpg,publish -DcreateChecksum=true 2>&1 | tee log.txt
           result_code=${PIPESTATUS[0]}
           exit $result_code
-      - name: Update README
-        run: python ./.github/update_readme.py
       - name: Tag release version
         run: |
           git add .
