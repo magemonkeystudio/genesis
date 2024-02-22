@@ -6,6 +6,9 @@
     <version>2.1.0-R0.5-SNAPSHOT</version>
     <name>BossShopPro</name>
     <description>Create virtual chest shops</description>
+    <url>
+        https://www.spigotmc.org/resources/bossshoppro-continued-now-free.104824/
+    </url>
 
     <properties>
         <java.version>11</java.version>
