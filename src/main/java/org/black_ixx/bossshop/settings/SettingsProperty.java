@@ -6,8 +6,8 @@ import java.util.List;
 
 public class SettingsProperty {
 
-    protected String path;
-    protected Object o;
+    protected String   path;
+    protected Object   o;
     protected Class<?> type;
 
     public SettingsProperty(ConfigurationSection config, String path, Class<?> type) {
@@ -18,6 +18,7 @@ public class SettingsProperty {
 
     /**
      * Load the settings
+     *
      * @param config the config to load from
      */
     public void load(ConfigurationSection config) {
@@ -26,6 +27,7 @@ public class SettingsProperty {
 
     /**
      * Read the config
+     *
      * @param config the config to read
      * @return config object
      */
@@ -50,6 +52,7 @@ public class SettingsProperty {
 
     /**
      * Update a settings property
+     *
      * @param o
      */
     public void update(Object o) {
@@ -58,6 +61,7 @@ public class SettingsProperty {
 
     /**
      * Check if object contains value
+     *
      * @param input object to check
      * @param value value to check for
      * @return contains or not
@@ -73,6 +77,7 @@ public class SettingsProperty {
 
     /**
      * Check if an object contains any value
+     *
      * @param value the value to check
      * @return contains or not
      */
@@ -82,6 +87,7 @@ public class SettingsProperty {
 
     /**
      * Get the object
+     *
      * @param input the object to get
      * @return object
      */
@@ -91,6 +97,7 @@ public class SettingsProperty {
 
     /**
      * Get a string from an object
+     *
      * @param input object
      * @return string
      */
@@ -100,6 +107,7 @@ public class SettingsProperty {
 
     /**
      * Get an int from an object
+     *
      * @param input object
      * @return int
      */
@@ -109,6 +117,7 @@ public class SettingsProperty {
 
     /**
      * Get a double from an object
+     *
      * @param input object
      * @return double
      */
@@ -118,6 +127,7 @@ public class SettingsProperty {
 
     /**
      * Get a string list from an object
+     *
      * @param input object
      * @return string list
      */
@@ -128,6 +138,7 @@ public class SettingsProperty {
 
     /**
      * Get a boolean from an object
+     *
      * @param input object
      * @return boolean
      */
@@ -138,6 +149,7 @@ public class SettingsProperty {
 
     /**
      * Check if two objects are identical
+     *
      * @param a obj1
      * @param b obj2
      * @return identical or not

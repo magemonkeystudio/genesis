@@ -16,19 +16,21 @@ import org.bukkit.inventory.ItemStack;
 public class BSRewardTypeEnchantment extends BSRewardType {
 
 
-    public Object createObject(Object o, boolean force_final_state) {
-        if (force_final_state) {
+    public Object createObject(Object o, boolean forceFinalState) {
+        if (forceFinalState) {
             return InputReader.readEnchant(o);
         } else {
             return InputReader.readString(o, false);
         }
     }
 
-    public boolean validityCheck(String item_name, Object o) {
+    public boolean validityCheck(String itemName, Object o) {
         if (o != null) {
             return true;
         }
-        ClassManager.manager.getBugFinder().severe("Was not able to create ShopItem " + item_name + "! The reward object needs to be a text line looking like this: '<enchantmenttype/enchantmentid>#<level>'.");
+        ClassManager.manager.getBugFinder()
+                .severe("Was not able to create ShopItem " + itemName
+                        + "! The reward object needs to be a text line looking like this: '<enchantmenttype/enchantmentid>#<level>'.");
         return false;
     }
 
@@ -37,12 +39,12 @@ public class BSRewardTypeEnchantment extends BSRewardType {
     }
 
     @Override
-    public boolean canBuy(Player p, BSBuy buy, boolean message_if_no_success, Object reward, ClickType clickType) {
+    public boolean canBuy(Player p, BSBuy buy, boolean messageIfNoSuccess, Object reward, ClickType clickType) {
         Enchant enchant = (Enchant) reward;
 
         ItemStack item = Misc.getItemInMainHand(p);
         if (item == null || item.getType() == Material.AIR) {
-            if (message_if_no_success) {
+            if (messageIfNoSuccess) {
                 ClassManager.manager.getMessageHandler().sendMessage("Enchantment.EmptyHand", p);
             }
             return false;
@@ -50,7 +52,7 @@ public class BSRewardTypeEnchantment extends BSRewardType {
 
         if (!ClassManager.manager.getSettings().getPropertyBoolean(Settings.ALLOW_UNSAFE_ENCHANTMENTS, buy)) {
             if (!(enchant.getType().canEnchantItem(item))) {
-                if (message_if_no_success) {
+                if (messageIfNoSuccess) {
                     ClassManager.manager.getMessageHandler().sendMessage("Enchantment.Invalid", p);
                 }
                 return false;
@@ -61,8 +63,8 @@ public class BSRewardTypeEnchantment extends BSRewardType {
 
     @Override
     public void giveReward(Player p, BSBuy buy, Object reward, ClickType clickType) {
-        Enchant enchant = (Enchant) reward;
-        ItemStack item = Misc.getItemInMainHand(p);
+        Enchant   enchant = (Enchant) reward;
+        ItemStack item    = Misc.getItemInMainHand(p);
         if (item != null && item.getType() != Material.AIR) {
             item.addUnsafeEnchantment(enchant.getType(), enchant.getLevel());
         }
@@ -71,7 +73,10 @@ public class BSRewardTypeEnchantment extends BSRewardType {
     @Override
     public String getDisplayReward(Player p, BSBuy buy, Object reward, ClickType clickType) {
         Enchant enchant = (Enchant) reward;
-        return ClassManager.manager.getMessageHandler().get("Display.Enchantment").replace("%type%", ClassManager.manager.getItemStackTranslator().readEnchantment(enchant.getType())).replace("%level%", String.valueOf(enchant.getLevel()));
+        return ClassManager.manager.getMessageHandler()
+                .get("Display.Enchantment")
+                .replace("%type%", ClassManager.manager.getItemStackTranslator().readEnchantment(enchant.getType()))
+                .replace("%level%", String.valueOf(enchant.getLevel()));
     }
 
     @Override

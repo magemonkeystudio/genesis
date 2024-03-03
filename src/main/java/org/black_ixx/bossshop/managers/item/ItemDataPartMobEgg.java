@@ -11,15 +11,18 @@ import java.util.List;
 public class ItemDataPartMobEgg extends ItemDataPart {
 
     @Override
-    public ItemStack transform(ItemStack item, String used_name, String argument) {
+    public ItemStack transform(ItemStack item, String usedName, String argument) {
         if (ClassManager.manager.getSpawnEggHandler() == null) {
-            ClassManager.manager.getBugFinder().warn("Unable to work with ItemData of type " + createNames()[0] + ": Requires the plugin SilkSpawners, which was not found.");
+            ClassManager.manager.getBugFinder()
+                    .warn("Unable to work with ItemData of type " + createNames()[0]
+                            + ": Requires the plugin SilkSpawners, which was not found.");
             return item;
         }
 
         ItemStack egg = ClassManager.manager.getSpawnEggHandler().transformEgg(item, argument);
         if (egg == null) {
-            ClassManager.manager.getBugFinder().severe("Mistake in Config: '" + argument + "' is not a valid mob type ('" + used_name + "').");
+            ClassManager.manager.getBugFinder()
+                    .severe("Mistake in Config: '" + argument + "' is not a valid mob type ('" + usedName + "').");
             return item;
         }
 
@@ -48,7 +51,7 @@ public class ItemDataPartMobEgg extends ItemDataPart {
             if (ClassManager.manager.getSpawnEggHandler() != null) {
                 output.add("monsteregg:" + ClassManager.manager.getSpawnEggHandler().readEgg(i));
             } else {
-                //no custom output needed: Knowing the material type is enough
+                // no custom output needed: Knowing the material type is enough
             }
         }
         return output;
@@ -56,14 +59,15 @@ public class ItemDataPartMobEgg extends ItemDataPart {
 
 
     @Override
-    public boolean isSimilar(ItemStack shop_item, ItemStack player_item, BSBuy buy, Player p) {
-        if (!shop_item.getType().equals(player_item.getType())) {
+    public boolean isSimilar(ItemStack shopItem, ItemStack playerItem, BSBuy buy, Player p) {
+        if (!shopItem.getType().equals(playerItem.getType())) {
             return false;
         }
 
-        if (ClassManager.manager.getSpawnEggHandler() != null) { //just necessary for custom mob types: General ones are determined by material name
-            String mobs = ClassManager.manager.getSpawnEggHandler().readEgg(shop_item);
-            String mobp = ClassManager.manager.getSpawnEggHandler().readEgg(player_item);
+        if (ClassManager.manager.getSpawnEggHandler()
+                != null) { //just necessary for custom mob types: General ones are determined by material name
+            String mobs = ClassManager.manager.getSpawnEggHandler().readEgg(shopItem);
+            String mobp = ClassManager.manager.getSpawnEggHandler().readEgg(playerItem);
             return mobs.equalsIgnoreCase(mobp);
         }
         return true;

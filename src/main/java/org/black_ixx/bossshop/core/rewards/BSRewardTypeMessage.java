@@ -10,19 +10,21 @@ import org.bukkit.event.inventory.ClickType;
 
 import java.util.List;
 
-public class BSRewardTypeMessage extends BSRewardType{
+public class BSRewardTypeMessage extends BSRewardType {
 
     @Override
-    public Object createObject(Object o, boolean force_final_state) {
+    public Object createObject(Object o, boolean forceFinalState) {
         return InputReader.readStringList(o);
     }
 
     @Override
-    public boolean validityCheck(String item_name, Object o) {
+    public boolean validityCheck(String itemName, Object o) {
         if (o != null) {
             return true;
         }
-        ClassManager.manager.getBugFinder().severe("Was not able to create ShopItem " + item_name + "! The reward object needs to be a list of commands (text lines).");
+        ClassManager.manager.getBugFinder()
+                .severe("Was not able to create ShopItem " + itemName
+                        + "! The reward object needs to be a list of commands (text lines).");
         return false;
     }
 
@@ -30,7 +32,7 @@ public class BSRewardTypeMessage extends BSRewardType{
     public void enableType() {}
 
     @Override
-    public boolean canBuy(Player p, BSBuy buy, boolean message_if_no_success, Object reward, ClickType clickType) {
+    public boolean canBuy(Player p, BSBuy buy, boolean messageIfNoSuccess, Object reward, ClickType clickType) {
         return true;
     }
 

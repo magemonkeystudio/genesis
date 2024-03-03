@@ -10,10 +10,10 @@ import org.bukkit.entity.Player;
 public class BSConditionTypePlaceholderMatch extends BSConditionType {
 
 
-    public boolean matches(Player p, String single_condition, String placeholder) {
+    public boolean matches(Player p, String singleCondition, String placeholder) {
         placeholder = ClassManager.manager.getStringManager().transform(placeholder, p);
-        single_condition = ClassManager.manager.getStringManager().transform(single_condition, p);
-        return ChatColor.stripColor(placeholder).trim().equalsIgnoreCase(ChatColor.stripColor(single_condition.trim()));
+        singleCondition = ClassManager.manager.getStringManager().transform(singleCondition, p);
+        return ChatColor.stripColor(placeholder).trim().equalsIgnoreCase(ChatColor.stripColor(singleCondition.trim()));
     }
 
     @Override
@@ -33,10 +33,17 @@ public class BSConditionTypePlaceholderMatch extends BSConditionType {
 
 
     @Override
-    public boolean meetsCondition(BSShopHolder holder, BSBuy shopitem, Player p, String conditiontype, String condition) {
+    public boolean meetsCondition(BSShopHolder holder,
+                                  BSBuy shopItem,
+                                  Player p,
+                                  String conditiontype,
+                                  String condition) {
         String parts[] = condition.split(":", 2);
         if (parts.length < 2) {
-            ClassManager.manager.getBugFinder().warn("Unable to read placeholdermatch condition " + conditiontype + ":" + condition + " of shopitem " + shopitem.getName() + ". It should look like following: '<Placeholder text>:<match/dontmatch>:<text>'.");
+            ClassManager.manager.getBugFinder()
+                    .warn("Unable to read placeholdermatch condition " + conditiontype + ":" + condition
+                            + " of shopitem " + shopItem.getName()
+                            + ". It should look like following: '<Placeholder text>:<match/dontmatch>:<text>'.");
             return false;
         }
         if (parts[0].equalsIgnoreCase("match")) {
@@ -49,9 +56,9 @@ public class BSConditionTypePlaceholderMatch extends BSConditionType {
     }
 
 
-    private boolean isCorrect(Player p, boolean has_to_match, String condition, String placeholder) {
-        for (String single_condition : condition.split(",")) {
-            if (matches(p, single_condition, placeholder) == has_to_match) {
+    private boolean isCorrect(Player p, boolean hasToMatch, String condition, String placeholder) {
+        for (String singleCondition : condition.split(",")) {
+            if (matches(p, singleCondition, placeholder) == hasToMatch) {
                 return true;
             }
         }

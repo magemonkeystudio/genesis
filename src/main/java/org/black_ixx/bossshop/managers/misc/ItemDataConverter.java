@@ -11,7 +11,8 @@ public class ItemDataConverter {
 
     /**
      * Convert a material from old to new
-     * @param m material to get
+     *
+     * @param m    material to get
      * @param data data value
      * @return material
      */
@@ -21,7 +22,8 @@ public class ItemDataConverter {
 
     /**
      * Convert a material from old to new
-     * @param ID the id of the item
+     *
+     * @param ID   the id of the item
      * @param Data the data of the item
      * @return material
      */

@@ -26,9 +26,9 @@ public class ServerConnector3 implements ServerConnector {
 
             socket.setSoTimeout(info.getTimeout());
             socket.connect(info.getAddress(), info.getTimeout());
-            OutputStream os = socket.getOutputStream();
+            OutputStream     os  = socket.getOutputStream();
             DataOutputStream dos = new DataOutputStream(os);
-            InputStream is = socket.getInputStream();
+            InputStream      is  = socket.getInputStream();
 
             InputStreamReader isr = new InputStreamReader(is, Charset.forName("UTF-16BE"));
             dos.write(new byte[]{(byte) 0xFE, (byte) 0x01});
@@ -63,8 +63,8 @@ public class ServerConnector3 implements ServerConnector {
                 return false;
             }
 
-            String string = new String(chars);
-            String[] data = string.split("\0");
+            String   string = new String(chars);
+            String[] data   = string.split("\0");
 
             info.setMotd(data[3]);
             info.setPlayers(Integer.parseInt(data[4]));

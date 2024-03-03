@@ -4,16 +4,16 @@ import org.black_ixx.bossshop.core.prices.BSPriceType;
 
 public class BSPricePart {
 
-    private BSPriceType pricetype;
-    private Object price;
+    private BSPriceType priceType;
+    private Object      price;
 
-    public BSPricePart(BSPriceType pricetype, Object price) {
+    public BSPricePart(BSPriceType priceType, Object price) {
         this.price = price;
-        this.pricetype = pricetype;
+        this.priceType = priceType;
     }
 
     public BSPriceType getPriceType() {
-        return pricetype;
+        return priceType;
     }
 
     public Object getPrice() {

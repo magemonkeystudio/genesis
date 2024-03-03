@@ -12,8 +12,9 @@ public abstract class BSRewardTypeNumber extends BSRewardType {
     public abstract boolean isIntegerValue();
 
     @Override
-    public boolean isPlayerDependend(BSBuy buy, ClickType clicktype) {
-        return super.isPlayerDependend(buy, clicktype) || (buy.getPriceType(clicktype) == BSPriceType.ItemAll && ClassManager.manager.getSettings().getItemAllShowFinalReward());
+    public boolean isPlayerDependend(BSBuy buy, ClickType clickType) {
+        return super.isPlayerDependend(buy, clickType) || (buy.getPriceType(clickType) == BSPriceType.ItemAll
+                && ClassManager.manager.getSettings().getItemAllShowFinalReward());
     }
 
     @Override

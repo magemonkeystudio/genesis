@@ -11,10 +11,12 @@ import java.util.List;
 
 public class ItemDataPartCustomModelData extends ItemDataPart {
     @Override
-    public ItemStack transform(ItemStack item, String used_name, String argument) {
+    public ItemStack transform(ItemStack item, String usedName, String argument) {
         int custommodeldata = InputReader.getInt(argument, -1);
         if (custommodeldata == -1) {
-            ClassManager.manager.getBugFinder().severe("Mistake in Config: '" + argument + "' is not a valid '" + used_name + "'. It needs to be a number like '1', '12' or '64'.");
+            ClassManager.manager.getBugFinder()
+                    .severe("Mistake in Config: '" + argument + "' is not a valid '" + usedName
+                            + "'. It needs to be a number like '1', '12' or '64'.");
             return item;
         }
         ItemMeta meta = item.getItemMeta();
@@ -24,9 +26,9 @@ public class ItemDataPartCustomModelData extends ItemDataPart {
     }
 
     @Override
-    public boolean isSimilar(ItemStack shop_item, ItemStack player_item, BSBuy buy, Player p) {
-        if (shop_item.hasItemMeta() && player_item.hasItemMeta()) {
-            return shop_item.getItemMeta().getCustomModelData() == player_item.getItemMeta().getCustomModelData();
+    public boolean isSimilar(ItemStack shopItem, ItemStack playerItem, BSBuy buy, Player p) {
+        if (shopItem.hasItemMeta() && playerItem.hasItemMeta()) {
+            return shopItem.getItemMeta().getCustomModelData() == playerItem.getItemMeta().getCustomModelData();
         }
         return true;
     }

@@ -17,11 +17,11 @@ import java.util.Date;
 public class TransactionLog {
 
 
-    private final BossShop plugin;
-    private final String fileName = "TransactionLog.yml";
-    private final File file;
-    private FileConfiguration config = null;
-    private SimpleDateFormat formatter = new SimpleDateFormat("yyyy dd-MM 'at' hh:mm:ss a (E)");
+    private final BossShop          plugin;
+    private final String            fileName  = "TransactionLog.yml";
+    private final File              file;
+    private       FileConfiguration config    = null;
+    private       SimpleDateFormat  formatter = new SimpleDateFormat("yyyy dd-MM 'at' hh:mm:ss a (E)");
 
     public TransactionLog(final BossShop plugin) {
         this.plugin = plugin;
@@ -62,9 +62,11 @@ public class TransactionLog {
         config.set(getDate(), message);
     }
 
-    public void addTransaction(Player p, BSBuy buy, ClickType clicktype) {
-        if (buy.getRewardType(clicktype).logTransaction()) {
-            addTransaction("Player " + p.getName() + " bought " + buy.getName() + "(" + buy.getRewardType(clicktype).name() + ") for " + buy.getPriceType(clicktype).name() + ".");
+    public void addTransaction(Player p, BSBuy buy, ClickType clickType) {
+        if (buy.getRewardType(clickType).logTransaction()) {
+            addTransaction(
+                    "Player " + p.getName() + " bought " + buy.getName() + "(" + buy.getRewardType(clickType).name()
+                            + ") for " + buy.getPriceType(clickType).name() + ".");
         }
     }
 

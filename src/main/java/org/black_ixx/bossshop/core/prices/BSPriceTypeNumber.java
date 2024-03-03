@@ -12,8 +12,9 @@ public abstract class BSPriceTypeNumber extends BSPriceType {
     public abstract boolean isIntegerValue();
 
     @Override
-    public boolean isPlayerDependend(BSBuy buy, ClickType clicktype) {
-        return super.isPlayerDependend(buy, clicktype) || (buy.getRewardType(clicktype) == BSRewardType.ItemAll && ClassManager.manager.getSettings().getItemAllShowFinalReward());
+    public boolean isPlayerDependend(BSBuy buy, ClickType clickType) {
+        return super.isPlayerDependend(buy, clickType) || (buy.getRewardType(clickType) == BSRewardType.ItemAll
+                && ClassManager.manager.getSettings().getItemAllShowFinalReward());
     }
 
     @Override
@@ -34,7 +35,12 @@ public abstract class BSPriceTypeNumber extends BSPriceType {
 
     public abstract String takePrice(Player p, BSBuy buy, Object price, ClickType clickType, int multiplier);
 
-    public abstract boolean hasPrice(Player p, BSBuy buy, Object price, ClickType clickType, int multiplier, boolean messageOnFailure);
+    public abstract boolean hasPrice(Player p,
+                                     BSBuy buy,
+                                     Object price,
+                                     ClickType clickType,
+                                     int multiplier,
+                                     boolean messageOnFailure);
 
     public abstract String getDisplayBalance(Player p, BSBuy buy, Object price, ClickType clickType);
 

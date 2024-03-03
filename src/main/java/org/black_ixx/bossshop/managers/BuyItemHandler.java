@@ -25,19 +25,19 @@ public class BuyItemHandler {
     /**
      * Load an item from a config into a shop
      *
-     * @param items_section the config section for the item
-     * @param shop          the shop to load it into
-     * @param name          the name of the config
+     * @param itemsSection the config section for the item
+     * @param shop         the shop to load it into
+     * @param name         the name of the config
      * @return shop item
      */
-    public BSBuy loadItem(ConfigurationSection items_section, BSShop shop, String name) {
-        if (items_section.getConfigurationSection(name) == null) {
-            String shopname = shop == null ? "none" : shop.getShopName();
+    public BSBuy loadItem(ConfigurationSection itemsSection, BSShop shop, String name) {
+        if (itemsSection.getConfigurationSection(name) == null) {
+            String shopName = shop == null ? "none" : shop.getShopName();
             ClassManager.manager.getBugFinder()
-                    .severe("Error when trying to create BuyItem " + name + "! (1) [Shop: " + shopname + "]");
+                    .severe("Error when trying to create BuyItem " + name + "! (1) [Shop: " + shopName + "]");
             return null;
         }
-        ConfigurationSection c = items_section.getConfigurationSection(name);
+        ConfigurationSection c = itemsSection.getConfigurationSection(name);
 
 
         BSLoadShopItemEvent event = new BSLoadShopItemEvent(shop, name, c);
@@ -46,13 +46,11 @@ public class BuyItemHandler {
 
 
         if (buy == null) { //If addons did not create own item create a default one here!
-
             buy = createBuyItem(shop, name, c);
 
             if (buy == null) {
                 return null;
             }
-
         }
 
 
@@ -66,30 +64,30 @@ public class BuyItemHandler {
     /**
      * Create item to buy
      *
-     * @param shop name of shop to load from
-     * @param name name of item
-     * @param c    part of config to get from
+     * @param shop   name of shop to load from
+     * @param name   name of item
+     * @param config part of config to get from
      * @return shop item
      */
-    public BSBuy createBuyItem(BSShop shop, String name, ConfigurationSection c) {
+    public BSBuy createBuyItem(BSShop shop, String name, ConfigurationSection config) {
         String stage    = "Basic Data";
-        String shopname = shop == null ? "none" : shop.getShopName();
+        String shopName = shop == null ? "none" : shop.getShopName();
 
         try {
-            String priceType  = c.getString("PriceType");
-            String rewardType = c.getString("RewardType");
-            String message    = c.getString("Message");
-            String permission = c.getString("ExtraPermission");
+            String priceType  = config.getString("PriceType");
+            String rewardType = config.getString("RewardType");
+            String message    = config.getString("Message");
+            String permission = config.getString("ExtraPermission");
             if (permission == null || permission == "") {
                 permission = null;
             }
-            int inventoryLocation = c.getInt("InventoryLocation");
+            int inventoryLocation = config.getInt("InventoryLocation");
 
             if (inventoryLocation < 0) {
                 ClassManager.manager.getBugFinder()
                         .warn("The InventoryLocation of the shopitem '" + name + "' is '" + inventoryLocation
                                 + "'. It has to be either higher than '0' or it has to be '0' if you want to it to automatically pick the next empty slot. [Shop: "
-                                + shopname + "]");
+                                + shopName + "]");
             }
             inventoryLocation--;
 
@@ -101,7 +99,7 @@ public class BuyItemHandler {
             if (rewardT == null) {
                 ClassManager.manager.getBugFinder()
                         .severe("Was not able to create shopitem '" + name + "'! '" + rewardType
-                                + "' is not a valid RewardType! [Shop: " + shopname + "]");
+                                + "' is not a valid RewardType! [Shop: " + shopName + "]");
                 ClassManager.manager.getBugFinder().severe("Valid RewardTypes:");
                 for (BSRewardType type : BSRewardType.values()) {
                     ClassManager.manager.getBugFinder().severe("-" + type.name());
@@ -112,7 +110,7 @@ public class BuyItemHandler {
             if (priceT == null) {
                 ClassManager.manager.getBugFinder()
                         .severe("Was not able to create shopitem '" + name + "'! '" + priceType
-                                + "' is not a valid PriceType! [Shop: " + shopname + "]");
+                                + "' is not a valid PriceType! [Shop: " + shopName + "]");
                 ClassManager.manager.getBugFinder().severe("Valid PriceTypes:");
                 for (BSPriceType type : BSPriceType.values()) {
                     ClassManager.manager.getBugFinder().severe("-" + type.name());
@@ -121,20 +119,20 @@ public class BuyItemHandler {
             }
 
             stage = "ForceInput Detection";
-            BSInputType inputtype     = null;
-            String      inputtypename = c.getString("ForceInput");
-            String      inputtext     = c.getString("ForceInputMessage");
-            if (inputtypename != null) {
+            BSInputType inputType     = null;
+            String      inputTypeName = config.getString("ForceInput");
+            String      inputText     = config.getString("ForceInputMessage");
+            if (inputTypeName != null) {
                 for (BSInputType it : BSInputType.values()) {
-                    if (it.name().equalsIgnoreCase(inputtypename)) {
-                        inputtype = it;
+                    if (it.name().equalsIgnoreCase(inputTypeName)) {
+                        inputType = it;
                         break;
                     }
                 }
-                if (inputtype == null) {
+                if (inputType == null) {
                     ClassManager.manager.getBugFinder()
-                            .warn("Invalid ForceInput type: '" + inputtypename + "' of shopitem '" + name + ". [Shop: "
-                                    + shopname + "]");
+                            .warn("Invalid ForceInput type: '" + inputTypeName + "' of shopitem '" + name + ". [Shop: "
+                                    + shopName + "]");
                 }
             }
 
@@ -144,8 +142,8 @@ public class BuyItemHandler {
             priceT.enableType();
 
 
-            Object price  = c.get("Price");
-            Object reward = c.get("Reward");
+            Object price  = config.get("Price");
+            Object reward = config.get("Reward");
 
             stage = "Price- and RewardType Adaption";
             price = priceT.createObject(price, true);
@@ -160,9 +158,9 @@ public class BuyItemHandler {
 
 
             stage = "Optional: Conditions";
-            BSConditionSet conditionsset = null;
+            BSConditionSet conditionsSet = null;
 
-            List<String> conditions = c.getStringList("Condition");
+            List<String> conditions = config.getStringList("Condition");
             if (conditions != null) {
                 BSConditionSet  set  = new BSConditionSet();
                 BSConditionType type = null;
@@ -172,7 +170,7 @@ public class BuyItemHandler {
                         ClassManager.manager.getBugFinder()
                                 .severe("Unable to add condition '" + s + "' to shopitem '" + name
                                         + "'! It has to look like following: '<conditiontype>:<condition>'. [Shop: "
-                                        + shopname + "]");
+                                        + shopName + "]");
                         continue;
                     }
 
@@ -190,7 +188,7 @@ public class BuyItemHandler {
                         ClassManager.manager.getBugFinder()
                                 .severe("Unable to add condition '" + s + "' to shopitem '" + name
                                         + "'! You need to define a conditiontype before you start listing conditions! [Shop: "
-                                        + shopname + "]");
+                                        + shopName + "]");
                         continue;
                     }
 
@@ -201,13 +199,13 @@ public class BuyItemHandler {
                     set.addCondition(new BSSingleCondition(type, a, b));
                 }
                 if (!set.isEmpty()) {
-                    conditionsset = set;
+                    conditionsSet = set;
                 }
             }
 
             BSCreateShopItemEvent event = new BSCreateShopItemEvent(shop,
                     name,
-                    c,
+                    config,
                     rewardT,
                     priceT,
                     reward,
@@ -215,9 +213,9 @@ public class BuyItemHandler {
                     message,
                     inventoryLocation,
                     permission,
-                    conditionsset,
-                    inputtype,
-                    inputtext);
+                    conditionsSet,
+                    inputType,
+                    inputText);
             Bukkit.getPluginManager().callEvent(event); //Allow addons to create a custom BSBuy
 
             BSBuy buy = event.getCustomShopItem();
@@ -230,36 +228,36 @@ public class BuyItemHandler {
                         inventoryLocation,
                         permission,
                         name,
-                        conditionsset,
-                        inputtype,
-                        inputtext);
+                        conditionsSet,
+                        inputType,
+                        inputText);
             }
             buy.setShop(shop);
 
 
             stage = "MenuItem creation";
-            if (c.getStringList("MenuItem") == null) {
+            if (config.getStringList("MenuItem") == null) {
                 ClassManager.manager.getBugFinder()
                         .severe("Error when trying to create shopitem " + name + "! MenuItem is not existing?! [Shop: "
-                                + shopname + "]");
+                                + shopName + "]");
                 return null;
             }
 
             ItemStack i = ClassManager.manager.getItemStackCreator()
-                    .createItemStack(c.getStringList("MenuItem"), buy, shop, false);
+                    .createItemStack(config.getStringList("MenuItem"), buy, shop, false);
             buy.setItem(i, false);
 
 
             ClassManager.manager.getSettings()
                     .update(buy); //TODO: Not tested if inheritance works fine yet. Order of methods matters!
 
-            Bukkit.getPluginManager().callEvent(new BSCreatedShopItemEvent(shop, buy, c));
+            Bukkit.getPluginManager().callEvent(new BSCreatedShopItemEvent(shop, buy, config));
             return buy;
 
         } catch (Exception e) {
             ClassManager.manager.getBugFinder()
                     .severe("Was not able to create BuyItem " + name + "! Error at Stage '" + stage + "'. [Shop: "
-                            + shopname + "]");
+                            + shopName + "]");
             e.printStackTrace();
             ClassManager.manager.getBugFinder().severe("Probably caused by Config Mistakes.");
             ClassManager.manager.getBugFinder().severe("For more help please send me a PM at Spigot.");

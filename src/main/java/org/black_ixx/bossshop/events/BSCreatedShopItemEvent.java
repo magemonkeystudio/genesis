@@ -4,7 +4,6 @@ package org.black_ixx.bossshop.events;
 import org.black_ixx.bossshop.core.BSBuy;
 import org.black_ixx.bossshop.core.BSShop;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.Plugin;
 
@@ -13,8 +12,8 @@ public class BSCreatedShopItemEvent extends BSEvent {
     private static final HandlerList handlers = new HandlerList();
 
 
-    private final BSShop shop;
-    private final BSBuy item;
+    private final BSShop               shop;
+    private final BSBuy                item;
     private final ConfigurationSection section;
 
 

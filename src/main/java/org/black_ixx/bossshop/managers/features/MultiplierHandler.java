@@ -31,9 +31,9 @@ public class MultiplierHandler {
         setup(plugin, lines);
     }
 
-    public void setup(BossShop plugin, List<String> config_lines) {
+    public void setup(BossShop plugin, List<String> configLines) {
         multipliers.clear();
-        for (String s : config_lines) {
+        for (String s : configLines) {
             BSMultiplier m = new BSMultiplier(s);
             if (m.isValid()) {
                 multipliers.add(m);
@@ -42,75 +42,124 @@ public class MultiplierHandler {
     }
 
 
-    public String calculatePriceDisplayWithMultiplier(Player p, BSBuy buy, ClickType clicktype, double d, String message) {
-        BSPriceType t = buy.getPriceType(clicktype);
-        return calculatePriceDisplayWithMultiplier(p, buy, clicktype, d, message, MathTools.getFormatting(t), MathTools.isIntegerValue(t));
+    public String calculatePriceDisplayWithMultiplier(Player p,
+                                                      BSBuy buy,
+                                                      ClickType clickType,
+                                                      double d,
+                                                      String message) {
+        BSPriceType t = buy.getPriceType(clickType);
+        return calculatePriceDisplayWithMultiplier(p,
+                buy,
+                clickType,
+                d,
+                message,
+                MathTools.getFormatting(t),
+                MathTools.isIntegerValue(t));
     }
 
-    public String calculatePriceDisplayWithMultiplier(Player p, BSBuy buy, ClickType clicktype, double d, String message, List<String> formatting, boolean integer_value) {
-        d = calculatePriceWithMultiplier(p, buy, clicktype, d);
+    public String calculatePriceDisplayWithMultiplier(Player p,
+                                                      BSBuy buy,
+                                                      ClickType clickType,
+                                                      double d,
+                                                      String message,
+                                                      List<String> formatting,
+                                                      boolean integerValue) {
+        d = calculatePriceWithMultiplier(p, buy, clickType, d);
 
-        if (buy.getRewardType(clicktype) == BSRewardType.ItemAll) {
+        if (buy.getRewardType(clickType) == BSRewardType.ItemAll) {
             if (ClassManager.manager.getSettings().getItemAllShowFinalReward() && p != null) {
-                ItemStack i = (ItemStack) buy.getReward(clicktype);
-                int count = ClassManager.manager.getItemStackChecker().getAmountOfFreeSpace(p, i);
+                ItemStack i     = (ItemStack) buy.getReward(clickType);
+                int       count = ClassManager.manager.getItemStackChecker().getAmountOfFreeSpace(p, i);
 
                 if (count == 0) {
-                    return ClassManager.manager.getMessageHandler().get("Display.ItemAllEach").replace("%value%", message.replace("%number%", MathTools.displayNumber(d, formatting, integer_value)));
+                    return ClassManager.manager.getMessageHandler()
+                            .get("Display.ItemAllEach")
+                            .replace("%value%",
+                                    message.replace("%number%", MathTools.displayNumber(d, formatting, integerValue)));
                 }
 
                 d *= count;
             } else {
-                return ClassManager.manager.getMessageHandler().get("Display.ItemAllEach").replace("%value%", message.replace("%number%", MathTools.displayNumber(d, formatting, integer_value)));
+                return ClassManager.manager.getMessageHandler()
+                        .get("Display.ItemAllEach")
+                        .replace("%value%",
+                                message.replace("%number%", MathTools.displayNumber(d, formatting, integerValue)));
             }
         }
 
-        return message.replace("%number%", MathTools.displayNumber(d, formatting, integer_value));
+        return message.replace("%number%", MathTools.displayNumber(d, formatting, integerValue));
     }
 
-    public double calculatePriceWithMultiplier(Player p, BSBuy buy, ClickType clicktype, double d) {
-        return calculatePriceWithMultiplier(p, buy.getPriceType(clicktype), d);
+    public double calculatePriceWithMultiplier(Player p, BSBuy buy, ClickType clickType, double d) {
+        return calculatePriceWithMultiplier(p, buy.getPriceType(clickType), d);
     }
 
-    public double calculatePriceWithMultiplier(Player p, BSPriceType pricetype, double d) { //Used for prices
+    public double calculatePriceWithMultiplier(Player p, BSPriceType priceType, double d) { //Used for prices
         for (BSMultiplier m : multipliers) {
-            d = m.calculateValue(p, pricetype, d, BSMultiplier.RANGE_PRICE_ONLY);
+            d = m.calculateValue(p, priceType, d, BSMultiplier.RANGE_PRICE_ONLY);
         }
         return MathTools.round(d, 2);
     }
 
 
-    public String calculateRewardDisplayWithMultiplier(Player p, BSBuy buy, ClickType clicktype, double d, String message) {
-        BSPriceType t = BSPriceType.detectType(buy.getRewardType(clicktype).name());
-        return calculateRewardDisplayWithMultiplier(p, buy, clicktype, d, message, MathTools.getFormatting(t), MathTools.isIntegerValue(t));
+    public String calculateRewardDisplayWithMultiplier(Player p,
+                                                       BSBuy buy,
+                                                       ClickType clickType,
+                                                       double d,
+                                                       String message) {
+        BSPriceType t = BSPriceType.detectType(buy.getRewardType(clickType).name());
+        return calculateRewardDisplayWithMultiplier(p,
+                buy,
+                clickType,
+                d,
+                message,
+                MathTools.getFormatting(t),
+                MathTools.isIntegerValue(t));
     }
 
-    public String calculateRewardDisplayWithMultiplier(Player p, BSBuy buy, ClickType clicktype, double d, String message, List<String> formatting, boolean integer_value) {
-        d = calculateRewardWithMultiplier(p, buy, clicktype, d);
+    public String calculateRewardDisplayWithMultiplier(Player p,
+                                                       BSBuy buy,
+                                                       ClickType clickType,
+                                                       double d,
+                                                       String message,
+                                                       List<String> formatting,
+                                                       boolean integerValue) {
+        d = calculateRewardWithMultiplier(p, buy, clickType, d);
 
-        if (buy.getPriceType(clicktype) == BSPriceType.ItemAll) {
+        if (buy.getPriceType(clickType) == BSPriceType.ItemAll) {
             if (ClassManager.manager.getSettings().getItemAllShowFinalReward() && p != null) {
-                ItemStack i = (ItemStack) buy.getPrice(clicktype);
-                int count = ClassManager.manager.getItemStackChecker().getAmountOfSameItems(p, i, buy);
+                ItemStack i     = (ItemStack) buy.getPrice(clickType);
+                int       count = ClassManager.manager.getItemStackChecker().getAmountOfSameItems(p, i, buy);
 
                 if (count == 0) {
-                    return ClassManager.manager.getMessageHandler().get("Display.ItemAllEach").replace("%value%", message.replace("%number%", MathTools.displayNumber(d, formatting, integer_value)));
+                    return ClassManager.manager.getMessageHandler()
+                            .get("Display.ItemAllEach")
+                            .replace("%value%",
+                                    message.replace("%number%", MathTools.displayNumber(d, formatting, integerValue)));
                 }
 
                 d *= count;
             } else {
-                return ClassManager.manager.getMessageHandler().get("Display.ItemAllEach").replace("%value%", message.replace("%number%", MathTools.displayNumber(d, formatting, integer_value)));
+                return ClassManager.manager.getMessageHandler()
+                        .get("Display.ItemAllEach")
+                        .replace("%value%",
+                                message.replace("%number%", MathTools.displayNumber(d, formatting, integerValue)));
             }
         }
 
-        return message.replace("%number%", MathTools.displayNumber(d, formatting, integer_value));
+        return message.replace("%number%", MathTools.displayNumber(d, formatting, integerValue));
     }
 
-    public double calculateRewardWithMultiplier(Player p, BSBuy buy, ClickType clicktype, double d) { //Used for reward; Works the other way around
-        return calculateRewardWithMultiplier(p, buy.getRewardType(clicktype), d);
+    public double calculateRewardWithMultiplier(Player p,
+                                                BSBuy buy,
+                                                ClickType clickType,
+                                                double d) { //Used for reward; Works the other way around
+        return calculateRewardWithMultiplier(p, buy.getRewardType(clickType), d);
     }
 
-    public double calculateRewardWithMultiplier(Player p, BSRewardType rewardtype, double d) { //Used for reward; Works the other way around
+    public double calculateRewardWithMultiplier(Player p,
+                                                BSRewardType rewardtype,
+                                                double d) { //Used for reward; Works the other way around
         for (BSMultiplier m : multipliers) {
             d = m.calculateValue(p, BSPriceType.detectType(rewardtype.name()), d, BSMultiplier.RANGE_REWARD_ONLY);
         }

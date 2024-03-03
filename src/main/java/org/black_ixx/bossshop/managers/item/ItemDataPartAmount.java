@@ -11,10 +11,12 @@ import java.util.List;
 public class ItemDataPartAmount extends ItemDataPart {
 
     @Override
-    public ItemStack transform(ItemStack item, String used_name, String argument) {
+    public ItemStack transform(ItemStack item, String usedName, String argument) {
         int amount = InputReader.getInt(argument, -1);
         if (amount == -1) {
-            ClassManager.manager.getBugFinder().severe("Mistake in Config: '" + argument + "' is not a valid '" + used_name + "'. It needs to be a number like '1', '12' or '64'.");
+            ClassManager.manager.getBugFinder()
+                    .severe("Mistake in Config: '" + argument + "' is not a valid '" + usedName
+                            + "'. It needs to be a number like '1', '12' or '64'.");
             return item;
         }
         item.setAmount(amount);
@@ -44,8 +46,8 @@ public class ItemDataPartAmount extends ItemDataPart {
     }
 
     @Override
-    public boolean isSimilar(ItemStack shop_item, ItemStack player_item, BSBuy buy, Player p) {
-        return shop_item.getAmount() == player_item.getAmount();
+    public boolean isSimilar(ItemStack shopItem, ItemStack playerItem, BSBuy buy, Player p) {
+        return shopItem.getAmount() == playerItem.getAmount();
     }
 
 

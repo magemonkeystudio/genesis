@@ -38,10 +38,10 @@ public class ServerConnector2 implements ServerConnector {
     @SuppressWarnings("resource")
     public StatusResponse fetchData(ServerInfo info) throws IOException {
 
-        Socket socket = new Socket();
-        OutputStream outputStream;
-        DataOutputStream dataOutputStream;
-        InputStream inputStream;
+        Socket            socket = new Socket();
+        OutputStream      outputStream;
+        DataOutputStream  dataOutputStream;
+        InputStream       inputStream;
         InputStreamReader inputStreamReader;
 
         socket.setSoTimeout(info.getTimeout());
@@ -54,8 +54,8 @@ public class ServerConnector2 implements ServerConnector {
         inputStream = socket.getInputStream();
         inputStreamReader = new InputStreamReader(inputStream);
 
-        ByteArrayOutputStream b = new ByteArrayOutputStream();
-        DataOutputStream handshake = new DataOutputStream(b);
+        ByteArrayOutputStream b         = new ByteArrayOutputStream();
+        DataOutputStream      handshake = new DataOutputStream(b);
         handshake.writeByte(0x00); //packet id for handshake
         writeVarInt(handshake, 4); //protocol version
         writeVarInt(handshake, info.getAddress().getHostString().length()); //host length
@@ -152,10 +152,10 @@ public class ServerConnector2 implements ServerConnector {
 
     public class StatusResponse {
         private Description description;
-        private Players players;
-        private Version version;
-        private String favicon;
-        private int time;
+        private Players     players;
+        private Version     version;
+        private String      favicon;
+        private int         time;
 
         public Description getDescription() {
             return description;
@@ -183,8 +183,8 @@ public class ServerConnector2 implements ServerConnector {
     }
 
     public class Players {
-        private int max;
-        private int online;
+        private int          max;
+        private int          online;
         private List<Player> sample;
 
         public int getMax() {

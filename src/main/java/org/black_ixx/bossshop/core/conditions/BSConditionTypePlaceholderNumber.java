@@ -10,14 +10,21 @@ public class BSConditionTypePlaceholderNumber extends BSConditionType {
 
 
     @Override
-    public boolean meetsCondition(BSShopHolder holder, BSBuy shopitem, Player p, String conditiontype, String condition) {
+    public boolean meetsCondition(BSShopHolder holder,
+                                  BSBuy shopItem,
+                                  Player p,
+                                  String conditiontype,
+                                  String condition) {
         String realparts[] = condition.split(":", 2);
         if (realparts.length < 2) {
-            ClassManager.manager.getBugFinder().warn("Unable to read placeholdernumber condition " + condition + ":" + condition + " of shopitem " + shopitem.getName() + ". It should look like following: '<Placeholder text>:<conditiontype>:<condition>'.");
+            ClassManager.manager.getBugFinder()
+                    .warn("Unable to read placeholdernumber condition " + condition + ":" + condition + " of shopitem "
+                            + shopItem.getName()
+                            + ". It should look like following: '<Placeholder text>:<conditiontype>:<condition>'.");
             return false;
         }
 
-        double n = getNumber(shopitem, p, conditiontype);
+        double n = getNumber(shopItem, p, conditiontype);
 
         conditiontype = realparts[0];
         condition = realparts[1];
@@ -29,12 +36,13 @@ public class BSConditionTypePlaceholderNumber extends BSConditionType {
             n %= divisor;
         }
 
-        //Basic operations
+        // Basic operations
         if (conditiontype.equalsIgnoreCase("over") || conditiontype.equalsIgnoreCase(">")) {
             double d = InputReader.getDouble(condition, -1);
             return n > d;
         }
-        if (conditiontype.equalsIgnoreCase("under") || conditiontype.equalsIgnoreCase("<") || conditiontype.equalsIgnoreCase("below")) {
+        if (conditiontype.equalsIgnoreCase("under") || conditiontype.equalsIgnoreCase("<")
+                || conditiontype.equalsIgnoreCase("below")) {
             double d = InputReader.getDouble(condition, -1);
             return n < d;
         }
@@ -46,10 +54,12 @@ public class BSConditionTypePlaceholderNumber extends BSConditionType {
             String[] parts = condition.split("-");
             if (parts.length == 2) {
                 double start = InputReader.getDouble(parts[0], -1);
-                double end = InputReader.getDouble(parts[1], -1);
+                double end   = InputReader.getDouble(parts[1], -1);
                 return n >= start && n <= end;
             } else {
-                ClassManager.manager.getBugFinder().warn("Unable to read condition '" + condition + "' of conditiontype 'between'. It has to look like following: '<number1>-<number2>'.");
+                ClassManager.manager.getBugFinder()
+                        .warn("Unable to read condition '" + condition
+                                + "' of conditiontype 'between'. It has to look like following: '<number1>-<number2>'.");
                 return false;
             }
         }
@@ -70,8 +80,9 @@ public class BSConditionTypePlaceholderNumber extends BSConditionType {
     }
 
 
-    public double getNumber(BSBuy shopitem, Player p, String placeholder) {
-        String transformedPlaceholder = ClassManager.manager.getStringManager().transform(placeholder, shopitem, shopitem.getShop(), null, p);
+    public double getNumber(BSBuy shopItem, Player p, String placeholder) {
+        String transformedPlaceholder =
+                ClassManager.manager.getStringManager().transform(placeholder, shopItem, shopItem.getShop(), null, p);
         return InputReader.getDouble(transformedPlaceholder.trim(), 0);
     }
 

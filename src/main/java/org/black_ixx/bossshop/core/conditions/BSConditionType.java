@@ -44,7 +44,7 @@ public abstract class BSConditionType {
 
 
     private static List<BSConditionType> types;
-    private final String[] names = createNames();
+    private final  String[]              names = createNames();
 
     public static void loadTypes() {
         types = new ArrayList<>();
@@ -120,9 +120,13 @@ public abstract class BSConditionType {
         return names[0].toUpperCase();
     }
 
-    public abstract void enableType(); //Here you can register classes that the type depends on
+    public abstract void enableType(); // Here you can register classes that the type depends on
 
-    public abstract boolean meetsCondition(BSShopHolder holder, BSBuy shopitem, Player p, String conditiontype, String condition);
+    public abstract boolean meetsCondition(BSShopHolder holder,
+                                           BSBuy shopItem,
+                                           Player p,
+                                           String conditiontype,
+                                           String condition);
 
     public abstract String[] createNames();
 

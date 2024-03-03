@@ -10,9 +10,9 @@ import org.black_ixx.bossshop.events.BSCheckStringForFeaturesEvent;
 import org.black_ixx.bossshop.events.BSTransformStringEvent;
 import org.black_ixx.bossshop.managers.ClassManager;
 import org.black_ixx.bossshop.managers.serverpinging.ConnectedBuyItem;
-import org.black_ixx.bossshop.misc.VersionManager;
 import org.black_ixx.bossshop.misc.MathTools;
 import org.black_ixx.bossshop.misc.Misc;
+import org.black_ixx.bossshop.misc.VersionManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -28,6 +28,7 @@ public class StringManager {
 
     /**
      * Transform specific strings from one thing to another
+     *
      * @param s input string
      * @return transformed string
      */
@@ -122,7 +123,9 @@ public class StringManager {
         }
 
         if (target != null && s.contains("%")) {
-            s = s.replace("%name%", target.getName()).replace("%player%", target.getName()).replace("%target%", target.getName());
+            s = s.replace("%name%", target.getName())
+                    .replace("%player%", target.getName())
+                    .replace("%target%", target.getName());
             s = s.replace("%displayname%", target.getDisplayName());
             s = s.replace("%uuid%", target.getUniqueId().toString());
 
@@ -133,8 +136,8 @@ public class StringManager {
                 }
             }
             if (s.contains("%balancepoints%") && ClassManager.manager.getPointsManager() != null) {
-                double balance_points = ClassManager.manager.getPointsManager().getPoints(target);
-                s = s.replace("%balancepoints%", MathTools.displayNumber(balance_points, BSPriceType.Points));
+                double balancePoints = ClassManager.manager.getPointsManager().getPoints(target);
+                s = s.replace("%balancepoints%", MathTools.displayNumber(balancePoints, BSPriceType.Points));
             }
 
             if (s.contains("%world%")) {
@@ -158,7 +161,10 @@ public class StringManager {
     }
 
 
-    public boolean checkStringForFeatures(BSShop shop, BSBuy buy, ItemStack menu_item, String s) { //Returns true if this would make a shop customizable
+    public boolean checkStringForFeatures(BSShop shop,
+                                          BSBuy buy,
+                                          ItemStack menuItem,
+                                          String s) { //Returns true if this would make a shop customizable
         boolean b = s.matches(hexPattern.pattern());
 
 
@@ -190,12 +196,13 @@ public class StringManager {
             }
 
             if (buy != null && shop != null && ClassManager.manager.getSettings().getServerPingingEnabled(true)) {
-                String server_names = StringManipulationLib.figureOutVariable(s, 0, "players", "motd");
-                if (server_names != null) {
+                String serverNames = StringManipulationLib.figureOutVariable(s, 0, "players", "motd");
+                if (serverNames != null) {
                     b = true;
                     if (buy.getItem() != null) {
-                        String[] servers = server_names.split(":");
-                        ClassManager.manager.getServerPingingManager().registerShopItem(servers[0].trim(), new ConnectedBuyItem(buy, menu_item));
+                        String[] servers = serverNames.split(":");
+                        ClassManager.manager.getServerPingingManager()
+                                .registerShopItem(servers[0].trim(), new ConnectedBuyItem(buy, menuItem));
                     }
                 }
             }

@@ -7,8 +7,8 @@ public class BSConditionTypeItem extends BSConditionTypeMatch {
 
 
     @Override
-    public boolean matches(Player p, String single_condition) {
-        return p.getInventory().contains(InputReader.readMaterial(single_condition));
+    public boolean matches(Player p, String singleCondition) {
+        return p.getInventory().contains(InputReader.readMaterial(singleCondition));
     }
 
 

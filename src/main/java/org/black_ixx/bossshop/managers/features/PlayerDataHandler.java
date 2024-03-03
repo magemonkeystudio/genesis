@@ -8,12 +8,12 @@ import java.util.HashMap;
 
 public class PlayerDataHandler {
 
-    private HashMap<Player, BSShop> last_shop = new HashMap<>();
-    private HashMap<Player, String> input = new HashMap<>();
-    private HashMap<Player, BSChatUserInput> input_waiting = new HashMap<>();
+    private HashMap<Player, BSShop>          lastShop     = new HashMap<>();
+    private HashMap<Player, String>          input        = new HashMap<>();
+    private HashMap<Player, BSChatUserInput> inputWaiting = new HashMap<>();
 
     public void openedShop(Player p, BSShop shop) {
-        this.last_shop.put(p, shop);
+        this.lastShop.put(p, shop);
     }
 
     /*
@@ -23,11 +23,11 @@ public class PlayerDataHandler {
      */
 
     public void requestInput(Player p, BSChatUserInput input) {
-        this.input_waiting.put(p, input);
+        this.inputWaiting.put(p, input);
     }
 
     public void removeInputRequest(Player p) {
-        this.input_waiting.remove(p);
+        this.inputWaiting.remove(p);
     }
 
     public void enteredInput(Player p, String input) {
@@ -36,9 +36,9 @@ public class PlayerDataHandler {
 
 
     public void leftServer(Player p) {
-        last_shop.remove(p);
+        lastShop.remove(p);
         input.remove(p);
-        input_waiting.remove(p);
+        inputWaiting.remove(p);
     }
 
 
@@ -50,11 +50,11 @@ public class PlayerDataHandler {
     }
 
     public BSChatUserInput getInputRequest(Player p) {
-        return input_waiting.get(p);
+        return inputWaiting.get(p);
     }
 
     public BSShop getLastShop(Player p) {
-        return last_shop.get(p);
+        return lastShop.get(p);
     }
 
 }

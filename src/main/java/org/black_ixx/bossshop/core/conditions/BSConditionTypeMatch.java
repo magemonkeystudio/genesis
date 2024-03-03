@@ -7,7 +7,11 @@ import org.bukkit.entity.Player;
 public abstract class BSConditionTypeMatch extends BSConditionType {
 
     @Override
-    public boolean meetsCondition(BSShopHolder holder, BSBuy shopitem, Player p, String conditiontype, String condition) {
+    public boolean meetsCondition(BSShopHolder holder,
+                                  BSBuy shopItem,
+                                  Player p,
+                                  String conditiontype,
+                                  String condition) {
         if (conditiontype.equalsIgnoreCase("match")) {
             return isCorrect(p, true, condition);
         }
@@ -18,9 +22,9 @@ public abstract class BSConditionTypeMatch extends BSConditionType {
     }
 
 
-    private boolean isCorrect(Player p, boolean has_to_match, String condition) {
-        for (String single_condition : condition.split(",")) {
-            if (matches(p, single_condition) == has_to_match) {
+    private boolean isCorrect(Player p, boolean hasToMatch, String condition) {
+        for (String singleCondition : condition.split(",")) {
+            if (matches(p, singleCondition) == hasToMatch) {
                 return true;
             }
         }
@@ -34,6 +38,6 @@ public abstract class BSConditionTypeMatch extends BSConditionType {
     }
 
 
-    public abstract boolean matches(Player p, String single_condition);
+    public abstract boolean matches(Player p, String singleCondition);
 
 }

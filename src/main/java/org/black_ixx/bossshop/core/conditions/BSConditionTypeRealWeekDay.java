@@ -9,7 +9,7 @@ import java.util.Calendar;
 public class BSConditionTypeRealWeekDay extends BSConditionTypeNumber {
 
     @Override
-    public double getNumber(BSBuy shopitem, BSShopHolder holder, Player p) {
+    public double getNumber(BSBuy shopItem, BSShopHolder holder, Player p) {
         int weekday = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
 
         switch (weekday) {

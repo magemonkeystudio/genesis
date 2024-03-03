@@ -1,11 +1,11 @@
 package org.black_ixx.bossshop.managers.features;
 
+import lombok.Getter;
 import org.black_ixx.bossshop.BossShop;
 import org.black_ixx.bossshop.managers.ClassManager;
 import org.black_ixx.bossshop.pointsystem.*;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.plugin.Plugin;
 
 public class PointsManager {
 
@@ -24,7 +24,11 @@ public class PointsManager {
 
         if (p != PointsPlugin.NONE) {
             if (Bukkit.getPluginManager().getPlugin(p.getPluginName()) == null) {
-                ClassManager.manager.getBugFinder().severe("You defined " + p.getPluginName() + " as Points Plugin... BUT IT WAS NOT FOUND?! Please install it or use an alternative like PlayerPoints (https://www.spigotmc.org/resources/playerpoints.80745/). If you want " + BossShop.NAME + " to auto-detect your Points plugin simply set 'PointsPlugin: auto-detect'.");
+                ClassManager.manager.getBugFinder()
+                        .severe("You defined " + p.getPluginName()
+                                + " as Points Plugin... BUT IT WAS NOT FOUND?! Please install it or use an alternative like PlayerPoints (https://www.spigotmc.org/resources/playerpoints.80745/). If you want "
+                                + BossShop.NAME
+                                + " to auto-detect your Points plugin simply set 'PointsPlugin: auto-detect'.");
                 this.pa = new BSPointsPluginFailed();
                 return;
             }
@@ -72,7 +76,8 @@ public class PointsManager {
         }
 
         if (this.pa == null) {
-            ClassManager.manager.getBugFinder().warn("No PointsPlugin was found... You need one if you want BossShopPro to work with Points! Get PlayerPoints here: http://dev.bukkit.org/server-mods/playerpoints/");
+            ClassManager.manager.getBugFinder()
+                    .warn("No PointsPlugin was found... You need one if you want BossShopPro to work with Points! Get PlayerPoints here: http://dev.bukkit.org/server-mods/playerpoints/");
             this.pa = new BSPointsPluginFailed();
         } else {
             BossShop.log("Successfully hooked into Points plugin " + this.pa.getName() + ".");
@@ -111,31 +116,28 @@ public class PointsManager {
         Gringotts(new String[]{"Gringotts"}),
         CUSTOM(new String[0]);
 
+        @Getter
         private final String[] nicknames;
-        private String custom_name;
+        private       String   customName;
 
         PointsPlugin(String[] nicknames) {
             this.nicknames = nicknames;
         }
 
         public String getCustom() {
-            return this.custom_name;
+            return this.customName;
         }
 
-        public void setCustom(String custom_name) {
-            this.custom_name = custom_name;
-        }
-
-        public String[] getNicknames() {
-            return this.nicknames;
+        public void setCustom(String customName) {
+            this.customName = customName;
         }
 
         public String getPluginName() {
             if (getNicknames() == null) {
-                return custom_name;
+                return customName;
             }
             if (getNicknames().length == 0) {
-                return custom_name;
+                return customName;
             }
             return getNicknames()[0];
         }

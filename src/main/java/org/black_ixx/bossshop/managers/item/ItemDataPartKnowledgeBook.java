@@ -10,24 +10,26 @@ import org.bukkit.inventory.meta.KnowledgeBookMeta;
 
 import java.util.List;
 
-public class ItemDataPartKnowledgeBook extends ItemDataPart{
+public class ItemDataPartKnowledgeBook extends ItemDataPart {
     @Override
-    public ItemStack transform(ItemStack item, String used_name, String argument) {
-        if(!item.getType().equals(Material.KNOWLEDGE_BOOK)){
-            ClassManager.manager.getBugFinder().severe("Mistake in Config: '" + argument + "' is not a valid '" + used_name + "'. The material must be KNOWLEDGE_BOOK.");
+    public ItemStack transform(ItemStack item, String usedName, String argument) {
+        if (!item.getType().equals(Material.KNOWLEDGE_BOOK)) {
+            ClassManager.manager.getBugFinder()
+                    .severe("Mistake in Config: '" + argument + "' is not a valid '" + usedName
+                            + "'. The material must be KNOWLEDGE_BOOK.");
             return item;
         }
         KnowledgeBookMeta meta = (KnowledgeBookMeta) item.getItemMeta();
-        NamespacedKey key = NamespacedKey.fromString(argument);
+        NamespacedKey     key  = NamespacedKey.fromString(argument);
         meta.addRecipe(key);
         item.setItemMeta(meta);
         return item;
     }
 
     @Override
-    public boolean isSimilar(ItemStack shop_item, ItemStack player_item, BSBuy buy, Player p) {
+    public boolean isSimilar(ItemStack shopItem, ItemStack playerItem, BSBuy buy, Player p) {
         //TODO: implement comparison of two knowledge books.
-        if (shop_item.getType() != Material.KNOWLEDGE_BOOK && player_item.getType() != Material.KNOWLEDGE_BOOK) {
+        if (shopItem.getType() != Material.KNOWLEDGE_BOOK && playerItem.getType() != Material.KNOWLEDGE_BOOK) {
             return true;
         }
         return false;
@@ -36,9 +38,9 @@ public class ItemDataPartKnowledgeBook extends ItemDataPart{
     @Override
     public List<String> read(ItemStack i, List<String> output) {
         KnowledgeBookMeta meta = (KnowledgeBookMeta) i.getItemMeta();
-        if(meta.hasRecipes()){
-            for(NamespacedKey key:meta.getRecipes()){
-                output.add("knowledgebook:"+key.getNamespace()+":"+key.getKey());
+        if (meta.hasRecipes()) {
+            for (NamespacedKey key : meta.getRecipes()) {
+                output.add("knowledgebook:" + key.getNamespace() + ":" + key.getKey());
             }
         }
         return output;

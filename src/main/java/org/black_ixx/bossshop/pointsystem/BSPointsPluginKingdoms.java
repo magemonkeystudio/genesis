@@ -4,7 +4,7 @@ import org.bukkit.OfflinePlayer;
 import org.kingdoms.constants.group.Kingdom;
 import org.kingdoms.constants.player.KingdomPlayer;
 
-public class BSPointsPluginKingdoms extends BSPointsPlugin{
+public class BSPointsPluginKingdoms extends BSPointsPlugin {
     public BSPointsPluginKingdoms() {
         super("Kingdoms");
     }

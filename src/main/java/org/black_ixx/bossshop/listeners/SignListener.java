@@ -2,7 +2,6 @@ package org.black_ixx.bossshop.listeners;
 
 import org.black_ixx.bossshop.BossShop;
 import org.black_ixx.bossshop.core.BSShop;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.event.EventHandler;
@@ -15,7 +14,7 @@ import java.util.HashMap;
 
 public class SignListener implements Listener {
 
-    private boolean s;
+    private boolean  s;
     private BossShop plugin;
 
     public SignListener(boolean s, BossShop plugin) {
@@ -33,7 +32,7 @@ public class SignListener implements Listener {
 
         for (Integer s : set.keySet()) {
 
-            BSShop shop = set.get(s);
+            BSShop shop     = set.get(s);
             String signtext = shop.getSignText();
 
             if (signtext != null) {
@@ -105,12 +104,16 @@ public class SignListener implements Listener {
                         BSShop shop = getBossShopSign(s.getLine(0));
                         if (shop != null) {
 
-                            if (e.getPlayer().hasPermission("BossShop.open") || e.getPlayer().hasPermission("BossShop.open.sign") || e.getPlayer().hasPermission("BossShop.open.sign." + shop.getShopName())) {
+                            if (e.getPlayer().hasPermission("BossShop.open") || e.getPlayer()
+                                    .hasPermission("BossShop.open.sign") || e.getPlayer()
+                                    .hasPermission("BossShop.open.sign." + shop.getShopName())) {
                                 plugin.getClassManager().getShops().openShop(e.getPlayer(), shop);
                                 return;
                             }
 
-                            plugin.getClassManager().getMessageHandler().sendMessage("Main.NoPermission", e.getPlayer());
+                            plugin.getClassManager()
+                                    .getMessageHandler()
+                                    .sendMessage("Main.NoPermission", e.getPlayer());
                             return;
                         }
 

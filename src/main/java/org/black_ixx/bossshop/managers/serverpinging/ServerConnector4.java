@@ -24,7 +24,7 @@ public class ServerConnector4 implements ServerConnector {
             final Socket socket = new Socket();
             socket.connect(info.getAddress(), info.getTimeout());
 
-            final DataInputStream in = new DataInputStream(socket.getInputStream());
+            final DataInputStream  in  = new DataInputStream(socket.getInputStream());
             final DataOutputStream out = new DataOutputStream(socket.getOutputStream());
 
             out.write(0xFE);

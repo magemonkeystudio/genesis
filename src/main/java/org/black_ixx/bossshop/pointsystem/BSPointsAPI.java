@@ -7,6 +7,7 @@ public class BSPointsAPI {
 
     /**
      * Register a points plugin
+     *
      * @param points the points to register
      */
     public static void register(BSPointsPlugin points) {
@@ -15,6 +16,7 @@ public class BSPointsAPI {
 
     /**
      * Get a points plugin object
+     *
      * @param name name of points plugin
      * @return points plugin
      */
@@ -42,6 +44,7 @@ public class BSPointsAPI {
 
     /**
      * Get the first available points plugin
+     *
      * @return points plugin
      */
     public static BSPointsPlugin getFirstAvailable() {

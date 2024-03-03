@@ -40,7 +40,7 @@ public class BSShops {
         for (File f : folder.listFiles()) {
             if (f != null) {
                 if (f.isDirectory()) {
-                    if (settings.getLoadSubfoldersEnabled()) {
+                    if (settings.getLoadSubFoldersEnabled()) {
                         if (loadShops(f, settings, f.getName() + File.separator)) {
                             enableShopCommands = true;
                         }
@@ -69,7 +69,9 @@ public class BSShops {
         shops.put(shop.getShopId(), shop);
 
         if (shopsIds.containsKey(shop.getShopName().toLowerCase())) {
-            ClassManager.manager.getBugFinder().warn("Two Shops with the same Name (" + shop.getShopName().toLowerCase() + ") are loaded. When opening a Shop via Name, only one of this Shops will be opened!");
+            ClassManager.manager.getBugFinder()
+                    .warn("Two Shops with the same Name (" + shop.getShopName().toLowerCase()
+                            + ") are loaded. When opening a Shop via Name, only one of this Shops will be opened!");
         }
 
         shopsIds.put(shop.getShopName().toLowerCase(), shop.getShopId());
@@ -103,15 +105,16 @@ public class BSShops {
     }
 
     public void openShop(Player p, BSShop shop) {
-        int     page                  = 0;
+        int     page                = 0;
         boolean rememberCurrentShop = true;
 
         InventoryView view = p.getOpenInventory();
-        if (view != null && view.getTopInventory() != null && view.getTopInventory().getHolder() instanceof BSShopHolder) {
-            BSShopHolder holder         = (BSShopHolder) view.getTopInventory().getHolder();
+        if (view != null && view.getTopInventory() != null && view.getTopInventory()
+                .getHolder() instanceof BSShopHolder) {
+            BSShopHolder holder        = (BSShopHolder) view.getTopInventory().getHolder();
             BSShopHolder oldShopHolder = holder.getPreviousShopHolder();
             if (oldShopHolder != null) {
-                //Going back to previous shop
+                // Going back to previous shop
                 if (oldShopHolder.getShop() == shop) {
                     page = oldShopHolder.getPage();
 
@@ -163,8 +166,8 @@ public class BSShops {
     public int getShopId(String name) {
         name = name.toLowerCase();
         if (!shopsIds.containsKey(name)) {
-            //ClassManager.manager.getBugFinder().warn("Was not able to get id of the "+name+" Shop.");
-            return -1; //Was return 0 before. Changed because I think then it returns no shop for sure!
+            // ClassManager.manager.getBugFinder().warn("Was not able to get id of the "+name+" Shop.");
+            return -1; // Was return 0 before. Changed because I think then it returns no shop for sure!
         }
         return shopsIds.get(name);
     }
@@ -194,10 +197,10 @@ public class BSShops {
     ////////////////////////////////////////////////////////////////////////////
 
     public void refreshShops(boolean serverPinging) {
-        for (Player p : Bukkit.getOnlinePlayers()) { //If players have a customizable inventory open it needs an update
+        for (Player p : Bukkit.getOnlinePlayers()) { // If players have a customizable inventory open it needs an update
             if (ClassManager.manager.getPlugin().getAPI().isValidShop(p.getOpenInventory())) {
                 Inventory    openInventory = p.getOpenInventory().getTopInventory();
-                BSShopHolder h              = (BSShopHolder) openInventory.getHolder();
+                BSShopHolder h             = (BSShopHolder) openInventory.getHolder();
 
                 if (h.getShop().isCustomizable()) {
                     if (!serverPinging) {
@@ -206,7 +209,14 @@ public class BSShops {
                                 continue;
                             }
                         }
-                        h.getShop().updateInventory(openInventory, h, p, ClassManager.manager, h.getPage(), h.getHighestPage(), true);
+                        h.getShop()
+                                .updateInventory(openInventory,
+                                        h,
+                                        p,
+                                        ClassManager.manager,
+                                        h.getPage(),
+                                        h.getHighestPage(),
+                                        true);
                     }
                 }
             }

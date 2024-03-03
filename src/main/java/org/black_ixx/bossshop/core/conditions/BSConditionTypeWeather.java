@@ -6,10 +6,10 @@ public class BSConditionTypeWeather extends BSConditionTypeMatch {
 
 
     @Override
-    public boolean matches(Player p, String single_condition) {
-        if (single_condition.equalsIgnoreCase("storm")) {
+    public boolean matches(Player p, String singleCondition) {
+        if (singleCondition.equalsIgnoreCase("storm")) {
             return p.getWorld().hasStorm();
-        } else if (single_condition.equalsIgnoreCase("clear")) {
+        } else if (singleCondition.equalsIgnoreCase("clear")) {
             return !p.getWorld().hasStorm();
         }
         return false;

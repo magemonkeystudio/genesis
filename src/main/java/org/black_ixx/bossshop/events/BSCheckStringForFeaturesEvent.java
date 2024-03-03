@@ -1,8 +1,8 @@
 package org.black_ixx.bossshop.events;
 
+import lombok.Getter;
 import org.black_ixx.bossshop.core.BSBuy;
 import org.black_ixx.bossshop.core.BSShop;
-import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 public class BSCheckStringForFeaturesEvent extends BSEvent {
@@ -10,11 +10,13 @@ public class BSCheckStringForFeaturesEvent extends BSEvent {
     private static final HandlerList handlers = new HandlerList();
 
 
+    @Getter
     private String text;
+    @Getter
     private BSShop shop;
-    private BSBuy buy;
+    private BSBuy  buy;
 
-    private boolean contains_feature;
+    private boolean containsFeature;
 
 
     public BSCheckStringForFeaturesEvent(String text, BSBuy item, BSShop shop) {
@@ -27,24 +29,16 @@ public class BSCheckStringForFeaturesEvent extends BSEvent {
         return handlers;
     }
 
-    public String getText() {
-        return text;
-    }
-
-    public BSShop getShop() {
-        return shop;
-    }
-
     public BSBuy getShopItem() {
         return buy;
     }
 
     public void approveFeature() {
-        contains_feature = true;
+        containsFeature = true;
     }
 
     public boolean containsFeature() {
-        return contains_feature;
+        return containsFeature;
     }
 
     @Override

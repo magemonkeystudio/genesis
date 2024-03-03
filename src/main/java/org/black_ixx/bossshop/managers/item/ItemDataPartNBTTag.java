@@ -9,10 +9,10 @@ import org.bukkit.inventory.ItemStack;
 import java.util.List;
 import java.util.UUID;
 
-public class ItemDataPartNBTTag extends ItemDataPart{
+public class ItemDataPartNBTTag extends ItemDataPart {
     @Override
-    public ItemStack transform(ItemStack item, String used_name, String argument) {
-        NBTItem i = new NBTItem(item);
+    public ItemStack transform(ItemStack item, String usedName, String argument) {
+        NBTItem  i     = new NBTItem(item);
         String[] parts = argument.split("#");
         switch (parts[0].toUpperCase()) {
             case "INT":
@@ -55,17 +55,17 @@ public class ItemDataPartNBTTag extends ItemDataPart{
     }
 
     @Override
-    public boolean isSimilar(ItemStack shop_item, ItemStack player_item, BSBuy buy, Player p) {
+    public boolean isSimilar(ItemStack shopItem, ItemStack playerItem, BSBuy buy, Player p) {
         return true;
     }
 
     @Override
     public List<String> read(ItemStack i, List<String> output) {
         NBTItem i2 = new NBTItem(i);
-        if (i2.hasNBTData()){
-            for (String key:i2.getKeys()){
-                Object value = i2.getObject(key,Object.class);
-                output.add("nbttag:OBJ#"+key+"#"+value.toString());
+        if (i2.hasNBTData()) {
+            for (String key : i2.getKeys()) {
+                Object value = i2.getObject(key, Object.class);
+                output.add("nbttag:OBJ#" + key + "#" + value.toString());
             }
         }
         return output;

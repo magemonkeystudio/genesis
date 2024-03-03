@@ -4,18 +4,19 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 
 public abstract class BSPointsPlugin {
-    private final String name;
+    private final String   name;
     private final String[] nicknames;
-    private final boolean available;
+    private final boolean  available;
 
-    public BSPointsPlugin(String main_name, String... nicknames) {
-        this.name = main_name;
+    public BSPointsPlugin(String mainName, String... nicknames) {
+        this.name = mainName;
         this.nicknames = nicknames;
         this.available = Bukkit.getPluginManager().getPlugin(name) != null;
     }
 
     /**
      * Get the name of the points plugin
+     *
      * @return name
      */
     public String getName() {
@@ -24,6 +25,7 @@ public abstract class BSPointsPlugin {
 
     /**
      * Get the nicknames of the points plugin
+     *
      * @return nicknames
      */
     public String[] getNicknames() {
@@ -32,6 +34,7 @@ public abstract class BSPointsPlugin {
 
     /**
      * Check if points plugin is available
+     *
      * @return available or not
      */
     public boolean isAvailable() {
@@ -40,6 +43,7 @@ public abstract class BSPointsPlugin {
 
     /**
      * Get the points from an offline player
+     *
      * @param player player to get points from
      * @return points of player
      */
@@ -47,6 +51,7 @@ public abstract class BSPointsPlugin {
 
     /**
      * Set the points of a player
+     *
      * @param player player to modify
      * @param points points to set
      * @return points to set
@@ -55,6 +60,7 @@ public abstract class BSPointsPlugin {
 
     /**
      * Take points from a player
+     *
      * @param player the player to modify
      * @param points points to take
      * @return amount taken
@@ -63,6 +69,7 @@ public abstract class BSPointsPlugin {
 
     /**
      * Give points to a player
+     *
      * @param player player to modify
      * @param points the amount to give
      * @return amount given
@@ -71,6 +78,7 @@ public abstract class BSPointsPlugin {
 
     /**
      * Use double values
+     *
      * @return true or false
      */
     public abstract boolean usesDoubleValues();

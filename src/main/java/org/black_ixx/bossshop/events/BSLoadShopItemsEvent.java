@@ -3,7 +3,6 @@ package org.black_ixx.bossshop.events;
 
 import org.black_ixx.bossshop.core.BSShop;
 import org.black_ixx.bossshop.core.BSShops;
-import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 
@@ -12,13 +11,13 @@ public class BSLoadShopItemsEvent extends BSEvent {
     private static final HandlerList handlers = new HandlerList();
 
 
-    private final BSShop shop;
-    private final BSShops shophandler;
+    private final BSShop  shop;
+    private final BSShops shopHandler;
 
 
-    public BSLoadShopItemsEvent(BSShops shophandler, BSShop shop) {
+    public BSLoadShopItemsEvent(BSShops shopHandler, BSShop shop) {
         this.shop = shop;
-        this.shophandler = shophandler;
+        this.shopHandler = shopHandler;
     }
 
     public static HandlerList getHandlerList() {
@@ -30,7 +29,7 @@ public class BSLoadShopItemsEvent extends BSEvent {
     }
 
     public BSShops getShopHandler() {
-        return shophandler;
+        return shopHandler;
     }
 
     @Override

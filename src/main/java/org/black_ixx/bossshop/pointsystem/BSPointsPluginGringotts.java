@@ -3,7 +3,7 @@ package org.black_ixx.bossshop.pointsystem;
 import org.bukkit.OfflinePlayer;
 import org.gestern.gringotts.Gringotts;
 
-public class BSPointsPluginGringotts extends BSPointsPlugin{
+public class BSPointsPluginGringotts extends BSPointsPlugin {
     public BSPointsPluginGringotts() {
         super("Gringotts");
     }

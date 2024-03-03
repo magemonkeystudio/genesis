@@ -1,5 +1,6 @@
 package org.black_ixx.bossshop.managers.config;
 
+import lombok.Getter;
 import org.black_ixx.bossshop.BossShop;
 import org.black_ixx.bossshop.core.BSBuy;
 import org.black_ixx.bossshop.core.BSShop;
@@ -24,26 +25,30 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class BSConfigShop extends BSShop {
 
-    private String ymlName;
-    private File f;
-    private FileConfiguration config;
+    private String               ymlName;
+    private File                 f;
+    @Getter
+    private FileConfiguration    config;
     private ConfigurationSection section;
 
     //////////////////////////////////
 
-    public BSConfigShop(int shop_id, String ymlName, BSShops shophandler) {
-        this(shop_id, new File(ClassManager.manager.getPlugin().getDataFolder().getAbsolutePath() + "/shops/" + ymlName), shophandler);
+    public BSConfigShop(int shopId, String ymlName, BSShops shopHandler) {
+        this(shopId,
+                new File(ClassManager.manager.getPlugin().getDataFolder().getAbsolutePath() + "/shops/" + ymlName),
+                shopHandler);
     }
 
-    public BSConfigShop(int shop_id, File f, BSShops shophandler) {
-        this(shop_id, f, shophandler, null);
+    public BSConfigShop(int shopId, File f, BSShops shopHandler) {
+        this(shopId, f, shopHandler, null);
     }
 
-    public BSConfigShop(int shop_id, File f, BSShops shophandler, ConfigurationSection sectionOptional) {
-        super(shop_id);
+    public BSConfigShop(int shopId, File f, BSShops shopHandler, ConfigurationSection sectionOptional) {
+        super(shopId);
 
         this.f = f;
 
@@ -51,29 +56,37 @@ public class BSConfigShop extends BSShop {
             config = ConfigLoader.loadConfiguration(f, true);
 
         } catch (InvalidConfigurationException e) {
-            ClassManager.manager.getBugFinder().severe("Invalid Configuration! File: /shops/" + ymlName + " Cause: " + e.getMessage());
+            ClassManager.manager.getBugFinder()
+                    .severe("Invalid Configuration! File: /shops/" + ymlName + " Cause: " + e.getMessage());
             String name = ymlName.replace(".yml", "");
             setSignText("[" + name + "]");
             setNeedPermToCreateSign(true);
             setShopName(name);
 
             ItemStack i = new ItemStack(Material.WHITE_WOOL, 1);
-            ItemMeta m = i.getItemMeta();
+            ItemMeta  m = i.getItemMeta();
             m.setDisplayName(ChatColor.RED + "Your Config File contains mistakes! (" + ymlName + ")");
             List<String> lore = new ArrayList<String>();
             lore.add(ChatColor.YELLOW + "For more information check /plugins/" + BossShop.NAME + "/BugFinder.yml out!");
             m.setLore(lore);
             i.setItemMeta(m);
-            addShopItem(new BSBuy(BSRewardType.Command, BSPriceType.Nothing, "tell %player% the config file (" + ymlName + ") contains mistakes...", null, "", 0, "", name), i, ClassManager.manager);
+            addShopItem(new BSBuy(BSRewardType.Command,
+                    BSPriceType.Nothing,
+                    "tell %player% the config file (" + ymlName + ") contains mistakes...",
+                    null,
+                    "",
+                    0,
+                    "",
+                    name), i, ClassManager.manager);
             finishedAddingItems();
             return;
         }
 
-        setup(shophandler, sectionOptional == null ? config : sectionOptional);
+        setup(shopHandler, sectionOptional == null ? config : sectionOptional);
 
     }
 
-    public void setup(BSShops shophandler, ConfigurationSection section) {
+    public void setup(BSShops shopHandler, ConfigurationSection section) {
         this.section = section;
 
         //Add defaults if not existing already
@@ -94,16 +107,12 @@ public class BSConfigShop extends BSShop {
 
         //Load Items
         loadItems();
-        BSLoadShopItemsEvent event = new BSLoadShopItemsEvent(shophandler, this);
+        BSLoadShopItemsEvent event = new BSLoadShopItemsEvent(shopHandler, this);
         Bukkit.getPluginManager().callEvent(event);
         finishedAddingItems();
     }
 
     //////////////////////////////////
-
-    public FileConfiguration getConfig() {
-        return config;
-    }
 
     public ConfigurationSection getConfigurationSection() {
         return section;
@@ -132,16 +141,24 @@ public class BSConfigShop extends BSShop {
 
     //////////////////////////////////
 
-    public void addDefault(String name, String rewardType, String priceType, Object reward, Object price, List<String> menuitem, String message, int loc, String permission) {
-        ConfigurationSection c = section.getConfigurationSection("shop").createSection(name);
-        c.set("RewardType", rewardType);
-        c.set("PriceType", priceType);
-        c.set("Price", price);
-        c.set("Reward", reward);
-        c.set("MenuItem", menuitem);
-        c.set("Message", message);
-        c.set("InventoryLocation", loc);
-        c.set("ExtraPermission", permission);
+    public void addDefault(String name,
+                           String rewardType,
+                           String priceType,
+                           Object reward,
+                           Object price,
+                           List<String> menuitem,
+                           String message,
+                           int loc,
+                           String permission) {
+        ConfigurationSection section = this.section.getConfigurationSection("shop").createSection(name);
+        section.set("RewardType", rewardType);
+        section.set("PriceType", priceType);
+        section.set("Price", price);
+        section.set("Reward", reward);
+        section.set("MenuItem", menuitem);
+        section.set("Message", message);
+        section.set("InventoryLocation", loc);
+        section.set("ExtraPermission", permission);
     }
 
     public void addDefaults() {
@@ -188,15 +205,26 @@ public class BSConfigShop extends BSShop {
         if (config.isSet("InventoryFill")) {
             Material material;
             try {
-                material = Material.valueOf(config.getString("InventoryFill").toUpperCase());
+                material = Material.valueOf(config.getString("InventoryFill").toUpperCase(Locale.ENGLISH));
             } catch (Exception ignored) {
                 material = Material.BLACK_STAINED_GLASS_PANE;
-                BossShop.log("Your InventoryFill parameter is invalid and was replaced with its default: " + config.getString("InventoryFill"));
+                BossShop.log("Your InventoryFill parameter is invalid and was replaced with its default: "
+                        + config.getString("InventoryFill"));
             }
             for (int i = 0; i < getInventorySize(); i++) {
-                if(isFilled(i))
+                if (isFilled(i))
                     continue;
-                BSBuy buy = new BSBuy(BSRewardType.Nothing, BSPriceType.Nothing, null, null, null, i, null, "internal_placeholder_" + i, null, null, null);
+                BSBuy buy = new BSBuy(BSRewardType.Nothing,
+                        BSPriceType.Nothing,
+                        null,
+                        null,
+                        null,
+                        i,
+                        null,
+                        "internal_placeholder_" + i,
+                        null,
+                        null,
+                        null);
                 ItemStack fillerItem = new ItemStack(material);
 
                 // Maybe there already is an existing method for it?
@@ -211,10 +239,7 @@ public class BSConfigShop extends BSShop {
     }
 
     private boolean isFilled(int location) {
-        for(BSBuy buy : this.getItems())
-            if(buy.getInventoryLocation() == location)
-                return true;
-        return false;
+        return this.getItems().stream().anyMatch(buy -> buy.getInventoryLocation() == location);
     }
 
     @Override

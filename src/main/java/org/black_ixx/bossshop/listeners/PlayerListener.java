@@ -10,7 +10,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.*;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+import org.bukkit.event.player.PlayerKickEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 public class PlayerListener implements Listener {
 
@@ -25,14 +28,15 @@ public class PlayerListener implements Listener {
     public void shopCommand(PlayerCommandPreprocessEvent e) {
         if (!e.isCancelled()) {
             if (plugin.getClassManager().getSettings().getShopCommandsEnabled()) {
-                Player p = e.getPlayer();
+                Player p   = e.getPlayer();
                 String cmd = e.getMessage().substring(1);
 
                 if (plugin.getClassManager().getShops() != null) {
                     BSShop shop = plugin.getClassManager().getShops().getShopByCommand(cmd);
                     if (shop != null) {
 
-                        if (p.hasPermission("BossShop.open") || p.hasPermission("BossShop.open.command") || p.hasPermission("BossShop.open.command." + shop.getShopName())) {
+                        if (p.hasPermission("BossShop.open") || p.hasPermission("BossShop.open.command")
+                                || p.hasPermission("BossShop.open.command." + shop.getShopName())) {
                             ClassManager.manager.getShops().openShop(p, shop);
                         } else {
                             ClassManager.manager.getMessageHandler().sendMessage("Main.NoPermission", p);

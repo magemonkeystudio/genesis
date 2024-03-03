@@ -34,7 +34,7 @@ public abstract class BSRewardType {
             Teleport;
 
     private static List<BSRewardType> types;
-    private String[] names = createNames();
+    private        String[]           names = createNames();
 
     public static void loadTypes() {
         types = new ArrayList<>();
@@ -104,13 +104,18 @@ public abstract class BSRewardType {
     }
 
 
-    public abstract Object createObject(Object o, boolean force_final_state); //Used to transform the config input into a functional object
+    public abstract Object createObject(Object o,
+                                        boolean forceFinalState); // Used to transform the config input into a functional object
 
-    public abstract boolean validityCheck(String item_name, Object o); //Used to check if the object is valid
+    public abstract boolean validityCheck(String itemName, Object o); // Used to check if the object is valid
 
-    public abstract void enableType(); //Here you can register classes that the type depends on
+    public abstract void enableType(); // Here you can register classes that the type depends on
 
-    public abstract boolean canBuy(Player p, BSBuy buy, boolean message_if_no_success, Object reward, ClickType clickType);
+    public abstract boolean canBuy(Player p,
+                                   BSBuy buy,
+                                   boolean messageIfNoSuccess,
+                                   Object reward,
+                                   ClickType clickType);
 
     public abstract void giveReward(Player p, BSBuy buy, Object reward, ClickType clickType);
 
@@ -120,34 +125,36 @@ public abstract class BSRewardType {
 
 
     public boolean logTransaction() {
-        return true; //Can be overwritten
+        return true; // Can be overwritten
     }
 
-    public boolean isPlayerDependend(BSBuy buy, ClickType clicktype) {
-        return supportsMultipliers() && ClassManager.manager.getMultiplierHandler().hasMultipliers() || (buy.getRewardType(clicktype) == BSRewardType.ItemAll && ClassManager.manager.getSettings().getItemAllShowFinalReward());
+    public boolean isPlayerDependend(BSBuy buy, ClickType clickType) {
+        return supportsMultipliers() && ClassManager.manager.getMultiplierHandler().hasMultipliers() || (
+                buy.getRewardType(clickType) == BSRewardType.ItemAll && ClassManager.manager.getSettings()
+                        .getItemAllShowFinalReward());
     }
 
     public boolean supportsMultipliers() {
-        return false; //can be overwritten
+        return false; // can be overwritten
     }
 
     /**
      * If set to true sound will be played when purchasing
      */
     public boolean isActualReward() {
-        return true; //can be overwritten
+        return true; // can be overwritten
     }
 
     public boolean allowAsync() {
-        return false; //can be overwritten
+        return false; // can be overwritten
     }
 
     public boolean overridesPrice() {
-        return false; //Can be overwritten
+        return false; // Can be overwritten
     }
 
     public String getPriceReturnMessage(Player p, BSBuy buy, Object price, ClickType clickType) {
-        return null; //Can be overwritten in case of overriding the price
+        return null; // Can be overwritten in case of overriding the price
     }
 
 

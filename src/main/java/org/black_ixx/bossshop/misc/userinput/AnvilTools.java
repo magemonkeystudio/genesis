@@ -12,13 +12,14 @@ public class AnvilTools {
 
     /**
      * Open an anvil inventory for a player
-     * @param title the title of the inventory
-     * @param item the item in the anvil
+     *
+     * @param title  the title of the inventory
+     * @param item   the item in the anvil
      * @param holder the holder
-     * @param p the player to open for
+     * @param p      the player to open for
      * @return opened inventory for player
      */
-    //WARNING: MIGHT NOT WORK WHEN USING OLDER MC BUILDS.
+    // WARNING: MIGHT NOT WORK WHEN USING OLDER MC BUILDS.
     public static Inventory openAnvilGui(String title, ItemStack item, BSAnvilHolder holder, Player p) {
         Inventory i = createAnvilGui(title, item, holder);
         p.openInventory(i);
@@ -27,8 +28,9 @@ public class AnvilTools {
 
     /**
      * Create anvil inventory
-     * @param title the title of inventory
-     * @param item the item in the inventory
+     *
+     * @param title  the title of inventory
+     * @param item   the item in the inventory
      * @param holder the holder
      * @return created anvil inventory
      */

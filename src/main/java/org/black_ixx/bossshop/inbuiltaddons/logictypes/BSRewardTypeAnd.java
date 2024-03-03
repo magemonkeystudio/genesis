@@ -13,18 +13,20 @@ import java.util.List;
 public class BSRewardTypeAnd extends BSRewardType {
 
     @Override
-    public Object createObject(Object o, boolean force_final_state) {
+    public Object createObject(Object o, boolean forceFinalState) {
         List<BSRewardPart> rewardparts = new ArrayList<BSRewardPart>();
 
         ConfigurationSection rewards = (ConfigurationSection) o;
         for (int i = 1; rewards.contains("RewardType" + i); i++) {
-            String rewardType = rewards.getString("RewardType" + i);
+            String rewardType   = rewards.getString("RewardType" + i);
             Object rewardObject = rewards.get("Reward" + i);
 
             BSRewardType rewardT = BSRewardType.detectType(rewardType);
 
             if (rewardT == null) {
-                ClassManager.manager.getBugFinder().severe("Invalid RewardType '" + rewardType + "' inside reward list of shopitem with rewardtype AND.");
+                ClassManager.manager.getBugFinder()
+                        .severe("Invalid RewardType '" + rewardType
+                                + "' inside reward list of shopitem with rewardtype AND.");
                 ClassManager.manager.getBugFinder().severe("Valid RewardTypes:");
                 for (BSRewardType type : BSRewardType.values()) {
                     ClassManager.manager.getBugFinder().severe("-" + type.name());
@@ -35,7 +37,9 @@ public class BSRewardTypeAnd extends BSRewardType {
             Object rewardO = rewardT.createObject(rewardObject, true);
 
             if (!rewardT.validityCheck("?", rewardO)) {
-                ClassManager.manager.getBugFinder().severe("Invalid Reward '" + rewardO + "' (RewardType= " + rewardType + ") inside reward list of shopitem with rewardtype AND.");
+                ClassManager.manager.getBugFinder()
+                        .severe("Invalid Reward '" + rewardO + "' (RewardType= " + rewardType
+                                + ") inside reward list of shopitem with rewardtype AND.");
                 continue;
             }
             rewardT.enableType();
@@ -48,11 +52,13 @@ public class BSRewardTypeAnd extends BSRewardType {
     }
 
     @Override
-    public boolean validityCheck(String item_name, Object o) {
+    public boolean validityCheck(String itemName, Object o) {
         if (o != null) {
             return true;
         }
-        ClassManager.manager.getBugFinder().severe("Was not able to create ShopItem " + item_name + "! The reward object needs to be a list of reward-blocks. Every rewardblock needs to contain reward and rewardtype.");
+        ClassManager.manager.getBugFinder()
+                .severe("Was not able to create ShopItem " + itemName
+                        + "! The reward object needs to be a list of reward-blocks. Every rewardblock needs to contain reward and rewardtype.");
         return false;
     }
 
@@ -62,10 +68,10 @@ public class BSRewardTypeAnd extends BSRewardType {
 
     @SuppressWarnings("unchecked")
     @Override
-    public boolean canBuy(Player p, BSBuy buy, boolean message_if_no_success, Object reward, ClickType clickType) {
+    public boolean canBuy(Player p, BSBuy buy, boolean messageIfNoSuccess, Object reward, ClickType clickType) {
         List<BSRewardPart> rewardparts = (List<BSRewardPart>) reward;
         for (BSRewardPart part : rewardparts) {
-            if (!part.getRewardType().canBuy(p, buy, message_if_no_success, part.getReward(), clickType)) {
+            if (!part.getRewardType().canBuy(p, buy, messageIfNoSuccess, part.getReward(), clickType)) {
                 return false;
             }
         }
@@ -85,12 +91,13 @@ public class BSRewardTypeAnd extends BSRewardType {
     @Override
     public String getDisplayReward(Player p, BSBuy buy, Object reward, ClickType clickType) {
         String sep = ClassManager.manager.getMessageHandler().get("Main.ListAndSeparator");
-        String s = "";
+        String s   = "";
 
         List<BSRewardPart> rewardparts = (List<BSRewardPart>) reward;
         for (int i = 0; i < rewardparts.size(); i++) {
             BSRewardPart part = rewardparts.get(i);
-            s += part.getRewardType().getDisplayReward(p, buy, part.getReward(), clickType) + (i < rewardparts.size() - 1 ? sep : "");
+            s += part.getRewardType().getDisplayReward(p, buy, part.getReward(), clickType) + (
+                    i < rewardparts.size() - 1 ? sep : "");
         }
         return s;
     }

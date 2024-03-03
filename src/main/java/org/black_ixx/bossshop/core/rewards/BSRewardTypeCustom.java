@@ -10,11 +10,11 @@ import org.bukkit.event.inventory.ClickType;
 public class BSRewardTypeCustom extends BSRewardType {
 
 
-    public Object createObject(Object o, boolean force_final_state) {
-        return o; //Because nothing is known about the custom reward type
+    public Object createObject(Object o, boolean forceFinalState) {
+        return o; // Because nothing is known about the custom reward type
     }
 
-    public boolean validityCheck(String item_name, Object o) { //Because nothing is known about the custom reward type
+    public boolean validityCheck(String itemName, Object o) { // Because nothing is known about the custom reward type
         return true;
     }
 
@@ -23,7 +23,7 @@ public class BSRewardTypeCustom extends BSRewardType {
     }
 
     @Override
-    public boolean canBuy(Player p, BSBuy buy, boolean message_if_no_success, Object reward, ClickType clickType) {
+    public boolean canBuy(Player p, BSBuy buy, boolean messageIfNoSuccess, Object reward, ClickType clickType) {
         return true;
     }
 

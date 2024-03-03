@@ -12,12 +12,12 @@ import java.util.List;
 
 public class ItemDataPartGlowing extends ItemDataPart {
     @Override
-    public ItemStack transform(ItemStack item, String used_name, String argument) {
+    public ItemStack transform(ItemStack item, String usedName, String argument) {
         boolean b = false;
-        if(argument!=null){
-            b = InputReader.getBoolean(argument,false);
+        if (argument != null) {
+            b = InputReader.getBoolean(argument, false);
         }
-        if(b) {
+        if (b) {
             item.addUnsafeEnchantment(Enchantment.OXYGEN, 1);
             ItemMeta meta = item.getItemMeta();
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
@@ -27,16 +27,17 @@ public class ItemDataPartGlowing extends ItemDataPart {
     }
 
     @Override
-    public boolean isSimilar(ItemStack shop_item, ItemStack player_item, BSBuy buy, Player p) {
-        ItemMeta shop = shop_item.getItemMeta();
-        ItemMeta player = player_item.getItemMeta();
-        return (shop.hasEnchant(Enchantment.OXYGEN) && shop.hasItemFlag(ItemFlag.HIDE_ENCHANTS)) == (player.hasEnchant(Enchantment.OXYGEN) && player.hasItemFlag(ItemFlag.HIDE_ENCHANTS));
+    public boolean isSimilar(ItemStack shopItem, ItemStack playerItem, BSBuy buy, Player p) {
+        ItemMeta shop   = shopItem.getItemMeta();
+        ItemMeta player = playerItem.getItemMeta();
+        return (shop.hasEnchant(Enchantment.OXYGEN) && shop.hasItemFlag(ItemFlag.HIDE_ENCHANTS)) == (
+                player.hasEnchant(Enchantment.OXYGEN) && player.hasItemFlag(ItemFlag.HIDE_ENCHANTS));
     }
 
     @Override
     public List<String> read(ItemStack i, List<String> output) {
         ItemMeta meta = i.getItemMeta();
-        if(meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS) & meta.hasEnchant(Enchantment.OXYGEN)){
+        if (meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS) & meta.hasEnchant(Enchantment.OXYGEN)) {
             output.add("glowing:true");
         }
         return output;

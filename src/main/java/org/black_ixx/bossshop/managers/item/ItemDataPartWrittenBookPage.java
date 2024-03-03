@@ -15,12 +15,14 @@ import java.util.List;
 public class ItemDataPartWrittenBookPage extends ItemDataPart {
 
     @Override
-    public ItemStack transform(ItemStack item, String used_name, String argument) {
+    public ItemStack transform(ItemStack item, String usedName, String argument) {
         if (!(item.getItemMeta() instanceof BookMeta)) {
-            ClassManager.manager.getBugFinder().severe("Mistake in Config: You can not add book text to an item with material '" + item.getType().name() + "'! Following line is invalid: '" + used_name + ":" + argument + "'.");
+            ClassManager.manager.getBugFinder()
+                    .severe("Mistake in Config: You can not add book text to an item with material '" + item.getType()
+                            .name() + "'! Following line is invalid: '" + usedName + ":" + argument + "'.");
             return item;
         }
-        BookMeta meta = (BookMeta) item.getItemMeta();
+        BookMeta     meta  = (BookMeta) item.getItemMeta();
         List<String> pages = new ArrayList<>();
         if (meta.getPages() != null) {
             for (String page : meta.getPages()) {
@@ -29,9 +31,11 @@ public class ItemDataPartWrittenBookPage extends ItemDataPart {
         }
 
         String[] parts = argument.split("#", 2);
-        int page = InputReader.getInt(parts[0], -1);
+        int      page  = InputReader.getInt(parts[0], -1);
         if (parts.length != 2 || page == -1) {
-            ClassManager.manager.getBugFinder().severe("Mistake in Config: Invalid: line: '" + used_name + ":" + argument + "'. It should look like following: 'bookpage:<page>#<text>'.");
+            ClassManager.manager.getBugFinder()
+                    .severe("Mistake in Config: Invalid: line: '" + usedName + ":" + argument
+                            + "'. It should look like following: 'bookpage:<page>#<text>'.");
             return item;
         }
 
@@ -97,14 +101,14 @@ public class ItemDataPartWrittenBookPage extends ItemDataPart {
 
 
     @Override
-    public boolean isSimilar(ItemStack shop_item, ItemStack player_item, BSBuy buy, Player p) {
-        if (shop_item.getItemMeta() instanceof BookMeta) {
-            if (!(player_item.getItemMeta() instanceof BookMeta)) {
+    public boolean isSimilar(ItemStack shopItem, ItemStack playerItem, BSBuy buy, Player p) {
+        if (shopItem.getItemMeta() instanceof BookMeta) {
+            if (!(playerItem.getItemMeta() instanceof BookMeta)) {
                 return false;
             }
 
-            BookMeta ms = (BookMeta) shop_item.getItemMeta();
-            BookMeta mp = (BookMeta) player_item.getItemMeta();
+            BookMeta ms = (BookMeta) shopItem.getItemMeta();
+            BookMeta mp = (BookMeta) playerItem.getItemMeta();
 
             if (ms.hasPages()) {
                 if (!mp.hasPages()) {

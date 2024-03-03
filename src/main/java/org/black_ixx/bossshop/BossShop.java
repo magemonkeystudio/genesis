@@ -19,14 +19,14 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class BossShop extends JavaPlugin {
 
-    public final static String NAME = "BossShopPro";
-    private ClassManager manager;
-    private InventoryListener il;
+    public final static String            NAME = "BossShopPro";
+    private             ClassManager      manager;
+    private             InventoryListener il;
 
     ///////////////////////////////////////////////
-    private SignListener sl;
+    private SignListener   sl;
     private PlayerListener pl;
-    private BossShopAPI api;
+    private BossShopAPI    api;
 
     public static void log(String s) {
         Bukkit.getLogger().info("[" + NAME + "] " + s);

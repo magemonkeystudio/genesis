@@ -12,42 +12,45 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.util.List;
 
-public class ItemDataPartSuspiciousStew extends ItemDataPart{
+public class ItemDataPartSuspiciousStew extends ItemDataPart {
     @Override
-    public ItemStack transform(ItemStack item, String used_name, String argument) {
-        if(!item.getType().equals(Material.SUSPICIOUS_STEW)){
-            ClassManager.manager.getBugFinder().severe("Mistake in Config: '" + argument + "' is not a valid '" + used_name + "'. The material must be SUSPICIOUS_STEW");
+    public ItemStack transform(ItemStack item, String usedName, String argument) {
+        if (!item.getType().equals(Material.SUSPICIOUS_STEW)) {
+            ClassManager.manager.getBugFinder()
+                    .severe("Mistake in Config: '" + argument + "' is not a valid '" + usedName
+                            + "'. The material must be SUSPICIOUS_STEW");
         }
-        SuspiciousStewMeta meta = (SuspiciousStewMeta) item.getItemMeta();
-        String[] parts = argument.split("#");
-        PotionEffectType pet = PotionEffectType.getByName(parts[0].toUpperCase());
-        PotionEffect pe;
-        int duration = (InputReader.getInt(parts[2].trim(),0) * 20);
-        if(pet != null) {
-            pe = new PotionEffect(pet, duration, InputReader.getInt(parts[1].trim(),0));
-        }else {
-            pe = new PotionEffect(PotionEffectType.POISON, duration,InputReader.getInt(parts[1].trim(),0));
-            ClassManager.manager.getBugFinder().warn("The potion effect type "+parts[0]+" is not found. Fallback to POISON.");
+        SuspiciousStewMeta meta     = (SuspiciousStewMeta) item.getItemMeta();
+        String[]           parts    = argument.split("#");
+        PotionEffectType   pet      = PotionEffectType.getByName(parts[0].toUpperCase());
+        PotionEffect       pe;
+        int                duration = (InputReader.getInt(parts[2].trim(), 0) * 20);
+        if (pet != null) {
+            pe = new PotionEffect(pet, duration, InputReader.getInt(parts[1].trim(), 0));
+        } else {
+            pe = new PotionEffect(PotionEffectType.POISON, duration, InputReader.getInt(parts[1].trim(), 0));
+            ClassManager.manager.getBugFinder()
+                    .warn("The potion effect type " + parts[0] + " is not found. Fallback to POISON.");
         }
-        meta.addCustomEffect(pe,false);
+        meta.addCustomEffect(pe, false);
         item.setItemMeta(meta);
         return item;
     }
 
     @Override
-    public boolean isSimilar(ItemStack shop_item, ItemStack player_item, BSBuy buy, Player p) {
+    public boolean isSimilar(ItemStack shopItem, ItemStack playerItem, BSBuy buy, Player p) {
         return true;
     }
 
     @Override
     public List<String> read(ItemStack i, List<String> output) {
         SuspiciousStewMeta meta = (SuspiciousStewMeta) i.getItemMeta();
-        if(meta.hasCustomEffects()){
-            for(PotionEffect pe:meta.getCustomEffects()){
+        if (meta.hasCustomEffects()) {
+            for (PotionEffect pe : meta.getCustomEffects()) {
                 String effectName = pe.getType().getName();
-                int duration = pe.getDuration();
-                int amplifier = pe.getAmplifier();
-                output.add("suspiciousstew:"+effectName+"#"+amplifier+"#"+duration);
+                int    duration   = pe.getDuration();
+                int    amplifier  = pe.getAmplifier();
+                output.add("suspiciousstew:" + effectName + "#" + amplifier + "#" + duration);
             }
         }
         return output;

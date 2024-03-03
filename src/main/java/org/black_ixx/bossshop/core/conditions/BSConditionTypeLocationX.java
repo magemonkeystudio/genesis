@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 public class BSConditionTypeLocationX extends BSConditionTypeNumber {
 
     @Override
-    public double getNumber(BSBuy shopitem, BSShopHolder holder, Player p) {
+    public double getNumber(BSBuy shopItem, BSShopHolder holder, Player p) {
         return p.getLocation().getX();
     }
 

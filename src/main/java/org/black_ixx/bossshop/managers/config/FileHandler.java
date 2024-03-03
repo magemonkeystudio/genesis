@@ -45,12 +45,12 @@ public class FileHandler {
         }
     }
 
-    public void exportLanguages(BossShop plugin){
+    public void exportLanguages(BossShop plugin) {
         if (!new File(plugin.getDataFolder() + File.separator + "lang/en-us.yml").exists()) {
-            plugin.saveResource("lang/en-us.yml",false);
+            plugin.saveResource("lang/en-us.yml", false);
         }
         if (!new File(plugin.getDataFolder() + File.separator + "lang/zh-cn.yml").exists()) {
-            plugin.saveResource("lang/zh-cn.yml",false);
+            plugin.saveResource("lang/zh-cn.yml", false);
         }
     }
 
@@ -70,7 +70,10 @@ public class FileHandler {
         copyDefaultsFromJar(plugin, plugin, filename, filename);
     }
 
-    public void copyDefaultsFromJar(Plugin resourceHolder, Plugin folderHolder, String filename, String outputfilename) {
+    public void copyDefaultsFromJar(Plugin resourceHolder,
+                                    Plugin folderHolder,
+                                    String filename,
+                                    String outputfilename) {
         File write = new File(folderHolder.getDataFolder() + File.separator + outputfilename);
         if (!write.exists()) {
             copyFromJar(resourceHolder, folderHolder, false, filename, outputfilename);
@@ -112,17 +115,21 @@ public class FileHandler {
         }
     }
 
-    public void copyFromJar(Plugin resourceHolder, Plugin folderHolder, boolean shop, String filename, String outputfilename) {
+    public void copyFromJar(Plugin resourceHolder,
+                            Plugin folderHolder,
+                            boolean shop,
+                            String filename,
+                            String outputfilename) {
         String additional = shop ? "shops" + File.separator : "";
-        File file = new File(folderHolder.getDataFolder() + File.separator + additional + outputfilename);
+        File   file       = new File(folderHolder.getDataFolder() + File.separator + additional + outputfilename);
         if (!file.exists()) {
             file.getParentFile().mkdirs();
         }
         InputStream in = resourceHolder.getResource(filename);
         try {
             OutputStream out = new FileOutputStream(file);
-            byte[] buf = new byte[1024];
-            int len;
+            byte[]       buf = new byte[1024];
+            int          len;
             while ((len = in.read(buf)) > 0) {
                 out.write(buf, 0, len);
             }

@@ -12,12 +12,16 @@ public class BSConditionTypeServerpinging extends BSConditionTypeNumber {
 
 
     @Override
-    public boolean meetsCondition(BSShopHolder holder, BSBuy shopitem, Player p, String conditiontype, String condition) {
+    public boolean meetsCondition(BSShopHolder holder,
+                                  BSBuy shopItem,
+                                  Player p,
+                                  String conditiontype,
+                                  String condition) {
         if (conditiontype.equalsIgnoreCase("online")) {
             ServerPingingManager m = ClassManager.manager.getServerPingingManager();
             if (m != null) {
-                ServerInfo connector = m.getFirstInfo(shopitem);
-                boolean b = InputReader.getBoolean(condition, true);
+                ServerInfo connector = m.getFirstInfo(shopItem);
+                boolean    b         = InputReader.getBoolean(condition, true);
                 if (connector != null) {
                     return connector.isOnline() == b;
                 }
@@ -25,15 +29,15 @@ public class BSConditionTypeServerpinging extends BSConditionTypeNumber {
             return false;
         }
 
-        return super.meetsCondition(holder, shopitem, p, conditiontype, condition);
+        return super.meetsCondition(holder, shopItem, p, conditiontype, condition);
     }
 
 
     @Override
-    public double getNumber(BSBuy shopitem, BSShopHolder holder, Player p) {
+    public double getNumber(BSBuy shopItem, BSShopHolder holder, Player p) {
         ServerPingingManager m = ClassManager.manager.getServerPingingManager();
         if (m != null) {
-            ServerInfo connector = ClassManager.manager.getServerPingingManager().getFirstInfo(shopitem);
+            ServerInfo connector = ClassManager.manager.getServerPingingManager().getFirstInfo(shopItem);
             if (connector != null) {
                 if (connector.isOnline()) {
                     return connector.getPlayers();

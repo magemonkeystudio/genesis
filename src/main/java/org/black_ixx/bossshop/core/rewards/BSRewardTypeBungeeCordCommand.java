@@ -13,15 +13,17 @@ import java.util.List;
 public class BSRewardTypeBungeeCordCommand extends BSRewardType {
 
 
-    public Object createObject(Object o, boolean force_final_state) {
+    public Object createObject(Object o, boolean forceFinalState) {
         return InputReader.readStringList(o);
     }
 
-    public boolean validityCheck(String item_name, Object o) {
+    public boolean validityCheck(String itemName, Object o) {
         if (o != null) {
             return true;
         }
-        ClassManager.manager.getBugFinder().severe("Was not able to create ShopItem " + item_name + "! The reward object needs to be a list of commands (text lines).");
+        ClassManager.manager.getBugFinder()
+                .severe("Was not able to create ShopItem " + itemName
+                        + "! The reward object needs to be a list of commands (text lines).");
         return false;
     }
 
@@ -31,7 +33,7 @@ public class BSRewardTypeBungeeCordCommand extends BSRewardType {
     }
 
     @Override
-    public boolean canBuy(Player p, BSBuy buy, boolean message_if_no_success, Object reward, ClickType clickType) {
+    public boolean canBuy(Player p, BSBuy buy, boolean messageIfNoSuccess, Object reward, ClickType clickType) {
         return true;
     }
 
@@ -49,7 +51,8 @@ public class BSRewardTypeBungeeCordCommand extends BSRewardType {
             }
 
         } else {
-            ClassManager.manager.getBugFinder().severe("Was not able to execute BungeeCord commands: The BungeeCordManager was not enabled properly.");
+            ClassManager.manager.getBugFinder()
+                    .severe("Was not able to execute BungeeCord commands: The BungeeCordManager was not enabled properly.");
         }
 
 
@@ -59,8 +62,10 @@ public class BSRewardTypeBungeeCordCommand extends BSRewardType {
     public String getDisplayReward(Player p, BSBuy buy, Object reward, ClickType clickType) {
         @SuppressWarnings("unchecked")
         List<String> commands = (List<String>) reward;
-        String commands_formatted = StringManipulationLib.formatList(commands);
-        return ClassManager.manager.getMessageHandler().get("Display.BungeeCordCommand").replace("%commands%", commands_formatted);
+        String commandsFormatted = StringManipulationLib.formatList(commands);
+        return ClassManager.manager.getMessageHandler()
+                .get("Display.BungeeCordCommand")
+                .replace("%commands%", commandsFormatted);
     }
 
     @Override

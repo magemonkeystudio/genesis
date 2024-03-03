@@ -4,7 +4,6 @@ import org.black_ixx.bossshop.core.BSBuy;
 import org.black_ixx.bossshop.core.BSShop;
 import org.black_ixx.bossshop.core.BSShopHolder;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 public class BSTransformStringEvent extends BSEvent {
@@ -12,10 +11,10 @@ public class BSTransformStringEvent extends BSEvent {
     private static final HandlerList handlers = new HandlerList();
 
 
-    private String text;
-    private Player target;
-    private BSShop shop;
-    private BSBuy buy;
+    private String       text;
+    private Player       target;
+    private BSShop       shop;
+    private BSBuy        buy;
     private BSShopHolder holder;
 
 
