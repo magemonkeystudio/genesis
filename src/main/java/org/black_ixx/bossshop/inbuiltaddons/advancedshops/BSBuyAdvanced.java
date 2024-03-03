@@ -166,8 +166,8 @@ public class BSBuyAdvanced extends BSBuy {
                     if (possiblyCustomizable) {
                         if (p != null) { //When shop is customizable, the variables needs to be adapted to the player
                             rewardMessage =
-                                    action.getRewardType().getDisplayReward(p, this, action.getReward(), clicktype);
-                            priceMessage = action.getPriceType().getDisplayPrice(p, this, action.getPrice(), clicktype);
+                                    action.getRewardType().getDisplayReward(p, this, action.getReward(), clickType);
+                            priceMessage = action.getPriceType().getDisplayPrice(p, this, action.getPrice(), clickType);
                         }
                     }
 
