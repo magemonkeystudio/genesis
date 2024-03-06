@@ -93,10 +93,11 @@ public class BSShops {
         shop.close();
     }
 
-    public void reloadShop(BSShop shop) {
+    public BSShop reloadShop(BSShop shop) {
         BSShop reloadedShop = new BSConfigShop(shop.getShopId(), ((BSConfigShop) shop).getYmlName(), this);
         unloadShop(shop);
         addShop(reloadedShop);
+        return reloadedShop;
     }
 
     /////////////////////////////// <- Simple Methods
