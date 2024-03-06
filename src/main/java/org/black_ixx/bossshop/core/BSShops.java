@@ -93,6 +93,11 @@ public class BSShops {
         shop.close();
     }
 
+    public void reloadShop(BSShop shop) {
+        BSShop reloadedShop = new BSConfigShop(shop.getShopId(), ((BSConfigShop) shop).getYmlName(), this);
+        unloadShop(shop);
+        addShop(reloadedShop);
+    }
 
     /////////////////////////////// <- Simple Methods
 
@@ -105,13 +110,13 @@ public class BSShops {
     }
 
     public void openShop(Player p, BSShop shop) {
-        int     page                = 0;
+        int page = 0;
         boolean rememberCurrentShop = true;
 
         InventoryView view = p.getOpenInventory();
         if (view != null && view.getTopInventory() != null && view.getTopInventory()
                 .getHolder() instanceof BSShopHolder) {
-            BSShopHolder holder        = (BSShopHolder) view.getTopInventory().getHolder();
+            BSShopHolder holder = (BSShopHolder) view.getTopInventory().getHolder();
             BSShopHolder oldShopHolder = holder.getPreviousShopHolder();
             if (oldShopHolder != null) {
                 // Going back to previous shop
@@ -199,8 +204,8 @@ public class BSShops {
     public void refreshShops(boolean serverPinging) {
         for (Player p : Bukkit.getOnlinePlayers()) { // If players have a customizable inventory open it needs an update
             if (ClassManager.manager.getPlugin().getAPI().isValidShop(p.getOpenInventory())) {
-                Inventory    openInventory = p.getOpenInventory().getTopInventory();
-                BSShopHolder h             = (BSShopHolder) openInventory.getHolder();
+                Inventory openInventory = p.getOpenInventory().getTopInventory();
+                BSShopHolder h = (BSShopHolder) openInventory.getHolder();
 
                 if (h.getShop().isCustomizable()) {
                     if (!serverPinging) {
@@ -222,5 +227,4 @@ public class BSShops {
             }
         }
     }
-
 }

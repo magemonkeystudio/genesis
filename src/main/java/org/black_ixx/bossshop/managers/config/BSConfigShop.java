@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class BSConfigShop extends BSShop {
-
+    @Getter
     private String               ymlName;
     private File                 f;
     @Getter
@@ -41,6 +41,7 @@ public class BSConfigShop extends BSShop {
         this(shopId,
                 new File(ClassManager.manager.getPlugin().getDataFolder().getAbsolutePath() + "/shops/" + ymlName),
                 shopHandler);
+        this.ymlName = ymlName;
     }
 
     public BSConfigShop(int shopId, File f, BSShops shopHandler) {
