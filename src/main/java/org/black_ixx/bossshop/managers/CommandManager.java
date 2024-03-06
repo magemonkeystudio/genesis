@@ -29,12 +29,21 @@ public class CommandManager implements TabExecutor {
 
             if (args.length > 0) {
                 if (args[0].equalsIgnoreCase("reload")) {
-
                     if (sender.hasPermission("BossShop.reload")) {
-
-                        sender.sendMessage(ChatColor.YELLOW + "Starting BossShop reload...");
-                        ClassManager.manager.getPlugin().reloadPlugin(sender);
-                        sender.sendMessage(ChatColor.YELLOW + "Done!");
+                        if (args.length == 2) {
+                            if (!ClassManager.manager.getShops().getShopIds().containsKey(args[1].toLowerCase())) {
+                                ClassManager.manager.getMessageHandler().sendMessage("Main.ShopNotExisting", sender);
+                                return true;
+                            }
+                            BSShop shop = ClassManager.manager.getShops().getShop(args[1].toLowerCase());
+                            sender.sendMessage(ChatColor.YELLOW + String.format("Starting reload of '%s'...", shop.getShopName()));
+                            ClassManager.manager.getShops().reloadShop(shop);
+                            sender.sendMessage(ChatColor.YELLOW + "Done!");
+                        } else {
+                            sender.sendMessage(ChatColor.YELLOW + "Starting BossShop reload...");
+                            ClassManager.manager.getPlugin().reloadPlugin(sender);
+                            sender.sendMessage(ChatColor.YELLOW + "Done!");
+                        }
 
                     } else {
                         ClassManager.manager.getMessageHandler().sendMessage("Main.NoPermission", sender);
@@ -46,7 +55,7 @@ public class CommandManager implements TabExecutor {
                 if (args[0].equalsIgnoreCase("read")) {
                     if (sender instanceof Player) {
                         if (sender.hasPermission("BossShop.read")) {
-                            Player    p    = (Player) sender;
+                            Player p = (Player) sender;
                             ItemStack item = Misc.getItemInMainHand(p);
                             if (item == null || item.getType() == Material.AIR) {
                                 ClassManager.manager.getMessageHandler().sendMessage("Main.NeedItemInHand", sender);
@@ -100,7 +109,7 @@ public class CommandManager implements TabExecutor {
 
                 if (args[0].equalsIgnoreCase("close")) {
                     if (sender.hasPermission("BossShop.close")) {
-                        Player p    = null;
+                        Player p = null;
                         String name = sender instanceof Player ? sender.getName() : "CONSOLE";
 
                         if (sender instanceof Player) {
@@ -151,9 +160,9 @@ public class CommandManager implements TabExecutor {
 
                 if (args.length >= 3 && args[0].equalsIgnoreCase("open")) {
                     String shopName = args[1].toLowerCase();
-                    BSShop shop     = ClassManager.manager.getShops().getShop(shopName);
-                    String name     = args[2];
-                    Player p        = Bukkit.getPlayerExact(name);
+                    BSShop shop = ClassManager.manager.getShops().getShop(shopName);
+                    String name = args[2];
+                    Player p = Bukkit.getPlayerExact(name);
                     String argument = args.length > 3 ? args[3] : null;
 
                     if (p == null) {
@@ -273,22 +282,16 @@ public class CommandManager implements TabExecutor {
             if (sender.hasPermission("BossShop.simulate")) {
                 arglist.add("simulate");
             }
-        }
-        // for list shop and players
-        if (args.length == 2) {
-            switch (args[1]) {
-                case "open":
-                    if (sender.hasPermission("BossShop.open.command") || sender.hasPermission("BossShop.open")) {
-                        for (int i : ClassManager.manager.getShops().getShops().keySet()) {
-                            arglist.add(ClassManager.manager.getShops().getShop(i).getShopName());
-                        }
-                    }
-                case "close":
-                    if (sender.hasPermission("BossShop.close")) {
-                        for (Player p : Bukkit.getOnlinePlayers()) {
-                            arglist.add(p.getName());
-                        }
-                    }
+        } else if (args.length == 2) {
+            if ((args[0].equalsIgnoreCase("open") && (sender.hasPermission("BossShop.open.command") || sender.hasPermission("BossShop.open"))) ||
+                    (args[0].equalsIgnoreCase("reload") && sender.hasPermission("BossShop.reload"))) {
+                for (BSShop shop : ClassManager.manager.getShops().getShops().values()) {
+                    if (shop.getShopName().toLowerCase().startsWith(args[1].toLowerCase())) arglist.add(shop.getShopName());
+                }
+            } else if(args[0].equalsIgnoreCase("close") && sender.hasPermission("BossShop.close")) {
+                for (Player p : Bukkit.getOnlinePlayers()) {
+                    if (p.getName().toLowerCase().startsWith(args[1].toLowerCase())) arglist.add(p.getName());
+                }
             }
         }
         return arglist;
