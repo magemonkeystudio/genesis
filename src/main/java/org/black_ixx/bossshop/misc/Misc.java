@@ -78,9 +78,6 @@ public class Misc {
      * @param sound the sound to play
      */
     public static void playSound(Player p, String sound) {
-
-        //p.playSound(p.getLocation(), "custom:incoming_call", SoundCategory.AMBIENT, 1.0F, 1.0F); // Doesn't work
-
         if (sound != null) {
             if (!sound.isEmpty()) {
                 String[] parts = sound.split(":");
