@@ -129,7 +129,7 @@ public class Misc {
      */
     @SuppressWarnings("deprecation")
     public static ItemStack getItemInMainHand(Player p) {
-        ItemStack item = null;
+        ItemStack item;
         try {
             item = p.getInventory().getItemInMainHand();
         } catch (NoSuchMethodError e) {
