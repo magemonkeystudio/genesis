@@ -16,6 +16,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,7 +31,7 @@ public class BuyItemHandler {
      * @param name         the name of the config
      * @return shop item
      */
-    public BSBuy loadItem(ConfigurationSection itemsSection, BSShop shop, String name) {
+    public List<BSBuy> loadItem(ConfigurationSection itemsSection, BSShop shop, String name) {
         if (itemsSection.getConfigurationSection(name) == null) {
             String shopName = shop == null ? "none" : shop.getShopName();
             ClassManager.manager.getBugFinder()
@@ -44,21 +45,18 @@ public class BuyItemHandler {
         Bukkit.getPluginManager().callEvent(event); //Allow addons to create a custom BSBuy
         BSBuy buy = event.getCustomShopItem();
 
-
+        List<BSBuy> buyItems = new ArrayList<>();
         if (buy == null) { //If addons did not create own item create a default one here!
-            buy = createBuyItem(shop, name, c);
-
-            if (buy == null) {
-                return null;
-            }
+            buyItems.addAll(createBuyItem(shop, name, c));
         }
 
 
         if (shop != null) {
-            shop.addShopItem(buy, buy.getItem(), ClassManager.manager);
+            for(BSBuy buyItem : buyItems)
+                shop.addShopItem(buyItem, buyItem.getItem(), ClassManager.manager);
         }
 
-        return buy;
+        return buyItems;
     }
 
     /**
@@ -69,32 +67,66 @@ public class BuyItemHandler {
      * @param config part of config to get from
      * @return shop item
      */
-    public BSBuy createBuyItem(BSShop shop, String name, ConfigurationSection config) {
-        String stage    = "Basic Data";
+    public List<BSBuy> createBuyItem(BSShop shop, String name, ConfigurationSection config) {
+        String stage = "Basic Data";
         String shopName = shop == null ? "none" : shop.getShopName();
 
         try {
-            String priceType  = config.getString("PriceType");
+            String priceType = config.getString("PriceType");
             String rewardType = config.getString("RewardType");
-            String message    = config.getString("Message");
+            String message = config.getString("Message");
             String permission = config.getString("ExtraPermission");
-            if (permission == null || permission == "") {
+            if (permission == null || permission.isEmpty()) {
                 permission = null;
             }
-            int inventoryLocation = config.getInt("InventoryLocation");
 
-            if (inventoryLocation < 0) {
-                ClassManager.manager.getBugFinder()
-                        .warn("The InventoryLocation of the shopitem '" + name + "' is '" + inventoryLocation
-                                + "'. It has to be either higher than '0' or it has to be '0' if you want to it to automatically pick the next empty slot. [Shop: "
-                                + shopName + "]");
+            List<Integer> inventoryLocations = new ArrayList<>();
+            if (config.isInt("InventoryLocation")) {
+                int inventoryLocation = config.getInt("InventoryLocation");
+                inventoryLocations.add(inventoryLocation - 1);
+            } else if (config.isList("InventoryLocation")) {
+                for (int inventoryLocation : config.getIntegerList("InventoryLocation")) {
+                    inventoryLocations.add(inventoryLocation - 1);
+                }
+            } else if (config.isString("InventoryLocation")) {
+                String inventoryLocation = config.getString("InventoryLocation");
+                if (inventoryLocation != null) {
+                    // Split this string on ":" so that for example "1:3" gives the locations 1,2 & 3 and adds them to the list
+                    String[] split = inventoryLocation.split(":");
+                    try {
+                        if (split.length == 2) {
+                            int start = Integer.parseInt(split[0]);
+                            int end = Integer.parseInt(split[1]);
+                            for (int i = start; i <= end; i++) {
+                                inventoryLocations.add(i - 1);
+                            }
+                        } else {
+                            int loc = Integer.parseInt(inventoryLocation);
+                            inventoryLocations.add(loc - 1);
+                        }
+                    } catch (Exception e) {
+                        ClassManager.manager.getBugFinder()
+                                .warn("The InventoryLocation of the shopitem '" + name + "' is '" + inventoryLocation
+                                        + "'. It has to be either higher than '0' or it has to be '0' if you want to it to automatically pick the next empty slot. [Shop: "
+                                        + shopName + "]");
+                    }
+                }
             }
-            inventoryLocation--;
+
+            for(int inventoryLocation : inventoryLocations) {
+                if (inventoryLocation < 0) {
+                    ClassManager.manager.getBugFinder()
+                            .warn("The InventoryLocation of the shopitem '" + name + "' is '" + inventoryLocation
+                                    + "'. It has to be either higher than '0' or it has to be '0' if you want to it to automatically pick the next empty slot. [Shop: "
+                                    + shopName + "]");
+
+                }
+            }
 
             stage = "Price- and RewardType Detection";
 
             BSRewardType rewardT = BSRewardType.detectType(rewardType);
-            BSPriceType  priceT  = BSPriceType.detectType(priceType);
+            BSPriceType priceT = BSPriceType.detectType(priceType);
 
             if (rewardT == null) {
                 ClassManager.manager.getBugFinder()
@@ -119,9 +151,9 @@ public class BuyItemHandler {
             }
 
             stage = "ForceInput Detection";
-            BSInputType inputType     = null;
-            String      inputTypeName = config.getString("ForceInput");
-            String      inputText     = config.getString("ForceInputMessage");
+            BSInputType inputType = null;
+            String inputTypeName = config.getString("ForceInput");
+            String inputText = config.getString("ForceInputMessage");
             if (inputTypeName != null) {
                 for (BSInputType it : BSInputType.values()) {
                     if (it.name().equalsIgnoreCase(inputTypeName)) {
@@ -142,7 +174,7 @@ public class BuyItemHandler {
             priceT.enableType();
 
 
-            Object price  = config.get("Price");
+            Object price = config.get("Price");
             Object reward = config.get("Reward");
 
             stage = "Price- and RewardType Adaption";
@@ -162,7 +194,7 @@ public class BuyItemHandler {
 
             List<String> conditions = config.getStringList("Condition");
             if (conditions != null) {
-                BSConditionSet  set  = new BSConditionSet();
+                BSConditionSet set = new BSConditionSet();
                 BSConditionType type = null;
                 for (String s : conditions) {
                     Pattern pattern = Pattern.compile("^(%.+?%|[^:]+?):(.+)$");
@@ -203,56 +235,60 @@ public class BuyItemHandler {
                 }
             }
 
-            BSCreateShopItemEvent event = new BSCreateShopItemEvent(shop,
-                    name,
-                    config,
-                    rewardT,
-                    priceT,
-                    reward,
-                    price,
-                    message,
-                    inventoryLocation,
-                    permission,
-                    conditionsSet,
-                    inputType,
-                    inputText);
-            Bukkit.getPluginManager().callEvent(event); //Allow addons to create a custom BSBuy
-
-            BSBuy buy = event.getCustomShopItem();
-            if (buy == null) { //If addons did not create own item create a default one here!
-                buy = new BSBuy(rewardT,
+            List<BSBuy> buyItems = new ArrayList<>();
+            for(int inventoryLocation : inventoryLocations) {
+                BSCreateShopItemEvent event = new BSCreateShopItemEvent(shop,
+                        name,
+                        config,
+                        rewardT,
                         priceT,
                         reward,
                         price,
                         message,
                         inventoryLocation,
                         permission,
-                        name,
                         conditionsSet,
                         inputType,
                         inputText);
+                Bukkit.getPluginManager().callEvent(event); //Allow addons to create a custom BSBuy
+
+                BSBuy buy = event.getCustomShopItem();
+                if (buy == null) { //If addons did not create own item create a default one here!
+                    buy = new BSBuy(rewardT,
+                            priceT,
+                            reward,
+                            price,
+                            message,
+                            inventoryLocation,
+                            permission,
+                            name,
+                            conditionsSet,
+                            inputType,
+                            inputText);
+                }
+                buy.setShop(shop);
+
+                stage = "MenuItem creation";
+                if (config.getStringList("MenuItem") == null) {
+                    ClassManager.manager.getBugFinder()
+                            .severe("Error when trying to create shopitem " + name + "! MenuItem is not existing?! [Shop: "
+                                    + shopName + "]");
+                    return null;
+                }
+
+                ItemStack i = ClassManager.manager.getItemStackCreator()
+                        .createItemStack(config.getStringList("MenuItem"), buy, shop, false);
+                buy.setItem(i, false);
+
+
+                ClassManager.manager.getSettings()
+                        .update(buy); //TODO: Not tested if inheritance works fine yet. Order of methods matters!
+
+                Bukkit.getPluginManager().callEvent(new BSCreatedShopItemEvent(shop, buy, config));
+                buyItems.add(buy);
             }
-            buy.setShop(shop);
 
-
-            stage = "MenuItem creation";
-            if (config.getStringList("MenuItem") == null) {
-                ClassManager.manager.getBugFinder()
-                        .severe("Error when trying to create shopitem " + name + "! MenuItem is not existing?! [Shop: "
-                                + shopName + "]");
-                return null;
-            }
-
-            ItemStack i = ClassManager.manager.getItemStackCreator()
-                    .createItemStack(config.getStringList("MenuItem"), buy, shop, false);
-            buy.setItem(i, false);
-
-
-            ClassManager.manager.getSettings()
-                    .update(buy); //TODO: Not tested if inheritance works fine yet. Order of methods matters!
-
-            Bukkit.getPluginManager().callEvent(new BSCreatedShopItemEvent(shop, buy, config));
-            return buy;
+            return buyItems;
 
         } catch (Exception e) {
             ClassManager.manager.getBugFinder()
