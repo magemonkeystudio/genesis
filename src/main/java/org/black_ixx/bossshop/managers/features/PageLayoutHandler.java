@@ -18,9 +18,9 @@ public class PageLayoutHandler {
     @Getter
     private List<BSBuy> items;
     @Getter
-    private int         maxRows = 6; //Default!
-    private int         reservedSlotsStart;
-    private boolean     showIfMultiplePagesOnly;
+    private int maxRows = 6; //Default!
+    private int reservedSlotsStart;
+    private boolean showIfMultiplePagesOnly;
 
     public PageLayoutHandler(List<BSBuy> items, int reservedSlotsStart, boolean showIfMultiplePagesOnly) {
         this.items = items;
@@ -53,13 +53,15 @@ public class PageLayoutHandler {
         reservedSlotsStart = section.getInt("ReservedSlotsStart");
         showIfMultiplePagesOnly = section.getBoolean("ShowIfMultiplePagesOnly");
 
-        items = new ArrayList<BSBuy>();
+        items = new ArrayList<>();
         if (section.isConfigurationSection("items")) {
             for (String key : section.getConfigurationSection("items").getKeys(false)) {
-                BSBuy buy = ClassManager.manager.getBuyItemHandler()
+                List<BSBuy> buyItems = ClassManager.manager.getBuyItemHandler()
                         .loadItem(section.getConfigurationSection("items"), null, key);
-                if (buy != null) {
-                    items.add(buy);
+                for (BSBuy buy : buyItems) {
+                    if (buy != null) {
+                        items.add(buy);
+                    }
                 }
             }
         }
