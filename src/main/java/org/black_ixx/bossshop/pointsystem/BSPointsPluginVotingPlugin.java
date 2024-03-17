@@ -10,10 +10,10 @@ public class BSPointsPluginVotingPlugin extends BSPointsPlugin {
     public BSPointsPluginVotingPlugin() {
         super("VotingPlugin", "VP");
     }
-    VotingPluginMain votingPlugin = (VotingPluginMain) Bukkit.getPluginManager().getPlugin("VotingPlugin");
 
     @Override
     public double getPoints(OfflinePlayer player) {
+        VotingPluginMain votingPlugin = (VotingPluginMain) Bukkit.getPluginManager().getPlugin("VotingPlugin");
         if (player instanceof Player) {
             return votingPlugin.getVotingPluginUserManager().getVotingPluginUser(player).getPoints();
         } else {
@@ -23,6 +23,7 @@ public class BSPointsPluginVotingPlugin extends BSPointsPlugin {
 
     @Override
     public double setPoints(OfflinePlayer player, double points) {
+        VotingPluginMain votingPlugin = (VotingPluginMain) Bukkit.getPluginManager().getPlugin("VotingPlugin");
         if (player instanceof Player) {
             votingPlugin.getVotingPluginUserManager().getVotingPluginUser(player).setPoints((int) points);
             return points;
@@ -33,6 +34,7 @@ public class BSPointsPluginVotingPlugin extends BSPointsPlugin {
 
     @Override
     public double takePoints(OfflinePlayer player, double points) {
+        VotingPluginMain votingPlugin = (VotingPluginMain) Bukkit.getPluginManager().getPlugin("VotingPlugin");
         if (player instanceof Player) {
             votingPlugin.getVotingPluginUserManager().getVotingPluginUser(player).removePoints((int) points);
             return points;
@@ -43,6 +45,7 @@ public class BSPointsPluginVotingPlugin extends BSPointsPlugin {
 
     @Override
     public double givePoints(OfflinePlayer player, double points) {
+        VotingPluginMain votingPlugin = (VotingPluginMain) Bukkit.getPluginManager().getPlugin("VotingPlugin");
         if (player instanceof Player) {
             votingPlugin.getVotingPluginUserManager().getVotingPluginUser(player).addPoints((int) points);
             return getPoints(player);
