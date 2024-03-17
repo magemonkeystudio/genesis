@@ -64,8 +64,8 @@
         </repository>
         <!-- EpicSpawners -->
         <repository>
-            <id>craftaro-public</id>
-            <url>https://repo.craftaro.com/repository/minecraft-plugins-snapshot/</url>
+            <id>com.craftaro</id>
+            <url>https://repo.craftaro.com/repository/minecraft-plugins/</url>
         </repository>
         <repository>
             <id>bencodez repo</id>
@@ -181,7 +181,7 @@
         <dependency>
             <groupId>com.bencodez</groupId>
             <artifactId>votingplugin</artifactId>
-            <version>6.12.1</version>
+            <version>6.15</version>
             <scope>provided</scope>
         </dependency>
 
