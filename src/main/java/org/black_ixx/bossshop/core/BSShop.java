@@ -1,5 +1,7 @@
 package org.black_ixx.bossshop.core;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.black_ixx.bossshop.BossShop;
 import org.black_ixx.bossshop.events.BSChoosePageLayoutEvent;
 import org.black_ixx.bossshop.managers.ClassManager;
@@ -18,93 +20,89 @@ import java.util.Set;
 
 public abstract class BSShop {
 
-    public final static int ROWS_LIMIT_CURRENT = ClassManager.manager.getPageLayoutHandler().getMaxRows(); //By default 6
-    public final static int ROWS_LIMIT_TOTAL = 6;
-    public final static int ROW_ITEMS = 9;
+    public final static int ROWS_LIMIT_CURRENT = ClassManager.manager.getPageLayoutHandler().getMaxRows();
+    // By default 6
+    public final static int ROWS_LIMIT_TOTAL   = 6;
+    public final static int ROW_ITEMS          = 9;
 
     //////////////////////////// <- Variables
 
-    private String shop_name = "BossShop";
-    private String sign_text = "[BossShop]";
+    @Getter
+    @Setter
+    private String shopName = "BossShop";
+    @Getter
+    @Setter
+    private String signText = "[BossShop]";
 
-    private String displayname;
+    @Getter
+    private String   displayName;
+    @Getter
+    @Setter
     private String[] commands;
 
+    @Setter
     private boolean needPermToCreateSign = true;
 
-    private boolean customizable = !ClassManager.manager.getPageLayoutHandler().showIfMultiplePagesOnly(); //Automatically customizable when there special PageLayout components are shown
-    private boolean displaying = false; //When displaying custom variables
+    @Setter
+    private boolean customizable = !ClassManager.manager.getPageLayoutHandler().showIfMultiplePagesOnly();
+    // Automatically customizable when there special PageLayout components are shown
+    @Setter
+    private boolean displaying   = false; // When displaying custom variables
 
-    private int inventory_size = 9;
-    private int manual_inventory_rows;
-    private final int shop_id;
+    @Getter
+    private       int inventorySize = 9;
+    @Getter
+    @Setter
+    private       int manualInventoryRows;
+    @Getter
+    private final int shopId;
 
-    private int highest_page; //Might not be correct but is used in case of a fix inventory having multiple pages
+    private int highestPage; // Might not be correct but is used in case of a fix inventory having multiple pages
 
 
+    @Getter
     private final Set<BSBuy> items = new LinkedHashSet<>();
 
     //////////////////////////// <- Constructor
 
-    public BSShop(int shop_id, String shop_name, String sign_text, boolean needPermToCreateSign, BossShop plugin, String displayname, int manual_inventory_rows, String[] commands) {
-        this.shop_id = shop_id;
-        this.shop_name = shop_name;
-        this.sign_text = sign_text;
-        this.manual_inventory_rows = manual_inventory_rows;
+    public BSShop(int shopId,
+                  String shopName,
+                  String signText,
+                  boolean needPermToCreateSign,
+                  BossShop plugin,
+                  String displayName,
+                  int manualInventoryRows,
+                  String[] commands) {
+        this.shopId = shopId;
+        this.shopName = shopName;
+        this.signText = signText;
+        this.manualInventoryRows = manualInventoryRows;
         this.needPermToCreateSign = needPermToCreateSign;
         setCommands(commands);
 
-        setDisplayName(displayname);
+        setDisplayName(displayName);
     }
 
-    public BSShop(int shop_id) {
-        this.shop_id = shop_id;
+    public BSShop(int shopId) {
+        this.shopId = shopId;
     }
 
     //////////////////////////// <- Methods to get main Variables
 
-    public String getShopName() {
-        return shop_name;
-    }
-
-    public void setShopName(String name) {
-        shop_name = name;
-    }
-
-    public String getDisplayName() {
-        return displayname;
-    }
-
-    public void setDisplayName(String displayname) {
-        if (displayname != null) {
-            this.displayname = ClassManager.manager.getStringManager().transform(displayname, null, this, null, null);
-            if (ClassManager.manager.getStringManager().checkStringForFeatures(this, null, null, this.displayname)) {
+    public void setDisplayName(String displayName) {
+        if (displayName != null) {
+            this.displayName = ClassManager.manager.getStringManager().transform(displayName, null, this, null, null);
+            if (ClassManager.manager.getStringManager().checkStringForFeatures(this, null, null, this.displayName)) {
                 customizable = true;
                 displaying = true;
             }
         } else {
-            this.displayname = shop_name;
+            this.displayName = shopName;
         }
     }
 
     public String getValidDisplayName(Player p, BSShopHolder holder) {
-        return ClassManager.manager.getStringManager().transform(this.displayname, null, this, holder, p);
-    }
-
-    public String getSignText() {
-        return sign_text;
-    }
-
-    public void setSignText(String text) {
-        sign_text = text;
-    }
-
-    public String[] getCommands() {
-        return commands;
-    }
-
-    public void setCommands(String[] commands) {
-        this.commands = commands;
+        return ClassManager.manager.getStringManager().transform(this.displayName, null, this, holder, p);
     }
 
     public boolean needPermToCreateSign() {
@@ -123,10 +121,6 @@ public abstract class BSShop {
 
     //////////////////////////// <- Methods to set main Variables
 
-    public void setCustomizable(boolean b) {
-        customizable = b;
-    }
-
     /**
      * Checks whether the shop contains player-dependent placeholders.
      *
@@ -136,35 +130,7 @@ public abstract class BSShop {
         return displaying;
     }
 
-    public void setDisplaying(boolean b) {
-        displaying = b;
-    }
-
-    public int getInventorySize() {
-        return inventory_size;
-    }
-
-    public int getShopId() {
-        return shop_id;
-    }
-
-    public int getManualInventoryRows() {
-        return manual_inventory_rows;
-    }
-
-    public void setManualInventoryRows(int i) {
-        this.manual_inventory_rows = i;
-    }
-
-    public void setNeedPermToCreateSign(boolean b) {
-        needPermToCreateSign = b;
-    }
-
     //////////////////////////// <- Methods to get Items
-
-    public Set<BSBuy> getItems() {
-        return items;
-    }
 
     public BSBuy getItem(String name) {
         for (BSBuy buy : items) {
@@ -183,8 +149,8 @@ public abstract class BSShop {
 
     //////////////////////////// <- Other Methods
 
-    public void addShopItem(BSBuy buy, ItemStack menu_item, ClassManager manager) {
-        buy.updateShop(this, menu_item, manager, true);
+    public void addShopItem(BSBuy buy, ItemStack menuItem, ClassManager manager) {
+        buy.updateShop(this, menuItem, manager, true);
     }
 
     public void removeShopItem(BSBuy buy) {
@@ -192,102 +158,123 @@ public abstract class BSShop {
     }
 
 
-    public Inventory createInventory(Player p, ClassManager manager, int page, int highest_page, BSShopHolder oldshopholder) {
-        return manager.getShopCustomizer().createInventory(this, items, p, manager, page, highest_page, oldshopholder);
+    public Inventory createInventory(Player p,
+                                     ClassManager manager,
+                                     int page,
+                                     int highestPage,
+                                     BSShopHolder oldShopHolder) {
+        return manager.getShopCustomizer().createInventory(this, items, p, manager, page, highestPage, oldShopHolder);
 
     }
 
-    public void updateInventory(Inventory i, BSShopHolder holder, Player p, ClassManager manager, int page, int highest_page, boolean auto_refresh) {
+    public void updateInventory(Inventory i,
+                                BSShopHolder holder,
+                                Player p,
+                                ClassManager manager,
+                                int page,
+                                int highestPage,
+                                boolean autoRefresh) {
         if (holder.getPage() != page) {
-            Misc.playSound(p, ClassManager.manager.getSettings().getPropertyString(Settings.SOUND_SHOP_CHANGE_PAGE, this, null));
+            Misc.playSound(p,
+                    ClassManager.manager.getSettings().getPropertyString(Settings.SOUND_SHOP_CHANGE_PAGE, this, null));
         }
         holder.setPage(page);
-        holder.setHighestPage(highest_page);
-        if (ClassManager.manager.getStringManager().checkStringForFeatures(this, null, null, getDisplayName()) & !getValidDisplayName(p, holder).equals(p.getOpenInventory().getTitle()) & !auto_refresh) { //Title is customizable as well but shall only be updated through main thread to prevent errors
-            Inventory created = manager.getShopCustomizer().createInventory(this, items, p, manager, page, highest_page, holder.getPreviousShopHolder());
+        holder.setHighestPage(highestPage);
+        if (ClassManager.manager.getStringManager().checkStringForFeatures(this, null, null, getDisplayName())
+                & !getValidDisplayName(p, holder).equals(p.getOpenInventory().getTitle())
+                & !autoRefresh) { // Title is customizable as well but shall only be updated through main thread to prevent errors
+            Inventory created = manager.getShopCustomizer()
+                    .createInventory(this, items, p, manager, page, highestPage, holder.getPreviousShopHolder());
             p.openInventory(created);
             return;
         }
-        Inventory inventory = manager.getShopCustomizer().createInventory(this, items, p, manager, i, page, highest_page);
+        Inventory inventory =
+                manager.getShopCustomizer().createInventory(this, items, p, manager, i, page, highestPage);
         if (inventory != i) {
             p.openInventory(inventory);
         }
     }
 
     public void loadInventorySize() {
-        PageLayoutHandler layout = ClassManager.manager.getPageLayoutHandler();
-        BSChoosePageLayoutEvent event = new BSChoosePageLayoutEvent(this, getShopName(), layout);
+        PageLayoutHandler       layout = ClassManager.manager.getPageLayoutHandler();
+        BSChoosePageLayoutEvent event  = new BSChoosePageLayoutEvent(this, getShopName(), layout);
         Bukkit.getPluginManager().callEvent(event);
         layout = event.getLayout();
 
         if (!layout.showIfMultiplePagesOnly()) {
-            inventory_size = ROW_ITEMS * layout.getMaxRows();
+            inventorySize = ROW_ITEMS * layout.getMaxRows();
             return;
         }
-        Set<Integer> used_slots = new HashSet<>();
-        int highest = 0;
-        int different_slots_amount = 0;
+        Set<Integer> usedSlots             = new HashSet<>();
+        int          highest                = 0;
+        int          differentSlotsAmount = 0;
         for (BSBuy b : items) {
             if (b != null) {
-                if (b.getInventoryLocation() == -1) { //If picking the next slot -> increasing slot number
-                    different_slots_amount++;
-                } else if (!used_slots.contains(b.getInventoryLocation())) { //if choosing specific slot -> store all different slots and add them in the end
-                    used_slots.add(b.getInventoryLocation());
+                if (b.getInventoryLocation() == -1) { // If picking the next slot -> increasing slot number
+                    differentSlotsAmount++;
+                } else if (!usedSlots.contains(b.getInventoryLocation())) { // if choosing specific slot -> store all different slots and add them in the end
+                    usedSlots.add(b.getInventoryLocation());
                 }
                 if (b.getInventoryLocation() > highest) {
                     highest = b.getInventoryLocation();
                 }
             }
         }
-        different_slots_amount += used_slots.size();
-        inventory_size = getInventorySize(Math.max(highest, different_slots_amount - 1)); //Use either the highest slot or the number of different possible slots in order to make sure the inventory is big enough
+        differentSlotsAmount += usedSlots.size();
+        inventorySize = getInventorySize(Math.max(highest,
+                differentSlotsAmount
+                        - 1)); // Use either the highest slot or the number of different possible slots in order to make sure the inventory is big enough
     }
 
     @Deprecated
-    public int getInventorySize(int i) { //i as highest slot
+    public int getInventorySize(int i) { // i as highest slot
         i++;
         int rest = i % ROW_ITEMS;
         if (rest > 0) {
             i += ROW_ITEMS - i % ROW_ITEMS;
         }
 
-        int max_slots_per_page = ROWS_LIMIT_CURRENT * ROW_ITEMS;
+        int maxSlotsPerPage = ROWS_LIMIT_CURRENT * ROW_ITEMS;
 
-        if (!ClassManager.manager.getPageLayoutHandler().showIfMultiplePagesOnly() || i > max_slots_per_page) {
-            highest_page = i / (ClassManager.manager.getPageLayoutHandler().getReservedSlotsStart() - 1); //Not tested yet!
+        if (!ClassManager.manager.getPageLayoutHandler().showIfMultiplePagesOnly() || i > maxSlotsPerPage) {
+            highestPage =
+                    i / (ClassManager.manager.getPageLayoutHandler().getReservedSlotsStart() - 1); // Not tested yet!
         } else {
-            highest_page = 0;
+            highestPage = 0;
         }
 
-        return Math.min(max_slots_per_page, Math.max(i, ROW_ITEMS * manual_inventory_rows));
+        return Math.min(maxSlotsPerPage, Math.max(i, ROW_ITEMS * manualInventoryRows));
     }
 
     public void openInventory(Player p) {
         openInventory(p, 0, true);
     }
 
-    public void openInventory(Player p, boolean remember_current_shop) {
-        openInventory(p, 0, remember_current_shop);
+    public void openInventory(Player p, boolean rememberCurrentShop) {
+        openInventory(p, 0, rememberCurrentShop);
     }
 
-    public void openInventory(Player p, int page, boolean remember_current_shop) {
-        BSShopHolder oldshopholder = null;
+    public void openInventory(Player p, int page, boolean rememberCurrentShop) {
+        BSShopHolder oldShopHolder = null;
 
-        if (remember_current_shop) {
+        if (rememberCurrentShop) {
             InventoryView openinventory = p.getOpenInventory();
             if (openinventory.getTopInventory().getHolder() instanceof BSShopHolder) {
-                oldshopholder = (BSShopHolder) openinventory.getTopInventory().getHolder();
+                oldShopHolder = (BSShopHolder) openinventory.getTopInventory().getHolder();
             }
         }
 
         ClassManager.manager.getMessageHandler().sendMessage("Main.OpenShop", p, null, p, this, null, null);
         if (ClassManager.manager.getPlugin().getAPI().isValidShop(p.getOpenInventory())) {
-            Misc.playSound(p, ClassManager.manager.getSettings().getPropertyString(Settings.SOUND_SHOP_CHANGE_SHOP, this, null));
+            Misc.playSound(p,
+                    ClassManager.manager.getSettings().getPropertyString(Settings.SOUND_SHOP_CHANGE_SHOP, this, null));
         } else {
-            Misc.playSound(p, ClassManager.manager.getSettings().getPropertyString(Settings.SOUND_SHOP_OPEN, this, null));
+            Misc.playSound(p,
+                    ClassManager.manager.getSettings().getPropertyString(Settings.SOUND_SHOP_OPEN, this, null));
         }
-        p.openInventory(createInventory(p, ClassManager.manager, page, highest_page, oldshopholder));
-        ClassManager.manager.getPlayerDataHandler().openedShop(p, this);//TODO: only store previous shop, not current shop somehow.
+        p.openInventory(createInventory(p, ClassManager.manager, page, highestPage, oldShopHolder));
+        ClassManager.manager.getPlayerDataHandler()
+                .openedShop(p, this);// TODO: only store previous shop, not current shop somehow.
     }
 
     public void close() {

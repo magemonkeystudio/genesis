@@ -9,7 +9,7 @@ import java.util.Calendar;
 public class BSConditionTypeRealMinute extends BSConditionTypeNumber {
 
     @Override
-    public double getNumber(BSBuy shopitem, BSShopHolder holder, Player p) {
+    public double getNumber(BSBuy shopItem, BSShopHolder holder, Player p) {
         return Calendar.getInstance().get(Calendar.MINUTE);
     }
 

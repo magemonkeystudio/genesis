@@ -13,15 +13,20 @@ import java.util.List;
 public class ItemDataPartWrittenBookInformation extends ItemDataPart {
 
     @Override
-    public ItemStack transform(ItemStack item, String used_name, String argument) {
+    public ItemStack transform(ItemStack item, String usedName, String argument) {
         if (!(item.getItemMeta() instanceof BookMeta)) {
-            ClassManager.manager.getBugFinder().severe("Mistake in Config: You can not add book information to an item with material '" + item.getType().name() + "'! Following line is invalid: '" + used_name + ":" + argument + "'.");
+            ClassManager.manager.getBugFinder()
+                    .severe("Mistake in Config: You can not add book information to an item with material '"
+                            + item.getType().name() + "'! Following line is invalid: '" + usedName + ":" + argument
+                            + "'.");
             return item;
         }
 
         String parts[] = argument.split("#", 2);
         if (parts.length != 2) {
-            ClassManager.manager.getBugFinder().severe("Mistake in Config: Following line is invalid: '" + used_name + ":" + argument + "'. It should look like this: 'book:<title>#<author>'.");
+            ClassManager.manager.getBugFinder()
+                    .severe("Mistake in Config: Following line is invalid: '" + usedName + ":" + argument
+                            + "'. It should look like this: 'book:<title>#<author>'.");
             return item;
         }
 
@@ -53,7 +58,8 @@ public class ItemDataPartWrittenBookInformation extends ItemDataPart {
         if ((i.getItemMeta() instanceof BookMeta)) {
             BookMeta meta = (BookMeta) i.getItemMeta();
             if (meta.hasAuthor() || meta.hasTitle()) {
-                output.add("book:" + meta.getTitle().replaceAll(String.valueOf(ChatColor.COLOR_CHAR), "&") + "#" + meta.getAuthor().replaceAll(String.valueOf(ChatColor.COLOR_CHAR), "&"));
+                output.add("book:" + meta.getTitle().replaceAll(String.valueOf(ChatColor.COLOR_CHAR), "&") + "#"
+                        + meta.getAuthor().replaceAll(String.valueOf(ChatColor.COLOR_CHAR), "&"));
             }
         }
         return output;
@@ -61,14 +67,14 @@ public class ItemDataPartWrittenBookInformation extends ItemDataPart {
 
 
     @Override
-    public boolean isSimilar(ItemStack shop_item, ItemStack player_item, BSBuy buy, Player p) {
-        if (shop_item.getItemMeta() instanceof BookMeta) {
-            if (!(player_item.getItemMeta() instanceof BookMeta)) {
+    public boolean isSimilar(ItemStack shopItem, ItemStack playerItem, BSBuy buy, Player p) {
+        if (shopItem.getItemMeta() instanceof BookMeta) {
+            if (!(playerItem.getItemMeta() instanceof BookMeta)) {
                 return false;
             }
 
-            BookMeta ms = (BookMeta) shop_item.getItemMeta();
-            BookMeta mp = (BookMeta) player_item.getItemMeta();
+            BookMeta ms = (BookMeta) shopItem.getItemMeta();
+            BookMeta mp = (BookMeta) playerItem.getItemMeta();
 
             if (ms.hasAuthor()) {
                 if (!mp.hasAuthor()) {

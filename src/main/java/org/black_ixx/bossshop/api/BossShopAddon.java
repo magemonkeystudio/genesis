@@ -20,7 +20,9 @@ public abstract class BossShopAddon extends JavaPlugin {
         Plugin plugin = Bukkit.getPluginManager().getPlugin(BossShop.NAME);
 
         if (plugin == null) {
-            printSevere(BossShop.NAME + " was not found... you need it in order to run " + getAddonName() + "! Get it here: https://www.spigotmc.org/resources/25699/. Version v" + getRequiredBossShopVersion() + " or newer is required!");
+            printSevere(BossShop.NAME + " was not found... you need it in order to run " + getAddonName()
+                    + "! Get it here: https://www.spigotmc.org/resources/25699/. Version v"
+                    + getRequiredBossShopVersion() + " or newer is required!");
             printInfo("Disabling Addon...");
             b = true;
             Bukkit.getPluginManager().disablePlugin(this);
@@ -29,10 +31,12 @@ public abstract class BossShopAddon extends JavaPlugin {
 
         bs = (BossShop) plugin;
 
-        double bs_worth = getWorth(bs.getDescription().getVersion());
-        double ao_worth = getWorth(getRequiredBossShopVersion());
-        if (bs_worth < ao_worth) {
-            printSevere(BossShop.NAME + " was found but it seems to be outdated... you need v" + getRequiredBossShopVersion() + " or newer in order to run " + getAddonName() + "! Get it here: https://www.spigotmc.org/resources/25699/");
+        double bsWorth = getWorth(bs.getDescription().getVersion());
+        double aoWorth = getWorth(getRequiredBossShopVersion());
+        if (bsWorth < aoWorth) {
+            printSevere(BossShop.NAME + " was found but it seems to be outdated... you need v"
+                    + getRequiredBossShopVersion() + " or newer in order to run " + getAddonName()
+                    + "! Get it here: https://www.spigotmc.org/resources/25699/");
             printInfo("Disabling Addon...");
             b = true;
             Bukkit.getPluginManager().disablePlugin(this);
@@ -60,14 +64,14 @@ public abstract class BossShopAddon extends JavaPlugin {
     /**
      * Called to enable the addon
      */
-    protected void enable() { //Can be overwritten
+    protected void enable() { // Can be overwritten
         enableAddon();
     }
 
     /**
      * Called to disable the addon
      */
-    protected void disable() { //Can be overwritten
+    protected void disable() { // Can be overwritten
         disableAddon();
     }
 
@@ -76,9 +80,10 @@ public abstract class BossShopAddon extends JavaPlugin {
      *
      * @param sender the execute of the command
      */
-    public void reload(CommandSender sender) { //Can be overwritten
+    public void reload(CommandSender sender) { // Can be overwritten
         bossShopReloaded(sender);
-        sender.sendMessage(ChatColor.YELLOW + "Reloaded " + BossShop.NAME + " Addon " + ChatColor.GOLD + getAddonName());
+        sender.sendMessage(
+                ChatColor.YELLOW + "Reloaded " + BossShop.NAME + " Addon " + ChatColor.GOLD + getAddonName());
     }
 
     /////// //// //// //// //// ////
@@ -129,7 +134,7 @@ public abstract class BossShopAddon extends JavaPlugin {
             }
             s = s.replace("-SNAPSHOT", "");
 
-            double   x = 0;
+            double   x     = 0;
             String[] parts = s.replace(".", ":").split(":");
             x += Integer.parseInt(parts[0].trim());
             if (parts.length == 2) {

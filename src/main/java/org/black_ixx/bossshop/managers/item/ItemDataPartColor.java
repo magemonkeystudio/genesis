@@ -17,21 +17,23 @@ import java.util.List;
 public class ItemDataPartColor extends ItemDataPart {
 
     @Override
-    public ItemStack transform(ItemStack item, String used_name, String argument) {
+    public ItemStack transform(ItemStack item, String usedName, String argument) {
         String[] parts = argument.split("#");
         if (parts.length != 3) {
-            ClassManager.manager.getBugFinder().severe("Mistake in Config: '" + argument + "' is not a valid '" + used_name + "'. It has to look like this: '<red part>#<green part>#<blue part>'. You can find a list of RGB Colors here: http://www.farb-tabelle.de/de/farbtabelle.htm.");
+            ClassManager.manager.getBugFinder()
+                    .severe("Mistake in Config: '" + argument + "' is not a valid '" + usedName
+                            + "'. It has to look like this: '<red part>#<green part>#<blue part>'. You can find a list of RGB Colors here: http://www.farb-tabelle.de/de/farbtabelle.htm.");
             return item;
         }
 
-        int red = InputReader.getInt(parts[0].trim(), 0);
-        int green = InputReader.getInt(parts[1].trim(), 0);
-        int blue = InputReader.getInt(parts[2].trim(), 0);
-        Color c = Color.fromRGB(red, green, blue);
+        int   red   = InputReader.getInt(parts[0].trim(), 0);
+        int   green = InputReader.getInt(parts[1].trim(), 0);
+        int   blue  = InputReader.getInt(parts[2].trim(), 0);
+        Color c     = Color.fromRGB(red, green, blue);
 
         if (item.getItemMeta() instanceof Colorable) {
-            Colorable meta = (Colorable) item.getItemMeta();
-            DyeColor color = DyeColor.getByColor(c);
+            Colorable meta  = (Colorable) item.getItemMeta();
+            DyeColor  color = DyeColor.getByColor(c);
             meta.setColor(color);
             item.setItemMeta((ItemMeta) meta);
             return item;
@@ -51,7 +53,8 @@ public class ItemDataPartColor extends ItemDataPart {
             return item;
         }
 
-        ClassManager.manager.getBugFinder().severe("Mistake in Config: Unable to color items of material '" + item.getType().name() + "'!");
+        ClassManager.manager.getBugFinder()
+                .severe("Mistake in Config: Unable to color items of material '" + item.getType().name() + "'!");
         return item;
     }
 
@@ -74,25 +77,25 @@ public class ItemDataPartColor extends ItemDataPart {
     @Override
     public List<String> read(ItemStack i, List<String> output) {
         if (i.getItemMeta() instanceof Colorable) {
-            Colorable c = (Colorable) (i.getItemMeta());
-            Color color = c.getColor().getColor();
+            Colorable c     = (Colorable) (i.getItemMeta());
+            Color     color = c.getColor().getColor();
             output.add("color:" + color.getRed() + "#" + color.getGreen() + "#" + color.getBlue());
 
         } else if (i.getItemMeta() instanceof LeatherArmorMeta) {
-            LeatherArmorMeta m = (LeatherArmorMeta) i.getItemMeta();
-            Color color = m.getColor();
+            LeatherArmorMeta m     = (LeatherArmorMeta) i.getItemMeta();
+            Color            color = m.getColor();
             output.add("color:" + color.getRed() + "#" + color.getGreen() + "#" + color.getBlue());
 
         } else if (i.getItemMeta() instanceof PotionMeta) {
-            PotionMeta m = (PotionMeta) i.getItemMeta();
-            Color color = m.getColor();
+            PotionMeta m     = (PotionMeta) i.getItemMeta();
+            Color      color = m.getColor();
             output.add("color:" + color.getRed() + "#" + color.getGreen() + "#" + color.getBlue());
         }
         return output;
     }
 
     @Override
-    public boolean isSimilar(ItemStack shop_item, ItemStack player_item, BSBuy buy, Player p) {
+    public boolean isSimilar(ItemStack shopItem, ItemStack playerItem, BSBuy buy, Player p) {
         return true; //Color does not matter
     }
 

@@ -16,11 +16,11 @@ public class BugFinder {
 
 
     private final BossShop plugin;
-    private final String fileName = "BugFinder.yml";
-    private final File file;
+    private final String   fileName = "BugFinder.yml";
+    private final File     file;
     String USER = "%%__USER__%%";
-    private FileConfiguration config = null;
-    private SimpleDateFormat formatter = new SimpleDateFormat("yyyy dd-MM 'at' hh:mm:ss a (E)");
+    private FileConfiguration config    = null;
+    private SimpleDateFormat  formatter = new SimpleDateFormat("yyyy dd-MM 'at' hh:mm:ss a (E)");
 
     public BugFinder(final BossShop plugin) {
         this.plugin = plugin;

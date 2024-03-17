@@ -11,7 +11,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 public class VaultHandler {
 
     private Permission perms;
-    private Economy economy;
+    private Economy    economy;
 
     public VaultHandler(boolean eco, boolean per) {
         BossShop.log("Vault found.");
@@ -28,9 +28,11 @@ public class VaultHandler {
     ///////////////////////////////////////
 
     private void setupEconomy() {
-        RegisteredServiceProvider<Economy> economyProvider = Bukkit.getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
+        RegisteredServiceProvider<Economy> economyProvider =
+                Bukkit.getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
         if (economyProvider == null) {
-            ClassManager.manager.getBugFinder().warn("No Economy Plugin was found... You need one if you want to work with Money! Get it there: http://plugins.bukkit.org/.");
+            ClassManager.manager.getBugFinder()
+                    .warn("No Economy Plugin was found... You need one if you want to work with Money! Get it there: http://plugins.bukkit.org/.");
             economy = new NoEconomy();
             return;
         }
@@ -38,9 +40,11 @@ public class VaultHandler {
     }
 
     private void setupPermissions() {
-        RegisteredServiceProvider<Permission> rsp = Bukkit.getServer().getServicesManager().getRegistration(Permission.class);
+        RegisteredServiceProvider<Permission> rsp =
+                Bukkit.getServer().getServicesManager().getRegistration(Permission.class);
         if (rsp == null) {
-            ClassManager.manager.getBugFinder().warn("No Permissions Plugin was found... You need one if you want to work with Permissions or Permission Groups! Get it there: http://plugins.bukkit.org/");
+            ClassManager.manager.getBugFinder()
+                    .warn("No Permissions Plugin was found... You need one if you want to work with Permissions or Permission Groups! Get it there: http://plugins.bukkit.org/");
             return;
         }
         perms = rsp.getProvider();

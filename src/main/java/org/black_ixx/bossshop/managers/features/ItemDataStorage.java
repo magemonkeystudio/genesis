@@ -15,11 +15,11 @@ import java.util.List;
 public class ItemDataStorage {
 
 
-    private final BossShop plugin;
-    private final String fileName = "ItemDataStorage.yml";
-    private final File file;
-    private FileConfiguration config = null;
-    private SimpleDateFormat formatter = new SimpleDateFormat("yyyy dd-MM 'at' hh:mm:ss a (E)");
+    private final BossShop          plugin;
+    private final String            fileName  = "ItemDataStorage.yml";
+    private final File              file;
+    private       FileConfiguration config    = null;
+    private       SimpleDateFormat  formatter = new SimpleDateFormat("yyyy dd-MM 'at' hh:mm:ss a (E)");
 
     public ItemDataStorage(final BossShop plugin) {
         this.plugin = plugin;

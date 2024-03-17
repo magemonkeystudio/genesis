@@ -16,23 +16,30 @@ import java.util.UUID;
 public class ShopItemPurchaseTask implements Runnable {
 
 
-    private UUID uuid;
-    private BSBuy buy;
-    private BSShop shop;
-    private BSShopHolder holder;
-    private ClickType clicktype;
-    private BSRewardType rewardtype;
-    private BSPriceType pricetype;
+    private UUID                uuid;
+    private BSBuy               buy;
+    private BSShop              shop;
+    private BSShopHolder        holder;
+    private ClickType           clickType;
+    private BSRewardType        rewardtype;
+    private BSPriceType         priceType;
     private InventoryClickEvent event;
 
-    public ShopItemPurchaseTask(Player p, BSBuy buy, BSShop shop, BSShopHolder holder, ClickType clicktype, BSRewardType rewardtype, BSPriceType pricetype, InventoryClickEvent event) {
+    public ShopItemPurchaseTask(Player p,
+                                BSBuy buy,
+                                BSShop shop,
+                                BSShopHolder holder,
+                                ClickType clickType,
+                                BSRewardType rewardtype,
+                                BSPriceType priceType,
+                                InventoryClickEvent event) {
         this.uuid = p.getUniqueId();
         this.buy = buy;
         this.shop = shop;
         this.holder = holder;
-        this.clicktype = clicktype;
+        this.clickType = clickType;
         this.rewardtype = rewardtype;
-        this.pricetype = pricetype;
+        this.priceType = priceType;
         this.event = event;
     }
 
@@ -42,7 +49,15 @@ public class ShopItemPurchaseTask implements Runnable {
         Player p = Bukkit.getPlayer(uuid);
 
         if (p != null) {
-            buy.purchase(p, shop, holder, clicktype, rewardtype, pricetype, event, ClassManager.manager.getPlugin(), true);
+            buy.purchase(p,
+                    shop,
+                    holder,
+                    clickType,
+                    rewardtype,
+                    priceType,
+                    event,
+                    ClassManager.manager.getPlugin(),
+                    true);
         }
     }
 

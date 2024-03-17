@@ -11,15 +11,17 @@ import org.bukkit.event.inventory.ClickType;
 public class BSRewardTypeExp extends BSRewardTypeNumber {
 
 
-    public Object createObject(Object o, boolean force_final_state) {
+    public Object createObject(Object o, boolean forceFinalState) {
         return InputReader.getInt(o, -1);
     }
 
-    public boolean validityCheck(String item_name, Object o) {
+    public boolean validityCheck(String itemName, Object o) {
         if ((Integer) o != -1) {
             return true;
         }
-        ClassManager.manager.getBugFinder().severe("Was not able to create ShopItem " + item_name + "! The reward object needs to be a valid Integer number. Example: '7' or '12'.");
+        ClassManager.manager.getBugFinder()
+                .severe("Was not able to create ShopItem " + itemName
+                        + "! The reward object needs to be a valid Integer number. Example: '7' or '12'.");
         return false;
     }
 
@@ -27,13 +29,14 @@ public class BSRewardTypeExp extends BSRewardTypeNumber {
     }
 
     @Override
-    public boolean canBuy(Player p, BSBuy buy, boolean message_if_no_success, Object reward, ClickType clickType) {
+    public boolean canBuy(Player p, BSBuy buy, boolean messageIfNoSuccess, Object reward, ClickType clickType) {
         return true;
     }
 
     @Override
     public void giveReward(Player p, BSBuy buy, Object reward, ClickType clickType, int multiplier) {
-        int exp = (int) ClassManager.manager.getMultiplierHandler().calculateRewardWithMultiplier(p, buy, clickType, ((Integer) reward)) * multiplier;
+        int exp = (int) ClassManager.manager.getMultiplierHandler()
+                .calculateRewardWithMultiplier(p, buy, clickType, ((Integer) reward)) * multiplier;
         if (ClassManager.manager.getSettings().getExpUseLevel()) {
             p.setLevel(p.getLevel() + exp);
         } else {
@@ -43,7 +46,12 @@ public class BSRewardTypeExp extends BSRewardTypeNumber {
 
     @Override
     public String getDisplayReward(Player p, BSBuy buy, Object reward, ClickType clickType) {
-        return ClassManager.manager.getMultiplierHandler().calculateRewardDisplayWithMultiplier(p, buy, clickType, ((Integer) reward), ClassManager.manager.getMessageHandler().get("Display.Exp").replace("%levels%", "%number%"));
+        return ClassManager.manager.getMultiplierHandler()
+                .calculateRewardDisplayWithMultiplier(p,
+                        buy,
+                        clickType,
+                        ((Integer) reward),
+                        ClassManager.manager.getMessageHandler().get("Display.Exp").replace("%levels%", "%number%"));
     }
 
     @Override

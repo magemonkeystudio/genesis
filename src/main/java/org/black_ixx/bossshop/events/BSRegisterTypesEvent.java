@@ -1,6 +1,5 @@
 package org.black_ixx.bossshop.events;
 
-import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 public class BSRegisterTypesEvent extends BSEvent {

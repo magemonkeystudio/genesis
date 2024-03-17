@@ -13,17 +13,20 @@ import java.util.List;
 public class ItemDataPartDurability extends ItemDataPart {
 
     @Override
-    public ItemStack transform(ItemStack item, String used_name, String argument) {
+    public ItemStack transform(ItemStack item, String usedName, String argument) {
         int damage = InputReader.getInt(argument, -1);
 
         if (damage == -1) {
-            ClassManager.manager.getBugFinder().severe("Mistake in Config: '" + argument + "' is not a valid '" + used_name + "'. " +
-                    "It needs to be an integer number like '0', '5' or '200'. ");
+            ClassManager.manager.getBugFinder()
+                    .severe("Mistake in Config: '" + argument + "' is not a valid '" + usedName + "'. " +
+                            "It needs to be an integer number like '0', '5' or '200'. ");
             return item;
         }
 
         if (!(item.getItemMeta() instanceof Damageable)) {
-            ClassManager.manager.getBugFinder().severe("Mistake in Config: Unable to add damage/durability to items of type '" + item.getType() + "'.");
+            ClassManager.manager.getBugFinder()
+                    .severe("Mistake in Config: Unable to add damage/durability to items of type '" + item.getType()
+                            + "'.");
             return item;
         }
         Damageable d = (Damageable) item.getItemMeta();
@@ -31,12 +34,12 @@ public class ItemDataPartDurability extends ItemDataPart {
 
         item.setItemMeta((ItemMeta) d);
 		
-		/*//TEMPORARY FIX USE SILKSPAWNERS INSTEAD!
+		/*// TEMPORARY FIX USE SILKSPAWNERS INSTEAD!
 		if(item.getType() == Material.MONSTER_EGG){
 			SpawnEgg egg = new SpawnEgg(EntityType.fromId(durability));
-			ItemStack egg_item = egg.toItemStack(item.getAmount());
-			ClassManager.manager.getItemStackTranslator().copyTexts(egg_item, item); //Copying all data because ItemStack 'i' might contain information that would get lost otherwise
-			return egg_item;
+			ItemStack eggItem = egg.toItemStack(item.getAmount());
+			ClassManager.manager.getItemStackTranslator().copyTexts(eggItem, item); //Copying all data because ItemStack 'i' might contain information that would get lost otherwise
+			return eggItem;
 		}
 		//END OF TEMPORARY FIX*/
         return item;
@@ -71,13 +74,13 @@ public class ItemDataPartDurability extends ItemDataPart {
 
 
     @Override
-    public boolean isSimilar(ItemStack shop_item, ItemStack player_item, BSBuy buy, Player p) {
-        if (shop_item.getItemMeta() instanceof Damageable != player_item.getItemMeta() instanceof Damageable) {
+    public boolean isSimilar(ItemStack shopItem, ItemStack playerItem, BSBuy buy, Player p) {
+        if (shopItem.getItemMeta() instanceof Damageable != playerItem.getItemMeta() instanceof Damageable) {
             return false;
         }
-        if (shop_item.getItemMeta() instanceof Damageable) {
-            Damageable a = (Damageable) shop_item.getItemMeta();
-            Damageable b = (Damageable) player_item.getItemMeta();
+        if (shopItem.getItemMeta() instanceof Damageable) {
+            Damageable a = (Damageable) shopItem.getItemMeta();
+            Damageable b = (Damageable) playerItem.getItemMeta();
             if (a.getDamage() != b.getDamage()) {
                 return false;
             }

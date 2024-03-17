@@ -41,8 +41,10 @@ public class ItemDataPartCustomSkull extends ItemDataPart {
         UUID id = UUID.randomUUID();
         try {
             PlayerProfile playerProfile = Bukkit.createPlayerProfile(id);
-            String decoded = new String(Base64.getDecoder().decode(input));
-            playerProfile.getTextures().setSkin(new URL(decoded.substring("{\"textures\":{\"SKIN\":{\"url\":\"".length(), decoded.length() - "\"}}}".length())));
+            String        decoded       = new String(Base64.getDecoder().decode(input));
+            playerProfile.getTextures()
+                    .setSkin(new URL(decoded.substring("{\"textures\":{\"SKIN\":{\"url\":\"".length(),
+                            decoded.length() - "\"}}}".length())));
             skullMeta.setOwnerProfile(playerProfile);
         } catch (MalformedURLException | NoClassDefFoundError | NoSuchMethodError | IllegalArgumentException e) {
             try {
@@ -103,10 +105,10 @@ public class ItemDataPartCustomSkull extends ItemDataPart {
     }
 
     @Override
-    public ItemStack transform(ItemStack item, String used_name, String argument) {
+    public ItemStack transform(ItemStack item, String usedName, String argument) {
         if (!(item.getItemMeta() instanceof SkullMeta)) {
             ClassManager.manager.getBugFinder()
-                    .warn("Mistake in Config: Itemdata of type '" + used_name + "' with value '" + argument
+                    .warn("Mistake in Config: Itemdata of type '" + usedName + "' with value '" + argument
                             + "' can not be added to an item with material '" + item.getType().name()
                             + "'. Don't worry I'll automatically transform the material into '" + Material.PLAYER_HEAD
                             + ".");
@@ -142,7 +144,7 @@ public class ItemDataPartCustomSkull extends ItemDataPart {
 
 
     @Override
-    public boolean isSimilar(ItemStack shop_item, ItemStack player_item, BSBuy buy, Player p) {
+    public boolean isSimilar(ItemStack shopItem, ItemStack playerItem, BSBuy buy, Player p) {
         return true; //Custom skull textures do not matter
     }
 

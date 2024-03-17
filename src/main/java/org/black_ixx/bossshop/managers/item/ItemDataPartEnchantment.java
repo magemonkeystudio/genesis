@@ -18,18 +18,22 @@ import java.util.Map;
 public class ItemDataPartEnchantment extends ItemDataPart {
 
     @Override
-    public ItemStack transform(ItemStack item, String used_name, String argument) {
+    public ItemStack transform(ItemStack item, String usedName, String argument) {
         String[] parts = argument.split("#");
         if (parts.length != 2) {
-            ClassManager.manager.getBugFinder().severe("Mistake in Config: '" + argument + "' is not a valid '" + used_name + "'. It has to look like this: '<enchantment name/id>#<level>'. For example 'DAMAGE_ALL#5'.");
+            ClassManager.manager.getBugFinder()
+                    .severe("Mistake in Config: '" + argument + "' is not a valid '" + usedName
+                            + "'. It has to look like this: '<enchantment name/id>#<level>'. For example 'DAMAGE_ALL#5'.");
             return item;
         }
 
         String enchantment = parts[0].trim();
-        int level = InputReader.getInt(parts[1].trim(), -1);
+        int    level       = InputReader.getInt(parts[1].trim(), -1);
 
         if (level == -1) {
-            ClassManager.manager.getBugFinder().severe("Mistake in Config: '" + argument + "' is not a valid '" + used_name + "'. The level of the enchantment is invalid.");
+            ClassManager.manager.getBugFinder()
+                    .severe("Mistake in Config: '" + argument + "' is not a valid '" + usedName
+                            + "'. The level of the enchantment is invalid.");
             return item;
         }
 
@@ -42,7 +46,9 @@ public class ItemDataPartEnchantment extends ItemDataPart {
         }
 
         if (e == null) {
-            ClassManager.manager.getBugFinder().severe("Mistake in Config: '" + enchantment + "' is not a valid '" + used_name + "'. The name/id of the enchantment is not known.");
+            ClassManager.manager.getBugFinder()
+                    .severe("Mistake in Config: '" + enchantment + "' is not a valid '" + usedName
+                            + "'. The name/id of the enchantment is not known.");
             return item;
         }
 
@@ -82,7 +88,7 @@ public class ItemDataPartEnchantment extends ItemDataPart {
             }
         }
         if (i.getItemMeta() instanceof EnchantmentStorageMeta) {
-            EnchantmentStorageMeta meta = (EnchantmentStorageMeta) i.getItemMeta();
+            EnchantmentStorageMeta    meta         = (EnchantmentStorageMeta) i.getItemMeta();
             Map<Enchantment, Integer> enchantments = meta.getStoredEnchants();
             for (Enchantment enchantment : enchantments.keySet()) {
                 output.add("enchantment:" + enchantment.getKey().getKey() + "#" + enchantments.get(enchantment));
@@ -93,22 +99,22 @@ public class ItemDataPartEnchantment extends ItemDataPart {
 
 
     @Override
-    public boolean isSimilar(ItemStack shop_item, ItemStack player_item, BSBuy buy, Player p) {
+    public boolean isSimilar(ItemStack shopItem, ItemStack playerItem, BSBuy buy, Player p) {
         //normal enchantments
-        if (!containsEnchantments(shop_item.getEnchantments(), player_item.getEnchantments(), buy)) {
+        if (!containsEnchantments(shopItem.getEnchantments(), playerItem.getEnchantments(), buy)) {
             return false;
         }
 
 
         //enchantmentbook enchantments
-        if (shop_item.getItemMeta() instanceof EnchantmentStorageMeta) {
+        if (shopItem.getItemMeta() instanceof EnchantmentStorageMeta) {
 
-            if (!(player_item.getItemMeta() instanceof EnchantmentStorageMeta)) {
+            if (!(playerItem.getItemMeta() instanceof EnchantmentStorageMeta)) {
                 return false;
             }
 
-            EnchantmentStorageMeta ms = (EnchantmentStorageMeta) shop_item.getItemMeta();
-            EnchantmentStorageMeta mp = (EnchantmentStorageMeta) player_item.getItemMeta();
+            EnchantmentStorageMeta ms = (EnchantmentStorageMeta) shopItem.getItemMeta();
+            EnchantmentStorageMeta mp = (EnchantmentStorageMeta) playerItem.getItemMeta();
             if (!containsEnchantments(ms.getStoredEnchants(), mp.getStoredEnchants(), buy)) {
                 return false;
             }

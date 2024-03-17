@@ -5,7 +5,7 @@ import org.bukkit.event.Event;
 
 public abstract class BSEvent extends Event {
 
-    public BSEvent(){
+    public BSEvent() {
         super(!Bukkit.getServer().isPrimaryThread());
     }
 }

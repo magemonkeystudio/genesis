@@ -29,6 +29,7 @@ public abstract class BossShopAddonConfigurable extends BossShopAddon {
 
     /**
      * Reloads thje config for an addon
+     *
      * @param sender the execute of the command
      */
     public void reload(CommandSender sender) {
@@ -39,6 +40,7 @@ public abstract class BossShopAddonConfigurable extends BossShopAddon {
 
     /**
      * Gets the config for the addon as a FileConfiguration
+     *
      * @return config for addon
      */
     @Override
@@ -48,6 +50,7 @@ public abstract class BossShopAddonConfigurable extends BossShopAddon {
 
     /**
      * Gets the config for the addon
+     *
      * @return config for addon
      */
     public BSAddonConfig getAddonConfig() {
@@ -72,6 +75,7 @@ public abstract class BossShopAddonConfigurable extends BossShopAddon {
 
     /**
      * Determines whether or not to save the config when the addon is disabled
+     *
      * @return save or not
      */
     public abstract boolean saveConfigOnDisable();

@@ -15,14 +15,14 @@ import java.util.List;
 public class ItemDataPartLore extends ItemDataPart {
 
     @Override
-    public ItemStack transform(ItemStack item, String used_name, String argument) {
+    public ItemStack transform(ItemStack item, String usedName, String argument) {
         ItemMeta meta = item.getItemMeta();
         // although not the most beautiful solution, what it does is the following:
         // it causes all hex color codes (started by hashtag) to be transformed already.
         // Therefore, all remaining hashtags are safe to interpret as new line (traditional BossShop line separator).
-        String argumentTransformed = ClassManager.manager.getStringManager().transform(argument);
-        String[] parts = argumentTransformed.split("[#\\n]");
-        List<String> lore = meta.getLore();
+        String       argumentTransformed = ClassManager.manager.getStringManager().transform(argument);
+        String[]     parts               = argumentTransformed.split("[#\\n]");
+        List<String> lore                = meta.getLore();
         if (lore == null) {
             lore = new ArrayList<>();
         }
@@ -62,9 +62,9 @@ public class ItemDataPartLore extends ItemDataPart {
 
 
     @Override
-    public boolean isSimilar(ItemStack shop_item, ItemStack player_item, BSBuy buy, Player p) {
-        ItemMeta ms = shop_item.getItemMeta();
-        ItemMeta mp = player_item.getItemMeta();
+    public boolean isSimilar(ItemStack shopItem, ItemStack playerItem, BSBuy buy, Player p) {
+        ItemMeta ms = shopItem.getItemMeta();
+        ItemMeta mp = playerItem.getItemMeta();
         if (ms.hasLore()) {
             if (!mp.hasLore()) {
                 return false;
@@ -74,11 +74,16 @@ public class ItemDataPartLore extends ItemDataPart {
                 return false;
             }
             for (int i = 0; i < ms.getLore().size(); i++) {
-                String shop_item_lore_line = ms.getLore().get(i);
-                if (ClassManager.manager.getStringManager().checkStringForFeatures(buy == null ? null : buy.getShop(), buy, buy == null ? null : buy.getItem(), shop_item_lore_line)) {
-                    shop_item_lore_line = ClassManager.manager.getStringManager().transform(shop_item_lore_line, buy, buy == null ? null : buy.getShop(), null, p);
+                String shopItemLoreLine = ms.getLore().get(i);
+                if (ClassManager.manager.getStringManager()
+                        .checkStringForFeatures(buy == null ? null : buy.getShop(),
+                                buy,
+                                buy == null ? null : buy.getItem(),
+                                shopItemLoreLine)) {
+                    shopItemLoreLine = ClassManager.manager.getStringManager()
+                            .transform(shopItemLoreLine, buy, buy == null ? null : buy.getShop(), null, p);
                 }
-                if (!mp.getLore().get(i).equals(shop_item_lore_line)) {
+                if (!mp.getLore().get(i).equals(shopItemLoreLine)) {
                     return false;
                 }
             }

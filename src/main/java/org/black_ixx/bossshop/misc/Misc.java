@@ -2,6 +2,7 @@ package org.black_ixx.bossshop.misc;
 
 import org.black_ixx.bossshop.managers.misc.InputReader;
 import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -11,15 +12,15 @@ import java.util.List;
 import java.util.Map;
 
 public class Misc {
-
     /**
-     * Fix the lore from a stringlist
+     * Fix the lore from a StringList
+     *
      * @param itemData the sting list
      * @return fixed lore list
      */
     public static List<String> fixLore(List<String> itemData) {
         Map<Integer, String> lore = null;
-        List<String> new_list = null;
+        List<String> newList = null;
         int highest = -1;
 
         for (String line : itemData) {
@@ -32,25 +33,25 @@ public class Misc {
                         int i = Integer.parseInt(start.replace("lore", "")) - 1;
 
                         if (lore == null) {
-                            lore = new HashMap<Integer, String>();
-                            new_list = new ArrayList<>();
+                            lore = new HashMap<>();
+                            newList = new ArrayList<>();
                         }
 
                         lore.put(i, parts[1]);
                         highest = Math.max(highest, i);
 
                     } catch (NumberFormatException e) {
-                        //Fail
+                        // Fail
                     }
 
                 }
             }
         }
 
-        if (new_list != null) {
+        if (newList != null) {
             for (String line : itemData) {
                 if (!line.toLowerCase().startsWith("lore")) {
-                    new_list.add(line);
+                    newList.add(line);
                 }
             }
             for (int i = 0; i <= highest; i++) {
@@ -58,13 +59,13 @@ public class Misc {
                 if (lore.containsKey(i)) {
                     s += lore.get(i);
                 }
-                new_list.add(s);
+                newList.add(s);
             }
         }
 
 
-        if (new_list != null) {
-            return new_list;
+        if (newList != null) {
+            return newList;
         }
         return itemData;
     }
@@ -72,30 +73,45 @@ public class Misc {
 
     /**
      * Play a sound for a player
-     * @param p the player to play the sound for
+     *
+     * @param p     the player to play the sound for
      * @param sound the sound to play
      */
     public static void playSound(Player p, String sound) {
         if (sound != null) {
             if (!sound.isEmpty()) {
                 String[] parts = sound.split(":");
-                Sound s = null;
-                for (Sound e : Sound.values()) {
-                    if (e.name().equalsIgnoreCase(parts[0])) {
-                        s = e;
-                        break;
+                String s = null;
+
+                // If splitted into 3, its a normal bukkit sound, else its custom
+                if (parts.length == 3) {
+                    for (Sound e : Sound.values()) {
+                        if (e.name().equalsIgnoreCase(parts[0]) || e.getKey().getKey().equalsIgnoreCase(parts[0])) {
+                            s = e.getKey().getKey();
+                            break;
+                        }
                     }
+                } else {
+                    s = parts[0] + ":" + parts[1];
                 }
+
                 if (s != null) {
-                    float volume = 1;
+                    boolean isCustomSound = s.contains(":");
+                    float volume;
                     float pitch = 1;
-                    if (parts.length >= 2) {
+                    // Parsing volume & pitch based on bukkit or custom sound
+                    if(!isCustomSound) {
                         volume = (float) InputReader.getDouble(parts[1], 1);
+                        if (parts.length >= 3) {
+                            pitch = (float) InputReader.getDouble(parts[2], 1);
+                        }
+                    } else {
+                        volume = (float) InputReader.getDouble(parts[2], 1);
+                        if (parts.length >= 4) {
+                            pitch = (float) InputReader.getDouble(parts[3], 1);
+                        }
                     }
-                    if (parts.length >= 3) {
-                        pitch = (float) InputReader.getDouble(parts[2], 1);
-                    }
-                    p.playSound(p.getLocation(), s, volume, pitch);
+                    p.playSound(p.getLocation(), s, SoundCategory.NEUTRAL, volume, pitch);
                 }
             }
         }
@@ -104,12 +120,13 @@ public class Misc {
 
     /**
      * Get the item in the player's main hand
+     *
      * @param p player to get item from
      * @return item
      */
     @SuppressWarnings("deprecation")
     public static ItemStack getItemInMainHand(Player p) {
-        ItemStack item = null;
+        ItemStack item;
         try {
             item = p.getInventory().getItemInMainHand();
         } catch (NoSuchMethodError e) {

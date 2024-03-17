@@ -12,7 +12,7 @@ import java.util.List;
 public class ItemDataPartName extends ItemDataPart {
 
     @Override
-    public ItemStack transform(ItemStack item, String used_name, String argument) {
+    public ItemStack transform(ItemStack item, String usedName, String argument) {
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(argument);
         item.setItemMeta(meta);
@@ -46,18 +46,23 @@ public class ItemDataPartName extends ItemDataPart {
 
 
     @Override
-    public boolean isSimilar(ItemStack shop_item, ItemStack player_item, BSBuy buy, Player p) {
-        ItemMeta ms = shop_item.getItemMeta();
-        ItemMeta mp = player_item.getItemMeta();
+    public boolean isSimilar(ItemStack shopItem, ItemStack playerItem, BSBuy buy, Player p) {
+        ItemMeta ms = shopItem.getItemMeta();
+        ItemMeta mp = playerItem.getItemMeta();
         if (ms.hasDisplayName()) {
             if (!mp.hasDisplayName()) {
                 return false;
             }
-            String shop_item_name = ms.getDisplayName();
-            if (ClassManager.manager.getStringManager().checkStringForFeatures(buy == null ? null : buy.getShop(), buy, buy == null ? null : buy.getItem(), shop_item_name)) {
-                shop_item_name = ClassManager.manager.getStringManager().transform(shop_item_name, buy, buy == null ? null : buy.getShop(), null, p);
+            String shopItemName = ms.getDisplayName();
+            if (ClassManager.manager.getStringManager()
+                    .checkStringForFeatures(buy == null ? null : buy.getShop(),
+                            buy,
+                            buy == null ? null : buy.getItem(),
+                            shopItemName)) {
+                shopItemName = ClassManager.manager.getStringManager()
+                        .transform(shopItemName, buy, buy == null ? null : buy.getShop(), null, p);
             }
-            return shop_item_name.equalsIgnoreCase(mp.getDisplayName());
+            return shopItemName.equalsIgnoreCase(mp.getDisplayName());
         }
         return true;
     }

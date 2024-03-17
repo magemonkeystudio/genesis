@@ -1,5 +1,6 @@
 package org.black_ixx.bossshop.managers.serverpinging;
 
+import lombok.Getter;
 import org.black_ixx.bossshop.core.BSBuy;
 
 import java.util.LinkedHashMap;
@@ -9,27 +10,26 @@ import java.util.Vector;
 
 
 public class ServerPingingList {
+    private Map<String, ServerInfo> toAdd  = new LinkedHashMap<>();
+    @Getter
+    private Map<String, ServerInfo> infos  = new LinkedHashMap<>();
+    private List<ServerInfo>        toPing = new Vector<>();
 
 
-    private Map<String, ServerInfo> to_add = new LinkedHashMap<>();
-    private Map<String, ServerInfo> infos = new LinkedHashMap<>();
-    private List<ServerInfo> to_ping = new Vector<ServerInfo>();
-
-
-    public void update(ServerConnector current_connector, boolean complete) {
-        synchronized (to_add) {
-            for (String name : to_add.keySet()) {
-                ServerInfo info = to_add.get(name);
+    public void update(ServerConnector currentConnector, boolean complete) {
+        synchronized (toAdd) {
+            for (String name : toAdd.keySet()) {
+                ServerInfo info = toAdd.get(name);
                 infos.put(name, info);
-                to_ping.add(info);
+                toPing.add(info);
             }
-            to_add.clear();
+            toAdd.clear();
         }
 
         if (complete) {
-            synchronized (to_ping) {
-                for (ServerInfo info : to_ping) {
-                    info.update(current_connector);
+            synchronized (toPing) {
+                for (ServerInfo info : toPing) {
+                    info.update(currentConnector);
                 }
             }
         }
@@ -37,7 +37,7 @@ public class ServerPingingList {
 
 
     public void addServerInfo(String name, ServerInfo info) {
-        to_add.put(name, info);
+        toAdd.put(name, info);
     }
 
     public ServerInfo getInfo(String name) {
@@ -47,10 +47,6 @@ public class ServerPingingList {
             }
         }
         return null;
-    }
-
-    public Map<String, ServerInfo> getInfos() {
-        return infos;
     }
 
     public ServerInfo getFirstInfo(BSBuy buy) {

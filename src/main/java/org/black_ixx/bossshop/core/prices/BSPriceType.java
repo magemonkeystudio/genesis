@@ -21,7 +21,7 @@ public abstract class BSPriceType {
             ThirdCurrencyVariable;
 
     private static List<BSPriceType> types;
-    private String[] names = createNames();
+    private        String[]          names = createNames();
 
     public static void loadTypes() {
         types = new ArrayList<>();
@@ -76,11 +76,12 @@ public abstract class BSPriceType {
     }
 
 
-    public abstract Object createObject(Object o, boolean force_final_state); //Used to transform the config input into a functional object
+    public abstract Object createObject(Object o,
+                                        boolean forceFinalState); // Used to transform the config input into a functional object
 
-    public abstract boolean validityCheck(String item_name, Object o); //Used to check if the object is valid
+    public abstract boolean validityCheck(String itemName, Object o); // Used to check if the object is valid
 
-    public abstract void enableType(); //Here you can register classes that the type depends on
+    public abstract void enableType(); // Here you can register classes that the type depends on
 
     public abstract boolean hasPrice(Player p, BSBuy buy, Object price, ClickType clickType, boolean messageOnFailure);
 
@@ -93,16 +94,16 @@ public abstract class BSPriceType {
     public abstract boolean mightNeedShopUpdate();
 
 
-    public boolean isPlayerDependend(BSBuy buy, ClickType clicktype) {
+    public boolean isPlayerDependend(BSBuy buy, ClickType clickType) {
         return supportsMultipliers() && ClassManager.manager.getMultiplierHandler().hasMultipliers();
     }
 
     public boolean overridesReward() {
-        return false; //Can be overwritten
+        return false; // Can be overwritten
     }
 
     public boolean supportsMultipliers() {
-        return false; //can be overwritten
+        return false; // can be overwritten
     }
 
 

@@ -25,7 +25,8 @@ public class InputReader {
 
     /**
      * Get a string from an object
-     * @param o object to check
+     *
+     * @param o         object to check
      * @param lowercase lowercase or not
      * @return string
      */
@@ -42,6 +43,7 @@ public class InputReader {
 
     /**
      * Get a string list from an object
+     *
      * @param o object to check
      * @return string list
      */
@@ -60,6 +62,7 @@ public class InputReader {
 
     /**
      * Get a list of string list from an object
+     *
      * @param o object to check
      * @return list of string list
      */
@@ -82,17 +85,18 @@ public class InputReader {
     }
 
     /**
-     * Get list of itemstacks from object
-     * @param o object to check
-     * @param final_version final version or not
-     * @return list of itemstacks
+     * Get list of ItemStacks from object
+     *
+     * @param o             object to check
+     * @param finalVersion final version or not
+     * @return list of ItemStacks
      */
-    public static List<ItemStack> readItemList(Object o, boolean final_version) {
+    public static List<ItemStack> readItemList(Object o, boolean finalVersion) {
         List<List<String>> list = readStringListList(o);
         if (list != null) {
-            List<ItemStack> items = new ArrayList<ItemStack>();
+            List<ItemStack> items = new ArrayList<>();
             for (List<String> s : list) {
-                items.add(ClassManager.manager.getItemStackCreator().createItemStack(s, final_version));
+                items.add(ClassManager.manager.getItemStackCreator().createItemStack(s, finalVersion));
             }
             return items;
         }
@@ -101,12 +105,13 @@ public class InputReader {
 
     /**
      * Get itemstack from object
-     * @param o object to check
-     * @param final_version final version or not
+     *
+     * @param o             object to check
+     * @param finalVersion final version or not
      * @return itemstack
      */
-    public static ItemStack readItem(Object o, boolean final_version) {
-        List<ItemStack> list = readItemList(o, final_version);
+    public static ItemStack readItem(Object o, boolean finalVersion) {
+        List<ItemStack> list = readItemList(o, finalVersion);
         if (list != null & !list.isEmpty()) {
             return list.get(0);
         }
@@ -115,6 +120,7 @@ public class InputReader {
 
     /**
      * Get enchant from an object
+     *
      * @param o object to check
      * @return enchant
      */
@@ -123,30 +129,32 @@ public class InputReader {
         if (s != null) {
             String parts[] = s.split("#", 2);
             if (parts.length == 2) {
-                String p_name = parts[0].trim();
-                String p_level = parts[1].trim();
-                int lvl;
+                String      pName  = parts[0].trim();
+                String      pLevel = parts[1].trim();
+                int         lvl;
                 Enchantment e;
 
                 try {
-                    lvl = Integer.parseInt(p_level);
+                    lvl = Integer.parseInt(pLevel);
                 } catch (NumberFormatException ex) {
-                    ClassManager.manager.getBugFinder().severe("Mistake in Config: '" + p_level + "' is not a valid enchantment level.");
+                    ClassManager.manager.getBugFinder()
+                            .severe("Mistake in Config: '" + pLevel + "' is not a valid enchantment level.");
                     return null;
                 }
-                e = readEnchantment(p_name);
+                e = readEnchantment(pName);
 
 				/* Enchantment seems to somehow not be detected.
 				if(e == null && Bukkit.getPluginManager().isPluginEnabled("TokenEnchant")){
 					TokenEnchantAPI te = TokenEnchantAPI.getInstance();
-					p_name = p_name.substring(0,1).toUpperCase()+p_name.substring(1).toLowerCase();
-					System.out.println("Enchantment for " + p_name+": " + te.getEnchant(p_name));
-					System.out.println("PE for " + p_name+": " + te.getPotion(p_name));
-					e = te.getEnchant(p_name);
+					pName = pName.substring(0,1).toUpperCase()+pName.substring(1).toLowerCase();
+					System.out.println("Enchantment for " + pName+": " + te.getEnchant(pName));
+					System.out.println("PE for " + pName+": " + te.getPotion(pName));
+					e = te.getEnchant(pName);
 				}*/
 
                 if (e == null) {
-                    ClassManager.manager.getBugFinder().severe("Mistake in Config: '" + p_name + "' is not a valid enchantment name/id.");
+                    ClassManager.manager.getBugFinder()
+                            .severe("Mistake in Config: '" + pName + "' is not a valid enchantment name/id.");
                     return null;
                 }
 
@@ -160,6 +168,7 @@ public class InputReader {
 
     /**
      * Get enchant by name
+     *
      * @param name name of enchant
      * @return enchant
      */
@@ -173,7 +182,8 @@ public class InputReader {
 
     /**
      * Get boolean from string
-     * @param s string to get from
+     *
+     * @param s   string to get from
      * @param def default value
      * @return boolean
      */
@@ -191,7 +201,8 @@ public class InputReader {
 
     /**
      * Get a double from an object
-     * @param o objecct to get from
+     *
+     * @param o         objecct to get from
      * @param exception exception
      * @return double
      */
@@ -218,7 +229,8 @@ public class InputReader {
 
     /**
      * Get an int from an object
-     * @param o object to get from
+     *
+     * @param o         object to get from
      * @param exception exception
      * @return int
      */
@@ -243,6 +255,7 @@ public class InputReader {
 
     /**
      * Get timed commands from an object
+     *
      * @param o object to check
      * @return timed commands
      */
@@ -253,9 +266,9 @@ public class InputReader {
             for (String s : list) {
                 try {
                     String[] parts = s.split(":", 2);
-                    String a1 = parts[0].trim();
-                    int i = Integer.parseInt(a1);
-                    String cmd = parts[1].trim();
+                    String   a1    = parts[0].trim();
+                    int      i     = Integer.parseInt(a1);
+                    String   cmd   = parts[1].trim();
                     cmds.put(i, cmd);
                 } catch (Exception e) {
                     return null;
@@ -269,6 +282,7 @@ public class InputReader {
 
     /**
      * Read material from string
+     *
      * @param s string to check
      * @return material
      */
@@ -282,6 +296,7 @@ public class InputReader {
 
     /**
      * Read entity type from string
+     *
      * @param s string to check
      * @return entity type
      */
@@ -296,12 +311,13 @@ public class InputReader {
 
     /**
      * Reads a ChatComponent from its raw json string.
+     *
      * @param rawJson JSON String containing the chat components,
      *                may be a single component or an array of components
      * @return a single BaseComponent. If the provided JSON String is an array,
-     *         a single {@link TextComponent} will be returned,
-     *         with the components in the String attached as extras.
-     *         Null if a {@link JsonParseException} is caught in the process.
+     * a single {@link TextComponent} will be returned,
+     * with the components in the String attached as extras.
+     * Null if a {@link JsonParseException} is caught in the process.
      */
     @Nullable
     public static BaseComponent readChatComponent(String rawJson) {
@@ -313,7 +329,9 @@ public class InputReader {
                 return array[0];
             } else {
                 BaseComponent component = new TextComponent();
-                for (BaseComponent baseComponent : array) { component.addExtra(baseComponent); }
+                for (BaseComponent baseComponent : array) {
+                    component.addExtra(baseComponent);
+                }
                 return component;
             }
         } catch (JsonParseException e) {

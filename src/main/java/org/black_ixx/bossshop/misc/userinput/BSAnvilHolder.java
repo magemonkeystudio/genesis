@@ -19,6 +19,7 @@ public abstract class BSAnvilHolder implements InventoryHolder {
 
     /**
      * Get the inventory
+     *
      * @return inventory
      */
     @Override
@@ -28,6 +29,7 @@ public abstract class BSAnvilHolder implements InventoryHolder {
 
     /**
      * Set the inventory
+     *
      * @param i inventory
      */
     public void setInventory(Inventory i) {
@@ -36,12 +38,14 @@ public abstract class BSAnvilHolder implements InventoryHolder {
 
     /**
      * Get the output text from the inventory
+     *
      * @return output text
      */
     public String getOutputText() {
         if (inventory != null) {
             ItemStack item = inventory.getItem(2);
-            if (item != null) { //Somehow the item in the result slot (slot 3) always is null?! Even when one is displayed by client
+            if (item
+                    != null) { // Somehow the item in the result slot (slot 3) always is null?! Even when one is displayed by client
                 if (item.hasItemMeta()) {
                     return item.getItemMeta().getDisplayName();
                 }
@@ -53,6 +57,7 @@ public abstract class BSAnvilHolder implements InventoryHolder {
 
     /**
      * Check if player clicked result
+     *
      * @param p player to check
      */
     public abstract void userClickedResult(Player p);

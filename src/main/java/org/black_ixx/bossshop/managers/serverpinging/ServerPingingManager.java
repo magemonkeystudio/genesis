@@ -1,5 +1,7 @@
 package org.black_ixx.bossshop.managers.serverpinging;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.black_ixx.bossshop.BossShop;
 import org.black_ixx.bossshop.core.BSBuy;
 import org.black_ixx.bossshop.core.BSShop;
@@ -11,38 +13,30 @@ import java.util.List;
 
 public class ServerPingingManager {
 
-    private final String[] placeholder_names = new String[]{"players", "motd"};
+    private final String[] placeholderNames = new String[]{"players", "motd"};
 
 
-    private ServerPingingList list = new ServerPingingList();
+    @Getter
+    private ServerPingingList    list = new ServerPingingList();
     private ServerConnectorSmart connector;
-    private boolean ready_to_transform;
+    @Setter
+    private boolean              readyToTransform;
 
-    private ServerPingingRunnableHandler runnablehandler = new ServerPingingRunnableHandler();
+    private ServerPingingRunnableHandler runnableHandler = new ServerPingingRunnableHandler();
 
 
     public ServerPingingManager(BossShop plugin) {
         BossShop.log("[ServerPinging] Loading ServerPinging Package!");
 
-        int connector_type = plugin.getClassManager().getStorageManager().getConfig().getInt("serverpinging.connector");
-        setup(plugin.getConfig().getStringList("ServerPinging.List"), connector_type);
+        int connectorType = plugin.getClassManager().getStorageManager().getConfig().getInt("serverpinging.connector");
+        setup(plugin.getConfig().getStringList("ServerPinging.List"), connectorType);
     }
 
     public ServerPingingRunnableHandler getServerPingingRunnableHandler() {
-        return runnablehandler;
+        return runnableHandler;
     }
 
-    public ServerPingingList getList() {
-        return list;
-    }
-
-
-    public void setReadyToTransform(boolean b) {
-        ready_to_transform = b;
-    }
-
-
-    public void setup(List<String> pinging_list, int connector_type) {
+    public void setup(List<String> pingingList, int connectorType) {
         List<ServerConnector> connectors = new ArrayList<>();
         try {
             connectors.add(new ServerConnector1());
@@ -62,26 +56,29 @@ public class ServerPingingManager {
         }
         connector = new ServerConnectorSmart(connectors);
 
-        if (pinging_list != null) {
-            for (String connection : pinging_list) {
+        if (pingingList != null) {
+            for (String connection : pingingList) {
                 String[] parts = connection.split(":", 3);
 
                 if (parts.length != 3 && parts.length != 2 && parts.length != 1) {
-                    ClassManager.manager.getBugFinder().warn("Unable to read ServerPinging list entry '" + connection + "'. It should look like following: '<name>:<server ip>:<server port>' or if you are using BungeeCord then simply enter the name of the connected BungeeCord server: 'server name'.");
+                    ClassManager.manager.getBugFinder()
+                            .warn("Unable to read ServerPinging list entry '" + connection
+                                    + "'. It should look like following: '<name>:<server ip>:<server port>' or if you are using BungeeCord then simply enter the name of the connected BungeeCord server: 'server name'.");
                     continue;
                 }
 
                 String name = parts[0].trim();
 
                 if (parts.length == 1) {
-                    ServerInfo info = new ServerInfo(name, ClassManager.manager.getSettings().getServerPingingTimeout());
+                    ServerInfo info =
+                            new ServerInfo(name, ClassManager.manager.getSettings().getServerPingingTimeout());
                     list.addServerInfo(name, info);
                     continue;
                 }
 
 
                 String host = parts[1].trim();
-                int port = 25565;
+                int    port = 25565;
 
                 if (parts.length == 3) {
                     try {
@@ -91,7 +88,8 @@ public class ServerPingingManager {
                     }
                 }
 
-                ServerInfo info = new ServerInfo(host, port, ClassManager.manager.getSettings().getServerPingingTimeout());
+                ServerInfo info =
+                        new ServerInfo(host, port, ClassManager.manager.getSettings().getServerPingingTimeout());
                 list.addServerInfo(name, info);
 
             }
@@ -108,20 +106,20 @@ public class ServerPingingManager {
 
 
     public String transform(String s) {
-        if (!ready_to_transform) {
+        if (!readyToTransform) {
             return s;
         }
 
-        if (StringManipulationLib.figureOutVariable(s, 0, placeholder_names) != null) {
+        if (StringManipulationLib.figureOutVariable(s, 0, placeholderNames) != null) {
 
-            for (String placeholder_name : placeholder_names) {
+            for (String placeholderName : placeholderNames) {
                 int fromIndex = 0;
 
-                String variable = StringManipulationLib.figureOutVariable(s, placeholder_name, fromIndex);
+                String variable = StringManipulationLib.figureOutVariable(s, placeholderName, fromIndex);
                 while (variable != null) {
                     s = transform(variable.split(":"), s, fromIndex);
-                    fromIndex = StringManipulationLib.getIndexOfVariableEnd(s, placeholder_name, fromIndex);
-                    variable = StringManipulationLib.figureOutVariable(s, placeholder_name, fromIndex);
+                    fromIndex = StringManipulationLib.getIndexOfVariableEnd(s, placeholderName, fromIndex);
+                    variable = StringManipulationLib.figureOutVariable(s, placeholderName, fromIndex);
                 }
 
             }
@@ -131,15 +129,15 @@ public class ServerPingingManager {
     }
 
     public String transform(String[] servers, String current, int fromIndex) {
-        if (!ready_to_transform) {
+        if (!readyToTransform) {
             return current;
         }
 
-        String motd = null;
-        int players = 0;
+        String motd    = null;
+        int    players = 0;
 
-        for (String server_name : servers) {
-            ServerInfo c = getInfo(server_name);
+        for (String serverName : servers) {
+            ServerInfo c = getInfo(serverName);
             if (c != null) {
                 if (c.isOnline()) {
                     if (motd == null) {
@@ -152,15 +150,15 @@ public class ServerPingingManager {
         return transform(current, current, motd == null ? "unknown" : motd, String.valueOf(players), fromIndex);
     }
 
-    public String transform(String server_name, String current, int fromIndex) {
-        if (!ready_to_transform) {
+    public String transform(String serverName, String current, int fromIndex) {
+        if (!readyToTransform) {
             return current;
         }
 
-        ServerInfo c = getInfo(server_name);
+        ServerInfo c = getInfo(serverName);
         if (c != null) {
             if (c.isOnline()) {
-                String motd = c.getMotd();
+                String motd    = c.getMotd();
                 String players = String.valueOf(c.getPlayers());
                 return transform(current, current, motd, players, fromIndex);
             }
@@ -169,7 +167,7 @@ public class ServerPingingManager {
     }
 
     private String transform(String original, String current, String motd, String players, int fromIndex) {
-        if (!ready_to_transform) {
+        if (!readyToTransform) {
             return current;
         }
 
@@ -189,8 +187,8 @@ public class ServerPingingManager {
     }
 
 
-    public void registerShopItem(String server_name, ConnectedBuyItem connection) {
-        ServerInfo info = getInfo(server_name);
+    public void registerShopItem(String serverName, ConnectedBuyItem connection) {
+        ServerInfo info = getInfo(serverName);
         if (info != null) {
             info.addShopItem(connection);
         }
@@ -201,8 +199,8 @@ public class ServerPingingManager {
     }
 
 
-    public ServerInfo getInfo(String server_name) {
-        return list.getInfo(server_name);
+    public ServerInfo getInfo(String serverName) {
+        return list.getInfo(serverName);
     }
 
 

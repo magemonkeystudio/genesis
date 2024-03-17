@@ -19,11 +19,11 @@ import java.util.Objects;
 public class ItemDataPartMaterial extends ItemDataPart {
 
     @Override
-    public ItemStack transform(ItemStack item, String used_name, String argument) {
-        short durability = 0;
+    public ItemStack transform(ItemStack item, String usedName, String argument) {
+        short    durability = 0;
         Material m;
 
-        if (argument.contains(":")) { //Can be used for durability
+        if (argument.contains(":")) { // Can be used for durability
             String[] parts = argument.split(":");
             if (parts.length > 1) {
                 durability = (short) InputReader.getInt(parts[1].trim(), 0);
@@ -35,46 +35,53 @@ public class ItemDataPartMaterial extends ItemDataPart {
             String[] parts = argument.split("/");
             if (parts.length == 2) {
                 String plugin = parts[0];
-                String id = parts[1];
-                switch (plugin){
+                String id     = parts[1];
+                switch (plugin) {
                     case "ItemsAdder":
                     case "itemsadder":
                         ItemStack i = CustomStack.getInstance(parts[1]).getItemStack();
-                        if (i != null){
+                        if (i != null) {
                             return i;
-                        }else {
-                            ClassManager.manager.getBugFinder().warn("Mistake in Config: '"+ id + "' is not a valid ItemsAdder item.");
+                        } else {
+                            ClassManager.manager.getBugFinder()
+                                    .warn("Mistake in Config: '" + id + "' is not a valid ItemsAdder item.");
                             return item;
                         }
                     case "MythicMobs":
                     case "mythicmobs":
                         ItemStack mi = MythicBukkit.inst().getItemManager().getItemStack(id);
-                        if (mi != null){
+                        if (mi != null) {
                             return mi;
-                        }else {
-                            ClassManager.manager.getBugFinder().warn("Mistake in Config: '"+ id + "' is not a valid MythicMobs item.");
+                        } else {
+                            ClassManager.manager.getBugFinder()
+                                    .warn("Mistake in Config: '" + id + "' is not a valid MythicMobs item.");
                             return item;
                         }
                     case "MagicCosmetics":
                     case "magiccosmetics":
                         ItemStack ci = MagicAPI.getCosmeticItem(id);
-                        if (ci != null){
+                        if (ci != null) {
                             return ci;
-                        }else {
-                            ClassManager.manager.getBugFinder().warn("Mistake in Config: '"+ id + "' is not a valid MagicCosmetics item.");
+                        } else {
+                            ClassManager.manager.getBugFinder()
+                                    .warn("Mistake in Config: '" + id + "' is not a valid MagicCosmetics item.");
                             return item;
                         }
                     case "ProRPGItems":
                     case "prorpgitems":
-                        ModuleItem pri = Objects.requireNonNull(QuantumRPG.instance.getModuleCache().getTierManager()).getItemById(id);
-                        if (pri != null){
+                        ModuleItem pri = Objects.requireNonNull(QuantumRPG.instance.getModuleCache().getTierManager())
+                                .getItemById(id);
+                        if (pri != null) {
                             return pri.create();
-                        }else {
-                            ClassManager.manager.getBugFinder().warn("Mistake in Config: '"+ id + "' is not a valid ProRPGItems item.");
+                        } else {
+                            ClassManager.manager.getBugFinder()
+                                    .warn("Mistake in Config: '" + id + "' is not a valid ProRPGItems item.");
                             return item;
                         }
                     default:
-                        ClassManager.manager.getBugFinder().warn("Mistake in Config: '"+ plugin + "' is not a valid plugin, or is not supported.");
+                        ClassManager.manager.getBugFinder()
+                                .warn("Mistake in Config: '" + plugin
+                                        + "' is not a valid plugin, or is not supported.");
                         return item;
                 }
             }
@@ -84,7 +91,9 @@ public class ItemDataPartMaterial extends ItemDataPart {
         m = InputReader.readMaterial(argument);
 
         if (m == null) {
-            ClassManager.manager.getBugFinder().severe("Mistake in Config: '" + argument + "' is not a valid '" + used_name + "'. Unable to find a fitting material.");
+            ClassManager.manager.getBugFinder()
+                    .severe("Mistake in Config: '" + argument + "' is not a valid '" + usedName
+                            + "'. Unable to find a fitting material.");
             return item;
         }
 
@@ -118,7 +127,7 @@ public class ItemDataPartMaterial extends ItemDataPart {
 
 
     @Override
-    public boolean isSimilar(ItemStack shop_item, ItemStack player_item, BSBuy buy, Player p) {
-        return shop_item.getType() == player_item.getType();
+    public boolean isSimilar(ItemStack shopItem, ItemStack playerItem, BSBuy buy, Player p) {
+        return shopItem.getType() == playerItem.getType();
     }
 }

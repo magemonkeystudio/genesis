@@ -11,7 +11,7 @@ import java.util.List;
 public class ItemDataPartUnbreaking extends ItemDataPart {
 
     @Override
-    public ItemStack transform(ItemStack item, String used_name, String argument) {
+    public ItemStack transform(ItemStack item, String usedName, String argument) {
         boolean b = true;
         if (argument != null) {
             b = InputReader.getBoolean(argument, true);
@@ -54,7 +54,7 @@ public class ItemDataPartUnbreaking extends ItemDataPart {
 
 
     @Override
-    public boolean isSimilar(ItemStack shop_item, ItemStack player_item, BSBuy buy, Player p) {
+    public boolean isSimilar(ItemStack shopItem, ItemStack playerItem, BSBuy buy, Player p) {
         return true; //Does not matter
     }
 

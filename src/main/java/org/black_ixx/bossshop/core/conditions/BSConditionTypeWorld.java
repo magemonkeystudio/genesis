@@ -6,8 +6,8 @@ import org.bukkit.entity.Player;
 public class BSConditionTypeWorld extends BSConditionTypeMatch {
 
     @Override
-    public boolean matches(Player p, String single_condition) {
-        return p.getWorld().getName().equalsIgnoreCase(single_condition);
+    public boolean matches(Player p, String singleCondition) {
+        return p.getWorld().getName().equalsIgnoreCase(singleCondition);
     }
 
     @Override

@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 public class BSCustomLink {
 
     private BSCustomActions actions;
-    private int id;
+    private int             id;
 
     public BSCustomLink(int id, BSCustomActions actions) {
         this.actions = actions;

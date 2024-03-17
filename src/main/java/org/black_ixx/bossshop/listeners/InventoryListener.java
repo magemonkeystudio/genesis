@@ -30,9 +30,9 @@ import java.util.WeakHashMap;
 public class InventoryListener implements Listener {
 
 
-    private WeakHashMap<Player, Long> lastClicks;
+    private WeakHashMap<Player, Long>    lastClicks;
     private WeakHashMap<Player, Integer> clickspamCounts;
-    private int clickDelay, clickspamDelay, clickspamWarnings, clickSpamForgetTime;
+    private int                          clickDelay, clickspamDelay, clickspamWarnings, clickSpamForgetTime;
     private BossShop plugin;
 
     public InventoryListener(BossShop plugin) {
@@ -57,12 +57,16 @@ public class InventoryListener implements Listener {
 
         if (e.getPlayer() instanceof Player) {
             final Player p = (Player) e.getPlayer();
-            plugin.getClassManager().getMessageHandler().sendMessage("Main.CloseShop", p, null, (Player) e.getPlayer(), holder.getShop(), holder, null);
+            plugin.getClassManager()
+                    .getMessageHandler()
+                    .sendMessage("Main.CloseShop", p, null, (Player) e.getPlayer(), holder.getShop(), holder, null);
             new BukkitRunnable() {
                 @Override
                 public void run() {
                     if (!ClassManager.manager.getPlugin().getAPI().isValidShop(p.getOpenInventory())) {
-                        Misc.playSound(p, ClassManager.manager.getSettings().getPropertyString(Settings.SOUND_SHOP_CLOSE, this, null));
+                        Misc.playSound(p,
+                                ClassManager.manager.getSettings()
+                                        .getPropertyString(Settings.SOUND_SHOP_CLOSE, this, null));
                     }
                 }
             }.runTask(plugin);
@@ -136,8 +140,8 @@ public class InventoryListener implements Listener {
             event.setResult(Result.DENY);
             //event.setCurrentItem(null);
 
-            final Player p = (Player) event.getWhoClicked();
-            ClickType clicktype = event.getClick();
+            final Player p         = (Player) event.getWhoClicked();
+            ClickType    clickType = event.getClick();
 
 
             BSShop shop = ((BSShopHolder) event.getInventory().getHolder()).getShop();
@@ -161,7 +165,15 @@ public class InventoryListener implements Listener {
                         } else {
                             double timeLeft = lastClicks.get(p) + clickspamDelay - System.currentTimeMillis();
                             timeLeft = Math.max(0.1f, timeLeft / 1000);
-                            ClassManager.manager.getMessageHandler().sendMessageDirect(ClassManager.manager.getStringManager().transform(ClassManager.manager.getMessageHandler().get("Main.OffensiveClickSpamWarning").replace("%time_left%", MathTools.displayNumber(timeLeft, 1)), buy, shop, holder, p), p);
+                            ClassManager.manager.getMessageHandler()
+                                    .sendMessageDirect(ClassManager.manager.getStringManager()
+                                            .transform(ClassManager.manager.getMessageHandler()
+                                                            .get("Main.OffensiveClickSpamWarning")
+                                                            .replace("%time_left%", MathTools.displayNumber(timeLeft, 1)),
+                                                    buy,
+                                                    shop,
+                                                    holder,
+                                                    p), p);
                         }
                         clickspamCounts.put(p, clickspamCount);
                         return;
@@ -171,7 +183,15 @@ public class InventoryListener implements Listener {
                     if (System.currentTimeMillis() < lastClick + clickDelay) {
                         double timeLeft = lastClicks.get(p) + clickDelay - System.currentTimeMillis();
                         timeLeft = Math.max(0.1f, timeLeft / 1000);
-                        ClassManager.manager.getMessageHandler().sendMessageDirect(ClassManager.manager.getStringManager().transform(ClassManager.manager.getMessageHandler().get("Main.ClickSpamWarning").replace("%time_left%", MathTools.displayNumber(timeLeft, 1)), buy, shop, holder, p), p);
+                        ClassManager.manager.getMessageHandler()
+                                .sendMessageDirect(ClassManager.manager.getStringManager()
+                                        .transform(ClassManager.manager.getMessageHandler()
+                                                        .get("Main.ClickSpamWarning")
+                                                        .replace("%time_left%", MathTools.displayNumber(timeLeft, 1)),
+                                                buy,
+                                                shop,
+                                                holder,
+                                                p), p);
                         return;
                     }
 
@@ -186,7 +206,7 @@ public class InventoryListener implements Listener {
                 lastClicks.put(p, System.currentTimeMillis());
             }
 
-            buy.click(p, shop, holder, clicktype, event, plugin);
+            buy.click(p, shop, holder, clickType, event, plugin);
         }
     }
 
@@ -234,7 +254,7 @@ public class InventoryListener implements Listener {
                 e.setResult(Result.DENY);
                 e.setCancelled(true);
                 BSAnvilHolder holder = (BSAnvilHolder) e.getInventory().getHolder();
-                String text = holder.getOutputText();
+                String        text   = holder.getOutputText();
                 if (text != null) {
                     holder.userClickedResult(p);
                 }

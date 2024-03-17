@@ -9,10 +9,16 @@ import org.bukkit.entity.Player;
 public abstract class BSConditionTypeNumber extends BSConditionType {
 
     @Override
-    public boolean meetsCondition(BSShopHolder holder, BSBuy shopitem, Player p, String conditiontype, String condition) {
+    public boolean meetsCondition(BSShopHolder holder,
+                                  BSBuy shopItem,
+                                  Player p,
+                                  String conditiontype,
+                                  String condition) {
         double n = 0;
-        try { n = getNumber(shopitem, holder, p);
-        }catch (Exception ignored){}
+        try {
+            n = getNumber(shopItem, holder, p);
+        } catch (Exception ignored) {
+        }
 
         if (condition.contains("#") && condition.contains("%")) {
             String[] parts = condition.split("#", 2);
@@ -21,16 +27,19 @@ public abstract class BSConditionTypeNumber extends BSConditionType {
             n %= divisor;
         }
 
-        if (ClassManager.manager.getStringManager().checkStringForFeatures(shopitem.getShop(), shopitem, shopitem.getItem(), condition)) {
-            condition = ClassManager.manager.getStringManager().transform(condition, shopitem, shopitem.getShop(), holder, p);
+        if (ClassManager.manager.getStringManager()
+                .checkStringForFeatures(shopItem.getShop(), shopItem, shopItem.getItem(), condition)) {
+            condition = ClassManager.manager.getStringManager()
+                    .transform(condition, shopItem, shopItem.getShop(), holder, p);
         }
 
-        //Basic operations
+        // Basic operations
         if (conditiontype.equalsIgnoreCase("over") || conditiontype.equalsIgnoreCase(">")) {
             double d = InputReader.getDouble(condition, -1);
             return n > d;
         }
-        if (conditiontype.equalsIgnoreCase("under") || conditiontype.equalsIgnoreCase("<") || conditiontype.equalsIgnoreCase("below")) {
+        if (conditiontype.equalsIgnoreCase("under") || conditiontype.equalsIgnoreCase("<")
+                || conditiontype.equalsIgnoreCase("below")) {
             double d = InputReader.getDouble(condition, -1);
             return n < d;
         }
@@ -39,14 +48,16 @@ public abstract class BSConditionTypeNumber extends BSConditionType {
         }
 
         if (conditiontype.equalsIgnoreCase("between") || conditiontype.equalsIgnoreCase("inbetween")) {
-            String separator = condition.contains(":") ? ":" : "-";
-            String[] parts = condition.split(separator);
+            String   separator = condition.contains(":") ? ":" : "-";
+            String[] parts     = condition.split(separator);
             if (parts.length == 2) {
                 double start = InputReader.getDouble(parts[0], -1);
-                double end = InputReader.getDouble(parts[1], -1);
+                double end   = InputReader.getDouble(parts[1], -1);
                 return n >= start && n <= end;
             } else {
-                ClassManager.manager.getBugFinder().warn("Unable to read condition '" + condition + "' of conditiontype 'between'. It has to look like following: '<number1>-<number2>'.");
+                ClassManager.manager.getBugFinder()
+                        .warn("Unable to read condition '" + condition
+                                + "' of conditiontype 'between'. It has to look like following: '<number1>-<number2>'.");
                 return false;
             }
         }
@@ -71,6 +82,8 @@ public abstract class BSConditionTypeNumber extends BSConditionType {
         return new String[]{"over:[double]", "under:[double]", "equals:[double]", "between:[double]:[double]"};
     }
 
-    public abstract double getNumber(BSBuy shopitem, BSShopHolder holder, Player p) throws NoSuchFieldException, IllegalAccessException;
+    public abstract double getNumber(BSBuy shopItem, BSShopHolder holder, Player p) throws
+            NoSuchFieldException,
+            IllegalAccessException;
 
 }

@@ -17,9 +17,9 @@ import java.io.InputStreamReader;
 import java.util.Objects;
 
 public class MessageHandler {
-    private final BossShop plugin;
-    private String fileName = "lang"+File.separator+"en-us.yml";
-    private FileConfiguration config;
+    private final BossShop          plugin;
+    private       String            fileName = "lang" + File.separator + "en-us.yml";
+    private       FileConfiguration config;
 
     public MessageHandler(final BossShop plugin) {
         this.plugin = plugin;
@@ -28,6 +28,7 @@ public class MessageHandler {
 
     /**
      * Get the config file
+     *
      * @return config
      */
     public FileConfiguration getConfig() {
@@ -40,7 +41,7 @@ public class MessageHandler {
      */
     public void reloadConfig() {
         setupLocate();
-        InputStream defConfigStream = plugin.getResource("lang/"+fileName);
+        InputStream defConfigStream = plugin.getResource("lang/" + fileName);
         if (defConfigStream != null) {
             YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(new InputStreamReader(defConfigStream));
             config.setDefaults(defConfig);
@@ -49,7 +50,8 @@ public class MessageHandler {
 
     /**
      * Send message from config to player
-     * @param node path of message
+     *
+     * @param node   path of message
      * @param sender sender to send to
      */
     public void sendMessage(String node, CommandSender sender) {
@@ -58,17 +60,19 @@ public class MessageHandler {
 
     /**
      * Send message from config to player
-     * @param node path of message
-     * @param sender sender to send to
-     * @param offline_target offline target
+     *
+     * @param node           path of message
+     * @param sender         sender to send to
+     * @param offlineTarget offline target
      */
-    public void sendMessage(String node, CommandSender sender, String offline_target) {
-        sendMessage(node, sender, offline_target, null, null, null, null);
+    public void sendMessage(String node, CommandSender sender, String offlineTarget) {
+        sendMessage(node, sender, offlineTarget, null, null, null, null);
     }
 
     /**
      * Send message from config to player
-     * @param node path of message
+     *
+     * @param node   path of message
      * @param sender sender to send to
      * @param target player target
      */
@@ -78,15 +82,22 @@ public class MessageHandler {
 
     /**
      * Send a message to a player
-     * @param node the path of message
-     * @param sender the sender to send to
-     * @param offline_target offline target
-     * @param target player target
-     * @param shop shop to send to
-     * @param holder the holder of the shop
-     * @param item the item in the shop
+     *
+     * @param node           the path of message
+     * @param sender         the sender to send to
+     * @param offlineTarget offline target
+     * @param target         player target
+     * @param shop           shop to send to
+     * @param holder         the holder of the shop
+     * @param item           the item in the shop
      */
-    public void sendMessage(String node, CommandSender sender, String offline_target, Player target, BSShop shop, BSShopHolder holder, BSBuy item) {
+    public void sendMessage(String node,
+                            CommandSender sender,
+                            String offlineTarget,
+                            Player target,
+                            BSShop shop,
+                            BSShopHolder holder,
+                            BSBuy item) {
         if (sender != null) {
 
             if (node == null || node.equals("")) {
@@ -99,8 +110,10 @@ public class MessageHandler {
                 return;
             }
 
-            if (offline_target != null) {
-                message = message.replace("%player%", offline_target).replace("%name%", offline_target).replace("%target%", offline_target);
+            if (offlineTarget != null) {
+                message = message.replace("%player%", offlineTarget)
+                        .replace("%name%", offlineTarget)
+                        .replace("%target%", offlineTarget);
             }
 
             sendMessageDirect(message, sender);
@@ -109,8 +122,9 @@ public class MessageHandler {
 
     /**
      * Send message directly to CommandSender
+     *
      * @param message the message to sender
-     * @param sender the sender to send to
+     * @param sender  the sender to send to
      */
     public void sendMessageDirect(String message, CommandSender sender) {
         if (sender != null) {
@@ -130,6 +144,7 @@ public class MessageHandler {
 
     /**
      * Get a string from the config
+     *
      * @param node path of node
      * @return string
      */
@@ -139,6 +154,7 @@ public class MessageHandler {
 
     /**
      * Get a raw string from config
+     *
      * @param node path of node
      * @return raw string
      */
@@ -154,29 +170,30 @@ public class MessageHandler {
         return ClassManager.manager.getStringManager().transform(message, item, shop, holder, target);
     }
 
-    public void setupLocate(){
+    public void setupLocate() {
         String LangCode = ClassManager.manager.getSettings().getLanguage();
-        if(Objects.equals(LangCode,null)||LangCode.equals("")){
+        if (Objects.equals(LangCode, null) || LangCode.equals("")) {
             LangCode = "en-us";
-            plugin.getConfig().set("Language","en-us");
+            plugin.getConfig().set("Language", "en-us");
         }
-        fileName = "lang/"+LangCode+".yml";
+        fileName = "lang/" + LangCode + ".yml";
         File file = new File(plugin.getDataFolder(), fileName);
-        if(!file.exists()){
+        if (!file.exists()) {
             LangCode = "en-us";
-            plugin.getConfig().set("Language","en-us");
-            FileHandler fh = new FileHandler();
-            File lang = new File(plugin.getDataFolder(),"lang"+File.separator+"en-us.yml");
-            if(!lang.exists()) {
+            plugin.getConfig().set("Language", "en-us");
+            FileHandler fh   = new FileHandler();
+            File        lang = new File(plugin.getDataFolder(), "lang" + File.separator + "en-us.yml");
+            if (!lang.exists()) {
                 fh.exportLanguages(plugin);
-                fileName = "lang/"+LangCode+".yml";
-                file = new File(plugin.getDataFolder(),"lang"+File.separator+fileName);
+                fileName = "lang/" + LangCode + ".yml";
+                file = new File(plugin.getDataFolder(), "lang" + File.separator + fileName);
                 config = YamlConfiguration.loadConfiguration(file);
                 return;
             }
-            fileName = "lang/"+LangCode+".yml";
-            file = new File(plugin.getDataFolder(),"lang"+File.separator+fileName);
-            ClassManager.manager.getBugFinder().warn("The corresponding message file cannot be found and fallback to en-us. (maybe you didn't put the message file in the plugin folder, or didn't have the message file)");
+            fileName = "lang/" + LangCode + ".yml";
+            file = new File(plugin.getDataFolder(), "lang" + File.separator + fileName);
+            ClassManager.manager.getBugFinder()
+                    .warn("The corresponding message file cannot be found and fallback to en-us. (maybe you didn't put the message file in the plugin folder, or didn't have the message file)");
 
         }
         config = YamlConfiguration.loadConfiguration(file);

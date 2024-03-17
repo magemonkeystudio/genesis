@@ -15,13 +15,15 @@ import java.util.Set;
 public class BSAddonConfig implements BSAddonStorage {
 
     boolean isSaving = false;
-    private Plugin plugin;
-    private File file;
+    private Plugin            plugin;
+    private File              file;
     private YamlConfiguration config;
 
-    public BSAddonConfig(Plugin plugin, String file_name) {
+    public BSAddonConfig(Plugin plugin, String fileName) {
         this.plugin = plugin;
-        file = new File(ClassManager.manager.getPlugin().getDataFolder().getAbsolutePath() + "/addons/" + plugin.getName() + "/" + file_name + ".yml");
+        file = new File(
+                ClassManager.manager.getPlugin().getDataFolder().getAbsolutePath() + "/addons/" + plugin.getName() + "/"
+                        + fileName + ".yml");
         config = YamlConfiguration.loadConfiguration(file);
     }
 
@@ -33,6 +35,7 @@ public class BSAddonConfig implements BSAddonStorage {
 
     /**
      * Save the addon config
+     *
      * @return saved or not
      */
     public boolean save() {
@@ -69,6 +72,7 @@ public class BSAddonConfig implements BSAddonStorage {
 
     /**
      * Reload the addon config
+     *
      * @return reloaded or not
      */
     public boolean reload() {
@@ -83,6 +87,7 @@ public class BSAddonConfig implements BSAddonStorage {
 
     /**
      * Get the addon config
+     *
      * @return addon config
      */
     public FileConfiguration getConfig() {
@@ -91,6 +96,7 @@ public class BSAddonConfig implements BSAddonStorage {
 
     /**
      * Get the config file
+     *
      * @return file
      */
     public File getFile() {
@@ -100,7 +106,8 @@ public class BSAddonConfig implements BSAddonStorage {
 
     /**
      * Set a path for the config
-     * @param path path
+     *
+     * @param path  path
      * @param value value
      */
     @Override
@@ -110,8 +117,9 @@ public class BSAddonConfig implements BSAddonStorage {
 
     /**
      * Get a string from the config
+     *
      * @param path path
-     * @param def default
+     * @param def  default
      * @return string
      */
     @Override
@@ -121,8 +129,9 @@ public class BSAddonConfig implements BSAddonStorage {
 
     /**
      * Get an int from the config
+     *
      * @param path path
-     * @param def default
+     * @param def  default
      * @return int
      */
     @Override
@@ -132,8 +141,9 @@ public class BSAddonConfig implements BSAddonStorage {
 
     /**
      * Get a double from the config
+     *
      * @param path path
-     * @param def default
+     * @param def  default
      * @return double
      */
     @Override
@@ -143,8 +153,9 @@ public class BSAddonConfig implements BSAddonStorage {
 
     /**
      * Get a boolean from the config
+     *
      * @param path path
-     * @param def default
+     * @param def  default
      * @return boolean
      */
     @Override
@@ -154,6 +165,7 @@ public class BSAddonConfig implements BSAddonStorage {
 
     /**
      * Get a string list from the config
+     *
      * @param path path
      * @return string list
      */
@@ -164,7 +176,8 @@ public class BSAddonConfig implements BSAddonStorage {
 
     /**
      * Add a default path to the config
-     * @param path path
+     *
+     * @param path  path
      * @param value value
      */
     public void addDefault(String path, Object value) {
@@ -175,6 +188,7 @@ public class BSAddonConfig implements BSAddonStorage {
 
     /**
      * Check if a config contains a path
+     *
      * @param key path
      * @return contains or not
      */
@@ -185,8 +199,9 @@ public class BSAddonConfig implements BSAddonStorage {
 
     /**
      * List all keys in a section of a config
+     *
      * @param section the section to check
-     * @param deep subkeys or not
+     * @param deep    subkeys or not
      * @return list of keys
      */
     @Override
@@ -203,6 +218,7 @@ public class BSAddonConfig implements BSAddonStorage {
 
     /**
      * Delete all parts of a section
+     *
      * @param section section to delete
      */
     @Override
@@ -221,6 +237,7 @@ public class BSAddonConfig implements BSAddonStorage {
 
     /**
      * Copy a file to a new file
+     *
      * @param source the source
      * @return new file
      */
@@ -233,13 +250,15 @@ public class BSAddonConfig implements BSAddonStorage {
                 Files.copy(c.getFile(), file);
                 reload();
             } catch (IOException e) {
-                ClassManager.manager.getBugFinder().warn("Unable to copy storage file from '" + c.getFile().getPath() + "' to '" + file.getPath() + "'.");
+                ClassManager.manager.getBugFinder()
+                        .warn("Unable to copy storage file from '" + c.getFile().getPath() + "' to '" + file.getPath()
+                                + "'.");
                 return false;
             }
             return true;
         }
 
-        //New storage types might be added in future
+        // New storage types might be added in future
         return false;
     }
 

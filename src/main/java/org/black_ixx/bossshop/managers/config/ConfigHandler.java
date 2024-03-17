@@ -14,8 +14,8 @@ public class ConfigHandler {
     // /////////////////////////////////////// <- Init class
 
     public ConfigHandler(BossShop plugin) {
-        Settings settings = ClassManager.manager.getSettings();
-        FileConfiguration config = plugin.getConfig();
+        Settings          settings = ClassManager.manager.getSettings();
+        FileConfiguration config   = plugin.getConfig();
 
         if (config.getBoolean("signs.enabled") || config.getBoolean("EnableSigns")) {
             settings.setSignsEnabled(true);
@@ -31,7 +31,7 @@ public class ConfigHandler {
         settings.setAutoRefreshSpeed((config.getInt("AutoRefreshDelay")));
         settings.setMetricsEnabled((!config.getBoolean("DisableMetrics")));
         settings.setPointsPlugin(findPointsPlugin(config.getString("PointsPlugin")));
-        settings.setLoadSubfoldersEnabled(config.getBoolean("SearchSubfoldersForShops"));
+        settings.setLoadSubFoldersEnabled(config.getBoolean("SearchSubfoldersForShops"));
         settings.setServerPingingEnabled(config.getBoolean("ServerPinging.Enabled"));
         settings.setInventoryFullDropItems(config.getBoolean("InventoryFullDropItems"));
         settings.setMaxLineLength(config.getInt("MaxLineLength"));
@@ -61,12 +61,12 @@ public class ConfigHandler {
     }
 
 
-    public PointsPlugin findPointsPlugin(String config_points_plugin) {
+    public PointsPlugin findPointsPlugin(String configPointsPlugin) {
         //Try out if pre-installed Points plugins fit with given name
-        if (config_points_plugin != null) {
+        if (configPointsPlugin != null) {
             for (PointsPlugin pp : PointsPlugin.values()) {
                 for (String nick : pp.getNicknames()) {
-                    if (nick.equalsIgnoreCase(config_points_plugin)) {
+                    if (nick.equalsIgnoreCase(configPointsPlugin)) {
                         return pp;
                     }
                 }
@@ -74,15 +74,15 @@ public class ConfigHandler {
         }
 
         //Try out if custom Points plugins fit with given name
-        if (BSPointsAPI.get(config_points_plugin) != null) {
-            PointsManager.PointsPlugin.CUSTOM.setCustom(config_points_plugin);
+        if (BSPointsAPI.get(configPointsPlugin) != null) {
+            PointsManager.PointsPlugin.CUSTOM.setCustom(configPointsPlugin);
             return PointsManager.PointsPlugin.CUSTOM;
         }
 
         //Use first available plugin
         for (PointsPlugin pp : PointsPlugin.values()) {
-            String plugin_name = pp.getPluginName();
-            if ((plugin_name != null) && (Bukkit.getPluginManager().getPlugin(plugin_name) != null)) {
+            String pluginName = pp.getPluginName();
+            if ((pluginName != null) && (Bukkit.getPluginManager().getPlugin(pluginName) != null)) {
                 return pp;
             }
 

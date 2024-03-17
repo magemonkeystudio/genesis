@@ -16,9 +16,13 @@ import java.util.List;
 public class ItemDataPartPlayerhead extends ItemDataPart {
 
     @Override
-    public ItemStack transform(ItemStack item, String used_name, String argument) {
+    public ItemStack transform(ItemStack item, String usedName, String argument) {
         if (!(item.getItemMeta() instanceof SkullMeta)) {
-            ClassManager.manager.getBugFinder().warn("Mistake in Config: Itemdata of type '" + used_name + "' with value '" + argument + "' can not be added to an item with material '" + item.getType().name() + "'. Don't worry I'll automatically transform the material into '" + Material.PLAYER_HEAD.name() + ".");
+            ClassManager.manager.getBugFinder()
+                    .warn("Mistake in Config: Itemdata of type '" + usedName + "' with value '" + argument
+                            + "' can not be added to an item with material '" + item.getType().name()
+                            + "'. Don't worry I'll automatically transform the material into '"
+                            + Material.PLAYER_HEAD.name() + ".");
             item.setType(Material.PLAYER_HEAD);
         }
 
@@ -67,14 +71,14 @@ public class ItemDataPartPlayerhead extends ItemDataPart {
 
 
     @Override
-    public boolean isSimilar(ItemStack shop_item, ItemStack player_item, BSBuy buy, Player p) {
-        if (shop_item.getType() == Material.PLAYER_HEAD) {
-            if (player_item.getType() != Material.PLAYER_HEAD) {
+    public boolean isSimilar(ItemStack shopItem, ItemStack playerItem, BSBuy buy, Player p) {
+        if (shopItem.getType() == Material.PLAYER_HEAD) {
+            if (playerItem.getType() != Material.PLAYER_HEAD) {
                 return false;
             }
 
-            SkullMeta ms = (SkullMeta) shop_item.getItemMeta();
-            SkullMeta mp = (SkullMeta) player_item.getItemMeta();
+            SkullMeta ms = (SkullMeta) shopItem.getItemMeta();
+            SkullMeta mp = (SkullMeta) playerItem.getItemMeta();
 
             if (ms.hasOwner()) {
 

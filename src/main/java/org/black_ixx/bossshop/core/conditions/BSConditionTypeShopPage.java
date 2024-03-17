@@ -6,12 +6,16 @@ import org.bukkit.entity.Player;
 
 public class BSConditionTypeShopPage extends BSConditionTypeNumber {
     @Override
-    public boolean meetsCondition(BSShopHolder holder, BSBuy shopitem, Player p, String conditiontype, String condition) {
-        return super.meetsCondition(holder, shopitem, p, conditiontype, transformLine(holder, condition));
+    public boolean meetsCondition(BSShopHolder holder,
+                                  BSBuy shopItem,
+                                  Player p,
+                                  String conditiontype,
+                                  String condition) {
+        return super.meetsCondition(holder, shopItem, p, conditiontype, transformLine(holder, condition));
     }
 
     @Override
-    public double getNumber(BSBuy shopitem, BSShopHolder holder, Player p) {
+    public double getNumber(BSBuy shopItem, BSShopHolder holder, Player p) {
         return holder.getDisplayPage();
     }
 

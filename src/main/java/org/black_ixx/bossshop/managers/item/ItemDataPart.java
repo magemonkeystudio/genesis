@@ -12,9 +12,9 @@ import java.util.List;
 public abstract class ItemDataPart {
 
     public static int PRIORITY_MOST_EARLY = 0;
-    public static int PRIORITY_EARLY = 10;
-    public static int PRIORITY_NORMAL = 50;
-    public static int PRIORITY_LATE = 80;
+    public static int PRIORITY_EARLY      = 10;
+    public static int PRIORITY_NORMAL     = 50;
+    public static int PRIORITY_LATE       = 80;
 
     public static ItemDataPart
             MATERIAL,
@@ -44,7 +44,7 @@ public abstract class ItemDataPart {
             NBTTAG;
 
     private static List<ItemDataPart> types;
-    private final String[] names = createNames();
+    private final  String[]           names = createNames();
 
     public static void loadTypes() {
         types = new ArrayList<>();
@@ -87,12 +87,12 @@ public abstract class ItemDataPart {
         return type;
     }
 
-    public static ItemDataPart detectTypeSpecial(String whole_line) {
-        if (whole_line == null) {
+    public static ItemDataPart detectTypeSpecial(String wholeLine) {
+        if (wholeLine == null) {
             return null;
         }
-        String[] parts = whole_line.split(":", 2);
-        String name = parts[0].trim();
+        String[] parts = wholeLine.split(":", 2);
+        String   name  = parts[0].trim();
         return detectType(name);
     }
 
@@ -106,7 +106,7 @@ public abstract class ItemDataPart {
     }
 
     public static ItemStack transformItem(ItemStack item, List<String> itemdata) {
-        itemdata.sort((s1, s2) -> {//TODO: test sorting out
+        itemdata.sort((s1, s2) -> {// TODO: test sorting out
             ItemDataPart type1 = detectTypeSpecial(s1);
             ItemDataPart type2 = detectTypeSpecial(s2);
             if (type1 != null && type2 != null) {
@@ -124,16 +124,17 @@ public abstract class ItemDataPart {
         if (line == null) {
             return item;
         }
-        String[] parts = line.split(":", 2);
-        String name = parts[0].trim();
-        String argument = null;
+        String[] parts    = line.split(":", 2);
+        String   name     = parts[0].trim();
+        String   argument = null;
         if (parts.length == 2) {
             argument = parts[1].trim();
         }
 
         ItemDataPart part = detectType(name);
         if (part == null) {
-            ClassManager.manager.getBugFinder().severe("Mistake in Config: Unable to read itemdata '" + name + ":" + argument);
+            ClassManager.manager.getBugFinder()
+                    .severe("Mistake in Config: Unable to read itemdata '" + name + ":" + argument);
             return item;
         }
 
@@ -146,26 +147,32 @@ public abstract class ItemDataPart {
         }
         List<String> output = new ArrayList<>();
         for (ItemDataPart part : types) {
-            try {output = part.read(item, output);
+            try {
+                output = part.read(item, output);
             } catch (Exception | NoSuchMethodError e) { //Seems like that ItemDataPart is not supported yet
             }
         }
         return output;
     }
 
-    public static boolean isSimilar(ItemStack shop_item, ItemStack player_item, ItemDataPart[] exceptions, BSBuy buy, boolean compare_amount, Player p) {
-        if (shop_item == null || player_item == null) {
+    public static boolean isSimilar(ItemStack shopItem,
+                                    ItemStack playerItem,
+                                    ItemDataPart[] exceptions,
+                                    BSBuy buy,
+                                    boolean compareAmount,
+                                    Player p) {
+        if (shopItem == null || playerItem == null) {
             return false;
         }
         for (ItemDataPart part : types) {
             if (isException(exceptions, part)) {
                 continue;
             }
-            if (!compare_amount && part == AMOUNT) {
+            if (!compareAmount && part == AMOUNT) {
                 continue;
             }
             try {
-                if (!part.isSimilar(shop_item, player_item, buy, p)) {
+                if (!part.isSimilar(shopItem, playerItem, buy, p)) {
                     return false;
                 }
             } catch (Exception | NoSuchMethodError e) { //Seems like that ItemDataPart is not supported yet
@@ -209,7 +216,7 @@ public abstract class ItemDataPart {
     }
 
 
-    public ItemStack transformItem(ItemStack item, String used_name, String argument) { //Return true in case of success
+    public ItemStack transformItem(ItemStack item, String usedName, String argument) { //Return true in case of success
         if (argument == null && needsArgument()) {
             return item;
         }
@@ -219,18 +226,22 @@ public abstract class ItemDataPart {
         }
 
         try {
-            return transform(item, used_name.toLowerCase(), argument);
+            return transform(item, usedName.toLowerCase(), argument);
         } catch (NoClassDefFoundError | NoSuchMethodError e) { //Seems like that ItemDataPart is not supported yet
-            ClassManager.manager.getBugFinder().severe("Unable to work with itemdata '" + used_name.toLowerCase() + ":" + argument + ". Seems like it is not supported by your server version yet.");
+            ClassManager.manager.getBugFinder()
+                    .severe("Unable to work with itemdata '" + usedName.toLowerCase() + ":" + argument
+                            + ". Seems like it is not supported by your server version yet.");
             return item;
         }
     }
 
 
     @Deprecated
-    public abstract ItemStack transform(ItemStack item, String used_name, String argument); //Return true in case of success
+    public abstract ItemStack transform(ItemStack item,
+                                        String usedName,
+                                        String argument); //Return true in case of success
 
-    public abstract boolean isSimilar(ItemStack shop_item, ItemStack player_item, BSBuy buy, Player p);
+    public abstract boolean isSimilar(ItemStack shopItem, ItemStack playerItem, BSBuy buy, Player p);
 
     public abstract List<String> read(ItemStack i, List<String> output);
 

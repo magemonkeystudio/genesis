@@ -12,7 +12,7 @@ import java.util.List;
 public class ItemDataPartItemflags extends ItemDataPart {
 
     @Override
-    public ItemStack transform(ItemStack item, String used_name, String argument) {
+    public ItemStack transform(ItemStack item, String usedName, String argument) {
         ItemMeta meta = item.getItemMeta();
 
         if (argument.equalsIgnoreCase("true") || argument.equalsIgnoreCase("all")) {
@@ -29,7 +29,8 @@ public class ItemDataPartItemflags extends ItemDataPart {
                     ItemFlag itemflag = ItemFlag.valueOf(flag.toUpperCase());
                     meta.addItemFlags(itemflag);
                 } catch (Exception e) {
-                    ClassManager.manager.getBugFinder().warn("Mistake in Config: '" + flag + "' is not a valid '" + used_name + "'.");
+                    ClassManager.manager.getBugFinder()
+                            .warn("Mistake in Config: '" + flag + "' is not a valid '" + usedName + "'.");
                 }
             }
 
@@ -68,8 +69,8 @@ public class ItemDataPartItemflags extends ItemDataPart {
 
 
     @Override
-    public boolean isSimilar(ItemStack shop_item, ItemStack player_item, BSBuy buy, Player p) {
-        return true; //Does not matter
+    public boolean isSimilar(ItemStack shopItem, ItemStack playerItem, BSBuy buy, Player p) {
+        return true; // Does not matter
     }
 
 }

@@ -15,15 +15,17 @@ import org.bukkit.inventory.InventoryView;
 public class BSRewardTypeShopPage extends BSRewardType {
 
 
-    public Object createObject(Object o, boolean force_final_state) {
+    public Object createObject(Object o, boolean forceFinalState) {
         return InputReader.readString(o, true);
     }
 
-    public boolean validityCheck(String item_name, Object o) {
+    public boolean validityCheck(String itemName, Object o) {
         if (o != null) {
             return true;
         }
-        ClassManager.manager.getBugFinder().severe("Was not able to create ShopItem " + item_name + "! The reward object needs to be either 'next', 'previous' or a page number like '0' (first page), '1' or '2'.");
+        ClassManager.manager.getBugFinder()
+                .severe("Was not able to create ShopItem " + itemName
+                        + "! The reward object needs to be either 'next', 'previous' or a page number like '0' (first page), '1' or '2'.");
         return false;
     }
 
@@ -31,7 +33,7 @@ public class BSRewardTypeShopPage extends BSRewardType {
     }
 
     @Override
-    public boolean canBuy(Player p, BSBuy buy, boolean message_if_no_success, Object reward, ClickType clickType) {
+    public boolean canBuy(Player p, BSBuy buy, boolean messageIfNoSuccess, Object reward, ClickType clickType) {
         return true;
     }
 
@@ -40,9 +42,10 @@ public class BSRewardTypeShopPage extends BSRewardType {
         int page = calculatePage(p, (String) reward);
 
         if (page != -1) {
-            Inventory inventory = p.getOpenInventory().getTopInventory();
-            BSShopHolder holder = (BSShopHolder) inventory.getHolder();
-            holder.getShop().updateInventory(inventory, holder, p, ClassManager.manager, page, holder.getHighestPage(), false);
+            Inventory    inventory = p.getOpenInventory().getTopInventory();
+            BSShopHolder holder    = (BSShopHolder) inventory.getHolder();
+            holder.getShop()
+                    .updateInventory(inventory, holder, p, ClassManager.manager, page, holder.getHighestPage(), false);
         }
     }
 
@@ -56,8 +59,8 @@ public class BSRewardTypeShopPage extends BSRewardType {
     private int calculatePage(Player p, String reward) {
         InventoryView inventoryview = p.getOpenInventory();
         if (inventoryview != null) {
-            Inventory inventory = inventoryview.getTopInventory();
-            InventoryHolder holder = inventory.getHolder();
+            Inventory       inventory = inventoryview.getTopInventory();
+            InventoryHolder holder    = inventory.getHolder();
 
             if (holder instanceof BSShopHolder) {
                 BSShopHolder shopholder = (BSShopHolder) holder;
@@ -75,7 +78,9 @@ public class BSRewardTypeShopPage extends BSRewardType {
                     return page - 1;
 
                 } catch (NumberFormatException e) {
-                    ClassManager.manager.getBugFinder().warn("Was not able to detect shop page. Unable to read Reward '" + reward + "'. Please use either 'next', 'previous' or a page number like '1' or '2'.");
+                    ClassManager.manager.getBugFinder()
+                            .warn("Was not able to detect shop page. Unable to read Reward '" + reward
+                                    + "'. Please use either 'next', 'previous' or a page number like '1' or '2'.");
                 }
 
             }
@@ -99,7 +104,7 @@ public class BSRewardTypeShopPage extends BSRewardType {
     }
 
     @Override
-    public boolean isPlayerDependend(BSBuy buy, ClickType clicktype) {
+    public boolean isPlayerDependend(BSBuy buy, ClickType clickType) {
         return true;
     }
 

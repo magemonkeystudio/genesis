@@ -6,8 +6,8 @@ public class BSConditionTypePermission extends BSConditionTypeMatch {
 
 
     @Override
-    public boolean matches(Player p, String single_condition) {
-        return p.hasPermission(single_condition);
+    public boolean matches(Player p, String singleCondition) {
+        return p.hasPermission(singleCondition);
     }
 
 

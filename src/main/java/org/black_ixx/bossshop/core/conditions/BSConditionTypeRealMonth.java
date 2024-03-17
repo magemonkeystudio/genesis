@@ -9,7 +9,7 @@ import java.util.Calendar;
 public class BSConditionTypeRealMonth extends BSConditionTypeNumber {
 
     @Override
-    public double getNumber(BSBuy shopitem, BSShopHolder holder, Player p) {
+    public double getNumber(BSBuy shopItem, BSShopHolder holder, Player p) {
         int month = Calendar.getInstance().get(Calendar.MONTH);
 
         switch (month) {

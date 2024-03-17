@@ -9,11 +9,11 @@ import org.bukkit.event.inventory.ClickType;
 public class BSRewardTypeClose extends BSRewardType {
 
 
-    public Object createObject(Object o, boolean force_final_state) {
+    public Object createObject(Object o, boolean forceFinalState) {
         return null;
     }
 
-    public boolean validityCheck(String item_name, Object o) { //Here can't be any mistakes
+    public boolean validityCheck(String itemName, Object o) { // Here can't be any mistakes
         return true;
     }
 
@@ -22,7 +22,7 @@ public class BSRewardTypeClose extends BSRewardType {
     }
 
     @Override
-    public boolean canBuy(Player p, BSBuy buy, boolean message_if_no_success, Object reward, ClickType clickType) {
+    public boolean canBuy(Player p, BSBuy buy, boolean messageIfNoSuccess, Object reward, ClickType clickType) {
         return true;
     }
 

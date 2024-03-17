@@ -13,19 +13,21 @@ import java.util.List;
 public class BSPriceTypeItem extends BSPriceType {
 
 
-    public Object createObject(Object o, boolean force_final_state) {
-        if (force_final_state) {
+    public Object createObject(Object o, boolean forceFinalState) {
+        if (forceFinalState) {
             return InputReader.readItemList(o, false);
         } else {
             return InputReader.readStringListList(o);
         }
     }
 
-    public boolean validityCheck(String item_name, Object o) {
+    public boolean validityCheck(String itemName, Object o) {
         if (o != null) {
             return true;
         }
-        ClassManager.manager.getBugFinder().severe("Was not able to create ShopItem " + item_name + "! The price object needs to be a valid list of ItemData (https://www.spigotmc.org/wiki/bossshoppro-rewardtypes/).");
+        ClassManager.manager.getBugFinder()
+                .severe("Was not able to create ShopItem " + itemName
+                        + "! The price object needs to be a valid list of ItemData (https://www.spigotmc.org/wiki/bossshoppro-rewardtypes/).");
         return false;
     }
 
@@ -62,9 +64,9 @@ public class BSPriceTypeItem extends BSPriceType {
     @Override
     @SuppressWarnings("unchecked")
     public String getDisplayPrice(Player p, BSBuy buy, Object price, ClickType clickType) {
-        List<ItemStack> items = (List<ItemStack>) price;
-        String items_formatted = ClassManager.manager.getItemStackTranslator().getFriendlyText(items);
-        return ClassManager.manager.getMessageHandler().get("Display.Item").replace("%items%", items_formatted);
+        List<ItemStack> items           = (List<ItemStack>) price;
+        String          itemsFormatted = ClassManager.manager.getItemStackTranslator().getFriendlyText(items);
+        return ClassManager.manager.getMessageHandler().get("Display.Item").replace("%items%", itemsFormatted);
     }
 
 

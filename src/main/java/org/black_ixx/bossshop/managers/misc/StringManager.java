@@ -10,14 +10,16 @@ import org.black_ixx.bossshop.events.BSCheckStringForFeaturesEvent;
 import org.black_ixx.bossshop.events.BSTransformStringEvent;
 import org.black_ixx.bossshop.managers.ClassManager;
 import org.black_ixx.bossshop.managers.serverpinging.ConnectedBuyItem;
-import org.black_ixx.bossshop.misc.VersionManager;
 import org.black_ixx.bossshop.misc.MathTools;
 import org.black_ixx.bossshop.misc.Misc;
+import org.black_ixx.bossshop.misc.VersionManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,9 +27,11 @@ import java.util.regex.Pattern;
 public class StringManager {
 
     private static final Pattern hexPattern = Pattern.compile("(#[a-fA-F0-9]{6})");
+    private static final Pattern placeholderPattern = Pattern.compile("%(.*?)%");
 
     /**
      * Transform specific strings from one thing to another
+     *
      * @param s input string
      * @return transformed string
      */
@@ -121,8 +125,22 @@ public class StringManager {
             return null;
         }
 
+       List<String> placeholders = new ArrayList<>();
+        Matcher matcher = placeholderPattern.matcher(s);
+        while (matcher.find()) {
+            placeholders.add(matcher.group(1));
+        }
+
+        for (String placeholder : placeholders) {
+            // Sometimes, we'll get %§8luckperms_has_permission.xxx.xxx% or similar
+            String replacement = ChatColor.stripColor(placeholder);
+            s = s.replace(placeholder, replacement);
+        }
+
         if (target != null && s.contains("%")) {
-            s = s.replace("%name%", target.getName()).replace("%player%", target.getName()).replace("%target%", target.getName());
+            s = s.replace("%name%", target.getName())
+                    .replace("%player%", target.getName())
+                    .replace("%target%", target.getName());
             s = s.replace("%displayname%", target.getDisplayName());
             s = s.replace("%uuid%", target.getUniqueId().toString());
 
@@ -133,8 +151,8 @@ public class StringManager {
                 }
             }
             if (s.contains("%balancepoints%") && ClassManager.manager.getPointsManager() != null) {
-                double balance_points = ClassManager.manager.getPointsManager().getPoints(target);
-                s = s.replace("%balancepoints%", MathTools.displayNumber(balance_points, BSPriceType.Points));
+                double balancePoints = ClassManager.manager.getPointsManager().getPoints(target);
+                s = s.replace("%balancepoints%", MathTools.displayNumber(balancePoints, BSPriceType.Points));
             }
 
             if (s.contains("%world%")) {
@@ -158,7 +176,10 @@ public class StringManager {
     }
 
 
-    public boolean checkStringForFeatures(BSShop shop, BSBuy buy, ItemStack menu_item, String s) { //Returns true if this would make a shop customizable
+    public boolean checkStringForFeatures(BSShop shop,
+                                          BSBuy buy,
+                                          ItemStack menuItem,
+                                          String s) { //Returns true if this would make a shop customizable
         boolean b = s.matches(hexPattern.pattern());
 
 
@@ -190,12 +211,13 @@ public class StringManager {
             }
 
             if (buy != null && shop != null && ClassManager.manager.getSettings().getServerPingingEnabled(true)) {
-                String server_names = StringManipulationLib.figureOutVariable(s, 0, "players", "motd");
-                if (server_names != null) {
+                String serverNames = StringManipulationLib.figureOutVariable(s, 0, "players", "motd");
+                if (serverNames != null) {
                     b = true;
                     if (buy.getItem() != null) {
-                        String[] servers = server_names.split(":");
-                        ClassManager.manager.getServerPingingManager().registerShopItem(servers[0].trim(), new ConnectedBuyItem(buy, menu_item));
+                        String[] servers = serverNames.split(":");
+                        ClassManager.manager.getServerPingingManager()
+                                .registerShopItem(servers[0].trim(), new ConnectedBuyItem(buy, menuItem));
                     }
                 }
             }

@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 public class BSSingleCondition implements BSCondition {
 
     private BSConditionType type;
-    private String conditiontype, condition;
+    private String          conditiontype, condition;
 
 
     public BSSingleCondition(BSConditionType type, String conditiontype, String condition) {

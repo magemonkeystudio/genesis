@@ -18,7 +18,7 @@ import org.bukkit.plugin.messaging.PluginMessageListener;
 public class BungeeCordManager implements PluginMessageListener {
 
 
-    public final static String PLUGIN_CHANNEL = "BossShopPro";
+    public final static String PLUGIN_CHANNEL                = "BossShopPro";
     public final static String PLUGIN_SUBCHANNEL_PLAYERINPUT = "PlayerInput";
 
 
@@ -51,8 +51,18 @@ public class BungeeCordManager implements PluginMessageListener {
         return false;
     }
 
-    public void sendShopPluginMessage(Player p, String subchannel, String argumentA, String argumentB, String argumentC) {
-        sendPluginMessage(p, ClassManager.manager.getPlugin(), PLUGIN_CHANNEL, subchannel, argumentA, argumentB, argumentC);
+    public void sendShopPluginMessage(Player p,
+                                      String subchannel,
+                                      String argumentA,
+                                      String argumentB,
+                                      String argumentC) {
+        sendPluginMessage(p,
+                ClassManager.manager.getPlugin(),
+                PLUGIN_CHANNEL,
+                subchannel,
+                argumentA,
+                argumentB,
+                argumentC);
     }
 
 
@@ -68,12 +78,13 @@ public class BungeeCordManager implements PluginMessageListener {
 
 
             if (subchannel.equals("PlayerCount")) {
-                String server = in.readUTF(); //
-                int playercount = in.readInt();
+                String server      = in.readUTF(); //
+                int    playercount = in.readInt();
 
                 ServerPingingManager m = ClassManager.manager.getServerPingingManager();
                 if (m == null) {
-                    throw new RuntimeException("Received PlayerCount plugin message but server pinging is not even loaded?!");
+                    throw new RuntimeException(
+                            "Received PlayerCount plugin message but server pinging is not even loaded?!");
                 }
                 for (ServerInfo c : ClassManager.manager.getServerPingingManager().getList().getInfos().values()) {
                     if (c.getHost().equalsIgnoreCase(server)) {

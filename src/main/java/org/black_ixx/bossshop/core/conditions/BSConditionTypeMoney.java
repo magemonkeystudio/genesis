@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 public class BSConditionTypeMoney extends BSConditionTypeNumber {
 
     @Override
-    public double getNumber(BSBuy shopitem, BSShopHolder holder, Player p) {
+    public double getNumber(BSBuy shopItem, BSShopHolder holder, Player p) {
         if (ClassManager.manager.getVaultHandler() == null) {
             return 0;
         }

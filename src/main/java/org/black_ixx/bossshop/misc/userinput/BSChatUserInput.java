@@ -7,9 +7,9 @@ import java.util.UUID;
 
 public class BSChatUserInput {
 
-    private UUID uuid;
+    private UUID        uuid;
     private BSUserInput input;
-    private long time;
+    private long        time;
 
 
     public BSChatUserInput(Player p, BSUserInput input, long allowedDelay) {
@@ -25,6 +25,7 @@ public class BSChatUserInput {
 
     /**
      * Check if time is up to date
+     *
      * @return up to date
      */
     public boolean isUpToDate() {
@@ -33,6 +34,7 @@ public class BSChatUserInput {
 
     /**
      * Check if it's the correct player being checked
+     *
      * @param p player to check
      * @return correct or not
      */
@@ -42,7 +44,8 @@ public class BSChatUserInput {
 
     /**
      * Input received
-     * @param p the player to check
+     *
+     * @param p    the player to check
      * @param text string
      */
     public void input(Player p, String text) {

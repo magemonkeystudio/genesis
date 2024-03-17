@@ -1,5 +1,6 @@
 package org.black_ixx.bossshop.api;
 
+import lombok.Getter;
 import org.black_ixx.bossshop.BossShop;
 import org.black_ixx.bossshop.core.*;
 import org.black_ixx.bossshop.core.conditions.BSConditionType;
@@ -22,8 +23,9 @@ import java.util.List;
 public class BossShopAPI {
 
 
-    private BossShop plugin;
-    private List<BossShopAddon> enabled_addons;
+    private BossShop            plugin;
+    @Getter
+    private List<BossShopAddon> enabledAddons;
 
 
     public BossShopAPI(BossShop plugin) {
@@ -33,12 +35,13 @@ public class BossShopAPI {
 
     /**
      * Gets the name of the addon for BossShop
+     *
      * @param addonname the name of the addon
      * @return addon
      */
     public BossShopAddon getAddon(String addonname) {
-        if (enabled_addons != null) {
-            for (BossShopAddon addon : enabled_addons) {
+        if (enabledAddons != null) {
+            for (BossShopAddon addon : enabledAddons) {
                 if (addon.getAddonName().equalsIgnoreCase(addonname)) {
                     return addon;
                 }
@@ -49,10 +52,11 @@ public class BossShopAPI {
 
     /**
      * Check if a shop is valid
+     *
      * @param v the inventory to check
      * @return valid shop or not
      */
-    //For single shop
+    // For single shop
     public boolean isValidShop(InventoryView v) {
         if (v != null) {
             if (v.getTopInventory() != null) {
@@ -64,6 +68,7 @@ public class BossShopAPI {
 
     /**
      * Check if a shop is valid
+     *
      * @param i inventory
      * @return valid or not
      */
@@ -76,6 +81,7 @@ public class BossShopAPI {
 
     /**
      * Get a BossShop Shop
+     *
      * @param name the name of the shop
      * @return shop
      */
@@ -91,7 +97,8 @@ public class BossShopAPI {
 
     /**
      * Open a shop for a player by the name of the shop
-     * @param p the player to open the shop for
+     *
+     * @param p    the player to open the shop for
      * @param name the name of the shop
      */
     public void openShop(Player p, String name) {
@@ -105,7 +112,8 @@ public class BossShopAPI {
 
     /**
      * Opens a shop for a player by the shop instance
-     * @param p the player to open for
+     *
+     * @param p    the player to open for
      * @param shop the shop to open
      */
     public void openShop(Player p, BSShop shop) {
@@ -114,6 +122,7 @@ public class BossShopAPI {
 
     /**
      * Updates the inventory for a player
+     *
      * @param p player to update for
      */
     public void updateInventory(Player p) {
@@ -122,16 +131,24 @@ public class BossShopAPI {
 
     /**
      * Updates the inventory
-     * @param p the player to update for
-     * @param force_new_creation should it be forced
+     *
+     * @param p                the player to update for
+     * @param forceNewCreation should it be forced
      */
-    public void updateInventory(Player p, boolean force_new_creation) {
+    public void updateInventory(Player p, boolean forceNewCreation) {
         if (isValidShop(p.getOpenInventory())) {
             BSShopHolder holder = (BSShopHolder) p.getOpenInventory().getTopInventory().getHolder();
-            if (force_new_creation) {
+            if (forceNewCreation) {
                 holder.getShop().openInventory(p, holder.getPage(), false);
             } else {
-                holder.getShop().updateInventory(p.getOpenInventory().getTopInventory(), holder, p, ClassManager.manager, holder.getPage(), holder.getHighestPage(), false);
+                holder.getShop()
+                        .updateInventory(p.getOpenInventory().getTopInventory(),
+                                holder,
+                                p,
+                                ClassManager.manager,
+                                holder.getPage(),
+                                holder.getHighestPage(),
+                                false);
             }
         }
     }
@@ -139,9 +156,10 @@ public class BossShopAPI {
 
     /**
      * Get the managers for the shop
+     *
      * @return managers
      */
-    //Get managers
+    // Get managers
     public BSShops getShopHandler() {
         return plugin.getClassManager().getShops();
     }
@@ -149,15 +167,17 @@ public class BossShopAPI {
 
     /**
      * Add a shop to the plugin
+     *
      * @param shop the shop to add
      */
-    //Modify Shop/Shops
+    // Modify Shop/Shops
     public void addShop(BSShop shop) {
         getShopHandler().addShop(shop);
     }
 
     /**
      * Create the next id of a shop
+     *
      * @return the id
      */
     public int createNextShopId() {
@@ -166,16 +186,18 @@ public class BossShopAPI {
 
     /**
      * Add a new item to a shop
-     * @param menu_item the item to add
-     * @param shop_item shop item
-     * @param shop the shop to add to
+     *
+     * @param menuItem the item to add
+     * @param shopItem shop item
+     * @param shop     the shop to add to
      */
-    public void addItemToShop(ItemStack menu_item, BSBuy shop_item, BSShop shop) {
-        shop.addShopItem(shop_item, menu_item, ClassManager.manager);
+    public void addItemToShop(ItemStack menuItem, BSBuy shopItem, BSShop shop) {
+        shop.addShopItem(shopItem, menuItem, ClassManager.manager);
     }
 
     /**
      * Add items to shop
+     *
      * @param shop the shop to add to
      */
     public void finishedAddingItemsToShop(BSShop shop) {
@@ -185,15 +207,17 @@ public class BossShopAPI {
 
     /**
      * Register a condition type
+     *
      * @param type the type of condition to register
      */
-    //Register things
+    // Register things
     public void registerConditionType(BSConditionType type) {
         type.register();
     }
 
     /**
      * Register a price type
+     *
      * @param type the price type to register
      */
     public void registerPriceType(BSPriceType type) {
@@ -202,6 +226,7 @@ public class BossShopAPI {
 
     /**
      * Register a reward type
+     *
      * @param type the reward type to register
      */
     public void registerRewardType(BSRewardType type) {
@@ -210,6 +235,7 @@ public class BossShopAPI {
 
     /**
      * Register an item data part
+     *
      * @param part part to add
      */
     public void registerItemDataPart(ItemDataPart part) {
@@ -218,75 +244,105 @@ public class BossShopAPI {
 
     /**
      * Create a new item
-     * @param name the name of the item
-     * @param reward_type the reward type of the item
-     * @param price_type the price type of the item
-     * @param reward the reward of the item
-     * @param price the price of the item
-     * @param msg the message of the item
-     * @param location the location of the item
+     *
+     * @param name       the name of the item
+     * @param rewardType the reward type of the item
+     * @param priceType  the price type of the item
+     * @param reward     the reward of the item
+     * @param price      the price of the item
+     * @param msg        the message of the item
+     * @param location   the location of the item
      * @param permission the permission of the item
      * @return created item
      */
-    //Create things
-    public BSBuy createBSBuy(String name, BSRewardType reward_type, BSPriceType price_type, Object reward, Object price, String msg, int location, String permission) {
-        return new BSBuy(reward_type, price_type, reward, price, msg, location, permission, name);
+    // Create things
+    public BSBuy createBSBuy(String name,
+                             BSRewardType rewardType,
+                             BSPriceType priceType,
+                             Object reward,
+                             Object price,
+                             String msg,
+                             int location,
+                             String permission) {
+        return new BSBuy(rewardType, priceType, reward, price, msg, location, permission, name);
     }
 
 
     /**
      * Creates a custom item
-     * @param name name of item
-     * @param reward_type reward type
-     * @param price_type price type
-     * @param reward reward
-     * @param price price
-     * @param msg msg
-     * @param location location
+     *
+     * @param name       name of item
+     * @param rewardType reward type
+     * @param priceType  price type
+     * @param reward     reward
+     * @param price      price
+     * @param msg        msg
+     * @param location   location
      * @param permission permission
      * @return custom item
      */
-    public BSBuy createBSBuyCustom(String name, BSRewardType reward_type, BSPriceType price_type, BSCustomLink reward, Object price, String msg, int location, String permission) {
-        return new BSBuy(reward_type, price_type, reward, price, msg, location, permission, name);
+    public BSBuy createBSBuyCustom(String name,
+                                   BSRewardType rewardType,
+                                   BSPriceType priceType,
+                                   BSCustomLink reward,
+                                   Object price,
+                                   String msg,
+                                   int location,
+                                   String permission) {
+        return new BSBuy(rewardType, priceType, reward, price, msg, location, permission, name);
     }
 
     /**
      * Create a buy item
-     * @param reward_type reward type
-     * @param price_type price type
-     * @param reward reward
-     * @param price price
-     * @param msg msg
-     * @param location location
+     *
+     * @param rewardType reward type
+     * @param priceType  price type
+     * @param reward     reward
+     * @param price      price
+     * @param msg        msg
+     * @param location   location
      * @param permission permission
      * @return buy item
      */
-    public BSBuy createBSBuy(BSRewardType reward_type, BSPriceType price_type, Object reward, Object price, String msg, int location, String permission) {
-        return new BSBuy(reward_type, price_type, reward, price, msg, location, permission, "");
+    public BSBuy createBSBuy(BSRewardType rewardType,
+                             BSPriceType priceType,
+                             Object reward,
+                             Object price,
+                             String msg,
+                             int location,
+                             String permission) {
+        return new BSBuy(rewardType, priceType, reward, price, msg, location, permission, "");
     }
 
-    public BSBuy createBSBuyCustom(BSRewardType reward_type, BSPriceType price_type, BSCustomLink reward, Object price, String msg, int location, String permission) {
-        return new BSBuy(reward_type, price_type, reward, price, msg, location, permission, "");
+    public BSBuy createBSBuyCustom(BSRewardType rewardType,
+                                   BSPriceType priceType,
+                                   BSCustomLink reward,
+                                   Object price,
+                                   String msg,
+                                   int location,
+                                   String permission) {
+        return new BSBuy(rewardType, priceType, reward, price, msg, location, permission, "");
     }
 
-    public BSCustomLink createBSCustomLink(BSCustomActions actions, int action_id) {
-        return new BSCustomLink(action_id, actions);
+    public BSCustomLink createBSCustomLink(BSCustomActions actions, int actionId) {
+        return new BSCustomLink(actionId, actions);
     }
 
 
     /**
      * Get all items in all shops
+     *
      * @return list of all items
      */
-    //Get shop items
+    // Get shop items
     public HashMap<BSShop, List<BSBuy>> getAllShopItems() {
-        HashMap<BSShop, List<BSBuy>> all = new HashMap<BSShop, List<BSBuy>>();
+        HashMap<BSShop, List<BSBuy>> all = new HashMap<>();
         for (int i : plugin.getClassManager().getShops().getShops().keySet()) {
             BSShop shop = plugin.getClassManager().getShops().getShop(i);
             if (shop == null) {
                 continue;
             }
-            List<BSBuy> items = new ArrayList<BSBuy>();
+            List<BSBuy> items = new ArrayList<>();
             for (BSBuy buy : shop.getItems()) {
                 if (buy == null || buy.getItem() == null) {
                     continue;
@@ -301,23 +357,25 @@ public class BossShopAPI {
 
     /**
      * Get all items from config
-     * @param config_option
+     *
+     * @param configOption
      * @return
      */
-    public HashMap<BSConfigShop, List<BSBuy>> getAllShopItems(String config_option) {
-        HashMap<BSConfigShop, List<BSBuy>> all = new HashMap<BSConfigShop, List<BSBuy>>();
+    public HashMap<BSConfigShop, List<BSBuy>> getAllShopItems(String configOption) {
+        HashMap<BSConfigShop, List<BSBuy>> all = new HashMap<>();
         for (int i : plugin.getClassManager().getShops().getShops().keySet()) {
             BSShop shop = plugin.getClassManager().getShops().getShop(i);
             if (shop == null | !(shop instanceof BSConfigShop)) {
                 continue;
             }
-            BSConfigShop sho = (BSConfigShop) shop;
-            List<BSBuy> items = new ArrayList<BSBuy>();
+            BSConfigShop sho   = (BSConfigShop) shop;
+            List<BSBuy>  items = new ArrayList<>();
             for (BSBuy buy : shop.getItems()) {
                 if (buy == null || buy.getItem() == null) {
                     continue;
                 }
-                if (buy.getConfigurationSection(sho).getBoolean(config_option) == false && buy.getConfigurationSection(sho).getInt(config_option) == 0) {
+                if (buy.getConfigurationSection(sho).getBoolean(configOption) == false
+                        && buy.getConfigurationSection(sho).getInt(configOption) == 0) {
                     continue;
                 }
                 items.add(buy);
@@ -330,26 +388,21 @@ public class BossShopAPI {
 
     /**
      * Add an addon to the plugin
+     *
      * @param addon the addon to add
      */
-    //Addon API
+    // Addon API
     protected void addEnabledAddon(BossShopAddon addon) {
         Plugin addonplugin = Bukkit.getPluginManager().getPlugin(addon.getAddonName());
         if (addonplugin == null) {
             return;
         }
-        if (enabled_addons == null) {
-            enabled_addons = new ArrayList<BossShopAddon>();
+        if (enabledAddons == null) {
+            enabledAddons = new ArrayList<>();
         }
-        if (enabled_addons.contains(addon)) {
+        if (enabledAddons.contains(addon)) {
             return;
         }
-        enabled_addons.add(addon);
+        enabledAddons.add(addon);
     }
-
-    public List<BossShopAddon> getEnabledAddons() {
-        return enabled_addons;
-    }
-
-
 }

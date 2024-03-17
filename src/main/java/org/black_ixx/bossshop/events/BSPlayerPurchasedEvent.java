@@ -3,7 +3,6 @@ package org.black_ixx.bossshop.events;
 import org.black_ixx.bossshop.core.BSBuy;
 import org.black_ixx.bossshop.core.BSShop;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.inventory.ClickType;
 
@@ -11,9 +10,9 @@ public class BSPlayerPurchasedEvent extends BSEvent {
 
     private static final HandlerList handlers = new HandlerList();
 
-    private final Player player;
-    private final BSBuy buy;
-    private final BSShop shop;
+    private final Player    player;
+    private final BSBuy     buy;
+    private final BSShop    shop;
     private final ClickType clickType;
 
 

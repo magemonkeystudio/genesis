@@ -9,11 +9,11 @@ import org.bukkit.event.inventory.ClickType;
 public class BSPriceTypeNothing extends BSPriceType {
 
 
-    public Object createObject(Object o, boolean force_final_state) {
+    public Object createObject(Object o, boolean forceFinalState) {
         return null;
     }
 
-    public boolean validityCheck(String item_name, Object o) {
+    public boolean validityCheck(String itemName, Object o) {
         return true;
     }
 

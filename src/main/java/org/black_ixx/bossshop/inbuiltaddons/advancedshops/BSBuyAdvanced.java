@@ -17,99 +17,110 @@ public class BSBuyAdvanced extends BSBuy {
     private Map<ClickType, ActionSet> actions;
 
 
-    public BSBuyAdvanced(BSRewardType rewardT, BSPriceType priceT, Object reward, Object price, String msg, int location, String permission, String name, BSCondition condition, BSInputType inputtype, String inputmessage, Map<ClickType, ActionSet> actions) {
-        super(rewardT, priceT, reward, price, msg, location, permission, name, condition, inputtype, inputmessage);
+    public BSBuyAdvanced(BSRewardType rewardT,
+                         BSPriceType priceT,
+                         Object reward,
+                         Object price,
+                         String msg,
+                         int location,
+                         String permission,
+                         String name,
+                         BSCondition condition,
+                         BSInputType inputType,
+                         String inputmessage,
+                         Map<ClickType, ActionSet> actions) {
+        super(rewardT, priceT, reward, price, msg, location, permission, name, condition, inputType, inputmessage);
         this.actions = actions;
     }
 
     @Override
-    public BSRewardType getRewardType(ClickType clicktype) {
+    public BSRewardType getRewardType(ClickType clickType) {
         if (actions != null) {
-            if (actions.containsKey(clicktype)) {
-                return actions.get(clicktype).getRewardType();
+            if (actions.containsKey(clickType)) {
+                return actions.get(clickType).getRewardType();
             }
         }
-        return super.getRewardType(clicktype);
+        return super.getRewardType(clickType);
     }
 
     @Override
-    public BSPriceType getPriceType(ClickType clicktype) {
+    public BSPriceType getPriceType(ClickType clickType) {
         if (actions != null) {
-            if (actions.containsKey(clicktype)) {
-                return actions.get(clicktype).getPriceType();
+            if (actions.containsKey(clickType)) {
+                return actions.get(clickType).getPriceType();
             }
         }
-        return super.getPriceType(clicktype);
+        return super.getPriceType(clickType);
     }
 
     @Override
-    public Object getReward(ClickType clicktype) {
+    public Object getReward(ClickType clickType) {
         if (actions != null) {
-            if (actions.containsKey(clicktype)) {
-                return actions.get(clicktype).getReward();
+            if (actions.containsKey(clickType)) {
+                return actions.get(clickType).getReward();
             }
         }
-        return super.getReward(clicktype);
+        return super.getReward(clickType);
     }
 
     @Override
-    public Object getPrice(ClickType clicktype) {
+    public Object getPrice(ClickType clickType) {
         if (actions != null) {
-            if (actions.containsKey(clicktype)) {
-                return actions.get(clicktype).getPrice();
+            if (actions.containsKey(clickType)) {
+                return actions.get(clickType).getPrice();
             }
         }
-        return super.getPrice(clicktype);
+        return super.getPrice(clickType);
     }
 
     @Override
-    public String getMessage(ClickType clicktype) {
+    public String getMessage(ClickType clickType) {
         if (actions != null) {
-            if (actions.containsKey(clicktype)) {
-                return actions.get(clicktype).getMessage();
+            if (actions.containsKey(clickType)) {
+                return actions.get(clickType).getMessage();
             }
         }
-        return super.getMessage(clicktype);
+        return super.getMessage(clickType);
     }
 
     @Override
-    public BSInputType getInputType(ClickType clicktype) {
+    public BSInputType getInputType(ClickType clickType) {
         if (actions != null) {
-            if (actions.containsKey(clicktype)) {
-                return actions.get(clicktype).getInputType();
+            if (actions.containsKey(clickType)) {
+                return actions.get(clickType).getInputType();
             }
         }
-        return super.getInputType(clicktype);
+        return super.getInputType(clickType);
     }
 
     @Override
-    public String getInputText(ClickType clicktype) {
+    public String getInputText(ClickType clickType) {
         if (actions != null) {
-            if (actions.containsKey(clicktype)) {
-                return actions.get(clicktype).getInputText();
+            if (actions.containsKey(clickType)) {
+                return actions.get(clickType).getInputText();
             }
         }
-        return super.getInputText(clicktype);
+        return super.getInputText(clickType);
     }
 
     @Override
-    public boolean isExtraPermissionGroup(ClickType clicktype) {
+    public boolean isExtraPermissionGroup(ClickType clickType) {
         if (actions != null) {
-            if (actions.containsKey(clicktype)) {
-                return actions.get(clicktype).isExtraPermissionGroup();
+            if (actions.containsKey(clickType)) {
+                return actions.get(clickType).isExtraPermissionGroup();
             }
         }
-        return super.isExtraPermissionGroup(clicktype);
+        return super.isExtraPermissionGroup(clickType);
     }
 
     @Override
-    public String getExtraPermission(ClickType clicktype) {
+    public String getExtraPermission(ClickType clickType) {
         if (actions != null) {
-            if (actions.containsKey(clicktype)) {
-                return actions.get(clicktype).getExtraPermission();
+            if (actions.containsKey(clickType)) {
+                return actions.get(clickType).getExtraPermission();
             }
         }
-        return super.getExtraPermission(clicktype);
+        return super.getExtraPermission(clickType);
     }
 
     @Override
@@ -124,42 +135,47 @@ public class BSBuyAdvanced extends BSBuy {
 
 
         if (actions != null) {
-            for (ClickType clicktype : actions.keySet()) {
-                ActionSet action = actions.get(clicktype);
-                String s = clicktype.name().toLowerCase();
+            for (ClickType clickType : actions.keySet()) {
+                ActionSet action = actions.get(clickType);
+                String    s      = clickType.name().toLowerCase();
 
                 String tp = "%price_" + s + "%";
                 String tr = "%reward_" + s + "%";
 
                 if (msg.contains(tp) || msg.contains(tr)) {
-                    String rewardMessage = action.getRewardType().isPlayerDependend(this, clicktype) ? null : action.getRewardType().getDisplayReward(p, this, action.getReward(), clicktype);
-                    String priceMessage = action.getPriceType().isPlayerDependend(this, clicktype) ? null : action.getPriceType().getDisplayPrice(p, this, action.getPrice(), clicktype);
+                    String rewardMessage = action.getRewardType().isPlayerDependend(this, clickType) ? null
+                            : action.getRewardType().getDisplayReward(p, this, action.getReward(), clickType);
+                    String priceMessage  = action.getPriceType().isPlayerDependend(this, clickType) ? null
+                            : action.getPriceType().getDisplayPrice(p, this, action.getPrice(), clickType);
 
 
                     if (shop != null) { //Does shop need to be customizable and is not already?
                         if (!shop.isCustomizable()) {
-                            boolean has_pricevariable = (msg.contains(tp) && (action.getPriceType().isPlayerDependend(this, clicktype)));
-                            boolean has_rewardvariable = (msg.contains(tr) && (action.getRewardType().isPlayerDependend(this, clicktype)));
-                            if (has_pricevariable || has_rewardvariable) {
+                            boolean hasPriceVariable  =
+                                    (msg.contains(tp) && (action.getPriceType().isPlayerDependend(this, clickType)));
+                            boolean hasRewardVariable =
+                                    (msg.contains(tr) && (action.getRewardType().isPlayerDependend(this, clickType)));
+                            if (hasPriceVariable || hasRewardVariable) {
                                 shop.setCustomizable(true);
                                 shop.setDisplaying(true);
                             }
                         }
                     }
 
-                    boolean possibly_customizable = shop == null ? true : shop.isCustomizable();
-                    if (possibly_customizable) {
+                    boolean possiblyCustomizable = shop == null || shop.isCustomizable();
+                    if (possiblyCustomizable) {
                         if (p != null) { //When shop is customizable, the variables needs to be adapted to the player
-                            rewardMessage = action.getRewardType().getDisplayReward(p, this, action.getReward(), clicktype);
-                            priceMessage = action.getPriceType().getDisplayPrice(p, this, action.getPrice(), clicktype);
+                            rewardMessage =
+                                    action.getRewardType().getDisplayReward(p, this, action.getReward(), clickType);
+                            priceMessage = action.getPriceType().getDisplayPrice(p, this, action.getPrice(), clickType);
                         }
                     }
 
 
-                    if (priceMessage != null && priceMessage != "" && priceMessage.length() > 0) {
+                    if (priceMessage != null && !priceMessage.isEmpty()) {
                         msg = msg.replace(tp, priceMessage);
                     }
-                    if (rewardMessage != null && rewardMessage != "" && rewardMessage.length() > 0) {
+                    if (rewardMessage != null && !rewardMessage.isEmpty()) {
                         msg = msg.replace(tr, rewardMessage);
                     }
                 }

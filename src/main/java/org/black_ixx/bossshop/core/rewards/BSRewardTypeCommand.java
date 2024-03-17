@@ -13,15 +13,17 @@ import java.util.List;
 public class BSRewardTypeCommand extends BSRewardType {
 
 
-    public Object createObject(Object o, boolean force_final_state) {
+    public Object createObject(Object o, boolean forceFinalState) {
         return InputReader.readStringList(o);
     }
 
-    public boolean validityCheck(String item_name, Object o) {
+    public boolean validityCheck(String itemName, Object o) {
         if (o != null) {
             return true;
         }
-        ClassManager.manager.getBugFinder().severe("Was not able to create ShopItem " + item_name + "! The reward object needs to be a list of commands (text lines).");
+        ClassManager.manager.getBugFinder()
+                .severe("Was not able to create ShopItem " + itemName
+                        + "! The reward object needs to be a list of commands (text lines).");
         return false;
     }
 
@@ -30,7 +32,7 @@ public class BSRewardTypeCommand extends BSRewardType {
     }
 
     @Override
-    public boolean canBuy(Player p, BSBuy buy, boolean message_if_no_success, Object reward, ClickType clickType) {
+    public boolean canBuy(Player p, BSBuy buy, boolean messageIfNoSuccess, Object reward, ClickType clickType) {
         return true;
     }
 
@@ -40,9 +42,12 @@ public class BSRewardTypeCommand extends BSRewardType {
         List<String> commands = (List<String>) reward;
 
         for (String s : commands) {
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), ClassManager.manager.getStringManager().transform(s, buy, null, null, p));
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
+                    ClassManager.manager.getStringManager().transform(s, buy, null, null, p));
         }
-        if (p.getOpenInventory() != null & !ClassManager.manager.getPlugin().getAPI().isValidShop(p.getOpenInventory())) {
+        if (p.getOpenInventory() != null & !ClassManager.manager.getPlugin()
+                .getAPI()
+                .isValidShop(p.getOpenInventory())) {
             p.updateInventory();
         }
 
@@ -52,8 +57,10 @@ public class BSRewardTypeCommand extends BSRewardType {
     public String getDisplayReward(Player p, BSBuy buy, Object reward, ClickType clickType) {
         @SuppressWarnings("unchecked")
         List<String> commands = (List<String>) reward;
-        String commands_formatted = StringManipulationLib.formatList(commands);
-        return ClassManager.manager.getMessageHandler().get("Display.Command").replace("%commands%", commands_formatted);
+        String commandsFormatted = StringManipulationLib.formatList(commands);
+        return ClassManager.manager.getMessageHandler()
+                .get("Display.Command")
+                .replace("%commands%", commandsFormatted);
     }
 
     @Override
