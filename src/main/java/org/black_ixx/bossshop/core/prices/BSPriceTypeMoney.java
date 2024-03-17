@@ -4,7 +4,6 @@ import org.black_ixx.bossshop.core.BSBuy;
 import org.black_ixx.bossshop.managers.ClassManager;
 import org.black_ixx.bossshop.managers.misc.InputReader;
 import org.black_ixx.bossshop.misc.MathTools;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 
@@ -44,7 +43,7 @@ public class BSPriceTypeMoney extends BSPriceTypeNumber {
                             ClickType clickType,
                             int multiplier,
                             boolean messageOnFailure) {
-        double money = (double) ClassManager.manager.getMultiplierHandler()
+        double money = ClassManager.manager.getMultiplierHandler()
                 .calculatePriceWithMultiplier(p, buy, clickType, (Double) price) * multiplier;
         if (ClassManager.manager.getVaultHandler() == null) {
             return false;

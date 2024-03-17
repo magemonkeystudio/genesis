@@ -174,11 +174,6 @@ public class MultiplierHandler {
 
 
     public boolean hasMultipliers() {
-        if (multipliers == null) {
-            return false;
-        }
         return !multipliers.isEmpty();
     }
-
-
 }
