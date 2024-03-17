@@ -1,28 +1,38 @@
 package org.black_ixx.bossshop.core;
 
+import lombok.Getter;
 import org.black_ixx.bossshop.core.prices.BSPriceType;
 import org.black_ixx.bossshop.managers.ClassManager;
 import org.bukkit.entity.Player;
 
 public class BSMultiplier {
 
-    public final static int RANGE_ALL         = 0;
-    public final static int RANGE_PRICE_ONLY  = 1;
+    public final static int RANGE_ALL = 0;
+    public final static int RANGE_PRICE_ONLY = 1;
     public final static int RANGE_REWARD_ONLY = 2;
 
-    private String      permission = "Permission.Node";
-    private BSPriceType type       = BSPriceType.Nothing;
-    private double      multiplier = 1.0;
-    private int         range      = RANGE_ALL;
+    @Getter
+    private String permission = "Permission.Node";
+    @Getter
+    private BSPriceType type = BSPriceType.Nothing;
+    @Getter
+    private double multiplier = 1.0;
+    private int range = RANGE_ALL;
+
+    // Optional filters for the multipliers to only apply to specific shops and items
+    @Getter
+    private String shopName = null;
+    @Getter
+    private String itemId = null;
 
 
     public BSMultiplier(String configLine) {
-        String[] parts = configLine.split(":", 4);
+        String[] parts = configLine.split(":", 6);
 
-        if (parts.length != 3 && parts.length != 4) {
+        if (parts.length < 3) {
             ClassManager.manager.getBugFinder()
-                    .warn("Invalid Multiplier Group Line... \"" + configLine
-                            + "\"! It should look like this: \"Permission.Node:<type>:<multiplier>:<price/reward/both>\"");
+                    .warn("Invalid Multiplier Group Line... " + configLine
+                            + "! It should look like this: Permission.Node:<type>:<multiplier>:<price/reward/both>:[shop]:[itemId]");
             return;
         }
 
@@ -32,10 +42,9 @@ public class BSMultiplier {
             return;
         }
 
-
-        BSPriceType type       = BSPriceType.detectType(parts[1].trim());
-        double      multiplier = 1.0;
-        int         range      = RANGE_ALL;
+        BSPriceType type = BSPriceType.detectType(parts[1].trim());
+        double multiplier;
+        int range = RANGE_ALL;
 
         if (type == null || !type.supportsMultipliers()) {
             ClassManager.manager.getBugFinder()
@@ -55,18 +64,33 @@ public class BSMultiplier {
             return;
         }
 
-
         if (parts.length >= 4) {
             String rs = parts[3].trim();
+            // If range is available, select between 'price' or 'reward'
             if (rs.equalsIgnoreCase("price")) {
                 range = RANGE_PRICE_ONLY;
             } else if (rs.equalsIgnoreCase("reward")) {
                 range = RANGE_REWARD_ONLY;
             }
+            // Else take 'both' and start to search for shop and item ids
+            else if (parts.length <= 5) {
+                setShopDetails(parts, 3);
+            }
+
+            // If the shop and item ids are not found yet, take a last attempt to see if they are set after the range
+            if (parts.length >= 6 && shopName == null && itemId == null) {
+                setShopDetails(parts, 4);
+            }
         }
 
         setup(permission, type, multiplier, range);
 
+    }
+
+    private void setShopDetails(String[] args, int fromPost) {
+        shopName = args[fromPost].trim();
+        if (args.length >= fromPost + 2)
+            itemId = args[fromPost + 1].trim();
     }
 
     public BSMultiplier(String permission, BSPriceType type, double multiplier, int range) {
@@ -82,18 +106,6 @@ public class BSMultiplier {
 
     public boolean isValid() {
         return type.supportsMultipliers();
-    }
-
-    public BSPriceType getType() {
-        return type;
-    }
-
-    public double getMultiplier() {
-        return multiplier;
-    }
-
-    public String getPermission() {
-        return permission;
     }
 
     public boolean hasPermission(Player p) {
@@ -136,9 +148,7 @@ public class BSMultiplier {
     public boolean isMultiplierActive(Player p, BSPriceType type, int range) {
         if (this.type == type) {
             if (hasPermission(p)) {
-                if (isInRange(range)) {
-                    return true;
-                }
+                return isInRange(range);
             }
         }
         return false;
@@ -154,6 +164,17 @@ public class BSMultiplier {
                 return this.range == RANGE_PRICE_ONLY || this.range == RANGE_ALL;
         }
         return false;
+    }
+
+    public boolean isAcceptedShopItem(BSBuy buy) {
+        if(shopName == null && itemId == null) {
+            return true;
+        } else if(shopName != null && itemId == null) {
+            return shopName.equalsIgnoreCase(buy.getShop().getShopName());
+        } else if(shopName != null) {
+            return shopName.equalsIgnoreCase(buy.getShop().getShopName()) && itemId.equalsIgnoreCase(buy.getName());
+        }
+        return true;
     }
 
     public double calculateWithMultiplier(double d) {

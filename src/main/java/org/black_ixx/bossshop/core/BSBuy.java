@@ -10,6 +10,7 @@ import org.black_ixx.bossshop.events.BSPlayerPurchaseEvent;
 import org.black_ixx.bossshop.events.BSPlayerPurchasedEvent;
 import org.black_ixx.bossshop.managers.ClassManager;
 import org.black_ixx.bossshop.managers.config.BSConfigShop;
+import org.black_ixx.bossshop.misc.MathTools;
 import org.black_ixx.bossshop.misc.Misc;
 import org.black_ixx.bossshop.misc.ShopItemPurchaseTask;
 import org.black_ixx.bossshop.settings.Settings;
@@ -289,11 +290,11 @@ public class BSBuy {
         }
 
         // Not working with these variables anymore. They are still included and set to "" in order to make previous shops still look good and stay compatible.
-        if (priceT != null && !Objects.equals(priceT.name(), "") && priceT.name().length() > 0) {
+        if (priceT != null && !Objects.equals(priceT.name(), "") && !priceT.name().isEmpty()) {
             msg = msg.replace(" %pricetype%", "");
             msg = msg.replace("%pricetype%", "");
         }
-        if (rewardT != null && !Objects.equals(rewardT.name(), "") && rewardT.name().length() > 0) {
+        if (rewardT != null && !Objects.equals(rewardT.name(), "") && !rewardT.name().isEmpty()) {
             msg = msg.replace(" %rewardtype%", "");
             msg = msg.replace("%rewardtype%", "");
         }
@@ -301,7 +302,7 @@ public class BSBuy {
         // Handle rest
         msg = msg.replace("%shopitemname%", this.name);
 
-        String name = this.name;
+        String name;
         if (shop != null && item != null) {
             String itemTitle = ClassManager.manager.getItemStackTranslator().readItemName(item);
             if (itemTitle != null) {
@@ -320,6 +321,12 @@ public class BSBuy {
             }
             if (msg.contains("%priceraw%")) {
                 msg = msg.replace("%priceraw%", String.valueOf(price));
+            }
+            if (msg.contains("%original_price%")) {
+                msg = msg.replace("%original_price%", MathTools.displayNumber((double) price, BSPriceType.Money));
+            }
+            if (msg.contains("%original_reward%")) {
+                msg = msg.replace("%original_reward%", MathTools.displayNumber((double) price, BSPriceType.Points));
             }
         }
         return msg;
