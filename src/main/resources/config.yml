@@ -223,16 +223,21 @@ BungeeCord : false
 # MultiplierGroups:
 # Here you can set up Price Multipliers.
 # If enabled, this MultiplierGroups will be loaded and players with the right permissions will get a price decrease/increase.
-# The lines of the List look like this: <Permission>:<Type>:<Multiplier>:<buy/sell/both>.
+# The lines of the List look like this: <Permission>:<Type>:<Multiplier>:<price/reward/both>:[shop]:[itemId].
 # <Permission>: Here you can put in whatever you want. If you want a group to have this multiplier, just give that group your permission.
 # <Type>: Multiplier Type. Valid: Money, Points, Exp
 # <Multiplier>: Price = old Price * Multiplier
 # <price/reward/both>: Here you enter the range of the multiplier. It can affect either prices, rewards or both. If using prices or rewards the value is multiplied by the multiplier.
 # In case of using range "both" the prices are multiplied by the given multiplier and the rewards are divided by the given multiplier. If you do not define a range the plugin will automatically select "both".
+# [shop]: Here you can define the shop the multiplier should be applied to. If you do not define a shop the plugin will select all shops.
+# [itemId]: Here you can define the item the multiplier should be applied to. If you do not define an item the plugin will select all items of the shop.
+# The modified price-format is shown in 'RenewedPriceFormat', showing %oldValue% as the old price and %newValue% as the new price.
 # Players can be in multiple "MultiplierGroups" at the same time.
 MultiplierGroups:
   Enabled: false
+  RenewedPriceFormat: "&c&m%oldValue%&r &r&a%newValue%&r"
   List:
+  - BossShop.PriceMultiplier.SpecialShopTest:money:0.1:price:test-shop:test-item
   - BossShop.PriceMultiplier.Points:points:0.75:price
   - BossShop.PriceMultiplier.Money:money:0.5:price
   - BossShop.RewardMultiplier.Money:money:2.0:reward
