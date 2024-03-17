@@ -66,6 +66,9 @@ public class MathTools {
         return s;
     }
 
+    public static String removeNonNumeric(String str) {
+        return str.replaceAll("[^\\d.]", "");
+    }
 
     public static double round(double value, int places) {
         if (places < 0) throw new IllegalArgumentException();
