@@ -12,12 +12,10 @@ import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.profile.PlayerProfile;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class ItemDataPartCustomSkull extends ItemDataPart {
 
@@ -27,6 +25,7 @@ public class ItemDataPartCustomSkull extends ItemDataPart {
         }
 
         SkullMeta skullMeta = (SkullMeta) i.getItemMeta();
+        if (skullMeta == null) return i;
         if (input.contains("http://textures.minecraft.net/texture")) {
             try {
                 PlayerProfile pprofile = Bukkit.createPlayerProfile(UUID.randomUUID());
@@ -39,18 +38,23 @@ public class ItemDataPartCustomSkull extends ItemDataPart {
             }
         }
 
-        GameProfile profile = new GameProfile(UUID.randomUUID(), null);
-        // TODO Use NBT to set skull texture b64
-        Property property = getProperty(input);
-        profile.getProperties().put("textures", property);
-
+        UUID id = UUID.randomUUID();
         try {
-            Field profileField = skullMeta.getClass().getDeclaredField("profile");
-            profileField.setAccessible(true);
-            profileField.set(skullMeta, profile);
-        } catch (NoSuchFieldException | SecurityException | IllegalAccessException e) {
-            ClassManager.manager.getBugFinder().warn("Could not set profile texture.");
-            e.printStackTrace();
+            PlayerProfile playerProfile = Bukkit.createPlayerProfile(id);
+            String decoded = new String(Base64.getDecoder().decode(input));
+            playerProfile.getTextures().setSkin(new URL(decoded.substring("{\"textures\":{\"SKIN\":{\"url\":\"".length(), decoded.length() - "\"}}}".length())));
+            skullMeta.setOwnerProfile(playerProfile);
+        } catch (MalformedURLException | NoClassDefFoundError | NoSuchMethodError | IllegalArgumentException e) {
+            try {
+                GameProfile profile = new GameProfile(id, id.toString());
+                profile.getProperties().put("textures", getProperty(input));
+                Field profileField = skullMeta.getClass().getDeclaredField("profile");
+                profileField.setAccessible(true);
+                profileField.set(skullMeta, profile);
+            } catch (NoSuchFieldException | SecurityException | IllegalAccessException e1) {
+                ClassManager.manager.getBugFinder().warn("Could not set profile texture.");
+                e1.printStackTrace();
+            }
         }
         i.setItemMeta(skullMeta);
         return i;
@@ -77,7 +81,15 @@ public class ItemDataPartCustomSkull extends ItemDataPart {
                             Iterator<Property> iterator = properties.iterator();
                             if (iterator.hasNext()) {
                                 Property property = iterator.next();
-                                return property.getValue();
+                                try {
+                                    // We'll try to call getValue just in case the property is not a record
+                                    Method getValueMethod = property.getClass().getDeclaredMethod("getValue");
+                                    getValueMethod.setAccessible(true);
+                                    return (String) getValueMethod.invoke(property);
+                                } catch (NoSuchMethodException e) {
+                                    // If the property is a record...
+                                    return property.value();
+                                }
                             }
                         }
                     }
@@ -93,7 +105,11 @@ public class ItemDataPartCustomSkull extends ItemDataPart {
     @Override
     public ItemStack transform(ItemStack item, String used_name, String argument) {
         if (!(item.getItemMeta() instanceof SkullMeta)) {
-            ClassManager.manager.getBugFinder().warn("Mistake in Config: Itemdata of type '" + used_name + "' with value '" + argument + "' can not be added to an item with material '" + item.getType().name() + "'. Don't worry I'll automatically transform the material into '" + Material.PLAYER_HEAD + ".");
+            ClassManager.manager.getBugFinder()
+                    .warn("Mistake in Config: Itemdata of type '" + used_name + "' with value '" + argument
+                            + "' can not be added to an item with material '" + item.getType().name()
+                            + "'. Don't worry I'll automatically transform the material into '" + Material.PLAYER_HEAD
+                            + ".");
             item.setType(Material.PLAYER_HEAD);
         }
         item = transformSkull(item, argument);

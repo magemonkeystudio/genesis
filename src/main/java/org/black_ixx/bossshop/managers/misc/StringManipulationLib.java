@@ -1,5 +1,7 @@
 package org.black_ixx.bossshop.managers.misc;
 
+import net.md_5.bungee.api.chat.BaseComponent;
+
 import java.util.List;
 
 public class StringManipulationLib {
@@ -73,15 +75,16 @@ public class StringManipulationLib {
         if (list == null || list.isEmpty()) {
             return "";
         }
-        String output = null;
+        StringBuilder output = null;
         for (String s : list) {
             if (output == null) {
-                output = s;
+                output = new StringBuilder(s);
             } else {
-                output += "\n" + s;
+                BaseComponent baseComponent = InputReader.readChatComponent(s);
+                output.append("\n").append(baseComponent == null ? s : baseComponent.toString());
             }
         }
-        return output;
+        return output.toString();
     }
 
 

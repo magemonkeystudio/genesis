@@ -3,9 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.promcteam</groupId>
     <artifactId>bossshoppro</artifactId>
-    <version>2.1.0-SNAPSHOT</version>
+    <version>2.1.0-R0.6-SNAPSHOT</version>
     <name>BossShopPro</name>
     <description>Create virtual chest shops</description>
+    <url>
+        https://www.spigotmc.org/resources/bossshoppro-continued-now-free.104824/
+    </url>
 
     <properties>
         <java.version>11</java.version>
@@ -79,7 +82,7 @@
         <dependency>
             <groupId>de.tr7zw</groupId>
             <artifactId>item-nbt-api</artifactId>
-            <version>2.11.0</version>
+            <version>2.12.2</version>
         </dependency>
 
         <!-- Adds player points support -->
@@ -116,7 +119,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.19.4-R0.1-SNAPSHOT</version>
+            <version>1.20.1-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
 
@@ -124,7 +127,7 @@
         <dependency>
             <groupId>net.md-5</groupId>
             <artifactId>bungeecord-api</artifactId>
-            <version>1.19-R0.1-SNAPSHOT</version>
+            <version>1.20-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
 
@@ -233,7 +236,7 @@
         <dependency>
             <groupId>com.github.FrancoBM12</groupId>
             <artifactId>API-MagicCosmetics</artifactId>
-            <version>2.2.2</version>
+            <version>2.2.6</version>
             <scope>provided</scope>
         </dependency>
 
@@ -264,7 +267,7 @@
         <dependency>
             <groupId>com.mojang</groupId>
             <artifactId>authlib</artifactId>
-            <version>3.11.50</version>
+            <version>5.0.47</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
@@ -381,7 +384,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
-                        <version>3.2.1</version>
+                        <version>3.3.0</version>
                         <executions>
                             <execution>
                                 <id>attach-sources</id>
@@ -407,7 +410,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.6</version>
+                        <version>3.1.0</version>
                         <executions>
                             <execution>
                                 <phase>verify</phase>

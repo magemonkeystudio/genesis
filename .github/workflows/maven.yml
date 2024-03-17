@@ -1,12 +1,14 @@
-name: PR Check
+name: Build Artifacts
 
 on:
-  pull_request_target:
-    branches: [ dev, main ]
+  pull_request:
+    branches: [ main, dev ]
 
 jobs:
-  deploy:
+  build:
+
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 17
@@ -22,8 +24,8 @@ jobs:
         uses: s4u/maven-settings-action@v2.8.0
         with:
           githubServer: false
-          servers: '[{"id": "ossrh", "username": "Travja", "password": "${{ secrets.SONATYPE_DEPLOY_KEY }}"}]'
+          servers: '[{"id": "promcteam", "username": "Travja", "password": "${{ secrets.GITHUB_TOKEN }}"}]'
       - name: Build with Maven
-        env:
-          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
         run: mvn clean package -e
+        env:
+          GITHUB_TOKEN_REF: ${{ secrets.GH_PAT_FOR_ACTIONS_TOKEN }}

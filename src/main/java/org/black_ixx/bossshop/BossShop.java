@@ -23,7 +23,7 @@ public class BossShop extends JavaPlugin {
     private ClassManager manager;
     private InventoryListener il;
 
-    /////////////////////////////////////////////////
+    ///////////////////////////////////////////////
     private SignListener sl;
     private PlayerListener pl;
     private BossShopAPI api;
