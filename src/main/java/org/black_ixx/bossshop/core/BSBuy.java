@@ -48,6 +48,10 @@ public class BSBuy {
     private Object       reward;
     private Object      price;
     @Getter
+    private String priceMessage = "";
+    @Getter
+    private String rewardMessage = "";
+    @Getter
     private BSCondition condition;
     private String      permission;
     private boolean      permIsGroup = false;
@@ -237,6 +241,8 @@ public class BSBuy {
      * @return transformed message.
      */
     public String transformMessage(String msg, BSShop shop, Player p) {
+        rewardMessage = "";
+        priceMessage = "";
         if (msg == null || msg.isEmpty()) {
             return msg;
         }
@@ -256,11 +262,8 @@ public class BSBuy {
 
         // Handle reward and price variables
         if (msg.contains("%price%") || msg.contains("%reward%")) {
-            String rewardMessage =
-                    rewardT.isPlayerDependend(this, null) ? null : rewardT.getDisplayReward(p, this, reward, null);
-            String priceMessage =
-                    priceT.isPlayerDependend(this, null) ? null : priceT.getDisplayPrice(p, this, price, null);
-
+            rewardMessage = rewardT.isPlayerDependend(this, null) ? null : rewardT.getDisplayReward(p, this, reward, null);
+            priceMessage = priceT.isPlayerDependend(this, null) ? null : priceT.getDisplayPrice(p, this, price, null);
 
             if (shop != null) { // Does shop need to be customizable and is not already?
                 if (!shop.isCustomizable()) {
@@ -327,6 +330,30 @@ public class BSBuy {
             }
             if (msg.contains("%original_reward%")) {
                 msg = msg.replace("%original_reward%", MathTools.displayNumber((double) price, BSPriceType.Points));
+            }
+            if(msg.contains("%price_")) {
+                // Get the content between %price_*%,
+                String placeholder = "%price_" + msg.split("%price_")[1].split("%")[0] +"%";
+                Bukkit.getConsoleSender().sendMessage("Placeholder: " + placeholder);
+                // split on '_', check if size is == 3
+                String[] parts = placeholder.split("_");
+                if(parts.length == 3) {
+                    String shopName = parts[1];
+                    String itemId = parts[2];
+
+                    // Call the bug finder since its not implemented yet
+                    ClassManager.manager.getBugFinder()
+                            .warn(String.format("[%s:%s] We do not have support for placeholders like %s at the moment. This feature is work in progress though!", shop.getShopName(), getName(), placeholder));
+                    // Search the shop with the name and its itemId
+                    /*BSShop _shop = ClassManager.manager.getShops().getShop(shopName);
+                    if(_shop != null) {
+                        BSBuy _buy = _shop.getItem(itemId);
+                        if(_buy != null) {
+                            // Replace the placeholder with the price of the item
+                            msg = msg.replace(placeholder, _buy.priceMessage);
+                        }
+                    }*/
+                }
             }
         }
         return msg;
@@ -594,7 +621,6 @@ public class BSBuy {
         //Update shop if needed
         if (shop.isCustomizable() && needUpdate && event != null) { //'event' is null in case of a simulated click
             if (p.getOpenInventory() == event.getView()) { //only if inventory is still open
-
                 if (async) {
                     Bukkit.getScheduler().runTask(ClassManager.manager.getPlugin(), new Runnable() {
                         @Override
@@ -617,10 +643,7 @@ public class BSBuy {
                             holder.getHighestPage(),
                             false);
                 }
-
             }
         }
-
     }
-
 }

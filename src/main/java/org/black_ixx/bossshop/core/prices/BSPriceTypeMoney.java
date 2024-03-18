@@ -33,7 +33,7 @@ public class BSPriceTypeMoney extends BSPriceTypeNumber {
     public static String getRenewedFormat(String newValue, String oldValue) {
         String reducedOldPrice = MathTools.removeNonNumeric(oldValue);
         String reducedNewPrice = MathTools.removeNonNumeric(newValue);
-        return reducedNewPrice.equals(reducedOldPrice) ? newValue : renewedFormat.replace("%oldValue%", oldValue).replace("%newValue%", newValue);
+        return reducedNewPrice.equals(reducedOldPrice) ? newValue : renewedFormat.replace("%oldValue%", newValue.replace(reducedNewPrice, reducedOldPrice)).replace("%newValue%", newValue);
     }
 
     @Override
