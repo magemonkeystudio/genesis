@@ -334,7 +334,6 @@ public class BSBuy {
             if(msg.contains("%price_")) {
                 // Get the content between %price_*%,
                 String placeholder = "%price_" + msg.split("%price_")[1].split("%")[0] +"%";
-                Bukkit.getConsoleSender().sendMessage("Placeholder: " + placeholder);
                 // split on '_', check if size is == 3
                 String[] parts = placeholder.split("_");
                 if(parts.length == 3) {

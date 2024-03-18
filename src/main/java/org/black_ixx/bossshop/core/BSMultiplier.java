@@ -170,8 +170,25 @@ public class BSMultiplier {
         if(shopName == null && itemId == null) {
             return true;
         } else if(shopName != null && itemId == null) {
+            boolean hasShopWildcard = shopName.endsWith("*");
+            if(hasShopWildcard) {
+                // Remove the wildcard character (*) from the shop name and check if the buy shop name starts with the shop name (case insensitive)
+                String wildcardShopName = shopName.substring(0, shopName.length() - 1);
+                return buy.getShop().getShopName().toLowerCase().startsWith(wildcardShopName.toLowerCase());
+            }
             return shopName.equalsIgnoreCase(buy.getShop().getShopName());
         } else if(shopName != null) {
+            boolean hasShopWildcard = shopName.endsWith("*");
+            boolean hasItemWildcard = itemId.endsWith("*");
+            String wildcardShopName = shopName.substring(0, shopName.length() - 1);
+            String wildcardItemId = itemId.substring(0, itemId.length() - 1);
+            if(hasShopWildcard && hasItemWildcard) {
+                return buy.getShop().getShopName().toLowerCase().startsWith(wildcardShopName.toLowerCase()) && buy.getName().toLowerCase().startsWith(wildcardItemId.toLowerCase());
+            } else if(hasShopWildcard) {
+                return buy.getShop().getShopName().toLowerCase().startsWith(wildcardShopName.toLowerCase()) && itemId.equalsIgnoreCase(buy.getName());
+            } else if(hasItemWildcard) {
+                return shopName.equalsIgnoreCase(buy.getShop().getShopName()) && buy.getName().toLowerCase().startsWith(wildcardItemId.toLowerCase());
+            }
             return shopName.equalsIgnoreCase(buy.getShop().getShopName()) && itemId.equalsIgnoreCase(buy.getName());
         }
         return true;
