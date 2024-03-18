@@ -11,11 +11,11 @@ import org.black_ixx.bossshop.listeners.SignListener;
 import org.black_ixx.bossshop.managers.ClassManager;
 import org.black_ixx.bossshop.managers.CommandManager;
 import org.black_ixx.bossshop.managers.config.ConfigKeyCompleter;
+import org.black_ixx.bossshop.managers.folia.CrossScheduler;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class BossShop extends JavaPlugin {
 
@@ -74,13 +74,10 @@ public class BossShop extends JavaPlugin {
         getServer().getPluginManager().registerEvents(pl, this);
 
         ////////////////
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                new InbuiltAddonLoader().load(BossShop.this);
-                getClassManager().setupDependentClasses();
-            }
-        }.runTaskLaterAsynchronously(this, 3);
+        CrossScheduler.run(() -> {
+            new InbuiltAddonLoader().load(BossShop.this);
+            getClassManager().setupDependentClasses();
+        });
 
         ////////////////<- File key complete
 
@@ -157,7 +154,7 @@ public class BossShop extends JavaPlugin {
     }
 
     private void unloadClasses() {
-        Bukkit.getScheduler().cancelTasks(this);
+        CrossScheduler.cancelTasks(this);
 
         if (manager == null) {
             return;

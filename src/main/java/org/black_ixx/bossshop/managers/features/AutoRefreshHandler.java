@@ -1,6 +1,7 @@
 package org.black_ixx.bossshop.managers.features;
 
 import org.black_ixx.bossshop.BossShop;
+import org.black_ixx.bossshop.managers.folia.CrossScheduler;
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
@@ -10,15 +11,18 @@ public class AutoRefreshHandler {
     private int id = -1;
 
     public void start(int speed, BossShop plugin) {
-        BukkitTask t = new AutoRefreshRunnable(plugin).runTaskTimer(plugin, speed, speed);
-        id = t.getTaskId();
+        // TODO couldn't find proper solution for folia yet
+        if(!CrossScheduler.isFolia()) {
+            BukkitTask t = new AutoRefreshRunnable(plugin).runTaskTimer(plugin, speed, speed);
+            id = t.getTaskId();
+        }
     }
 
     public void stop() {
         if (id == -1) {
             return;
         }
-        Bukkit.getScheduler().cancelTask(id);
+        CrossScheduler.cancelTask(id);
     }
 
 

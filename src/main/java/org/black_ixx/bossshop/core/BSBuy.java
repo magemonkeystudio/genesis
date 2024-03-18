@@ -10,6 +10,7 @@ import org.black_ixx.bossshop.events.BSPlayerPurchaseEvent;
 import org.black_ixx.bossshop.events.BSPlayerPurchasedEvent;
 import org.black_ixx.bossshop.managers.ClassManager;
 import org.black_ixx.bossshop.managers.config.BSConfigShop;
+import org.black_ixx.bossshop.managers.folia.CrossScheduler;
 import org.black_ixx.bossshop.misc.Misc;
 import org.black_ixx.bossshop.misc.ShopItemPurchaseTask;
 import org.black_ixx.bossshop.settings.Settings;
@@ -20,7 +21,6 @@ import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -464,9 +464,7 @@ public class BSBuy {
         }
 
         if (ClassManager.manager.getSettings().getPurchaseAsync()) {
-            Bukkit.getScheduler()
-                    .runTaskAsynchronously(plugin,
-                            new ShopItemPurchaseTask(p, this, shop, holder, clickType, rewardType, priceType, event));
+            CrossScheduler.runAsync(new ShopItemPurchaseTask(p, this, shop, holder, clickType, rewardType, priceType, event));
         } else {
             purchase(p, shop, holder, clickType, rewardType, priceType, event, plugin, false);
         }
@@ -529,12 +527,7 @@ public class BSBuy {
             //Give Reward
             //Some rewardtypes may not be async!
             if (async && rewardType.allowAsync()) {
-                new BukkitRunnable() {
-                    @Override
-                    public void run() {
-                        rewardType.giveReward(p, BSBuy.this, getReward(clickType), clickType);
-                    }
-                }.runTask(plugin);
+                CrossScheduler.run(() -> rewardType.giveReward(p, BSBuy.this, getReward(clickType), clickType));
             } else {
                 rewardType.giveReward(p, this, getReward(clickType), clickType);
             }
@@ -587,28 +580,10 @@ public class BSBuy {
         //Update shop if needed
         if (shop.isCustomizable() && needUpdate && event != null) { //'event' is null in case of a simulated click
             if (p.getOpenInventory() == event.getView()) { //only if inventory is still open
-
                 if (async) {
-                    Bukkit.getScheduler().runTask(ClassManager.manager.getPlugin(), new Runnable() {
-                        @Override
-                        public void run() {
-                            shop.updateInventory(event.getInventory(),
-                                    holder,
-                                    p,
-                                    plugin.getClassManager(),
-                                    holder.getPage(),
-                                    holder.getHighestPage(),
-                                    false);
-                        }
-                    });
+                    CrossScheduler.run(() -> shop.updateInventory(event.getInventory(), holder, p, plugin.getClassManager(), holder.getPage(), holder.getHighestPage(), false));
                 } else {
-                    shop.updateInventory(event.getInventory(),
-                            holder,
-                            p,
-                            plugin.getClassManager(),
-                            holder.getPage(),
-                            holder.getHighestPage(),
-                            false);
+                    shop.updateInventory(event.getInventory(), holder, p, plugin.getClassManager(), holder.getPage(), holder.getHighestPage(), false);
                 }
 
             }
