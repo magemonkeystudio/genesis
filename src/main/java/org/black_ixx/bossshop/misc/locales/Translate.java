@@ -61,10 +61,8 @@ public final class Translate extends JavaPlugin {
             standard = Locale.en_us;
         }
         if(p  == null) {
-            Bukkit.getConsoleSender().sendMessage("§c[Translate] §4Player is null");
             return standard;
         }
-        Bukkit.getConsoleSender().sendMessage("§c[Translate] §4Player is not null");
         return Locale.valueOf(p.getLocale()).getName() != null ? Locale.valueOf(p.getLocale()) : standard;
     }
 
