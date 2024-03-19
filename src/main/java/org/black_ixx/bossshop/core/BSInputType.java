@@ -4,14 +4,12 @@ import org.black_ixx.bossshop.BossShop;
 import org.black_ixx.bossshop.core.prices.BSPriceType;
 import org.black_ixx.bossshop.core.rewards.BSRewardType;
 import org.black_ixx.bossshop.managers.ClassManager;
-import org.black_ixx.bossshop.managers.folia.CrossScheduler;
 import org.black_ixx.bossshop.misc.userinput.BSUserInput;
+import org.black_ixx.bossshoppro.folia.CrossScheduler;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
-
-import java.util.concurrent.Callable;
 
 public enum BSInputType {
 

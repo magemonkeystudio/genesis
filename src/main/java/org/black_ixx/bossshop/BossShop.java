@@ -11,7 +11,7 @@ import org.black_ixx.bossshop.listeners.SignListener;
 import org.black_ixx.bossshop.managers.ClassManager;
 import org.black_ixx.bossshop.managers.CommandManager;
 import org.black_ixx.bossshop.managers.config.ConfigKeyCompleter;
-import org.black_ixx.bossshop.managers.folia.CrossScheduler;
+import org.black_ixx.bossshoppro.folia.CrossScheduler;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

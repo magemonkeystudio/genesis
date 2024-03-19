@@ -1,8 +1,7 @@
 package org.black_ixx.bossshop.managers.features;
 
 import org.black_ixx.bossshop.BossShop;
-import org.black_ixx.bossshop.managers.folia.CrossScheduler;
-import org.bukkit.Bukkit;
+import org.black_ixx.bossshoppro.folia.CrossScheduler;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
