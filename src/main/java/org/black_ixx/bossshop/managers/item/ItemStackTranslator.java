@@ -5,10 +5,8 @@ import org.black_ixx.bossshop.core.BSShop;
 import org.black_ixx.bossshop.core.BSShopHolder;
 import org.black_ixx.bossshop.managers.ClassManager;
 import org.black_ixx.bossshop.managers.misc.StringManager;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.NamespacedKey;
-import org.bukkit.OfflinePlayer;
+import org.black_ixx.bossshop.misc.locales.Translate;
+import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -129,24 +127,24 @@ public class ItemStackTranslator {
     }
 
 
-    public String getFriendlyText(List<ItemStack> items) {
+    public String getFriendlyText(Player player, List<ItemStack> items) {
         if (items != null) {
             String msg = "";
             int    x   = 0;
             for (ItemStack i : items) {
                 x++;
-                msg += readItemStack(i) + (x < items.size() ? ", " : "");
+                msg += readItemStack(player, i) + (x < items.size() ? ", " : "");
             }
             return msg;
         }
         return null;
     }
 
-    public String readItemStack(ItemStack i) {
+    public String readItemStack(Player player, ItemStack i) {
         if (ClassManager.manager.getLanguageManager() != null) {
             return i.getAmount() + " " + ClassManager.manager.getLanguageManager().getDisplayNameItem(i);
         }
-        String material = readMaterial(i);
+        String material = readMaterial(player, i);
         return i.getAmount() + " " + material;
     }
 
@@ -197,7 +195,7 @@ public class ItemStackTranslator {
         return b;
     }
 
-    public String readItemName(ItemStack item) {
+    public String readItemName(Player player, ItemStack item) {
         if (item != null) {
             if (item.hasItemMeta()) {
                 ItemMeta meta = item.getItemMeta();
@@ -205,19 +203,25 @@ public class ItemStackTranslator {
                     return meta.getDisplayName();
                 }
             }
-            return readItemStack(item);
+            return readItemStack(player, item);
         }
         return null;
     }
 
-    public String readMaterial(ItemStack item) {
+    public String readMaterial(Player player, ItemStack item) {
         if (ClassManager.manager.getLanguageManager() != null) {
             ItemStack i = new ItemStack(item.getType());
             return ClassManager.manager.getLanguageManager().getDisplayNameItem(i);
         }
-        String material = item.getType().name().toLowerCase().replace("_", " ");
+
+        /*String material = item.getType().name().toLowerCase().replace("_", " ");
         material = material.replaceFirst(material.substring(0, 1), material.substring(0, 1).toUpperCase());
-        return material;
+        return material;*/
+        ItemMeta meta = item.getItemMeta();
+        if(meta == null)  {
+            return Translate.getMaterial(player, item.getType());
+        }
+        return item.hasItemMeta() && meta.hasDisplayName() ? item.getItemMeta().getDisplayName() : Translate.getMaterial(player, item.getType());
     }
 
     public void copyTexts(ItemStack receiver, ItemStack source) {

@@ -100,7 +100,6 @@ public class BSBuy {
         this.location = location;
     }
 
-
     public BSRewardType getRewardType(ClickType clickType) {
         return rewardT;
     }
@@ -303,7 +302,7 @@ public class BSBuy {
 
         String name = this.name;
         if (shop != null && item != null) {
-            String itemTitle = ClassManager.manager.getItemStackTranslator().readItemName(item);
+            String itemTitle = ClassManager.manager.getItemStackTranslator().readItemName(p, item);
             if (itemTitle != null) {
                 name = itemTitle;
                 msg = msg.replace("%itemname%", name);
@@ -313,7 +312,7 @@ public class BSBuy {
                 msg = msg.replace("%amount%", String.valueOf(item.getAmount()));
             }
             if (msg.contains("%material%")) {
-                msg = msg.replace("%material%", ClassManager.manager.getItemStackTranslator().readMaterial(item));
+                msg = msg.replace("%material%", ClassManager.manager.getItemStackTranslator().readMaterial(p, item));
             }
             if (msg.contains("%rewardraw%")) {
                 msg = msg.replace("%rewardraw%", String.valueOf(reward));
@@ -323,6 +322,10 @@ public class BSBuy {
             }
         }
         return msg;
+    }
+
+    public void updateMsg(Player player) {
+        this.msg = ClassManager.manager.getStringManager().transform(msg, this, null, null, player);
     }
 
     public void updateShop(BSShop shop, ItemStack menuitem, ClassManager manager, boolean addItem) {

@@ -87,7 +87,7 @@ public class BSRewardTypeItemAll extends BSRewardType {
     @Override
     public String getDisplayReward(Player p, BSBuy buy, Object reward, ClickType clickType) {
         ItemStack item     = (ItemStack) reward;
-        String    itemName = ClassManager.manager.getItemStackTranslator().readMaterial(item);
+        String    itemName = ClassManager.manager.getItemStackTranslator().readMaterial(p, item);
         return ClassManager.manager.getMessageHandler().get("Display.ItemAllBuy").replace("%item%", itemName);
     }
 

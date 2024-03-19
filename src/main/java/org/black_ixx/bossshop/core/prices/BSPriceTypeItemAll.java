@@ -69,7 +69,7 @@ public class BSPriceTypeItemAll extends BSPriceType {
     @Override
     public String getDisplayPrice(Player p, BSBuy buy, Object price, ClickType clickType) {
         ItemStack item      = (ItemStack) price;
-        String    itemName = ClassManager.manager.getItemStackTranslator().readMaterial(item);
+        String    itemName = ClassManager.manager.getItemStackTranslator().readMaterial(p, item);
         return ClassManager.manager.getMessageHandler().get("Display.ItemAll").replace("%item%", itemName);
     }
 

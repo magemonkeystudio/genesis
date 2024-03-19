@@ -63,8 +63,8 @@ public class BSRewardTypeItem extends BSRewardType {
     @Override
     @SuppressWarnings("unchecked")
     public String getDisplayReward(Player p, BSBuy buy, Object reward, ClickType clickType) {
-        List<ItemStack> items           = (List<ItemStack>) reward;
-        String          itemsFormatted = ClassManager.manager.getItemStackTranslator().getFriendlyText(items);
+        List<ItemStack> items = (List<ItemStack>) reward;
+        String itemsFormatted = ClassManager.manager.getItemStackTranslator().getFriendlyText(p, items);
         return ClassManager.manager.getMessageHandler().get("Display.Item").replace("%items%", itemsFormatted);
     }
 
