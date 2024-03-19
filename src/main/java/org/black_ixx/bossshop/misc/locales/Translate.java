@@ -116,10 +116,18 @@ public final class Translate extends JavaPlugin {
 
     @NotNull
     public static String getMaterial(@NotNull Player p, @NotNull Material mat) {
-        return getMaterial(getLocale(p), mat);
+        Locale locale = getLocale(p);
+        if(locale != null) {
+            String result = getMaterial(locale, mat);
+            if(result != null) {
+                return result;
+            }
+        }
+        String material = mat.name().toLowerCase().replace("_", " ");
+        material = material.replaceFirst(material.substring(0, 1), material.substring(0, 1).toUpperCase());
+        return material;
     }
 
-    @NotNull
     public static String getMaterial(@NotNull Locale locale, @NotNull Material mat) {
         LocaleReader reader = TranslationRegistry.get(locale);
         String name = mat.getKey().getKey();

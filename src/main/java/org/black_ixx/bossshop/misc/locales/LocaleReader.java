@@ -12,6 +12,7 @@ package org.black_ixx.bossshop.misc.locales;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import lombok.Getter;
 import org.black_ixx.bossshop.managers.ClassManager;
 import org.jetbrains.annotations.NotNull;
 import org.black_ixx.bossshop.misc.locales.Locale;
@@ -51,8 +52,9 @@ import java.util.*;
  */
 public class LocaleReader {
 
-    private final JsonObject json;
-    private final Locale locale;
+    @Getter
+    private JsonObject json = null;
+    private Locale locale = null;
 
     /**
      * Constructs an LocaleReader for the given locale.
@@ -70,7 +72,7 @@ public class LocaleReader {
 
             this.json = gson.fromJson(reader, JsonObject.class);
         } catch (IOException e) {
-            throw new RuntimeException("Could not load locale " + locale, e);
+            ClassManager.manager.getBugFinder().warn("Could not load locale " + locale + ". Using the standard translations in english.");
         }
     }
 
@@ -85,6 +87,9 @@ public class LocaleReader {
      *         is returned.
      */
     String getValue(@NotNull String key) {
+        if(json == null) {
+            return null;
+        }
         JsonElement element = json.get(key);
         if (element == null) {
             if (locale == Locale.en_us) {
