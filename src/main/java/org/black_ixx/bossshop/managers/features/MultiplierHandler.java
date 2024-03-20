@@ -1,5 +1,6 @@
 package org.black_ixx.bossshop.managers.features;
 
+import lombok.Getter;
 import org.black_ixx.bossshop.BossShop;
 import org.black_ixx.bossshop.core.BSBuy;
 import org.black_ixx.bossshop.core.BSMultiplier;
@@ -16,24 +17,24 @@ import java.util.List;
 import java.util.Set;
 
 
+@Getter
 public class MultiplierHandler {
 
-    private Set<BSMultiplier> multipliers = new HashSet<BSMultiplier>();
+    private final Set<BSMultiplier> multipliers = new HashSet<>();
 
+    private BossShop plugin;
+    private List<String> lines;
     public MultiplierHandler(BossShop plugin) {
-        if (plugin.getConfig().getBoolean("MultiplierGroups.Enabled") == false) {
+        if (!plugin.getConfig().getBoolean("MultiplierGroups.Enabled")) {
             return;
         }
-        List<String> lines = plugin.getConfig().getStringList("MultiplierGroups.List");
-        if (lines == null) {
-            return;
-        }
-        setup(plugin, lines);
+        lines = plugin.getConfig().getStringList("MultiplierGroups.List");
+        setup();
     }
 
-    public void setup(BossShop plugin, List<String> configLines) {
+    public void setup() {
         multipliers.clear();
-        for (String s : configLines) {
+        for (String s : lines) {
             BSMultiplier m = new BSMultiplier(s);
             if (m.isValid()) {
                 multipliers.add(m);
@@ -68,8 +69,8 @@ public class MultiplierHandler {
 
         if (buy.getRewardType(clickType) == BSRewardType.ItemAll) {
             if (ClassManager.manager.getSettings().getItemAllShowFinalReward() && p != null) {
-                ItemStack i     = (ItemStack) buy.getReward(clickType);
-                int       count = ClassManager.manager.getItemStackChecker().getAmountOfFreeSpace(p, i);
+                ItemStack i = (ItemStack) buy.getReward(clickType);
+                int count = ClassManager.manager.getItemStackChecker().getAmountOfFreeSpace(p, i);
 
                 if (count == 0) {
                     return ClassManager.manager.getMessageHandler()
@@ -91,12 +92,14 @@ public class MultiplierHandler {
     }
 
     public double calculatePriceWithMultiplier(Player p, BSBuy buy, ClickType clickType, double d) {
-        return calculatePriceWithMultiplier(p, buy.getPriceType(clickType), d);
+        return calculatePriceWithMultiplier(p, buy, buy.getPriceType(clickType), d);
     }
 
-    public double calculatePriceWithMultiplier(Player p, BSPriceType priceType, double d) { //Used for prices
+    public double calculatePriceWithMultiplier(Player p, BSBuy buy, BSPriceType priceType, double d) { //Used for prices
         for (BSMultiplier m : multipliers) {
-            d = m.calculateValue(p, priceType, d, BSMultiplier.RANGE_PRICE_ONLY);
+            if(m.isAcceptedShopItem(buy)) {
+                d = m.calculateValue(p, priceType, d, BSMultiplier.RANGE_PRICE_ONLY);
+            }
         }
         return MathTools.round(d, 2);
     }
@@ -128,8 +131,8 @@ public class MultiplierHandler {
 
         if (buy.getPriceType(clickType) == BSPriceType.ItemAll) {
             if (ClassManager.manager.getSettings().getItemAllShowFinalReward() && p != null) {
-                ItemStack i     = (ItemStack) buy.getPrice(clickType);
-                int       count = ClassManager.manager.getItemStackChecker().getAmountOfSameItems(p, i, buy);
+                ItemStack i = (ItemStack) buy.getPrice(clickType);
+                int count = ClassManager.manager.getItemStackChecker().getAmountOfSameItems(p, i, buy);
 
                 if (count == 0) {
                     return ClassManager.manager.getMessageHandler()
@@ -154,29 +157,23 @@ public class MultiplierHandler {
                                                 BSBuy buy,
                                                 ClickType clickType,
                                                 double d) { //Used for reward; Works the other way around
-        return calculateRewardWithMultiplier(p, buy.getRewardType(clickType), d);
+        return calculateRewardWithMultiplier(p, buy, buy.getRewardType(clickType), d);
     }
 
     public double calculateRewardWithMultiplier(Player p,
+                                                BSBuy buy,
                                                 BSRewardType rewardtype,
                                                 double d) { //Used for reward; Works the other way around
         for (BSMultiplier m : multipliers) {
-            d = m.calculateValue(p, BSPriceType.detectType(rewardtype.name()), d, BSMultiplier.RANGE_REWARD_ONLY);
+            if(m.isAcceptedShopItem(buy)) {
+                d = m.calculateValue(p, BSPriceType.detectType(rewardtype.name()), d, BSMultiplier.RANGE_REWARD_ONLY);
+            }
         }
         return MathTools.round(d, 2);
     }
 
 
-    public Set<BSMultiplier> getMultipliers() {
-        return multipliers;
-    }
-
     public boolean hasMultipliers() {
-        if (multipliers == null) {
-            return false;
-        }
         return !multipliers.isEmpty();
     }
-
-
 }

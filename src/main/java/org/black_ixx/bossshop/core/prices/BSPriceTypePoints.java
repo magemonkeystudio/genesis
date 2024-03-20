@@ -67,12 +67,14 @@ public class BSPriceTypePoints extends BSPriceTypeNumber {
 
     @Override
     public String getDisplayPrice(Player p, BSBuy buy, Object price, ClickType clickType) {
-        return ClassManager.manager.getMultiplierHandler()
+        String newPoints = ClassManager.manager.getMultiplierHandler()
                 .calculatePriceDisplayWithMultiplier(p,
                         buy,
                         clickType,
                         (Double) price,
                         ClassManager.manager.getMessageHandler().get("Display.Points").replace("%points%", "%number%"));
+        double oldPoints = (double) buy.getPrice(clickType);
+        return BSPriceTypeMoney.getRenewedFormat(newPoints, MathTools.displayNumber(oldPoints, MathTools.getFormatting(this), isIntegerValue()));
     }
 
 

@@ -1,6 +1,5 @@
 package org.black_ixx.bossshop.core.prices;
 
-
 import org.black_ixx.bossshop.core.BSBuy;
 import org.black_ixx.bossshop.managers.ClassManager;
 import org.black_ixx.bossshop.managers.misc.InputReader;
@@ -10,6 +9,7 @@ import org.bukkit.event.inventory.ClickType;
 
 public class BSPriceTypeMoney extends BSPriceTypeNumber {
 
+    public static String renewedFormat = ClassManager.manager.getPlugin().getConfig().getString("MultiplierGroups.RenewedPriceFormat");
 
     public Object createObject(Object o, boolean forceFinalState) {
         return InputReader.getDouble(o, -1);
@@ -30,6 +30,11 @@ public class BSPriceTypeMoney extends BSPriceTypeNumber {
         ClassManager.manager.getSettings().setVaultEnabled(true);
     }
 
+    public static String getRenewedFormat(String newValue, String oldValue) {
+        String reducedOldPrice = MathTools.removeNonNumeric(oldValue);
+        String reducedNewPrice = MathTools.removeNonNumeric(newValue);
+        return reducedNewPrice.equals(reducedOldPrice) ? newValue : renewedFormat.replace("%oldValue%", newValue.replace(reducedNewPrice, reducedOldPrice)).replace("%newValue%", newValue);
+    }
 
     @Override
     public boolean hasPrice(Player p,
@@ -38,7 +43,7 @@ public class BSPriceTypeMoney extends BSPriceTypeNumber {
                             ClickType clickType,
                             int multiplier,
                             boolean messageOnFailure) {
-        double money = (double) ClassManager.manager.getMultiplierHandler()
+        double money = ClassManager.manager.getMultiplierHandler()
                 .calculatePriceWithMultiplier(p, buy, clickType, (Double) price) * multiplier;
         if (ClassManager.manager.getVaultHandler() == null) {
             return false;
@@ -64,7 +69,7 @@ public class BSPriceTypeMoney extends BSPriceTypeNumber {
 
     @Override
     public String takePrice(Player p, BSBuy buy, Object price, ClickType clickType, int multiplier) {
-        double money = (double) ClassManager.manager.getMultiplierHandler()
+        double money = ClassManager.manager.getMultiplierHandler()
                 .calculatePriceWithMultiplier(p, buy, clickType, (Double) price) * multiplier;
 
         if (!ClassManager.manager.getVaultHandler().getEconomy().hasAccount(p.getName())) {
@@ -87,12 +92,14 @@ public class BSPriceTypeMoney extends BSPriceTypeNumber {
 
     @Override
     public String getDisplayPrice(Player p, BSBuy buy, Object price, ClickType clickType) {
-        return ClassManager.manager.getMultiplierHandler()
-                .calculatePriceDisplayWithMultiplier(p,
+        // TODO might need a better handling in future. I think we could skip a lot of the 'calculatePriceDisplayWithMultiplier' depth
+        String newPrice = ClassManager.manager.getMultiplierHandler().calculatePriceDisplayWithMultiplier(p,
                         buy,
                         clickType,
                         (Double) price,
                         ClassManager.manager.getMessageHandler().get("Display.Money").replace("%money%", "%number%"));
+        double oldPrice = (double) buy.getPrice(clickType);
+        return getRenewedFormat(newPrice, MathTools.displayNumber(oldPrice, MathTools.getFormatting(this), isIntegerValue()));
     }
 
     @Override
