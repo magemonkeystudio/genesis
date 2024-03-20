@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.promcteam</groupId>
     <artifactId>bossshoppro</artifactId>
-    <version>2.1.1-R0.1-SNAPSHOT</version>
+    <version>2.1.1-R0.2-SNAPSHOT</version>
     <name>BossShopPro</name>
     <description>Create virtual chest shops</description>
     <url>
