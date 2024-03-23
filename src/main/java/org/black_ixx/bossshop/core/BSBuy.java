@@ -24,6 +24,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -334,16 +335,18 @@ public class BSBuy {
             if(msg.contains("%price_")) {
                 // Get the content between %price_*%,
                 String placeholder = "%price_" + msg.split("%price_")[1].split("%")[0] +"%";
-                // split on '_', check if size is == 3
-                String[] parts = placeholder.split("_");
-                if(parts.length == 3) {
-                    String shopName = parts[1];
-                    String itemId = parts[2];
+                if(!List.of("%reward_shift_left%", "%price_shift_left%", "%reward_shift_right%", "%price_shift_right%").contains(placeholder)) {
 
-                    // Call the bug finder since its not implemented yet
-                    ClassManager.manager.getBugFinder()
-                            .warn(String.format("[%s:%s] We do not have support for placeholders like %s at the moment. This feature is work in progress though!", shop.getShopName(), getName(), placeholder));
-                    // Search the shop with the name and its itemId
+                    // split on '_', check if size is == 3
+                    String[] parts = placeholder.split("_");
+                    if (parts.length == 3) {
+                        String shopName = parts[1];
+                        String itemId = parts[2];
+
+                        // Call the bug finder since its not implemented yet
+                        ClassManager.manager.getBugFinder()
+                                .warn(String.format("[%s:%s] We do not have support for placeholders like %s at the moment. This feature is work in progress though!", shop.getShopName(), getName(), placeholder));
+                        // Search the shop with the name and its itemId
                     /*BSShop _shop = ClassManager.manager.getShops().getShop(shopName);
                     if(_shop != null) {
                         BSBuy _buy = _shop.getItem(itemId);
@@ -352,6 +355,7 @@ public class BSBuy {
                             msg = msg.replace(placeholder, _buy.priceMessage);
                         }
                     }*/
+                    }
                 }
             }
         }
