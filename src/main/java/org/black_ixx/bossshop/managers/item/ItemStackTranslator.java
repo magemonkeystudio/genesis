@@ -6,7 +6,10 @@ import org.black_ixx.bossshop.core.BSShopHolder;
 import org.black_ixx.bossshop.managers.ClassManager;
 import org.black_ixx.bossshop.managers.misc.StringManager;
 import org.black_ixx.bossshop.misc.locales.Translate;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.NamespacedKey;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -148,11 +151,11 @@ public class ItemStackTranslator {
         return i.getAmount() + " " + material;
     }
 
-    public String readEnchantment(Enchantment e) {
+    public String readEnchantment(Player player, Enchantment e) {
         if (ClassManager.manager.getLanguageManager() != null) {
             return ClassManager.manager.getLanguageManager().getDisplayNameEnchantment(e);
         }
-        return e.getName().toLowerCase().replace("_", "");
+        return Translate.getEnchantment(player, e);
     }
 
 

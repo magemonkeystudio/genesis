@@ -11,7 +11,6 @@ package org.black_ixx.bossshop.misc.locales;
 
 import com.google.common.base.Preconditions;
 import org.black_ixx.bossshop.managers.ClassManager;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
 import org.bukkit.enchantments.Enchantment;
