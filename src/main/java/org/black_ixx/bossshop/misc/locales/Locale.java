@@ -9,6 +9,11 @@
 
 package org.black_ixx.bossshop.misc.locales;
 
+import org.apache.commons.io.IOUtils;
+import org.black_ixx.bossshop.managers.ClassManager;
+
+import java.io.*;
+
 /**
  * Original Author: Unp1xelt
  * An enum of all locale codes used by Minecraft which defines the language of the
@@ -19,361 +24,632 @@ package org.black_ixx.bossshop.misc.locales;
  * and the official <a href="https://crowdin.com/project/minecraft">Minecraft translation project</a>.
  */
 public enum Locale {
-    /** Afrikaans (Suid-Afrika) */
+    /**
+     * Afrikaans (Suid-Afrika)
+     */
     af_za("Afrikaans (Suid-Afrika)"),
-    /** Arabic */
+    /**
+     * Arabic
+     */
     ar_sa("Arabic"),
-    /** Asturian */
+    /**
+     * Asturian
+     */
     ast_es("Asturian"),
-    /** Azerbaijani */
+    /**
+     * Azerbaijani
+     */
     az_az("Azerbaijani"),
     /**
      * Bashkir
+     *
      * @apiNote since v1.14.3
      */
     ba_ru("Bashkir"),
     /**
      * Bavarian
+     *
      * @apiNote since v1.14
      */
     bar("Bavarian"),
-    /** Belarusian */
+    /**
+     * Belarusian
+     */
     be_by("Belarusian"),
-    /** Bulgarian */
+    /**
+     * Bulgarian
+     */
     bg_bg("Bulgarian"),
-    /** Breton */
+    /**
+     * Breton
+     */
     br_fr("Breton"),
-    /** Brabantian */
+    /**
+     * Brabantian
+     */
     brb("Brabantian"),
-    /** Bosnian */
+    /**
+     * Bosnian
+     */
     bs_ba("Bosnian"),
-    /** Catalan */
+    /**
+     * Catalan
+     */
     ca_es("Catalan"),
-    /** Czech*/
+    /**
+     * Czech
+     */
     cs_cz("Czech"),
-    /** Welsh */
+    /**
+     * Welsh
+     */
     cy_gb("Welsh"),
-    /** Danish */
+    /**
+     * Danish
+     */
     da_dk("Danish"),
-    /** Austrian German */
+    /**
+     * Austrian German
+     */
     de_at("Austrian German"),
-    /** Swiss German */
+    /**
+     * Swiss German
+     */
     de_ch("Swiss German"),
-    /** German */
+    /**
+     * German
+     */
     de_de("German"),
-    /** Greek */
+    /**
+     * Greek
+     */
     el_gr("Greek"),
-    /** Australian English */
+    /**
+     * Australian English
+     */
     en_au("Australian English"),
-    /** Canadian English */
+    /**
+     * Canadian English
+     */
     en_ca("Canadian English"),
-    /** British English */
+    /**
+     * British English
+     */
     en_gb("British English"),
-    /** New Zealand English */
+    /**
+     * New Zealand English
+     */
     en_nz("New Zealand English"),
-    /** Pirate English */
+    /**
+     * Pirate English
+     */
     en_pt("Pirate English"),
-    /** Upside down English */
+    /**
+     * Upside down English
+     */
     en_ud("Upside down English"),
-    /** American English */
+    /**
+     * American English
+     */
     en_us("American English"),
-    /** Modern English */
+    /**
+     * Modern English
+     */
     enp(" Modern English"),
-    /** Early Modern English */
+    /**
+     * Early Modern English
+     */
     enws("Early Modern English"),
-    /** Esperanto */
+    /**
+     * Esperanto
+     */
     eo_uy("Esperanto"),
-    /** Argentinian Spanish */
+    /**
+     * Argentinian Spanish
+     */
     es_ar("Argentinian Spanish"),
-    /** Chilean Spanish */
+    /**
+     * Chilean Spanish
+     */
     es_cl("Chilean Spanish"),
     /**
      * Ecuadorian Spanish
+     *
      * @apiNote since v1.16
      */
     es_ec("Ecuadorian Spanish"),
-    /** Spanish */
+    /**
+     * Spanish
+     */
     es_es("Spanish"),
-    /** Mexican Spanish */
+    /**
+     * Mexican Spanish
+     */
     es_mx("Mexican Spanish"),
-    /** Uruguayan Spanish */
+    /**
+     * Uruguayan Spanish
+     */
     es_uy("Uruguayan Spanish"),
-    /** Venezuelan Spanish */
+    /**
+     * Venezuelan Spanish
+     */
     es_ve("Venezuelan Spanish"),
     /**
      * Andalusian
+     *
      * @apiNote since v1.16
      */
     esan("Andalusian"),
-    /** Estonian */
+    /**
+     * Estonian
+     */
     et_ee("Estonian"),
-    /** Basque */
+    /**
+     * Basque
+     */
     eu_es("Basque"),
-    /** Persian */
+    /**
+     * Persian
+     */
     fa_ir("Persian"),
-    /** Finnish */
+    /**
+     * Finnish
+     */
     fi_fi("Finnish"),
-    /** Filipino */
+    /**
+     * Filipino
+     */
     fil_ph("Filipino"),
-    /** Faroese */
+    /**
+     * Faroese
+     */
     fo_fo("Faroese"),
-    /** Canadian French */
+    /**
+     * Canadian French
+     */
     fr_ca("Canadian French"),
-    /** French */
+    /**
+     * French
+     */
     fr_fr("French"),
     /**
      * East Franconian
+     *
      * @apiNote since v1.13.1
      */
     fra_de("East Franconian"),
-    /** Friulian */
+    /**
+     * Friulian
+     */
     fur_it("Friulian"),
-    /** Frisian */
+    /**
+     * Frisian
+     */
     fy_nl("Frisian"),
-    /** Irish */
+    /**
+     * Irish
+     */
     ga_ie("Irish"),
-    /** Scottish Gaelic */
+    /**
+     * Scottish Gaelic
+     */
     gd_gb("Scottish Gaelic"),
-    /** Galician */
+    /**
+     * Galician
+     */
     gl_es("Galician"),
     /**
      * Gothic (got)
+     *
      * @apiNote available from v1.14 to v1.15
      */
     got_de("Gothic"),
     /**
      * Manx
+     *
      * @apiNote only up to v1.16
      */
     gv_im("Manx"),
-    /** Hawaiian */
+    /**
+     * Hawaiian
+     */
     haw_us("Hawaiian"),
-    /** Hebrew */
+    /**
+     * Hebrew
+     */
     he_il("Hebrew"),
-    /** Hindi */
+    /**
+     * Hindi
+     */
     hi_in("Hindi"),
-    /** Croatian */
+    /**
+     * Croatian
+     */
     hr_hr("Croatian"),
-    /** Hungarian */
+    /**
+     * Hungarian
+     */
     hu_hu("Hungarian"),
-    /** Armenian */
+    /**
+     * Armenian
+     */
     hy_am("Armenian"),
-    /** Indonesian */
+    /**
+     * Indonesian
+     */
     id_id("Indonesian"),
-    /** Igbo */
+    /**
+     * Igbo
+     */
     ig_ng("Igbo"),
-    /** Ido */
+    /**
+     * Ido
+     */
     io_en("Ido"),
-    /** Icelandic */
+    /**
+     * Icelandic
+     */
     is_is("Icelandic"),
     /**
      * Interslavic
+     *
      * @apiNote since v1.16
      */
     isv("Interslavic"),
-    /** Italian */
+    /**
+     * Italian
+     */
     it_it("Italian"),
-    /** Japanese */
+    /**
+     * Japanese
+     */
     ja_jp("Japanese"),
-    /** Lojban */
+    /**
+     * Lojban
+     */
     jbo_en("Lojban"),
-    /** Georgian */
+    /**
+     * Georgian
+     */
     ka_ge("Georgian"),
     /**
      * Kabyle (kab_dz)
+     *
      * @apiNote only up to v1.15
      */
     kab_kab("Kabyle"),
     /**
      * Kazakh
+     *
      * @apiNote since v1.14
      */
     kk_kz("Kazakh"),
-    /** Kannada */
+    /**
+     * Kannada
+     */
     kn_in("Kannada"),
-    /** Korean */
+    /**
+     * Korean
+     */
     ko_kr("Korean"),
-    /** Kölsch/Ripuarian */
+    /**
+     * Kölsch/Ripuarian
+     */
     ksh("Kölsch/Ripuarian"),
-    /** Cornish */
+    /**
+     * Cornish
+     */
     kw_gb("Cornish"),
-    /** Latin */
+    /**
+     * Latin
+     */
     la_la("Latin"),
-    /** Luxembourgish */
+    /**
+     * Luxembourgish
+     */
     lb_lu("Luxembourgish"),
-    /** Limburgish */
+    /**
+     * Limburgish
+     */
     li_li("Limburgish"),
     /**
      * Lombard
+     *
      * @apiNote since v1.18
      */
     lmo("Lombard"),
-    /** LOLCAT */
+    /**
+     * LOLCAT
+     */
     lol_us("LOLCAT"),
-    /** Lithuanian */
+    /**
+     * Lithuanian
+     */
     lt_lt("Lithuanian"),
-    /** Latvian */
+    /**
+     * Latvian
+     */
     lv_lv("Latvian"),
     /**
      * Classical Chinese
+     *
      * @apiNote since v1.17.1
      */
     lzh("Classical Chinese"),
     /**
      * Māori
+     *
      * @apiNote only up to v1.16
      */
     mi_nz("Māori"),
-    /** Macedonian */
+    /**
+     * Macedonian
+     */
     mk_mk("Macedonian"),
-    /** Mongolian */
+    /**
+     * Mongolian
+     */
     mn_mn("Mongolian"),
     /**
      * Mohawk
+     *
      * @apiNote only up to v1.15
      */
     moh_ca("Mohawk"),
-    /** Malay */
+    /**
+     * Malay
+     */
     ms_my("Malay"),
-    /** Maltese */
+    /**
+     * Maltese
+     */
     mt_mt("Maltese"),
-    /** Low German */
+    /**
+     * Low German
+     */
     nds_de("Low German"),
-    /** Dutch, Flemish */
+    /**
+     * Dutch, Flemish
+     */
     nl_be("Dutch, Flemish"),
-    /** Dutch */
+    /**
+     * Dutch
+     */
     nl_nl("Dutch"),
-    /** Norwegian Nynorsk */
+    /**
+     * Norwegian Nynorsk
+     */
     nn_no("Norwegian Nynorsk"),
-    /** Norwegian Bokmål */
+    /**
+     * Norwegian Bokmål
+     */
     no_no("Norwegian Bokmål"),
     /**
      * Nuu-chah-nulth
+     *
      * @apiNote only up to v1.15
      */
     nuk("Nuu-chah-nulth"),
-    /** Occitan */
+    /**
+     * Occitan
+     */
     oc_fr("Occitan"),
     /**
      * Ojibwe (oji)
+     *
      * @apiNote only up to v1.15
      */
     oj_ca("Ojibwe"),
-    /** Elfdalian */
+    /**
+     * Elfdalian
+     */
     ovd("Elfdalian"),
-    /** Polish */
+    /**
+     * Polish
+     */
     pl_pl("Polish"),
-    /** Brazilian Portuguese */
+    /**
+     * Brazilian Portuguese
+     */
     pt_br("Brazilian Portuguese"),
-    /** Portuguese */
+    /**
+     * Portuguese
+     */
     pt_pt("Portuguese"),
-    /** Quenya (Form of Elvish from LOTR) */
+    /**
+     * Quenya (Form of Elvish from LOTR)
+     */
     qya_aa("Quenya (Form of Elvish from LOTR)"),
-    /** Romanian */
+    /**
+     * Romanian
+     */
     ro_ro("Romanian"),
     /**
      * Russian (Pre-revolutionary)
+     *
      * @apiNote since v1.17
      */
     rpr("Russian (Pre-revolutionary)"),
-    /** Russian */
+    /**
+     * Russian
+     */
     ru_ru("Russian"),
     /**
      * Sicilian
+     *
      * @apiNote only available in v1.15.x
      */
     scn("Sicilian"),
-    /** Northern Sami */
+    /**
+     * Northern Sami
+     */
     se_no("Northern Sami"),
-    /** Slovak */
+    /**
+     * Slovak
+     */
     sk_sk("Slovak"),
-    /** Slovenian */
+    /**
+     * Slovenian
+     */
     sl_si("Slovenian"),
-    /** Somali */
+    /**
+     * Somali
+     */
     so_so("Somali"),
-    /** Albanian */
+    /**
+     * Albanian
+     */
     sq_al("Albanian"),
-    /** Serbian (Cyrillic/Latin) */
+    /**
+     * Serbian (Cyrillic/Latin)
+     */
     sr_sp("Serbian (Cyrillic/Latin)"),
-    /** Swedish */
+    /**
+     * Swedish
+     */
     sv_se("Swedish"),
     /**
      * Allgovian German
+     *
      * @apiNote only up tp v1.16.x
      */
     swg("Allgovian German"),
-    /** Upper Saxon German */
+    /**
+     * Upper Saxon German
+     */
     sxu("Upper Saxon German"),
-    /** Silesian */
+    /**
+     * Silesian
+     */
     szl("Silesian"),
-    /** Tamil */
+    /**
+     * Tamil
+     */
     ta_in("Tamil"),
-    /** Thai */
+    /**
+     * Thai
+     */
     th_th("Thai"),
     /**
      * Tagalog
+     *
      * @apiNote since v1.15.1
      */
     tl_ph("Tagalog"),
-    /** Klingon */
+    /**
+     * Klingon
+     */
     tlh_aa("Klingon'"),
     /**
      * Toki Pona
+     *
      * @apiNote since v1.18
      */
     tok("Toki Pona"),
-    /** Turkish */
+    /**
+     * Turkish
+     */
     tr_tr("Turkish"),
     /**
      * Tatar
+     *
      * @apiNote since v1.13.1
      */
     tt_ru("Tatar"),
     /**
      * Talossan
+     *
      * @apiNote only up to v1.15
      */
     tzl_tzl("Talossan"),
-    /** Ukrainian */
+    /**
+     * Ukrainian
+     */
     uk_ua("Ukrainian"),
-    /** Valencian */
+    /**
+     * Valencian
+     */
     val_es("Valencian"),
-    /** Venetian */
+    /**
+     * Venetian
+     */
     vec_it("Venetian"),
-    /** Vietnamese */
+    /**
+     * Vietnamese
+     */
     vi_vn("Vietnamese"),
     /**
      * Yiddish
+     *
      * @apiNote since v1.15
      */
     yi_de("Yiddish"),
-    /** Yoruba */
+    /**
+     * Yoruba
+     */
     yo_ng("Yoruba"),
-    /** Chinese Simplified (China; Mandarin) */
+    /**
+     * Chinese Simplified (China; Mandarin)
+     */
     zh_cn("Chinese Simplified (China; Mandarin)"),
     /**
      * Chinese Traditional (Hong Kong; Mix)
+     *
      * @apiNote since v.1.16
      */
     zh_hk("Chinese Traditional (Hong Kong; Mix)"),
-    /** Chinese Traditional (Taiwan; Mandarin) */
+    /**
+     * Chinese Traditional (Taiwan; Mandarin)
+     */
     zh_tw("Chinese Traditional (Taiwan; Mandarin)"),
     /**
      * Malay (Jawi)
+     *
      * @apiNote since v1.19
      */
     zlm_arab("Malay (Jawi)");
 
     private final String name;
+
     Locale(final String name) {
         this.name = name;
     }
 
     /**
      * Returns the language name.
+     *
      * @return the language name of this locale.
      */
     public String getName() {
         return name;
+    }
+
+    public Locale createIfNotExistend() {
+        File folder = new File(ClassManager.manager.getPlugin().getDataFolder(), "locales");
+        File file = new File(ClassManager.manager.getPlugin().getDataFolder(), "locales/" + this + ".json");
+        try {
+            if (!folder.exists()) {
+                folder.mkdirs();
+            }
+            if (!file.exists()) {
+                file.createNewFile();
+                try (OutputStream outputStream = new FileOutputStream(file)) {
+                    // Generate the locale file with its content
+                    InputStream inputStream = ClassManager.manager.getPlugin().getResource("locales/" + this + ".json");
+                    if (inputStream == null) {
+                        ClassManager.manager.getBugFinder().severe("Resource not found: locales/" + this + ".json");
+                        return null;
+                    }
+                    IOUtils.copy(inputStream, outputStream);
+                } catch (IOException e) {
+                    ClassManager.manager.getBugFinder().severe("Failed to get content of " + this + ".json");
+                    e.printStackTrace();
+                }
+            }
+        } catch (IOException e) {
+            ClassManager.manager.getBugFinder().severe("Failed to create locale file: " + this + ".json");
+            e.printStackTrace();
+        }
+        return this;
     }
 }
