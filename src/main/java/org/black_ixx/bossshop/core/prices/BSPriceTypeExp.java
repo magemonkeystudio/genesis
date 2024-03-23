@@ -66,15 +66,12 @@ public class BSPriceTypeExp extends BSPriceTypeNumber {
 
     @Override
     public String getDisplayPrice(Player p, BSBuy buy, Object price, ClickType clickType) {
-        // TODO might need a better handling in future. I think we could skip a lot of the 'calculatePriceDisplayWithMultiplier' depth
-        String newExp = ClassManager.manager.getMultiplierHandler()
+        return ClassManager.manager.getMultiplierHandler()
                 .calculatePriceDisplayWithMultiplier(p,
                         buy,
                         clickType,
                         (Integer) price,
                         ClassManager.manager.getMessageHandler().get("Display.Exp").replace("%levels%", "%number%"));
-        double oldExp = (double) buy.getReward(clickType);
-        return BSPriceTypeMoney.getRenewedFormat(newExp, MathTools.displayNumber(oldExp, MathTools.getFormatting(this), isIntegerValue()));
     }
 
 
