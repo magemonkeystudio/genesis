@@ -75,7 +75,7 @@ public class BSRewardTypeEnchantment extends BSRewardType {
         Enchant enchant = (Enchant) reward;
         return ClassManager.manager.getMessageHandler()
                 .get("Display.Enchantment")
-                .replace("%type%", ClassManager.manager.getItemStackTranslator().readEnchantment(enchant.getType()))
+                .replace("%type%", ClassManager.manager.getItemStackTranslator().readEnchantment(p, enchant.getType()))
                 .replace("%level%", String.valueOf(enchant.getLevel()));
     }
 
