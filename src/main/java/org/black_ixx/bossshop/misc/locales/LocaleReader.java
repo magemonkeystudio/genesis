@@ -14,8 +14,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import lombok.Getter;
 import org.black_ixx.bossshop.managers.ClassManager;
+import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
-import org.black_ixx.bossshop.misc.locales.Locale;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -62,18 +62,17 @@ public class LocaleReader {
      * @param locale The locale used
      */
     LocaleReader(@NotNull Locale locale) {
-        try {
-            this.locale = locale;
-            String fileName = locale + ".json";
-            File file = new File(ClassManager.manager.getPlugin().getDataFolder(), "locales/" + fileName);
-            InputStreamReader streamReader = new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8);
-            BufferedReader reader = new BufferedReader(streamReader);
-            Gson gson = new Gson();
-
-            this.json = gson.fromJson(reader, JsonObject.class);
-        } catch (IOException e) {
-            ClassManager.manager.getBugFinder().warn("Could not load locale " + locale + ". Using the standard translations in english.");
+        this.locale = locale;
+        String fileName = locale + ".json";
+        InputStream inputStream = ClassManager.manager.getPlugin().getResource("locales/" + fileName);
+        if (inputStream == null) {
+            Bukkit.getConsoleSender().sendMessage("Resource not found: resources/locales/de_de.json");
         }
+        InputStreamReader streamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
+        BufferedReader reader = new BufferedReader(streamReader);
+        Gson gson = new Gson();
+
+        this.json = gson.fromJson(reader, JsonObject.class);
     }
 
     /**
