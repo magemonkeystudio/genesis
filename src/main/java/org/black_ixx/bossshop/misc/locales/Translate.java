@@ -56,9 +56,9 @@ public final class Translate extends JavaPlugin {
      */
     public static Locale getLocale(Player p) {
         Locale standard = Locale.valueOf(ClassManager.manager.getPlugin().getConfig()
-                .getString("Language", "en_us").replace("-", "_").toLowerCase());
-        if(standard.getName() == null) {
-            standard = Locale.en_us;
+                .getString("Locales", "en_us").replace("-", "_").toLowerCase()).createIfNotExistend();
+        if(standard == null) {
+            standard = Locale.en_us.createIfNotExistend();
         }
         if(p  == null) {
             return standard;
