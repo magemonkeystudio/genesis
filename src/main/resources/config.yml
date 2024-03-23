@@ -24,6 +24,11 @@
 # es-es by FunkyNico
 Language: "en-us"
 #
+# The locale of the translations for minecraft related things. For example if you have a item of material feather, you might get the translated name of it based on your locale.
+# You can add new locales anytime under /BossShopPro/locales/<your-locale-file>
+# You can also find a list of supported locales here: https://github.com/promcteam/BossShopPro/tree/dev/src/main/resources/locales
+Locales: "en_us"
+#
 #
 # ReloadAfterCreateShop:
 #
