@@ -32,11 +32,12 @@ public class BuyItemHandler {
      * @return shop item
      */
     public List<BSBuy> loadItem(ConfigurationSection itemsSection, BSShop shop, String name) {
+        List<BSBuy> buyItems = new ArrayList<>();
         if (itemsSection.getConfigurationSection(name) == null) {
             String shopName = shop == null ? "none" : shop.getShopName();
             ClassManager.manager.getBugFinder()
                     .severe("Error when trying to create BuyItem " + name + "! (1) [Shop: " + shopName + "]");
-            return null;
+            return buyItems;
         }
         ConfigurationSection c = itemsSection.getConfigurationSection(name);
 
@@ -45,7 +46,6 @@ public class BuyItemHandler {
         Bukkit.getPluginManager().callEvent(event); //Allow addons to create a custom BSBuy
         BSBuy buy = event.getCustomShopItem();
 
-        List<BSBuy> buyItems = new ArrayList<>();
         if (buy == null) { //If addons did not create own item create a default one here!
             buyItems.addAll(createBuyItem(shop, name, c));
         }
@@ -70,7 +70,7 @@ public class BuyItemHandler {
     public List<BSBuy> createBuyItem(BSShop shop, String name, ConfigurationSection config) {
         String stage = "Basic Data";
         String shopName = shop == null ? "none" : shop.getShopName();
-
+        List<BSBuy> buyItems = new ArrayList<>();
         try {
             String priceType = config.getString("PriceType");
             String rewardType = config.getString("RewardType");
@@ -136,7 +136,7 @@ public class BuyItemHandler {
                 for (BSRewardType type : BSRewardType.values()) {
                     ClassManager.manager.getBugFinder().severe("-" + type.name());
                 }
-                return null;
+                return buyItems;
             }
 
             if (priceT == null) {
@@ -147,7 +147,7 @@ public class BuyItemHandler {
                 for (BSPriceType type : BSPriceType.values()) {
                     ClassManager.manager.getBugFinder().severe("-" + type.name());
                 }
-                return null;
+                return buyItems;
             }
 
             stage = "ForceInput Detection";
@@ -182,10 +182,10 @@ public class BuyItemHandler {
             reward = rewardT.createObject(reward, true);
 
             if (!priceT.validityCheck(name, price)) {
-                return null;
+                return buyItems;
             }
             if (!rewardT.validityCheck(name, reward)) {
-                return null;
+                return buyItems;
             }
 
 
@@ -235,7 +235,6 @@ public class BuyItemHandler {
                 }
             }
 
-            List<BSBuy> buyItems = new ArrayList<>();
             for(int inventoryLocation : inventoryLocations) {
                 BSCreateShopItemEvent event = new BSCreateShopItemEvent(shop,
                         name,
@@ -273,7 +272,7 @@ public class BuyItemHandler {
                     ClassManager.manager.getBugFinder()
                             .severe("Error when trying to create shopitem " + name + "! MenuItem is not existing?! [Shop: "
                                     + shopName + "]");
-                    return null;
+                    return buyItems;
                 }
 
                 ItemStack i = ClassManager.manager.getItemStackCreator()
@@ -297,7 +296,7 @@ public class BuyItemHandler {
             e.printStackTrace();
             ClassManager.manager.getBugFinder().severe("Probably caused by Config Mistakes.");
             ClassManager.manager.getBugFinder().severe("For more help please send me a PM at Spigot.");
-            return null;
+            return buyItems;
         }
     }
 
