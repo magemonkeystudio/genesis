@@ -10,7 +10,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
-import com.promcteam.divinity.QuantumRPG;
+import com.promcteam.divinity.Divinity;
 import com.promcteam.divinity.modules.ModuleItem;
 
 import java.util.List;
@@ -36,8 +36,7 @@ public class ItemDataPartMaterial extends ItemDataPart {
             if (parts.length == 2) {
                 String plugin = parts[0];
                 String id     = parts[1];
-                switch (plugin) {
-                    case "ItemsAdder":
+                switch (plugin.toLowerCase()) {
                     case "itemsadder":
                         ItemStack i = CustomStack.getInstance(parts[1]).getItemStack();
                         if (i != null) {
@@ -47,7 +46,6 @@ public class ItemDataPartMaterial extends ItemDataPart {
                                     .warn("Mistake in Config: '" + id + "' is not a valid ItemsAdder item.");
                             return item;
                         }
-                    case "MythicMobs":
                     case "mythicmobs":
                         ItemStack mi = MythicBukkit.inst().getItemManager().getItemStack(id);
                         if (mi != null) {
@@ -57,7 +55,6 @@ public class ItemDataPartMaterial extends ItemDataPart {
                                     .warn("Mistake in Config: '" + id + "' is not a valid MythicMobs item.");
                             return item;
                         }
-                    case "MagicCosmetics":
                     case "magiccosmetics":
                         ItemStack ci = MagicAPI.getCosmeticItem(id);
                         if (ci != null) {
@@ -67,11 +64,9 @@ public class ItemDataPartMaterial extends ItemDataPart {
                                     .warn("Mistake in Config: '" + id + "' is not a valid MagicCosmetics item.");
                             return item;
                         }
-                    case "Divinity":
                     case "divinity":
-                    case "ProRPGItems":
                     case "prorpgitems":
-                        ModuleItem pri = Objects.requireNonNull(QuantumRPG.instance.getModuleCache().getTierManager())
+                        ModuleItem pri = Objects.requireNonNull(Divinity.instance.getModuleCache().getTierManager())
                                 .getItemById(id);
                         if (pri != null) {
                             return pri.create();
