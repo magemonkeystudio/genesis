@@ -2,9 +2,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.promcteam</groupId>
-    <artifactId>bossshoppro</artifactId>
-    <version>2.1.1-R0.3-SNAPSHOT</version>
-    <name>BossShopPro</name>
+    <artifactId>genesis</artifactId>
+    <version>1.0.0-R0.1-SNAPSHOT</version>
+    <name>Genesis</name>
     <description>Create virtual chest shops</description>
     <url>
         https://www.spigotmc.org/resources/bossshoppro-continued-now-free.104824/
@@ -93,17 +93,17 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Adds prorpgitems support -->
+        <!-- Adds divinity support -->
         <dependency>
             <groupId>com.promcteam</groupId>
-            <artifactId>prorpgitems</artifactId>
-            <version>1.0.3.17-SNAPSHOT</version>
+            <artifactId>divinity</artifactId>
+            <version>1.0.0-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.promcteam</groupId>
-            <artifactId>promccore</artifactId>
-            <version>1.0.6-R0.4-SNAPSHOT</version>
+            <artifactId>codex</artifactId>
+            <version>1.0.0-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
 
@@ -119,7 +119,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.20.1-R0.1-SNAPSHOT</version>
+            <version>1.20.4-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
 
@@ -135,7 +135,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.24</version>
+            <version>1.18.32</version>
             <scope>provided</scope>
         </dependency>
 
@@ -396,6 +396,14 @@
                                 </configuration>
                             </execution>
                         </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-jar-plugin</artifactId>
+                        <version>3.3.0</version>
+                        <configuration>
+                            <outputDirectory>../ProBuilds</outputDirectory>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>

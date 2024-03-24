@@ -1,5 +1,5 @@
-name: BossShopPro
-main: org.black_ixx.bossshoppro.bungeecord.BSPBungeeCordPlugin
+name: Genesis
+main: com.promcteam.genesis.bungee.GenesisBungeePlugin
 version: ${project.version}
-description: BungeeCord plugin for BossShopPro
-author: Black_ixx
+description: BungeeCord plugin for Genesis
+authors: [ Black_ixx, ProMCTeam ]

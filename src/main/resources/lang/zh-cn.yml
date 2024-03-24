@@ -13,16 +13,16 @@ Main:
   OffensiveClickSpamWarning: '&4警告：请不要点击太快。'
   OffensiveClickSpamKick: '&4因点击过多被踢。'
   NeedItemInHand: '&c您需要在主手上放一个物品才能执行此指令！'
-  PrintedItemInfo: '&6所有物品信息已成功保存在此处： &7''/plugins/BossShopPro/ItemDataStorage.yml''&6。'
+  PrintedItemInfo: '&6所有物品信息已成功保存在此处： &7''/plugins/Genesis/ItemDataStorage.yml''&6。'
   ListAndSeparator: ' & '
   ListOrSeparator: ' 或 '
   WorldNotExisting: "&c那个世界不存在。。。"
-  StartReload: "&eBossShopPro正在开始重载。。。"
+  StartReload: "&eGenesis正在开始重载。。。"
   ReloadFinish: "&e完成！"
 Economy:
   NoAccount: '&c你没有经济账户！'
 ShopCreate:
-  Success: "&a文件已保存至 &7/plugins/BossShopPro/shops&a下。"
+  Success: "&a文件已保存至 &7/plugins/Genesis/shops&a下。"
   Success2: "&c请重载插件才能读取新生成的商店文件。"
   FileExists: "&c相同的文件已存在，将会覆盖文件。"
   #这两个字符串不要随意修改,否则无法保存文件。
