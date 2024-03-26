@@ -1,8 +1,8 @@
 package com.promcteam.genesis.inbuiltaddons;
 
 import com.promcteam.genesis.Genesis;
-import com.promcteam.genesis.inbuiltaddons.logictypes.LogicTypes;
 import com.promcteam.genesis.inbuiltaddons.advancedshops.AdvancedShops;
+import com.promcteam.genesis.inbuiltaddons.logictypes.LogicTypes;
 
 public class InbuiltAddonLoader {
 

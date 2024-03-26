@@ -1,10 +1,10 @@
 package com.promcteam.genesis.core.rewards;
 
-import net.milkbowl.vault.permission.Permission;
 import com.promcteam.genesis.core.GenesisBuy;
 import com.promcteam.genesis.managers.ClassManager;
 import com.promcteam.genesis.managers.misc.InputReader;
 import com.promcteam.genesis.managers.misc.StringManipulationLib;
+import net.milkbowl.vault.permission.Permission;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 

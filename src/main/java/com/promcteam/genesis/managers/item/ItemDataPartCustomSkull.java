@@ -79,7 +79,6 @@ public class ItemDataPartCustomSkull extends ItemDataPart {
                     if (profile.getProperties() != null) {
                         Collection<Property> properties = profile.getProperties().get("textures");
                         if (properties != null) {
-
                             Iterator<Property> iterator = properties.iterator();
                             if (iterator.hasNext()) {
                                 Property property = iterator.next();
@@ -88,9 +87,11 @@ public class ItemDataPartCustomSkull extends ItemDataPart {
                                     Method getValueMethod = property.getClass().getDeclaredMethod("getValue");
                                     getValueMethod.setAccessible(true);
                                     return (String) getValueMethod.invoke(property);
-                                } catch (NoSuchMethodException e) {
+                                } catch (Exception e) {
                                     // If the property is a record...
-                                    return property.value();
+                                    Method valueMethod = property.getClass().getDeclaredMethod("value");
+                                    valueMethod.setAccessible(true);
+                                    return (String) valueMethod.invoke(property);
                                 }
                             }
                         }

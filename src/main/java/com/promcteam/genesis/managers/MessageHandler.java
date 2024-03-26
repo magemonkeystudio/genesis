@@ -1,10 +1,10 @@
 package com.promcteam.genesis.managers;
 
 import com.promcteam.genesis.Genesis;
-import com.promcteam.genesis.managers.config.FileHandler;
 import com.promcteam.genesis.core.GenesisBuy;
 import com.promcteam.genesis.core.GenesisShop;
 import com.promcteam.genesis.core.GenesisShopHolder;
+import com.promcteam.genesis.managers.config.FileHandler;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;

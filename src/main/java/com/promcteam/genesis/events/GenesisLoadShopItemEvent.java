@@ -1,10 +1,10 @@
 package com.promcteam.genesis.events;
 
 
+import com.promcteam.genesis.core.GenesisBuy;
 import com.promcteam.genesis.core.GenesisShop;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import com.promcteam.genesis.core.GenesisBuy;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.event.HandlerList;
 

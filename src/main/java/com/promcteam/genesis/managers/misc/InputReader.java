@@ -1,12 +1,12 @@
 package com.promcteam.genesis.managers.misc;
 
 import com.google.gson.JsonParseException;
-import net.md_5.bungee.api.chat.BaseComponent;
-import net.md_5.bungee.api.chat.TextComponent;
-import net.md_5.bungee.chat.ComponentSerializer;
 import com.promcteam.genesis.managers.ClassManager;
 import com.promcteam.genesis.misc.Enchant;
 import com.promcteam.genesis.misc.MathTools;
+import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.chat.ComponentSerializer;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;

@@ -2,8 +2,8 @@ package com.promcteam.genesis.core;
 
 import com.promcteam.genesis.Genesis;
 import com.promcteam.genesis.managers.ClassManager;
-import com.promcteam.genesis.managers.config.GenesisConfigShop;
 import com.promcteam.genesis.managers.config.FileHandler;
+import com.promcteam.genesis.managers.config.GenesisConfigShop;
 import com.promcteam.genesis.settings.Settings;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

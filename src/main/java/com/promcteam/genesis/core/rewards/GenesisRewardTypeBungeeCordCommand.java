@@ -1,8 +1,8 @@
 package com.promcteam.genesis.core.rewards;
 
-import com.promcteam.genesis.managers.external.BungeeCordManager;
 import com.promcteam.genesis.core.GenesisBuy;
 import com.promcteam.genesis.managers.ClassManager;
+import com.promcteam.genesis.managers.external.BungeeCordManager;
 import com.promcteam.genesis.managers.misc.InputReader;
 import com.promcteam.genesis.managers.misc.StringManipulationLib;
 import org.bukkit.entity.Player;

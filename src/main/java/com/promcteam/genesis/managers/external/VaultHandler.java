@@ -1,10 +1,10 @@
 package com.promcteam.genesis.managers.external;
 
 import com.promcteam.genesis.Genesis;
-import net.milkbowl.vault.economy.Economy;
-import net.milkbowl.vault.permission.Permission;
 import com.promcteam.genesis.managers.ClassManager;
 import com.promcteam.genesis.misc.NoEconomy;
+import net.milkbowl.vault.economy.Economy;
+import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;
 

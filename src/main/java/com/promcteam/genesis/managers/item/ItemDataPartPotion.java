@@ -1,8 +1,8 @@
 package com.promcteam.genesis.managers.item;
 
-import com.promcteam.genesis.managers.misc.InputReader;
 import com.promcteam.genesis.core.GenesisBuy;
 import com.promcteam.genesis.managers.ClassManager;
+import com.promcteam.genesis.managers.misc.InputReader;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.PotionMeta;

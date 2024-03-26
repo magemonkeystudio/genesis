@@ -1,13 +1,13 @@
 package com.promcteam.genesis.core;
 
 import com.promcteam.genesis.Genesis;
-import com.promcteam.genesis.managers.ClassManager;
-import lombok.Getter;
-import lombok.Setter;
 import com.promcteam.genesis.events.GenesisChoosePageLayoutEvent;
+import com.promcteam.genesis.managers.ClassManager;
 import com.promcteam.genesis.managers.features.PageLayoutHandler;
 import com.promcteam.genesis.misc.Misc;
 import com.promcteam.genesis.settings.Settings;
+import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;

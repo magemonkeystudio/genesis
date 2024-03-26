@@ -17,7 +17,6 @@
     </url>
 
     <properties>
-        <java.version>11</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <nexus.url>https://s01.oss.sonatype.org</nexus.url>
     </properties>
@@ -103,14 +102,10 @@
         <dependency>
             <groupId>com.promcteam</groupId>
             <artifactId>divinity</artifactId>
-            <version>1.0.0-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.promcteam</groupId>
             <artifactId>codex</artifactId>
-            <version>1.0.0-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
         </dependency>
 
         <!-- Adds MythicMobs api -->
@@ -118,14 +113,6 @@
             <groupId>io.lumine</groupId>
             <artifactId>Mythic-Dist</artifactId>
             <version>5.2.0</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- Platform -->
-        <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot-api</artifactId>
-            <version>1.20.4-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
 
@@ -210,7 +197,7 @@
             </exclusions>
         </dependency>
 
-        <!-- Used for language utils -->
+        <!-- Used for language util -->
         <dependency>
             <groupId>com.meowj</groupId>
             <artifactId>LangUtils</artifactId>
@@ -270,14 +257,12 @@
         <dependency>
             <groupId>com.mojang</groupId>
             <artifactId>authlib</artifactId>
-            <version>5.0.47</version>
-            <scope>provided</scope>
         </dependency>
     </dependencies>
 
 
     <build>
-        <finalName>${project.name}-${project.version}</finalName>
+        <finalName>${project.artifactId}-${project.version}</finalName>
         <resources>
             <resource>
                 <targetPath>.</targetPath>
@@ -326,10 +311,6 @@
                         <relocation>
                             <pattern>de.tr7zw.changeme.nbtapi</pattern>
                             <shadedPattern>org.black_ixx.bossshop.lib.nbtapi</shadedPattern>
-                        </relocation>
-                        <relocation>
-                            <pattern>org.apache.commons.lang3</pattern>
-                            <shadedPattern>org.black_ixx.bossshop.lib.commons</shadedPattern>
                         </relocation>
                     </relocations>
                 </configuration>
@@ -399,14 +380,6 @@
                                 </configuration>
                             </execution>
                         </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-jar-plugin</artifactId>
-                        <version>3.3.0</version>
-                        <configuration>
-                            <outputDirectory>../ProBuilds</outputDirectory>
-                        </configuration>
                     </plugin>
                 </plugins>
             </build>

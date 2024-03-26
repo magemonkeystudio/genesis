@@ -1,10 +1,10 @@
 package com.promcteam.genesis.core.prices;
 
 
-import com.promcteam.genesis.core.rewards.GenesisRewardTypeNumber;
-import com.promcteam.genesis.managers.misc.InputReader;
 import com.promcteam.genesis.core.GenesisBuy;
+import com.promcteam.genesis.core.rewards.GenesisRewardTypeNumber;
 import com.promcteam.genesis.managers.ClassManager;
+import com.promcteam.genesis.managers.misc.InputReader;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;

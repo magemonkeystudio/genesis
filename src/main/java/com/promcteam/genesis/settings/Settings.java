@@ -1,9 +1,9 @@
 package com.promcteam.genesis.settings;
 
 import com.promcteam.genesis.managers.ClassManager;
+import com.promcteam.genesis.managers.features.PointsManager.PointsPlugin;
 import lombok.Getter;
 import lombok.Setter;
-import com.promcteam.genesis.managers.features.PointsManager.PointsPlugin;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.ConfigurationSection;
 

@@ -84,7 +84,8 @@ public class ItemStackCreator {
             } else {
                 ClassManager.manager.getBugFinder()
                         .warn("Was trying to import the item look for MenuItem of shopitem '" + buy.getName()
-                                + "' in shop '" + shop.getShopName() + "' but your " + path + " is not an item list!");
+                                + "' in shop '" + shop.getShopName() + "' but your " + path
+                                + " is not an item list!");
             }
         }
         return newList;

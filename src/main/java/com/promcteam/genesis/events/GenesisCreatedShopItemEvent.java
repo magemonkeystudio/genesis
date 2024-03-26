@@ -1,8 +1,8 @@
 package com.promcteam.genesis.events;
 
 
-import com.promcteam.genesis.core.GenesisShop;
 import com.promcteam.genesis.core.GenesisBuy;
+import com.promcteam.genesis.core.GenesisShop;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.Plugin;

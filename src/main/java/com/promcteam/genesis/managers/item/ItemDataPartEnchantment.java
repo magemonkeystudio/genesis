@@ -1,10 +1,10 @@
 package com.promcteam.genesis.managers.item;
 
-import com.vk2gpz.tokenenchant.api.TokenEnchantAPI;
 import com.promcteam.genesis.core.GenesisBuy;
 import com.promcteam.genesis.managers.ClassManager;
 import com.promcteam.genesis.managers.misc.InputReader;
 import com.promcteam.genesis.settings.Settings;
+import com.vk2gpz.tokenenchant.api.TokenEnchantAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;

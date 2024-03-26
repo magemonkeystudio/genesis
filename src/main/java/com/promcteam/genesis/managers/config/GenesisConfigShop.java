@@ -1,14 +1,14 @@
 package com.promcteam.genesis.managers.config;
 
 import com.promcteam.genesis.Genesis;
-import com.promcteam.genesis.core.rewards.GenesisRewardType;
-import lombok.Getter;
 import com.promcteam.genesis.core.GenesisBuy;
 import com.promcteam.genesis.core.GenesisShop;
 import com.promcteam.genesis.core.GenesisShops;
 import com.promcteam.genesis.core.prices.GenesisPriceType;
+import com.promcteam.genesis.core.rewards.GenesisRewardType;
 import com.promcteam.genesis.events.GenesisLoadShopItemsEvent;
 import com.promcteam.genesis.managers.ClassManager;
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

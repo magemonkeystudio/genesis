@@ -1,6 +1,8 @@
 package com.promcteam.genesis.managers.item;
 
 import com.francobm.magicosmetics.api.MagicAPI;
+import com.promcteam.divinity.Divinity;
+import com.promcteam.divinity.modules.ModuleItem;
 import com.promcteam.genesis.core.GenesisBuy;
 import com.promcteam.genesis.managers.ClassManager;
 import com.promcteam.genesis.managers.misc.InputReader;
@@ -10,8 +12,6 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
-import com.promcteam.divinity.Divinity;
-import com.promcteam.divinity.modules.ModuleItem;
 
 import java.util.List;
 import java.util.Objects;

@@ -1,11 +1,11 @@
 package com.promcteam.genesis.managers.misc;
 
 
-import com.promcteam.genesis.core.rewards.GenesisRewardType;
 import com.promcteam.genesis.core.GenesisBuy;
 import com.promcteam.genesis.core.GenesisShop;
 import com.promcteam.genesis.core.GenesisShopHolder;
 import com.promcteam.genesis.core.prices.GenesisPriceType;
+import com.promcteam.genesis.core.rewards.GenesisRewardType;
 import com.promcteam.genesis.events.GenesisCheckStringForFeaturesEvent;
 import com.promcteam.genesis.events.GenesisTransformStringEvent;
 import com.promcteam.genesis.managers.ClassManager;

@@ -18,7 +18,8 @@ public class ItemDataPartWrittenBookPage extends ItemDataPart {
     public ItemStack transform(ItemStack item, String usedName, String argument) {
         if (!(item.getItemMeta() instanceof BookMeta)) {
             ClassManager.manager.getBugFinder()
-                    .severe("Mistake in Config: You can not add book text to an item with material '" + item.getType()
+                    .severe("Mistake in Config: You can not add book text to an item with material '"
+                            + item.getType()
                             .name() + "'! Following line is invalid: '" + usedName + ":" + argument + "'.");
             return item;
         }

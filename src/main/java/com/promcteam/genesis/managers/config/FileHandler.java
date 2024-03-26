@@ -1,8 +1,8 @@
 package com.promcteam.genesis.managers.config;
 
 import com.promcteam.genesis.Genesis;
-import com.promcteam.genesis.api.GenesisAddonConfig;
 import com.promcteam.genesis.api.GenesisAddon;
+import com.promcteam.genesis.api.GenesisAddonConfig;
 import com.promcteam.genesis.managers.ClassManager;
 import org.bukkit.plugin.Plugin;
 

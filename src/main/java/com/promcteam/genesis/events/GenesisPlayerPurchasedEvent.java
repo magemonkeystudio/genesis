@@ -1,7 +1,7 @@
 package com.promcteam.genesis.events;
 
-import com.promcteam.genesis.core.GenesisShop;
 import com.promcteam.genesis.core.GenesisBuy;
+import com.promcteam.genesis.core.GenesisShop;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.inventory.ClickType;

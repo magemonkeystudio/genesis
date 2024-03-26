@@ -1,8 +1,8 @@
 package com.promcteam.genesis.managers.item;
 
-import de.tr7zw.changeme.nbtapi.NBTItem;
 import com.promcteam.genesis.core.GenesisBuy;
 import com.promcteam.genesis.managers.ClassManager;
+import de.tr7zw.changeme.nbtapi.NBTItem;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
