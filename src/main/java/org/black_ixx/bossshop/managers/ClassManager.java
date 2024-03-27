@@ -1,5 +1,8 @@
 package org.black_ixx.bossshop.managers;
 
+import lombok.Getter;
+import net.kyori.adventure.audience.Audience;
+import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.black_ixx.bossshop.BossShop;
 import org.black_ixx.bossshop.api.BossShopAddon;
 import org.black_ixx.bossshop.core.BSShops;
@@ -32,41 +35,44 @@ import org.bukkit.plugin.Plugin;
 
 public class ClassManager {
 
-    public static ClassManager     manager;
-    private       ItemStackChecker itemstackChecker;
-    private       StringManager    stringmanager;
+    public static ClassManager manager;
+    @Getter
+    private static BukkitAudiences audience;
+    private ItemStackChecker itemstackChecker;
+    private StringManager stringmanager;
 
 
     ///////////////////////////////
-    private PointsManager         pointsmanager;
-    private VaultHandler          vaulthandler;
+    private PointsManager pointsmanager;
+    private VaultHandler vaulthandler;
     private PlaceholderAPIHandler placeholderhandler;
-    private MessageHandler        messagehandler;
-    private ItemStackCreator      itemstackCreator;
-    private ItemStackTranslator   itemstackTranslator;
-    private BuyItemHandler        buyItemHandler;
-    private ConfigHandler         configHandler;
-    private BugFinder             bugfinder;
-    private BossShop              plugin;
-    private Settings              settings;
-    private BSShops               shops;
-    private PageLayoutHandler     pagelayoutHandler;
-    private BungeeCordManager     bungeeCordManager;
-    private ShopCustomizer        customizer;
-    private TransactionLog        transactionLog;
-    private ServerPingingManager  serverPingingManager;
-    private AutoRefreshHandler    autoRefreshHandler;
-    private MultiplierHandler     multiplierHandler;
-    private StorageManager        storageManager;
-    private ISpawnEggHandler      spawnEggHandler;
-    private ISpawnerHandler       spawnerHandler;
-    private LanguageManager       languageManager;
-    private ItemDataStorage       itemdataStorage;
-    private PlayerDataHandler     playerdataHandler;
+    private MessageHandler messagehandler;
+    private ItemStackCreator itemstackCreator;
+    private ItemStackTranslator itemstackTranslator;
+    private BuyItemHandler buyItemHandler;
+    private ConfigHandler configHandler;
+    private BugFinder bugfinder;
+    private BossShop plugin;
+    private Settings settings;
+    private BSShops shops;
+    private PageLayoutHandler pagelayoutHandler;
+    private BungeeCordManager bungeeCordManager;
+    private ShopCustomizer customizer;
+    private TransactionLog transactionLog;
+    private ServerPingingManager serverPingingManager;
+    private AutoRefreshHandler autoRefreshHandler;
+    private MultiplierHandler multiplierHandler;
+    private StorageManager storageManager;
+    private ISpawnEggHandler spawnEggHandler;
+    private ISpawnerHandler spawnerHandler;
+    private LanguageManager languageManager;
+    private ItemDataStorage itemdataStorage;
+    private PlayerDataHandler playerdataHandler;
 
     public ClassManager(BossShop plugin) {
         this.plugin = plugin;
         manager = this;
+        audience = BukkitAudiences.create(plugin);
         settings = new Settings();
 
         new FileHandler().exportConfigs(plugin);

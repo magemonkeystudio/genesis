@@ -17,9 +17,9 @@ import java.io.InputStreamReader;
 import java.util.Objects;
 
 public class MessageHandler {
-    private final BossShop          plugin;
-    private       String            fileName = "lang" + File.separator + "en-us.yml";
-    private       FileConfiguration config;
+    private final BossShop plugin;
+    private String fileName = "lang" + File.separator + "en-us.yml";
+    private FileConfiguration config;
 
     public MessageHandler(final BossShop plugin) {
         this.plugin = plugin;
@@ -61,8 +61,8 @@ public class MessageHandler {
     /**
      * Send message from config to player
      *
-     * @param node           path of message
-     * @param sender         sender to send to
+     * @param node          path of message
+     * @param sender        sender to send to
      * @param offlineTarget offline target
      */
     public void sendMessage(String node, CommandSender sender, String offlineTarget) {
@@ -83,13 +83,13 @@ public class MessageHandler {
     /**
      * Send a message to a player
      *
-     * @param node           the path of message
-     * @param sender         the sender to send to
+     * @param node          the path of message
+     * @param sender        the sender to send to
      * @param offlineTarget offline target
-     * @param target         player target
-     * @param shop           shop to send to
-     * @param holder         the holder of the shop
-     * @param item           the item in the shop
+     * @param target        player target
+     * @param shop          shop to send to
+     * @param holder        the holder of the shop
+     * @param item          the item in the shop
      */
     public void sendMessage(String node,
                             CommandSender sender,
@@ -181,8 +181,8 @@ public class MessageHandler {
         if (!file.exists()) {
             LangCode = "en-us";
             plugin.getConfig().set("Language", "en-us");
-            FileHandler fh   = new FileHandler();
-            File        lang = new File(plugin.getDataFolder(), "lang" + File.separator + "en-us.yml");
+            FileHandler fh = new FileHandler();
+            File lang = new File(plugin.getDataFolder(), "lang" + File.separator + "en-us.yml");
             if (!lang.exists()) {
                 fh.exportLanguages(plugin);
                 fileName = "lang/" + LangCode + ".yml";

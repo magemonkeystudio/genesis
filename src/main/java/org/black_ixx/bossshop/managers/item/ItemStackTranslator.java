@@ -1,10 +1,13 @@
 package org.black_ixx.bossshop.managers.item;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import org.black_ixx.bossshop.core.BSBuy;
 import org.black_ixx.bossshop.core.BSShop;
 import org.black_ixx.bossshop.core.BSShopHolder;
 import org.black_ixx.bossshop.managers.ClassManager;
 import org.black_ixx.bossshop.managers.misc.StringManager;
+import org.black_ixx.bossshop.misc.ChatUT;
 import org.black_ixx.bossshop.misc.locales.Translate;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -222,9 +225,10 @@ public class ItemStackTranslator {
         return material;*/
         ItemMeta meta = item.getItemMeta();
         if(meta == null)  {
-            return Translate.getMaterial(player, item.getType());
+            return GsonComponentSerializer.gson().serialize(Component.translatable(item.getType().getTranslationKey().replace("lang:", "")));
         }
-        return item.hasItemMeta() && meta.hasDisplayName() ? item.getItemMeta().getDisplayName() : Translate.getMaterial(player, item.getType());
+        ClassManager.getAudience().sender(Bukkit.getConsoleSender()).sendMessage(Component.translatable(item.getType().getTranslationKey()));
+        return item.hasItemMeta() && meta.hasDisplayName() ? item.getItemMeta().getDisplayName() : GsonComponentSerializer.gson().serialize(Component.translatable(item.getType().getTranslationKey().replace("lang:", "")));
     }
 
     public void copyTexts(ItemStack receiver, ItemStack source) {
