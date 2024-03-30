@@ -1,9 +1,9 @@
 [![Build](https://github.com/promcteam/BossShopPro/actions/workflows/release.yml/badge.svg?branch=main)](https://s01.oss.sonatype.org/content/repositories/snapshots/com/promcteam/bossshoppro)
 [![Build](https://github.com/promcteam/BossShopPro/actions/workflows/devbuild.yml/badge.svg?branch=dev)](https://s01.oss.sonatype.org/content/repositories/snapshots/com/promcteam/bossshoppro)
 
-# BossShopPro
+# Genesis
 
-BossShopPro is one of the most player-friendly and multifunctional GUI plugins ever! Say goodbye to all the annoying
+Genesis is one of the most player-friendly and multifunctional GUI plugins ever! Say goodbye to all the annoying
 command- or signshops!
 It can not only be used to create shops but for every kind of menu. Here are just a few examples:
 
@@ -33,4 +33,4 @@ https://github.com/Megumiovo/BossShopPro/commit/319e8c13dfab33b73c1856428e638d1b
 
 ## API
 
-Information regarding the BossShopPro API can be found here: [Link](https://www.spigotmc.org/wiki/bossshoppro-api/).
+Information regarding the Genesis API can be found here: [Link](https://www.spigotmc.org/wiki/bossshoppro-api/).
