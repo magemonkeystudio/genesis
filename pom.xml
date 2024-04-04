@@ -3,9 +3,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.promcteam</groupId>
-        <artifactId>promc-parent</artifactId>
-        <version>1.20.4-R1-SNAPSHOT</version>
+        <groupId>studio.magemonkey</groupId>
+        <artifactId>magemonkey-parent</artifactId>
+        <version>1.20.4-SNAPSHOT</version>
     </parent>
 
     <artifactId>genesis</artifactId>
@@ -100,11 +100,11 @@
 
         <!-- Adds divinity support -->
         <dependency>
-            <groupId>com.promcteam</groupId>
+            <groupId>studio.magemonkey</groupId>
             <artifactId>divinity</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.promcteam</groupId>
+            <groupId>studio.magemonkey</groupId>
             <artifactId>codex</artifactId>
         </dependency>
 
@@ -424,9 +424,9 @@
 
     <developers>
         <developer>
-            <name>ProMCTeam</name>
-            <organization>ProMCTeam</organization>
-            <organizationUrl>https://promcteam.com</organizationUrl>
+            <name>Mage Monkey Studios</name>
+            <organization>Mage Monkey Studios</organization>
+            <organizationUrl>https://magemonkey.studio</organizationUrl>
         </developer>
     </developers>
 

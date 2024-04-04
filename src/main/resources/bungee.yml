@@ -1,5 +1,5 @@
 name: Genesis
-main: com.promcteam.genesis.bungee.GenesisBungeePlugin
+main: studio.magemonkey.genesis.bungee.GenesisBungeePlugin
 version: ${project.version}
 description: BungeeCord plugin for Genesis
-authors: [ Black_ixx, ProMCTeam ]
+authors: [ Black_ixx, Mage Monkey Studios ]

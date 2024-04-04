@@ -2,8 +2,8 @@ name: ${project.name}
 version: ${project.version}
 api-version: 1.13
 description: A powerful custom shop creator plugin
-authors: [ Black_ixx, ProMCTeam ]
-main: com.promcteam.genesis.Genesis
+authors: [ Black_ixx, Mage Monkey Studios ]
+main: studio.magemonkey.genesis.Genesis
 softdepend: [ Divinity, ItemsAdder, MagicCosmetics, MythicMobs, PlayerShops GUI, ItemShops, ThirdCurrency, GuiShopManager, LimitedUses, TrickyShops, Vault, PlayerPoints, Jobs, Gringotts, VotingPlugin, SilkSpawners, PlaceholderAPI ]
 loadbefore: [ LimitedUses, ItemShops, PlayerShops, ThirdCurrency, GuiShopManager ]
 libraries: [ org.apache.commons:commons-lang3:${apache.version} ]
