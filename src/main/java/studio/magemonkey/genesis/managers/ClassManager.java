@@ -183,7 +183,7 @@ public class ClassManager {
 
         if (plugin.getAPI().getEnabledAddons() != null) {
             for (GenesisAddon addon : plugin.getAPI().getEnabledAddons()) {
-                addon.bossShopFinishedLoading();
+                addon.genesisFinishedLoading();
             }
         }
     }

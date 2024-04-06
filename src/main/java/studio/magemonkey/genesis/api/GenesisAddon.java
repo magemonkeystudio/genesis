@@ -1,11 +1,11 @@
 package studio.magemonkey.genesis.api;
 
-import studio.magemonkey.genesis.Genesis;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+import studio.magemonkey.genesis.Genesis;
 
 public abstract class GenesisAddon extends JavaPlugin {
     private Genesis bs;
@@ -22,7 +22,7 @@ public abstract class GenesisAddon extends JavaPlugin {
         if (plugin == null) {
             printSevere(Genesis.NAME + " was not found... you need it in order to run " + getAddonName()
                     + "! Get it here: https://www.spigotmc.org/resources/25699/. Version v"
-                    + getRequiredBossShopVersion() + " or newer is required!");
+                    + getRequiredGenesisVersion() + " or newer is required!");
             printInfo("Disabling Addon...");
             b = true;
             Bukkit.getPluginManager().disablePlugin(this);
@@ -32,10 +32,10 @@ public abstract class GenesisAddon extends JavaPlugin {
         bs = (Genesis) plugin;
 
         double bsWorth = getWorth(bs.getDescription().getVersion());
-        double aoWorth = getWorth(getRequiredBossShopVersion());
+        double aoWorth = getWorth(getRequiredGenesisVersion());
         if (bsWorth < aoWorth) {
             printSevere(Genesis.NAME + " was found but it seems to be outdated... you need v"
-                    + getRequiredBossShopVersion() + " or newer in order to run " + getAddonName()
+                    + getRequiredGenesisVersion() + " or newer in order to run " + getAddonName()
                     + "! Get it here: https://www.spigotmc.org/resources/25699/");
             printInfo("Disabling Addon...");
             b = true;
@@ -78,10 +78,10 @@ public abstract class GenesisAddon extends JavaPlugin {
     /**
      * Called to reload the addon
      *
-     * @param sender the execute of the command
+     * @param sender the sender of the command
      */
     public void reload(CommandSender sender) { // Can be overwritten
-        bossShopReloaded(sender);
+        genesisReloaded(sender);
         sender.sendMessage(
                 ChatColor.YELLOW + "Reloaded " + Genesis.NAME + " Addon " + ChatColor.GOLD + getAddonName());
     }
@@ -120,7 +120,7 @@ public abstract class GenesisAddon extends JavaPlugin {
      *
      * @return instance of class
      */
-    public final Genesis getBossShop() {
+    public final Genesis getGenesis() {
         return bs;
     }
 
@@ -176,19 +176,19 @@ public abstract class GenesisAddon extends JavaPlugin {
      *
      * @return version required
      */
-    public abstract String getRequiredBossShopVersion();
+    public abstract String getRequiredGenesisVersion();
 
     /**
      * Enables the addon
      */
     public abstract void enableAddon();
 
-    public abstract void bossShopFinishedLoading();
+    public abstract void genesisFinishedLoading();
 
     /**
      * Disables the addon
      */
     public abstract void disableAddon();
 
-    public abstract void bossShopReloaded(CommandSender sender);
+    public abstract void genesisReloaded(CommandSender sender);
 }

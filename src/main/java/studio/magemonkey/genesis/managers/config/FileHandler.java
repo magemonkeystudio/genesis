@@ -55,7 +55,7 @@ public class FileHandler {
     }
 
     public void copyDefaultsFromJar(GenesisAddon addon, String filename) {
-        copyDefaultsFromJar(addon, addon.getBossShop(), filename, "addons/" + addon.getAddonName() + "/" + filename);
+        copyDefaultsFromJar(addon, addon.getGenesis(), filename, "addons/" + addon.getAddonName() + "/" + filename);
     }
 
     public void copyDefaultsFromJar(Genesis plugin, String... files) {
@@ -142,7 +142,7 @@ public class FileHandler {
 
 
     public void copyFromJar(GenesisAddon addon, String filename) {
-        copyFromJar(addon, addon.getBossShop(), false, filename, "/addons/" + addon.getAddonName() + "/" + filename);
+        copyFromJar(addon, addon.getGenesis(), false, filename, "/addons/" + addon.getAddonName() + "/" + filename);
     }
 
 }
