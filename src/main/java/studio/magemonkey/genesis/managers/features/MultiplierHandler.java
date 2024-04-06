@@ -1,5 +1,9 @@
 package studio.magemonkey.genesis.managers.features;
 
+import lombok.Getter;
+import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
+import org.bukkit.inventory.ItemStack;
 import studio.magemonkey.genesis.Genesis;
 import studio.magemonkey.genesis.core.GenesisBuy;
 import studio.magemonkey.genesis.core.GenesisMultiplier;
@@ -7,10 +11,6 @@ import studio.magemonkey.genesis.core.prices.GenesisPriceType;
 import studio.magemonkey.genesis.core.rewards.GenesisRewardType;
 import studio.magemonkey.genesis.managers.ClassManager;
 import studio.magemonkey.genesis.misc.MathTools;
-import lombok.Getter;
-import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.ClickType;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.HashSet;
 import java.util.List;
@@ -91,6 +91,15 @@ public class MultiplierHandler {
 
     public double calculatePriceWithMultiplier(Player p, GenesisBuy buy, ClickType clickType, double d) {
         return calculatePriceWithMultiplier(p, buy, buy.getPriceType(clickType), d);
+    }
+
+    public double calculatePriceWithMultiplier(Player p,
+                                               GenesisPriceType priceType,
+                                               double d) { //Used for prices
+        for (GenesisMultiplier m : multipliers) {
+            d = m.calculateValue(p, priceType, d, GenesisMultiplier.RANGE_PRICE_ONLY);
+        }
+        return MathTools.round(d, 2);
     }
 
     public double calculatePriceWithMultiplier(Player p,

@@ -1,5 +1,9 @@
 package studio.magemonkey.genesis.managers;
 
+import lombok.Getter;
+import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.plugin.Plugin;
 import studio.magemonkey.genesis.Genesis;
 import studio.magemonkey.genesis.api.GenesisAddon;
 import studio.magemonkey.genesis.core.GenesisShops;
@@ -17,52 +21,70 @@ import studio.magemonkey.genesis.managers.external.spawners.ISpawnEggHandler;
 import studio.magemonkey.genesis.managers.external.spawners.ISpawnerHandler;
 import studio.magemonkey.genesis.managers.external.spawners.SpawnersHandlerEpicSpawners;
 import studio.magemonkey.genesis.managers.external.spawners.SpawnersHandlerSilkSpawners;
+import studio.magemonkey.genesis.managers.features.*;
 import studio.magemonkey.genesis.managers.item.ItemDataPart;
 import studio.magemonkey.genesis.managers.item.ItemStackChecker;
 import studio.magemonkey.genesis.managers.item.ItemStackCreator;
 import studio.magemonkey.genesis.managers.item.ItemStackTranslator;
 import studio.magemonkey.genesis.managers.misc.StringManager;
-import studio.magemonkey.genesis.managers.features.*;
 import studio.magemonkey.genesis.managers.serverpinging.ServerPingingManager;
 import studio.magemonkey.genesis.misc.MathTools;
 import studio.magemonkey.genesis.settings.Settings;
-import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.plugin.Plugin;
 
 public class ClassManager {
+    public static ClassManager manager;
 
-    public static ClassManager     manager;
-    private final ItemStackChecker itemstackChecker;
-    private final StringManager    stringmanager;
-
-
-    ///////////////////////////////
-    private       PointsManager         pointsmanager;
-    private       VaultHandler          vaulthandler;
-    private       PlaceholderAPIHandler placeholderhandler;
-    private final MessageHandler        messagehandler;
-    private final ItemStackCreator      itemstackCreator;
-    private final ItemStackTranslator   itemstackTranslator;
+    @Getter
+    private final ItemStackChecker      itemStackChecker;
+    @Getter
+    private final StringManager         stringManager;
+    @Getter
+    private final MessageHandler        messageHandler;
+    @Getter
+    private final ItemStackCreator      itemStackCreator;
+    @Getter
+    private final ItemStackTranslator   itemStackTranslator;
+    @Getter
     private final BuyItemHandler        buyItemHandler;
-    private final ConfigHandler        configHandler;
-    private final BugFinder            bugfinder;
-    private final Genesis              plugin;
+    @Getter
+    private final ConfigHandler         configHandler;
+    @Getter
+    private final BugFinder             bugFinder;
+    @Getter
+    private final Genesis               plugin;
+    @Getter
     private final Settings              settings;
+    @Getter
+    private final MultiplierHandler     multiplierHandler;
+    @Getter
+    private final StorageManager        storageManager;
+    @Getter
+    private final ItemDataStorage       itemDataStorage;
+    @Getter
+    private final PlayerDataHandler     playerDataHandler;
+    @Getter
+    private       PointsManager         pointsManager;
+    private       VaultHandler          vaulthandler;
+    @Getter
+    private       PlaceholderAPIHandler placeholderHandler;
+    @Getter
     private       GenesisShops          shops;
-    private       PageLayoutHandler     pagelayoutHandler;
+    @Getter
+    private       PageLayoutHandler     pageLayoutHandler;
     private       BungeeCordManager     bungeeCordManager;
     private       ShopCustomizer        customizer;
+    @Getter
     private       TransactionLog        transactionLog;
-    private       ServerPingingManager serverPingingManager;
-    private       AutoRefreshHandler   autoRefreshHandler;
-    private final MultiplierHandler    multiplierHandler;
-    private final StorageManager       storageManager;
+    @Getter
+    private       ServerPingingManager  serverPingingManager;
+    @Getter
+    private       AutoRefreshHandler    autoRefreshHandler;
+    @Getter
     private       ISpawnEggHandler      spawnEggHandler;
+    @Getter
     private       ISpawnerHandler       spawnerHandler;
-    private       LanguageManager      languageManager;
-    private final ItemDataStorage      itemdataStorage;
-    private final PlayerDataHandler    playerdataHandler;
+    @Getter
+    private       LanguageManager       languageManager;
 
     public ClassManager(Genesis plugin) {
         this.plugin = plugin;
@@ -78,22 +100,22 @@ public class ClassManager {
 
         //////////////// <- Independent Classes
 
-        playerdataHandler = new PlayerDataHandler();
+        playerDataHandler = new PlayerDataHandler();
         configHandler = new ConfigHandler(plugin);
         MathTools.init(settings.getNumberLocale(), settings.getNumberGroupingSize());
         storageManager = new StorageManager(plugin);
-        bugfinder = new BugFinder(plugin);
-        itemdataStorage = new ItemDataStorage(plugin);
+        bugFinder = new BugFinder(plugin);
+        itemDataStorage = new ItemDataStorage(plugin);
         multiplierHandler = new MultiplierHandler(plugin);
-        stringmanager = new StringManager();
-        itemstackCreator = new ItemStackCreator();
-        itemstackTranslator = new ItemStackTranslator();
+        stringManager = new StringManager();
+        itemStackCreator = new ItemStackCreator();
+        itemStackTranslator = new ItemStackTranslator();
         buyItemHandler = new BuyItemHandler();
-        itemstackChecker = new ItemStackChecker();
-        messagehandler = new MessageHandler(plugin);
+        itemStackChecker = new ItemStackChecker();
+        messageHandler = new MessageHandler(plugin);
 
         if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
-            placeholderhandler = new PlaceholderAPIHandler();
+            placeholderHandler = new PlaceholderAPIHandler();
         }
 
         if (Bukkit.getPluginManager().isPluginEnabled("LangUtils")) {
@@ -135,10 +157,10 @@ public class ClassManager {
                         config.getInt("ClickSpamKick.Warnings"),
                         config.getInt("ClickSpamKick.ForgetTime"));
 
-        pagelayoutHandler = new PageLayoutHandler(plugin);
+        pageLayoutHandler = new PageLayoutHandler(plugin);
 
         //if (settings.getPointsEnabled()){ Is not known because shops are not yet loaded. But is required before shops are loaded in order to be able to display items properly.
-        pointsmanager = new PointsManager();
+        pointsManager = new PointsManager();
         //}
 
         shops = new GenesisShops(plugin, settings);
@@ -188,75 +210,12 @@ public class ClassManager {
         }
     }
 
-    ///////////////////////////////
-
-    public Settings getSettings() {
-        return settings;
-    }
-
-    public ItemStackChecker getItemStackChecker() {
-        return itemstackChecker;
-    }
-
-    public StringManager getStringManager() {
-        return stringmanager;
-    }
-
-    public PointsManager getPointsManager() {
-        return pointsmanager;
-    }
-
     public VaultHandler getVaultHandler() {
         if (vaulthandler == null) {
             return new VaultHandler(ClassManager.manager.getSettings().getMoneyEnabled(),
                     ClassManager.manager.getSettings().getPointsEnabled());
         }
         return vaulthandler;
-    }
-
-    public PlaceholderAPIHandler getPlaceholderHandler() {
-        return placeholderhandler;
-    }
-
-    public MessageHandler getMessageHandler() {
-        return messagehandler;
-    }
-
-    public ItemStackCreator getItemStackCreator() {
-        return itemstackCreator;
-    }
-
-    public ItemStackTranslator getItemStackTranslator() {
-        return itemstackTranslator;
-    }
-
-    public BuyItemHandler getBuyItemHandler() {
-        return buyItemHandler;
-    }
-
-    @SuppressWarnings("unused")
-    public ConfigHandler getConfigHandler() {
-        return configHandler;
-    }
-
-    public BugFinder getBugFinder() {
-        return bugfinder;
-    }
-
-    public Genesis getPlugin() {
-        return plugin;
-    }
-
-    public GenesisShops getShops() {
-        return shops;
-    }
-
-    public PageLayoutHandler getPageLayoutHandler() {
-        return pagelayoutHandler;
-    }
-
-    public PlayerDataHandler getPlayerDataHandler() {
-        return playerdataHandler;
     }
 
     public BungeeCordManager getBungeeCordManager() {
@@ -272,42 +231,4 @@ public class ClassManager {
         }
         return customizer;
     }
-
-    public TransactionLog getTransactionLog() {
-        return transactionLog;
-    }
-
-    public ServerPingingManager getServerPingingManager() {
-        return serverPingingManager;
-    }
-
-    public MultiplierHandler getMultiplierHandler() {
-        return multiplierHandler;
-    }
-
-    public AutoRefreshHandler getAutoRefreshHandler() {
-        return autoRefreshHandler;
-    }
-
-    public StorageManager getStorageManager() {
-        return storageManager;
-    }
-
-    public ISpawnerHandler getSpawnerHandler() {
-        return spawnerHandler;
-    }
-
-    public ISpawnEggHandler getSpawnEggHandler() {
-        return spawnEggHandler;
-    }
-
-    public LanguageManager getLanguageManager() {
-        return languageManager;
-    }
-
-    public ItemDataStorage getItemDataStorage() {
-        return itemdataStorage;
-    }
-
-
 }

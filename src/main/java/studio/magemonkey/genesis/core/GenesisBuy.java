@@ -353,9 +353,9 @@ public class GenesisBuy {
                                         getName(),
                                         placeholder));
                         // Search the shop with the name and its itemId
-                    /*BSShop _shop = ClassManager.manager.getShops().getShop(shopName);
+                    /*GenesisShop _shop = ClassManager.manager.getShops().getShop(shopName);
                     if(_shop != null) {
-                        BSBuy _buy = _shop.getItem(itemId);
+                        GenesisBuy _buy = _shop.getItem(itemId);
                         if(_buy != null) {
                             // Replace the placeholder with the price of the item
                             msg = msg.replace(placeholder, _buy.priceMessage);
