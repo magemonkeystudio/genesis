@@ -270,18 +270,7 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
-                <configuration>
-                    <source>11</source>
-                    <target>11</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.4</version>
                 <executions>
                     <execution>
                         <id>shade</id>
@@ -304,7 +293,7 @@
                     <relocations>
                         <relocation>
                             <pattern>de.tr7zw.changeme.nbtapi</pattern>
-                            <shadedPattern>org.black_ixx.bossshop.lib.nbtapi</shadedPattern>
+                            <shadedPattern>studio.magemonkey.genesis.lib.nbtapi</shadedPattern>
                         </relocation>
                     </relocations>
                 </configuration>
@@ -323,7 +312,6 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>3.2.0</version>
                         <configuration>
                             <tags>
                                 <tag>
