@@ -21,7 +21,7 @@ public abstract class GenesisAddon extends JavaPlugin {
 
         if (plugin == null) {
             printSevere(Genesis.NAME + " was not found... you need it in order to run " + getAddonName()
-                    + "! Get it here: https://www.spigotmc.org/resources/25699/. Version v"
+                    + "! Get it here: https://www.spigotmc.org/resources/104824/. Version v"
                     + getRequiredGenesisVersion() + " or newer is required!");
             printInfo("Disabling Addon...");
             b = true;
@@ -36,7 +36,7 @@ public abstract class GenesisAddon extends JavaPlugin {
         if (bsWorth < aoWorth) {
             printSevere(Genesis.NAME + " was found but it seems to be outdated... you need v"
                     + getRequiredGenesisVersion() + " or newer in order to run " + getAddonName()
-                    + "! Get it here: https://www.spigotmc.org/resources/25699/");
+                    + "! Get it here: https://www.spigotmc.org/resources/104824/");
             printInfo("Disabling Addon...");
             b = true;
             Bukkit.getPluginManager().disablePlugin(this);
