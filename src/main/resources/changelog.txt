@@ -1,5 +1,5 @@
 ﻿Genesis
-by MageMonkeyStudios
+by MageMonkeyStudio
 
 v2.0.9 [BETA]
 * [ADD] Added support for hex color codes

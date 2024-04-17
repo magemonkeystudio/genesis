@@ -2,4 +2,4 @@ name: Genesis
 main: studio.magemonkey.genesis.bungee.GenesisBungeePlugin
 version: ${project.version}
 description: BungeeCord plugin for Genesis
-authors: [ Black_ixx, Mage Monkey Studios ]
+authors: [ Black_ixx, MageMonkeyStudio ]
