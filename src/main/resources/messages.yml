@@ -1,4 +1,4 @@
-#Here you can define all BossShopPro texts displayed to players. Leave a line empty in order to disable a message.
+#Here you can define all Genesis texts displayed to players. Leave a line empty in order to disable a message.
 Main:
   NoPermission: '&cYou are not allowed to do this!'
   AlreadyBought: '&cYou already purchased that!'
@@ -14,7 +14,7 @@ Main:
   OffensiveClickSpamWarning: '&4Warning: Please do not click that fast.'
   OffensiveClickSpamKick: '&4Kicked for clickspam.'
   NeedItemInHand: '&cYou need an item in your main hand in order to be able to execute this command.'
-  PrintedItemInfo: '&6All item information has successfully been saved here: &7''/plugins/BossShopPro/ItemDataStorage.yml''&6.'
+  PrintedItemInfo: '&6All item information has successfully been saved here: &7''/plugins/Genesis/ItemDataStorage.yml''&6.'
   ListAndSeparator: ' & '
   ListOrSeparator: ' or '
 Economy:
@@ -54,7 +54,7 @@ Time:
   Hours: '%time% hours'
   Days: '%time% days'
   Weeks: '%time% weeks'
-#You can make BossShopPro translate every enchantment and item into any language included in Vanilla minecraft.
+#You can make Genesis translate every enchantment and item into any language included in Vanilla minecraft.
 #Optional & requires LangUtils to be installed (https://www.spigotmc.org/resources/1-10-x-1-9-x-1-8-x-1-7-10-language-utils.8859/)
 #Here you can find a list of locale ids: http://www.oracle.com/technetwork/java/javase/javase7locales-334809.html
 Locale: en-us

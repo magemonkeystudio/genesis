@@ -1,19 +1,19 @@
-name: BossShopPro
+name: ${project.name}
 version: ${project.version}
 api-version: 1.13
-description: The BOSS Shop Plugin *PRO VERSION*
-author: Black_ixx, ProMCTeam
-main: org.black_ixx.bossshop.BossShop
-softdepend: [ProRPGItems, ItemsAdder, MagicCosmetics, MythicMobs, PlayerShops GUI, ItemShops, ThirdCurrency, GuiShopManager, LimitedUses, TrickyShops, Vault, PlayerPoints, Jobs, Gringotts, VotingPlugin, SilkSpawners, PlaceholderAPI]
+description: A powerful custom shop creator plugin
+authors: [ Black_ixx, MageMonkeyStudio ]
+main: studio.magemonkey.genesis.Genesis
+softdepend: [ Divinity, ItemsAdder, MagicCosmetics, MythicMobs, PlayerShops GUI, ItemShops, ThirdCurrency, GuiShopManager, LimitedUses, TrickyShops, Vault, PlayerPoints, Jobs, Gringotts, VotingPlugin, SilkSpawners, PlaceholderAPI ]
 loadbefore: [ LimitedUses, ItemShops, PlayerShops, ThirdCurrency, GuiShopManager ]
-libraries: [ commons-lang:commons-lang:2.6 ]
+libraries: [ org.apache.commons:commons-lang3:${apache.version} ]
 commands:
   bs:
-   description: BossShop command
+    description: BossShop command
   bossshop:
-   description: BossShop command
+    description: BossShop command
   shop:
-   description: BossShop command
+    description: BossShop command
 permissions:
   BossShop.open:
     description: Allows opening shops via command/sign
@@ -34,7 +34,7 @@ permissions:
     description: Allows reloading the plugin
     default: op
   BossShop.createSign:
-    description: Allows creating BossShopPro signs
+    description: Allows creating Genesis signs
     default: op
   BossShop.bypass:
     description: Allows to bypass the click delay

@@ -1,17 +1,17 @@
-# BossShopPro
-# by Felix Neubauer
+# Genesis
+# by MageMonkeyStudio
 # Check out following page for more information: https://www.spigotmc.org/wiki/bossshoppro-configuration
 #
-# BossShopPro Wiki Page:
+# Genesis Wiki Page:
 # https://www.spigotmc.org/wiki/bossshoppro
 #
 # Hey!
-# You got BossShopPro? Awesome.
+# You got Genesis? Awesome.
 # Believe me: Setting it up is simple.
 #
 # You can either set it up the classic (And boring/hard) way with editing the configuration files by hand
-# OR you can edit it the Boss way: Use "BossShopProConfigure" (An awesome software which allows simple Setup with a few clicks).
-# You can download BossShopProConfigure here: https://www.spigotmc.org/wiki/bossshoppro-tool
+# OR you can edit it the Boss way: Use "GenesisConfigure" (An awesome software which allows simple Setup with a few clicks).
+# You can download GenesisConfigure here: https://www.spigotmc.org/wiki/bossshoppro-tool
 #
 #
 #
@@ -110,8 +110,8 @@ MaxLineLength: 42
 #
 #
 # InputTimeOut:
-# When BossShopPro expects player input (because of addons like PlayerShops or the 'ForceInput' feature) it waits for player chat and uses the next chat message as input.
-# If the player does not input anything in the chat BossShopPro will after the defined timeout (in seconds) cancel the action and stop waiting for player input.
+# When Genesis expects player input (because of addons like PlayerShops or the 'ForceInput' feature) it waits for player chat and uses the next chat message as input.
+# If the player does not input anything in the chat Genesis will after the defined timeout (in seconds) cancel the action and stop waiting for player input.
 InputTimeout: 45
 #
 #
@@ -126,11 +126,11 @@ InputTimeout: 45
 MoneyDisplay:
   Enabled: true
   List:
-  - 1000000000000:12:2:%number% trillion
-  - 1000000000:9:2:%number% billion
-  - 1000000:6:2:%number% million
-  - 1000:3:2:%number%k
-  - 0:0:2:%number%
+    - 1000000000000:12:2:%number% trillion
+    - 1000000000:9:2:%number% billion
+    - 1000000:6:2:%number% million
+    - 1000:3:2:%number%k
+    - 0:0:2:%number%
 #
 #
 # PointsDisplay:
@@ -139,9 +139,9 @@ MoneyDisplay:
 PointsDisplay:
   Enabled: false
   List:
-  - 1000000:6:2:%number% million
-  - 1000:3:2:%number%k
-  - 0:0:0:%number%
+    - 1000000:6:2:%number% million
+    - 1000:3:2:%number%k
+    - 0:0:0:%number%
 #
 #
 # NumberDisplay:
@@ -193,14 +193,14 @@ AutoRefreshDelay: 100
 ## You can define the pinging delay in ticks (20 ticks = 1 second).
 #
 ## FixConnector:
-## If BossShopPro is not able to connect with servers with the selected connector type it will try out different connector types. If you do know that the current connector type is correct and
+## If Genesis is not able to connect with servers with the selected connector type it will try out different connector types. If you do know that the current connector type is correct and
 # the servers to ping are just offline you can set "FixConnector" to true in order to prevent the plugin from trying out other connector types.
 #
 ## Timeout:
 ## Here you can define the time (in milliseconds) this plugin will wait until it will cancel the pinging process due to not being able to ping a server.
 #
 ## WaitTimeAfterFail:
-## BossShopPro will wait the given time until it re-tries connecting with a server if it was unable to ping it last time.
+## Genesis will wait the given time until it re-tries connecting with a server if it was unable to ping it last time.
 #
 ## List:
 ## The list of servers to ping consists of lines that look like following: <name>:<server ip>:<server port>
@@ -212,12 +212,12 @@ ServerPinging:
   Timeout: 4000
   WaitTimeAfterFail: 4500
   List:
-  - snapcraft:mc.snapcraft.net:25565
+    - snapcraft:mc.snapcraft.net:25565
 # 
 #
 # BungeeCord:
 # Set to true if working with BungeeCord.
-BungeeCord : false
+BungeeCord: false
 #
 # 
 # MultiplierGroups:
@@ -238,11 +238,11 @@ MultiplierGroups:
   Enabled: false
   RenewedPriceFormat: "&c&m%oldValue%&r &r&a%newValue%&r"
   List:
-  - BossShop.PriceMultiplier.SpecialShopTest:money:0.1:price:test-shop:test-item
-  - BossShop.PriceMultiplier.Points:points:0.75:price
-  - BossShop.PriceMultiplier.Money:money:0.5:price
-  - BossShop.RewardMultiplier.Money:money:2.0:reward
-  - BossShop.BothMultiplier.Exp:exp:0.8
+    - BossShop.PriceMultiplier.SpecialShopTest:money:0.1:price:test-shop:test-item
+    - BossShop.PriceMultiplier.Points:points:0.75:price
+    - BossShop.PriceMultiplier.Money:money:0.5:price
+    - BossShop.RewardMultiplier.Money:money:2.0:reward
+    - BossShop.BothMultiplier.Exp:exp:0.8
 #
 #
 # PointsPlugin:

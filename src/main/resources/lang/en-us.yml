@@ -13,7 +13,7 @@ Main:
   OffensiveClickSpamWarning: '&4Warning: Please do not click that fast.'
   OffensiveClickSpamKick: '&4Kicked for clickspam.'
   NeedItemInHand: '&cYou need an item in your main hand in order to be able to execute this command.'
-  PrintedItemInfo: '&6All item information has successfully been saved here: &7''/plugins/BossShopPro/ItemDataStorage.yml''&6.'
+  PrintedItemInfo: '&6All item information has successfully been saved here: &7''/plugins/Genesis/ItemDataStorage.yml''&6.'
   ListAndSeparator: ' & '
   ListOrSeparator: ' or '
   WorldNotExisting: "&cThat world is not existing..."
@@ -22,7 +22,7 @@ Main:
 Economy:
   NoAccount: '&cYou don''t have an economy account!'
 ShopCreate:
-  Success: "&aThe file has been saved to &7/plugins/BossShopPro/shops&a."
+  Success: "&aThe file has been saved to &7/plugins/Genesis/shops&a."
   Success2: "&cPlease reload the plugin to read the newly generated shop file."
   FileExists: "&cThe same file already exists. The file will be overwritten."
   Title: "Creating shop %shop% (Close it to save file)"

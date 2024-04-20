@@ -14,7 +14,7 @@ Main:
   OffensiveClickSpamWarning: '&4Advertencia: Por favor, no hagas clic así de rápido.'
   OffensiveClickSpamKick: '&4Expulsado por hacer spam de clic.'
   NeedItemInHand: '&cPrimero necesitas un objeto en tú mano principal para poder hacer eso.'
-  PrintedItemInfo: '&6Toda la información de los objetos ha sido guardada exitósamente aquí: &7''/plugins/BossShopPro/ItemDataStorage.yml''&6.'
+  PrintedItemInfo: '&6Toda la información de los objetos ha sido guardada exitósamente aquí: &7''/plugins/Genesis/ItemDataStorage.yml''&6.'
   ListAndSeparator: ' & '
   ListOrSeparator: ' o '
   WorldNotExisting: "&cEse mundo no existe..."
@@ -23,7 +23,7 @@ Main:
 Economy:
   NoAccount: '&cNo tienes una cuenta de dinero!'
 ShopCreate:
-  Success: "&aEl archivo ha sido guardado en &7/plugins/BossShopPro/shops&a."
+  Success: "&aEl archivo ha sido guardado en &7/plugins/Genesis/shops&a."
   Success2: "&cPor favor, reinicia el plugin para leer el nuevo archivo de tienda generado."
   FileExists: "&cEl mismo archivo ya existe. El archivo será sobreescrito."
   Title: "Creando tienda %shop% (Ciérralo para guardar el archivo)"
