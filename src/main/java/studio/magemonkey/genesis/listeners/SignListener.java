@@ -1,7 +1,5 @@
 package studio.magemonkey.genesis.listeners;
 
-import studio.magemonkey.genesis.Genesis;
-import studio.magemonkey.genesis.core.GenesisShop;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.event.EventHandler;
@@ -9,12 +7,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import studio.magemonkey.genesis.Genesis;
+import studio.magemonkey.genesis.core.GenesisShop;
 
 import java.util.HashMap;
 
 public class SignListener implements Listener {
 
-    private       boolean s;
+    private boolean s;
     private final Genesis plugin;
 
     public SignListener(boolean s, Genesis plugin) {
@@ -32,8 +32,8 @@ public class SignListener implements Listener {
 
         for (Integer s : set.keySet()) {
 
-            GenesisShop shop     = set.get(s);
-            String      signtext = shop.getSignText();
+            GenesisShop shop = set.get(s);
+            String signtext = shop.getSignText();
 
             if (signtext != null) {
                 if (line.endsWith(signtext.toLowerCase())) {
@@ -58,8 +58,6 @@ public class SignListener implements Listener {
         if (shop != null) {
 
             if (shop.needPermToCreateSign()) {
-
-
                 if (!e.getPlayer().hasPermission("BossShop.createSign")) {
 
                     plugin.getClassManager().getMessageHandler().sendMessage("Main.NoPermission", e.getPlayer());
@@ -80,8 +78,6 @@ public class SignListener implements Listener {
             if (e.getLine(3) != "") {
                 e.setLine(3, plugin.getClassManager().getStringManager().transform(e.getLine(3)));
             }
-
-
         }
     }
 
@@ -103,7 +99,7 @@ public class SignListener implements Listener {
 
                         GenesisShop shop = getBossShopSign(s.getLine(0));
                         if (shop != null) {
-
+                            e.setCancelled(true);
                             if (e.getPlayer().hasPermission("BossShop.open") || e.getPlayer()
                                     .hasPermission("BossShop.open.sign") || e.getPlayer()
                                     .hasPermission("BossShop.open.sign." + shop.getShopName())) {
