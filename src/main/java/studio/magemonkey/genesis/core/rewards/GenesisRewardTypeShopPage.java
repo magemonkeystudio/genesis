@@ -1,15 +1,15 @@
 package studio.magemonkey.genesis.core.rewards;
 
 
-import studio.magemonkey.genesis.core.GenesisBuy;
-import studio.magemonkey.genesis.core.GenesisShopHolder;
-import studio.magemonkey.genesis.managers.ClassManager;
-import studio.magemonkey.genesis.managers.misc.InputReader;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.InventoryView;
+import studio.magemonkey.genesis.core.GenesisBuy;
+import studio.magemonkey.genesis.core.GenesisShopHolder;
+import studio.magemonkey.genesis.managers.ClassManager;
+import studio.magemonkey.genesis.managers.misc.InputReader;
 
 
 public class GenesisRewardTypeShopPage extends GenesisRewardType {
@@ -40,12 +40,19 @@ public class GenesisRewardTypeShopPage extends GenesisRewardType {
     @Override
     public void giveReward(Player p, GenesisBuy buy, Object reward, ClickType clickType) {
         int page = calculatePage(p, (String) reward);
+        if (page == -1) return;
 
-        if (page != -1) {
-            Inventory         inventory = p.getOpenInventory().getTopInventory();
-            GenesisShopHolder holder    = (GenesisShopHolder) inventory.getHolder();
+        Inventory         inventory = p.getOpenInventory().getTopInventory();
+        GenesisShopHolder holder    = (GenesisShopHolder) inventory.getHolder();
+        if (holder != null) {
             holder.getShop()
-                    .updateInventory(inventory, holder, p, ClassManager.manager, page, holder.getHighestPage(), false);
+                    .updateInventory(inventory,
+                            holder,
+                            p,
+                            ClassManager.manager,
+                            page,
+                            holder.getHighestPage(),
+                            false);
         }
     }
 
@@ -57,32 +64,26 @@ public class GenesisRewardTypeShopPage extends GenesisRewardType {
 
 
     private int calculatePage(Player p, String reward) {
-        InventoryView inventoryview = p.getOpenInventory();
-        if (inventoryview != null) {
-            Inventory       inventory = inventoryview.getTopInventory();
-            InventoryHolder holder    = inventory.getHolder();
+        InventoryView   inventoryView = p.getOpenInventory();
+        Inventory       inventory     = inventoryView.getTopInventory();
+        InventoryHolder holder        = inventory.getHolder();
 
-            if (holder instanceof GenesisShopHolder) {
-                GenesisShopHolder shopholder = (GenesisShopHolder) holder;
-                if (reward.equalsIgnoreCase("next") || reward.equalsIgnoreCase("+")) {
-                    int page = Math.min(shopholder.getPage() + 1, shopholder.getHighestPage());
-                    return page;
-                }
-                if (reward.equalsIgnoreCase("previous") || reward.equalsIgnoreCase("-")) {
-                    int page = Math.max(shopholder.getPage() - 1, 0);
-                    return page;
-                }
+        if (holder instanceof GenesisShopHolder) {
+            GenesisShopHolder shopHolder = (GenesisShopHolder) holder;
+            if (reward.equalsIgnoreCase("next") || reward.equalsIgnoreCase("+")) {
+                return Math.min(shopHolder.getPage() + 1, shopHolder.getHighestPage());
+            }
+            if (reward.equalsIgnoreCase("previous") || reward.equalsIgnoreCase("-")) {
+                return Math.max(shopHolder.getPage() - 1, 0);
+            }
 
-                try {
-                    int page = Math.max(0, Math.min(Integer.valueOf(reward), shopholder.getHighestPage()));
-                    return page - 1;
-
-                } catch (NumberFormatException e) {
-                    ClassManager.manager.getBugFinder()
-                            .warn("Was not able to detect shop page. Unable to read Reward '" + reward
-                                    + "'. Please use either 'next', 'previous' or a page number like '1' or '2'.");
-                }
-
+            try {
+                int page = Math.max(0, Math.min(Integer.parseInt(reward), shopHolder.getHighestPage()));
+                return page - 1;
+            } catch (NumberFormatException e) {
+                ClassManager.manager.getBugFinder()
+                        .warn("Was not able to detect shop page. Unable to read Reward '" + reward
+                                + "'. Please use either 'next', 'previous' or a page number like '1' or '2'.");
             }
         }
         return -1;

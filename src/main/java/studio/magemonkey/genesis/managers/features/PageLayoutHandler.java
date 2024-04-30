@@ -1,24 +1,29 @@
 package studio.magemonkey.genesis.managers.features;
 
-import studio.magemonkey.genesis.Genesis;
-import studio.magemonkey.genesis.core.GenesisBuy;
-import studio.magemonkey.genesis.managers.ClassManager;
-import studio.magemonkey.genesis.managers.config.ConfigLoader;
 import lombok.Getter;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
+import studio.magemonkey.genesis.Genesis;
+import studio.magemonkey.genesis.core.GenesisBuy;
+import studio.magemonkey.genesis.managers.ClassManager;
+import studio.magemonkey.genesis.managers.config.ConfigLoader;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PageLayoutHandler {
-
     @Getter
     private List<GenesisBuy> items;
     @Getter
     private int              maxRows = 6; //Default!
+    /**
+     * -- GETTER --
+     *
+     * @return display slot start: Starts with slot 1.
+     */
+    @Getter
     private int              reservedSlotsStart;
     private boolean          showIfMultiplePagesOnly;
 
@@ -34,7 +39,6 @@ public class PageLayoutHandler {
         try {
             FileConfiguration config = ConfigLoader.loadConfiguration(f, false);
             setup(config);
-
         } catch (InvalidConfigurationException e) {
             plugin.getClassManager()
                     .getBugFinder()
@@ -54,14 +58,14 @@ public class PageLayoutHandler {
         showIfMultiplePagesOnly = section.getBoolean("ShowIfMultiplePagesOnly");
 
         items = new ArrayList<>();
-        if (section.isConfigurationSection("items")) {
-            for (String key : section.getConfigurationSection("items").getKeys(false)) {
-                List<GenesisBuy> buyItems = ClassManager.manager.getBuyItemHandler()
-                        .loadItem(section.getConfigurationSection("items"), null, key);
-                for (GenesisBuy buy : buyItems) {
-                    if (buy != null) {
-                        items.add(buy);
-                    }
+        if (!section.isConfigurationSection("items")) return;
+
+        for (String key : section.getConfigurationSection("items").getKeys(false)) {
+            List<GenesisBuy> buyItems = ClassManager.manager.getBuyItemHandler()
+                    .loadItem(section.getConfigurationSection("items"), null, key);
+            for (GenesisBuy buy : buyItems) {
+                if (buy != null) {
+                    items.add(buy);
                 }
             }
         }
@@ -70,12 +74,4 @@ public class PageLayoutHandler {
     public boolean showIfMultiplePagesOnly() {
         return showIfMultiplePagesOnly;
     }
-
-    /**
-     * @return display slot start: Starts with slot 1.
-     */
-    public int getReservedSlotsStart() {
-        return reservedSlotsStart;
-    }
-
 }

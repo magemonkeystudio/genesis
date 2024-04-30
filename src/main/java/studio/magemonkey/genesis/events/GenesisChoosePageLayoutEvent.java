@@ -1,18 +1,19 @@
 package studio.magemonkey.genesis.events;
 
-
+import lombok.Getter;
+import lombok.Setter;
+import org.bukkit.event.HandlerList;
 import studio.magemonkey.genesis.core.GenesisShop;
 import studio.magemonkey.genesis.managers.features.PageLayoutHandler;
-import org.bukkit.event.HandlerList;
-
 
 public class GenesisChoosePageLayoutEvent extends GenesisEvent {
-
     private static final HandlerList handlers = new HandlerList();
 
-
+    @Getter
     private final GenesisShop       shop;
     private final String            name;
+    @Getter
+    @Setter
     private       PageLayoutHandler layout;
 
 
@@ -28,18 +29,6 @@ public class GenesisChoosePageLayoutEvent extends GenesisEvent {
 
     public String getShopItemName() {
         return name;
-    }
-
-    public GenesisShop getShop() {
-        return shop;
-    }
-
-    public PageLayoutHandler getLayout() {
-        return layout;
-    }
-
-    public void setLayout(PageLayoutHandler layout) {
-        this.layout = layout;
     }
 
     @Override

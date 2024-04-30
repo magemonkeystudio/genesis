@@ -42,7 +42,7 @@ public class GenesisBuy {
     private final String            name;
     private       GenesisInputType  inputType;
     // null by default. A value if players need to enter input before they can purchase the item.
-    private       String            inputtext;
+    private       String            inputText;
     private final GenesisRewardType rewardT;
     private final GenesisPriceType  priceT;
     private final Object            reward;
@@ -72,7 +72,7 @@ public class GenesisBuy {
         this(rewardT, priceT, reward, price, msg, location, permission, name);
         this.condition = condition;
         this.inputType = inputType;
-        this.inputtext = ClassManager.manager.getStringManager().transform(inputText, this, null, null, null);
+        this.inputText = ClassManager.manager.getStringManager().transform(inputText, this, null, null, null);
     }
 
     public GenesisBuy(GenesisRewardType rewardT,
@@ -131,7 +131,7 @@ public class GenesisBuy {
     }
 
     public String getInputText(ClickType clickType) {
-        return inputtext;
+        return inputText;
     }
 
     /**

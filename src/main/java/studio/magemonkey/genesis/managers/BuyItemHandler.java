@@ -1,5 +1,8 @@
 package studio.magemonkey.genesis.managers;
 
+import org.bukkit.Bukkit;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.inventory.ItemStack;
 import studio.magemonkey.genesis.core.GenesisBuy;
 import studio.magemonkey.genesis.core.GenesisInputType;
 import studio.magemonkey.genesis.core.GenesisShop;
@@ -11,9 +14,6 @@ import studio.magemonkey.genesis.core.rewards.GenesisRewardType;
 import studio.magemonkey.genesis.events.GenesisCreateShopItemEvent;
 import studio.magemonkey.genesis.events.GenesisCreatedShopItemEvent;
 import studio.magemonkey.genesis.events.GenesisLoadShopItemEvent;
-import org.bukkit.Bukkit;
-import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,9 +80,23 @@ public class BuyItemHandler {
             List<Integer> inventoryLocations = new ArrayList<>();
             if (config.isInt("InventoryLocation")) {
                 int inventoryLocation = config.getInt("InventoryLocation");
+                if (inventoryLocation < 0) {
+                    ClassManager.manager.getBugFinder()
+                            .warn("The InventoryLocation of the shopitem '" + name + "' is '" + inventoryLocation
+                                    + "'. It has to be either higher than '0' or it has to be '0' if you want to it to automatically pick the next empty slot. [Shop: "
+                                    + shopName + "]");
+
+                }
                 inventoryLocations.add(inventoryLocation - 1);
             } else if (config.isList("InventoryLocation")) {
                 for (int inventoryLocation : config.getIntegerList("InventoryLocation")) {
+                    if (inventoryLocation < 0) {
+                        ClassManager.manager.getBugFinder()
+                                .warn("The InventoryLocation of the shopitem '" + name + "' is '" + inventoryLocation
+                                        + "'. It has to be either higher than '0' or it has to be '0' if you want to it to automatically pick the next empty slot. [Shop: "
+                                        + shopName + "]");
+
+                    }
                     inventoryLocations.add(inventoryLocation - 1);
                 }
             } else if (config.isString("InventoryLocation")) {
@@ -99,6 +113,13 @@ public class BuyItemHandler {
                             }
                         } else {
                             int loc = Integer.parseInt(inventoryLocation);
+                            if (loc < 0) {
+                                ClassManager.manager.getBugFinder()
+                                        .warn("The InventoryLocation of the shopitem '" + name + "' is '" + loc
+                                                + "'. It has to be either higher than '0' or it has to be '0' if you want to it to automatically pick the next empty slot. [Shop: "
+                                                + shopName + "]");
+
+                            }
                             inventoryLocations.add(loc - 1);
                         }
                     } catch (Exception e) {
@@ -107,16 +128,6 @@ public class BuyItemHandler {
                                         + "'. It has to be either higher than '0' or it has to be '0' if you want to it to automatically pick the next empty slot. [Shop: "
                                         + shopName + "]");
                     }
-                }
-            }
-
-            for (int inventoryLocation : inventoryLocations) {
-                if (inventoryLocation < 0) {
-                    ClassManager.manager.getBugFinder()
-                            .warn("The InventoryLocation of the shopitem '" + name + "' is '" + inventoryLocation
-                                    + "'. It has to be either higher than '0' or it has to be '0' if you want to it to automatically pick the next empty slot. [Shop: "
-                                    + shopName + "]");
-
                 }
             }
 
