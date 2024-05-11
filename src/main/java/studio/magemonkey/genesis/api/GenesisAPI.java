@@ -32,7 +32,7 @@ public class GenesisAPI {
 
 
     /**
-     * Gets the name of the addon for BossShop
+     * Gets the name of the addon for Genesis
      *
      * @param addonname the name of the addon
      * @return addon
@@ -78,7 +78,7 @@ public class GenesisAPI {
     }
 
     /**
-     * Get a BossShop Shop
+     * Get a Genesis Shop
      *
      * @param name the name of the shop
      * @return shop

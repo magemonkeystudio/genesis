@@ -29,10 +29,10 @@ public abstract class GenesisShop {
 
     @Getter
     @Setter
-    private String shopName = "BossShop";
+    private String shopName = "Genesis";
     @Getter
     @Setter
-    private String signText = "[BossShop]";
+    private String signText = "[Genesis]";
 
     @Getter
     private String   displayName;

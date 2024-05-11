@@ -116,7 +116,7 @@ public abstract class GenesisAddon extends JavaPlugin {
     }
 
     /**
-     * Get an instance of the BossShop class
+     * Get an instance of the Genesis class
      *
      * @return instance of class
      */

@@ -22,7 +22,7 @@ public class SignListener implements Listener {
         this.plugin = plugin;
     }
 
-    private GenesisShop getBossShopSign(String line) {
+    private GenesisShop getGenesisSign(String line) {
 
         if (line == null || line == "") {
             return null;
@@ -54,11 +54,11 @@ public class SignListener implements Listener {
             return;
         }
 
-        final GenesisShop shop = getBossShopSign(e.getLine(0));
+        final GenesisShop shop = getGenesisSign(e.getLine(0));
         if (shop != null) {
 
             if (shop.needPermToCreateSign()) {
-                if (!e.getPlayer().hasPermission("BossShop.createSign")) {
+                if (!e.getPlayer().hasPermission("Genesis.createSign")) {
 
                     plugin.getClassManager().getMessageHandler().sendMessage("Main.NoPermission", e.getPlayer());
                     e.setCancelled(true);
@@ -97,12 +97,12 @@ public class SignListener implements Listener {
                     if (b.getState() instanceof Sign) {
                         Sign s = (Sign) b.getState();
 
-                        GenesisShop shop = getBossShopSign(s.getLine(0));
+                        GenesisShop shop = getGenesisSign(s.getLine(0));
                         if (shop != null) {
                             e.setCancelled(true);
-                            if (e.getPlayer().hasPermission("BossShop.open") || e.getPlayer()
-                                    .hasPermission("BossShop.open.sign") || e.getPlayer()
-                                    .hasPermission("BossShop.open.sign." + shop.getShopName())) {
+                            if (e.getPlayer().hasPermission("Genesis.open") || e.getPlayer()
+                                    .hasPermission("Genesis.open.sign") || e.getPlayer()
+                                    .hasPermission("Genesis.open.sign." + shop.getShopName())) {
                                 plugin.getClassManager().getShops().openShop(e.getPlayer(), shop);
                                 return;
                             }

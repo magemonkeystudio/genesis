@@ -43,7 +43,7 @@ public class ShopCreator implements Listener {
         if (e.getPlayer() instanceof Player) {
             Player p = (Player) e.getPlayer();
             if (p.getOpenInventory().getTitle().startsWith(this.mh.get("ShopCreate.TitleHead"))) {
-                if (p.hasPermission("BossShop.create") || e.getPlayer().isOp()) {
+                if (p.hasPermission("Genesis.create") || e.getPlayer().isOp()) {
                     Inventory inv = e.getInventory();
                     if (inv.getSize() == 54) {
                         SaveAsFile(inv, p, getName(), getTitle());

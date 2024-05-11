@@ -48,13 +48,13 @@ public class Genesis extends JavaPlugin {
 
         CommandManager commander = new CommandManager();
 
-        if (getCommand("bs") != null) {
-            getCommand("bs").setExecutor(commander);
-            getCommand("bs").setTabCompleter(commander);
+        if (getCommand("gen") != null) {
+            getCommand("gen").setExecutor(commander);
+            getCommand("gen").setTabCompleter(commander);
         }
-        if (getCommand("bossshop") != null) {
-            getCommand("bossshop").setExecutor(commander);
-            getCommand("bossshop").setTabCompleter(commander);
+        if (getCommand("genesis") != null) {
+            getCommand("genesis").setExecutor(commander);
+            getCommand("genesis").setTabCompleter(commander);
         }
         if (getCommand("shop") != null) {
             getCommand("shop").setExecutor(commander);

@@ -19,7 +19,7 @@ public class ItemDataPartLore extends ItemDataPart {
         ItemMeta meta = item.getItemMeta();
         // although not the most beautiful solution, what it does is the following:
         // it causes all hex color codes (started by hashtag) to be transformed already.
-        // Therefore, all remaining hashtags are safe to interpret as new line (traditional BossShop line separator).
+        // Therefore, all remaining hashtags are safe to interpret as new line (traditional Genesis line separator).
         String       argumentTransformed = ClassManager.manager.getStringManager().transform(argument);
         String[]     parts               = argumentTransformed.split("[#\\n]");
         List<String> lore                = meta.getLore();

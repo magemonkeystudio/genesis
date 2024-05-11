@@ -531,7 +531,7 @@ v1.1.5
 v1.1.4
 *[ADD] Added configurable click delay to prevent click spam
 ** Not for long-time uses: The delay is removed when the player leaves the server
-** You can bypass the delay using the "BossShop.bypass" permission
+** You can bypass the delay using the "Genesis.bypass" permission
 *[IMPROVE] Small number display improvements (Now showing '0.1' instead of '.1')
 
 

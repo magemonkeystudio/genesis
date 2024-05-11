@@ -29,7 +29,7 @@ public class GenesisPointsPluginFailed extends GenesisPointsPlugin {
         return -1;
     }
 
-    private void informPlayer(OfflinePlayer player) { //Not sending to prevent spam on servers that installed BossShop for the first time. It should be enough when BossShop notifies about this on startup.
+    private void informPlayer(OfflinePlayer player) { //Not sending to prevent spam on servers that installed Genesis for the first time. It should be enough when Genesis notifies about this on startup.
         Bukkit.getConsoleSender()
                 .sendMessage("PlayerPoints/CommandPoints was not found... "
                         + "You need one of that plugins if you want to work with Points! " + "Get PlayerPoints there: "
@@ -38,10 +38,10 @@ public class GenesisPointsPluginFailed extends GenesisPointsPlugin {
             if (player.isOp()) {
                 player.getPlayer()
                         .sendMessage(
-                                "[BossShop] No Points Plugin installed. If you want to work with Points please install one.");
+                                "[Genesis] No Points Plugin installed. If you want to work with Points please install one.");
             } else {
                 player.getPlayer()
-                        .sendMessage("[BossShop] No Points Plugin installed. Please inform an administrator.");
+                        .sendMessage("[Genesis] No Points Plugin installed. Please inform an administrator.");
             }
 
     }

@@ -31,7 +31,7 @@ ReloadAfterCreateShop: false
 #
 #
 # EnableSigns:
-# If set EnableSigns to 'false' BossShop signs will be disabled.
+# If set EnableSigns to 'false' Genesis signs will be disabled.
 EnableSigns: true
 #
 #
@@ -59,7 +59,7 @@ EnableTransactionLog: false
 #
 #
 # SearchSubfoldersForShops:
-# If enabled BossShop will search children folders of the '/shops' directory for shop files. That can be quite helpful for sorting, when dealing with a big amount of shops.
+# If enabled Genesis will search children folders of the '/shops' directory for shop files. That can be quite helpful for sorting, when dealing with a big amount of shops.
 SearchSubfoldersForShops: false
 #
 #
@@ -238,17 +238,17 @@ MultiplierGroups:
   Enabled: false
   RenewedPriceFormat: "&c&m%oldValue%&r &r&a%newValue%&r"
   List:
-    - BossShop.PriceMultiplier.SpecialShopTest:money:0.1:price:test-shop:test-item
-    - BossShop.PriceMultiplier.Points:points:0.75:price
-    - BossShop.PriceMultiplier.Money:money:0.5:price
-    - BossShop.RewardMultiplier.Money:money:2.0:reward
-    - BossShop.BothMultiplier.Exp:exp:0.8
+    - Genesis.PriceMultiplier.SpecialShopTest:money:0.1:price:test-shop:test-item
+    - Genesis.PriceMultiplier.Points:points:0.75:price
+    - Genesis.PriceMultiplier.Money:money:0.5:price
+    - Genesis.RewardMultiplier.Money:money:2.0:reward
+    - Genesis.BothMultiplier.Exp:exp:0.8
 #
 #
 # PointsPlugin:
 # Only important if you work with Points.
-# Here you can enter whatever you want. BossShop will always detect the Points Plugin you are using and it will hook into it
-# (If you are using one). If you use multiple Points Plugins fill in the name of the one that you want BossShop to work with.
+# Here you can enter whatever you want. Genesis will always detect the Points Plugin you are using and it will hook into it
+# (If you are using one). If you use multiple Points Plugins fill in the name of the one that you want Genesis to work with.
 # 'PlayerPoints', 'CommandPoints', 'EnjinMinecraftPlugin'/'Enjin', 'PointsAPI', 'Jobs', 'TokenEnchant', 'Kingdoms', 'MySQL-Tokens', 'VotingPlugin', 'MySQLTokens'.
 PointsPlugin: auto-detect
 #

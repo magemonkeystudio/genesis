@@ -24,12 +24,12 @@ public class CommandManager implements TabExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String arg, String[] args) {
 
-        if (cmd.getName().equalsIgnoreCase("bossshop") || cmd.getName().equalsIgnoreCase("shop") || cmd.getName()
-                .equalsIgnoreCase("bs")) {
+        if (cmd.getName().equalsIgnoreCase("genesis") || cmd.getName().equalsIgnoreCase("shop") || cmd.getName()
+                .equalsIgnoreCase("gen")) {
 
             if (args.length > 0) {
                 if (args[0].equalsIgnoreCase("reload")) {
-                    if (sender.hasPermission("BossShop.reload")) {
+                    if (sender.hasPermission("Genesis.reload")) {
                         if (args.length == 2) {
                             if (!ClassManager.manager.getShops().getShopIds().containsKey(args[1].toLowerCase())) {
                                 ClassManager.manager.getMessageHandler().sendMessage("Main.ShopNotExisting", sender);
@@ -41,7 +41,7 @@ public class CommandManager implements TabExecutor {
                             ClassManager.manager.getShops().reloadShop(shop);
                             sender.sendMessage(ChatColor.YELLOW + "Done!");
                         } else {
-                            sender.sendMessage(ChatColor.YELLOW + "Starting BossShop reload...");
+                            sender.sendMessage(ChatColor.YELLOW + "Starting Genesis reload...");
                             ClassManager.manager.getPlugin().reloadPlugin(sender);
                             sender.sendMessage(ChatColor.YELLOW + "Done!");
                         }
@@ -55,7 +55,7 @@ public class CommandManager implements TabExecutor {
 
                 if (args[0].equalsIgnoreCase("read")) {
                     if (sender instanceof Player) {
-                        if (sender.hasPermission("BossShop.read")) {
+                        if (sender.hasPermission("Genesis.read")) {
                             Player    p    = (Player) sender;
                             ItemStack item = Misc.getItemInMainHand(p);
                             if (item == null || item.getType() == Material.AIR) {
@@ -77,7 +77,7 @@ public class CommandManager implements TabExecutor {
                 }
 
                 if (args[0].equalsIgnoreCase("simulate")) {
-                    if (sender.hasPermission("BossShop.simulate")) {
+                    if (sender.hasPermission("Genesis.simulate")) {
                         if (args.length == 4) {
                             Player p = Bukkit.getPlayer(args[1]);
                             if (p == null) {
@@ -109,7 +109,7 @@ public class CommandManager implements TabExecutor {
                 }
 
                 if (args[0].equalsIgnoreCase("close")) {
-                    if (sender.hasPermission("BossShop.close")) {
+                    if (sender.hasPermission("Genesis.close")) {
                         Player p    = null;
                         String name = sender instanceof Player ? sender.getName() : "CONSOLE";
 
@@ -140,7 +140,7 @@ public class CommandManager implements TabExecutor {
                 }
 
                 if (args[0].equalsIgnoreCase("create") & args.length == 3) {
-                    if (sender.hasPermission("BossShop.create")) {
+                    if (sender.hasPermission("Genesis.create")) {
                         Player p;
                         if (sender instanceof Player) {
                             p = (Player) sender;
@@ -214,13 +214,13 @@ public class CommandManager implements TabExecutor {
 
     private void playerCommandOpenShop(CommandSender sender, Player target, String shop, String argument) {
         if (sender == target) {
-            if (!(sender.hasPermission("BossShop.open") || sender.hasPermission("BossShop.open.command")
-                    || sender.hasPermission("BossShop.open.command." + shop))) {
+            if (!(sender.hasPermission("Genesis.open") || sender.hasPermission("Genesis.open.command")
+                    || sender.hasPermission("Genesis.open.command." + shop))) {
                 ClassManager.manager.getMessageHandler().sendMessage("Main.NoPermission", sender);
                 return;
             }
         } else {
-            if (!sender.hasPermission("BossShop.open.other")) {
+            if (!sender.hasPermission("Genesis.open.other")) {
                 ClassManager.manager.getMessageHandler().sendMessage("Main.NoPermission", sender);
                 return;
             }
@@ -259,25 +259,25 @@ public class CommandManager implements TabExecutor {
                                       @NotNull String[] args) {
         List<String> arglist = new ArrayList<>();
         if (args.length == 1) {
-            if (sender.hasPermission("BossShop.open.command") || sender.hasPermission("BossShop.open")) {
+            if (sender.hasPermission("Genesis.open.command") || sender.hasPermission("Genesis.open")) {
                 arglist.add("open");
                 if (sender instanceof Player) {
                     arglist.add("<shop>");
                 }
             }
             arglist.add("help");
-            if (sender.hasPermission("BossShop.close")) {
+            if (sender.hasPermission("Genesis.close")) {
                 arglist.add("close");
             }
             if (sender instanceof Player) {
-                if (sender.hasPermission("BossShop.read")) {
+                if (sender.hasPermission("Genesis.read")) {
                     arglist.add("read");
                 }
-                if (sender.hasPermission("BossShop.create")) {
+                if (sender.hasPermission("Genesis.create")) {
                     arglist.add("create");
                 }
             }
-            if (sender.hasPermission("BossShop.reload")) {
+            if (sender.hasPermission("Genesis.reload")) {
                 arglist.add("reload");
             }
             if (sender.hasPermission("BossShop.simulate")) {

@@ -19,7 +19,7 @@ public class GenesisReloadedEvent extends GenesisEvent {
         return handlers;
     }
 
-    public Genesis getBossShop() {
+    public Genesis getGenesis() {
         return plugin;
     }
 

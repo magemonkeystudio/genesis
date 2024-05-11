@@ -35,13 +35,13 @@ public class PlayerListener implements Listener {
                     GenesisShop shop = plugin.getClassManager().getShops().getShopByCommand(cmd);
                     if (shop != null) {
 
-                        if (p.hasPermission("BossShop.open") || p.hasPermission("BossShop.open.command")
-                                || p.hasPermission("BossShop.open.command." + shop.getShopName())) {
+                        if (p.hasPermission("Genesis.open") || p.hasPermission("Genesis.open.command")
+                                || p.hasPermission("Genesis.open.command." + shop.getShopName())) {
                             ClassManager.manager.getShops().openShop(p, shop);
                         } else {
                             ClassManager.manager.getMessageHandler().sendMessage("Main.NoPermission", p);
                         }
-                        //p.performCommand("bossshop "+shop.getShopName());
+                        //p.performCommand("genesis "+shop.getShopName());
 
                         e.setCancelled(true);
                     }

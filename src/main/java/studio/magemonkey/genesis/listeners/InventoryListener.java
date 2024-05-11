@@ -147,7 +147,7 @@ public class InventoryListener implements Listener {
             GenesisShop shop = ((GenesisShopHolder) event.getInventory().getHolder()).getShop();
 
             //Anti spam delay
-            if (!p.hasPermission("BossShop.bypasss")) {
+            if (!p.hasPermission("Genesis.bypass")) {
                 if (lastClicks.containsKey(p)) {
                     long lastClick = lastClicks.get(p);
 
