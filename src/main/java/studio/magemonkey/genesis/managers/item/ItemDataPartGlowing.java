@@ -1,5 +1,7 @@
 package studio.magemonkey.genesis.managers.item;
 
+import org.bukkit.Bukkit;
+import org.bukkit.NamespacedKey;
 import studio.magemonkey.genesis.core.GenesisBuy;
 import studio.magemonkey.genesis.managers.misc.InputReader;
 import org.bukkit.enchantments.Enchantment;
@@ -18,7 +20,7 @@ public class ItemDataPartGlowing extends ItemDataPart {
             b = InputReader.getBoolean(argument, false);
         }
         if (b) {
-            item.addUnsafeEnchantment(Enchantment.OXYGEN, 1);
+            item.addUnsafeEnchantment(Enchantment.getByKey(NamespacedKey.minecraft("respiration")), 1);
             ItemMeta meta = item.getItemMeta();
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
             item.setItemMeta(meta);
@@ -30,14 +32,14 @@ public class ItemDataPartGlowing extends ItemDataPart {
     public boolean isSimilar(ItemStack shopItem, ItemStack playerItem, GenesisBuy buy, Player p) {
         ItemMeta shop   = shopItem.getItemMeta();
         ItemMeta player = playerItem.getItemMeta();
-        return (shop.hasEnchant(Enchantment.OXYGEN) && shop.hasItemFlag(ItemFlag.HIDE_ENCHANTS)) == (
-                player.hasEnchant(Enchantment.OXYGEN) && player.hasItemFlag(ItemFlag.HIDE_ENCHANTS));
+        return (shop.hasEnchant(Enchantment.getByKey(NamespacedKey.minecraft("respiration"))) && shop.hasItemFlag(ItemFlag.HIDE_ENCHANTS)) == (
+                player.hasEnchant(Enchantment.getByKey(NamespacedKey.minecraft("respiration"))) && player.hasItemFlag(ItemFlag.HIDE_ENCHANTS));
     }
 
     @Override
     public List<String> read(ItemStack i, List<String> output) {
         ItemMeta meta = i.getItemMeta();
-        if (meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS) & meta.hasEnchant(Enchantment.OXYGEN)) {
+        if (meta.hasItemFlag(ItemFlag.HIDE_ENCHANTS) & meta.hasEnchant(Enchantment.getByKey(NamespacedKey.minecraft("respiration")))) {
             output.add("glowing:true");
         }
         return output;

@@ -97,8 +97,7 @@ public class ItemDataPartPotion extends ItemDataPart {
             PotionMeta ms = (PotionMeta) shopItem.getItemMeta();
             PotionMeta mp = (PotionMeta) playerItem.getItemMeta();
 
-            if (ms.getBasePotionData().getType() == PotionType.WATER
-                    || ms.getBasePotionData().getType() == PotionType.UNCRAFTABLE) {
+            if (ms.getBasePotionData().getType() == PotionType.WATER) {
                 return true;
             }
 
