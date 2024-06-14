@@ -48,7 +48,8 @@ public class ItemDataPartCustomSkull extends ItemDataPart {
             skullMeta.setOwnerProfile(playerProfile);
         } catch (MalformedURLException | NoClassDefFoundError | NoSuchMethodError | IllegalArgumentException e) {
             try {
-                GameProfile profile = new GameProfile(id, id.toString().substring(0, 16));
+                String      cleaned = id.toString().replace("-", "");
+                GameProfile profile = new GameProfile(id, cleaned.substring(0, Math.min(cleaned.length(), 16)));
                 profile.getProperties().put("textures", getProperty(input));
                 Field profileField = skullMeta.getClass().getDeclaredField("profile");
                 profileField.setAccessible(true);
