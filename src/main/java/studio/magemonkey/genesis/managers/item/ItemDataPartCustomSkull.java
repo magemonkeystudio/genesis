@@ -2,14 +2,14 @@ package studio.magemonkey.genesis.managers.item;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
-import studio.magemonkey.genesis.core.GenesisBuy;
-import studio.magemonkey.genesis.managers.ClassManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.profile.PlayerProfile;
+import studio.magemonkey.genesis.core.GenesisBuy;
+import studio.magemonkey.genesis.managers.ClassManager;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -48,7 +48,7 @@ public class ItemDataPartCustomSkull extends ItemDataPart {
             skullMeta.setOwnerProfile(playerProfile);
         } catch (MalformedURLException | NoClassDefFoundError | NoSuchMethodError | IllegalArgumentException e) {
             try {
-                GameProfile profile = new GameProfile(id, id.toString());
+                GameProfile profile = new GameProfile(id, id.toString().substring(0, 16));
                 profile.getProperties().put("textures", getProperty(input));
                 Field profileField = skullMeta.getClass().getDeclaredField("profile");
                 profileField.setAccessible(true);
