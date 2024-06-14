@@ -10,12 +10,12 @@ public abstract class GenesisConditionTypeMatch extends GenesisConditionType {
     public boolean meetsCondition(GenesisShopHolder holder,
                                   GenesisBuy shopItem,
                                   Player p,
-                                  String conditiontype,
+                                  String conditionType,
                                   String condition) {
-        if (conditiontype.equalsIgnoreCase("match")) {
+        if (conditionType.equalsIgnoreCase("match")) {
             return isCorrect(p, true, condition);
         }
-        if (conditiontype.equalsIgnoreCase("dontmatch")) {
+        if (conditionType.equalsIgnoreCase("dontmatch")) {
             return isCorrect(p, false, condition);
         }
         return false;

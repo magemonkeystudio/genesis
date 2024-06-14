@@ -36,21 +36,21 @@ public class GenesisConditionTypePlaceholderMatch extends GenesisConditionType {
     public boolean meetsCondition(GenesisShopHolder holder,
                                   GenesisBuy shopItem,
                                   Player p,
-                                  String conditiontype,
+                                  String conditionType,
                                   String condition) {
         String[] parts = condition.split(":", 2);
         if (parts.length < 2) {
             ClassManager.manager.getBugFinder()
-                    .warn("Unable to read placeholdermatch condition " + conditiontype + ":" + condition
+                    .warn("Unable to read placeholdermatch condition " + conditionType + ":" + condition
                             + " of shopitem " + shopItem.getName()
                             + ". It should look like following: '<Placeholder text>:<match/dontmatch>:<text>'.");
             return false;
         }
         if (parts[0].equalsIgnoreCase("match")) {
-            return isCorrect(p, true, parts[1], conditiontype);
+            return isCorrect(p, true, parts[1], conditionType);
         }
         if (parts[0].equalsIgnoreCase("dontmatch")) {
-            return isCorrect(p, false, parts[1], conditiontype);
+            return isCorrect(p, false, parts[1], conditionType);
         }
         return false;
     }
