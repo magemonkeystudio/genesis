@@ -159,16 +159,19 @@ public class CommandManager implements TabExecutor {
                     return false;
                 }
 
-                if (args.length >= 3 && args[0].equalsIgnoreCase("open")) {
+                if (args.length >= 2 && args[0].equalsIgnoreCase("open")) {
                     String      shopName = args[1].toLowerCase();
                     GenesisShop shop     = ClassManager.manager.getShops().getShop(shopName);
-                    String      name     = args[2];
-                    Player      p        = Bukkit.getPlayerExact(name);
-                    String      argument = args.length > 3 ? args[3] : null;
-
-                    if (p == null) {
+                    Player p;
+                    String name;
+                    if(args.length >= 3) {
+                        name = args[2];
                         p = Bukkit.getPlayer(name);
+                    } else {
+                        p = sender instanceof Player ? (Player) sender : null;
+                        name = sender instanceof Player ? sender.getName() : "";
                     }
+                    String      argument = args.length > 3 ? args[3] : null;
 
                     if (p == null) {
                         ClassManager.manager.getMessageHandler()
