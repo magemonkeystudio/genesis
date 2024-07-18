@@ -23,7 +23,7 @@ public class Genesis extends JavaPlugin {
     private             ClassManager      manager;
     private             InventoryListener il;
 
-    //////////////////////////////////////////////
+    ///////////////////////////////////////////////
     private SignListener   sl;
     private PlayerListener pl;
     private GenesisAPI     api;
