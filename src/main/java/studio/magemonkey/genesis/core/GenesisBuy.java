@@ -628,8 +628,8 @@ public class GenesisBuy {
         }
 
         //Update shop if needed
-        if (shop.isCustomizable() && needUpdate && event != null) { //'event' is null in case of a simulated click
-            if (p.getOpenInventory() == event.getView()) { //only if inventory is still open
+        if (shop.isCustomizable() && needUpdate && event != null) { // 'event' is null in case of a simulated click
+            if (p.getOpenInventory() == event.getView()) { // only if inventory is still open
                 if (async) {
                     Bukkit.getScheduler().runTask(ClassManager.manager.getPlugin(), new Runnable() {
                         @Override
