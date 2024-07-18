@@ -95,7 +95,7 @@
         <dependency>
             <groupId>org.black_ixx</groupId>
             <artifactId>playerpoints</artifactId>
-            <version>3.2.5</version>
+            <version>3.2.7</version>
             <scope>provided</scope>
         </dependency>
 
