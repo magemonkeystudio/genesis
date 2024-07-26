@@ -1,5 +1,11 @@
 package studio.magemonkey.genesis.api;
 
+import lombok.Getter;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 import studio.magemonkey.genesis.Genesis;
 import studio.magemonkey.genesis.core.*;
 import studio.magemonkey.genesis.core.conditions.GenesisConditionType;
@@ -8,13 +14,6 @@ import studio.magemonkey.genesis.core.rewards.GenesisRewardType;
 import studio.magemonkey.genesis.managers.ClassManager;
 import studio.magemonkey.genesis.managers.config.GenesisConfigShop;
 import studio.magemonkey.genesis.managers.item.ItemDataPart;
-import lombok.Getter;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryView;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.Plugin;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,13 +54,12 @@ public class GenesisAPI {
      * @return valid shop or not
      */
     // For single shop
-    public boolean isValidShop(InventoryView v) {
-        if (v != null) {
-            if (v.getTopInventory() != null) {
-                return isValidShop(v.getTopInventory());
-            }
+    public boolean isValidShop(Object v) {
+        if (v == null) {
+            return false;
         }
-        return false;
+
+        return isValidShop(InventoryUtil.getTopInventory(v));
     }
 
     /**

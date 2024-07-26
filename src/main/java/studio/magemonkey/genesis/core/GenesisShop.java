@@ -1,18 +1,18 @@
 package studio.magemonkey.genesis.core;
 
-import studio.magemonkey.genesis.Genesis;
-import studio.magemonkey.genesis.events.GenesisChoosePageLayoutEvent;
-import studio.magemonkey.genesis.managers.ClassManager;
-import studio.magemonkey.genesis.managers.features.PageLayoutHandler;
-import studio.magemonkey.genesis.misc.Misc;
-import studio.magemonkey.genesis.settings.Settings;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
+import studio.magemonkey.genesis.Genesis;
+import studio.magemonkey.genesis.api.InventoryUtil;
+import studio.magemonkey.genesis.events.GenesisChoosePageLayoutEvent;
+import studio.magemonkey.genesis.managers.ClassManager;
+import studio.magemonkey.genesis.managers.features.PageLayoutHandler;
+import studio.magemonkey.genesis.misc.Misc;
+import studio.magemonkey.genesis.settings.Settings;
 
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -257,9 +257,10 @@ public abstract class GenesisShop {
         GenesisShopHolder oldShopHolder = null;
 
         if (rememberCurrentShop) {
-            InventoryView openinventory = p.getOpenInventory();
-            if (openinventory.getTopInventory().getHolder() instanceof GenesisShopHolder) {
-                oldShopHolder = (GenesisShopHolder) openinventory.getTopInventory().getHolder();
+            Object    openInventory = p.getOpenInventory();
+            Inventory top           = InventoryUtil.getTopInventory(openInventory);
+            if (top.getHolder() instanceof GenesisShopHolder) {
+                oldShopHolder = (GenesisShopHolder) top.getHolder();
             }
         }
 

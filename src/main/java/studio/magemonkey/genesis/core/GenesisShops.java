@@ -1,14 +1,14 @@
 package studio.magemonkey.genesis.core;
 
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import studio.magemonkey.genesis.Genesis;
+import studio.magemonkey.genesis.api.InventoryUtil;
 import studio.magemonkey.genesis.managers.ClassManager;
 import studio.magemonkey.genesis.managers.config.FileHandler;
 import studio.magemonkey.genesis.managers.config.GenesisConfigShop;
 import studio.magemonkey.genesis.settings.Settings;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryView;
 
 import java.io.File;
 import java.util.HashMap;
@@ -115,10 +115,10 @@ public class GenesisShops {
         int     page                = 0;
         boolean rememberCurrentShop = true;
 
-        InventoryView view = p.getOpenInventory();
-        if (view != null && view.getTopInventory() != null && view.getTopInventory()
-                .getHolder() instanceof GenesisShopHolder) {
-            GenesisShopHolder holder        = (GenesisShopHolder) view.getTopInventory().getHolder();
+        Object    view = p.getOpenInventory();
+        Inventory top  = InventoryUtil.getTopInventory(view);
+        if (top.getHolder() instanceof GenesisShopHolder) {
+            GenesisShopHolder holder        = (GenesisShopHolder) top.getHolder();
             GenesisShopHolder oldShopHolder = holder.getPreviousShopHolder();
             if (oldShopHolder != null) {
                 // Going back to previous shop

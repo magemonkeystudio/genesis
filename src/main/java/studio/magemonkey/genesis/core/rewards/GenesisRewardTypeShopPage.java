@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
-import org.bukkit.inventory.InventoryView;
+import studio.magemonkey.genesis.api.InventoryUtil;
 import studio.magemonkey.genesis.core.GenesisBuy;
 import studio.magemonkey.genesis.core.GenesisShopHolder;
 import studio.magemonkey.genesis.managers.ClassManager;
@@ -64,8 +64,7 @@ public class GenesisRewardTypeShopPage extends GenesisRewardType {
 
 
     private int calculatePage(Player p, String reward) {
-        InventoryView   inventoryView = p.getOpenInventory();
-        Inventory       inventory     = inventoryView.getTopInventory();
+        Inventory       inventory     = InventoryUtil.getTopInventory(p.getOpenInventory());
         InventoryHolder holder        = inventory.getHolder();
 
         if (holder instanceof GenesisShopHolder) {
