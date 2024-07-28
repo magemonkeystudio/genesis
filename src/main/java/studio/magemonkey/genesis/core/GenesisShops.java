@@ -206,7 +206,7 @@ public class GenesisShops {
     public void refreshShops(boolean serverPinging) {
         for (Player p : Bukkit.getOnlinePlayers()) { // If players have a customizable inventory open it needs an update
             if (ClassManager.manager.getPlugin().getAPI().isValidShop(p.getOpenInventory())) {
-                Inventory         openInventory = p.getOpenInventory().getTopInventory();
+                Inventory         openInventory = InventoryUtil.getTopInventory(p.getOpenInventory());
                 GenesisShopHolder h             = (GenesisShopHolder) openInventory.getHolder();
 
                 if (h.getShop().isCustomizable()) {

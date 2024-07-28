@@ -133,12 +133,13 @@ public class GenesisAPI {
      */
     public void updateInventory(Player p, boolean forceNewCreation) {
         if (isValidShop(p.getOpenInventory())) {
-            GenesisShopHolder holder = (GenesisShopHolder) p.getOpenInventory().getTopInventory().getHolder();
+            GenesisShopHolder holder =
+                    (GenesisShopHolder) InventoryUtil.getTopInventory(p.getOpenInventory()).getHolder();
             if (forceNewCreation) {
                 holder.getShop().openInventory(p, holder.getPage(), false);
             } else {
                 holder.getShop()
-                        .updateInventory(p.getOpenInventory().getTopInventory(),
+                        .updateInventory(InventoryUtil.getTopInventory(p.getOpenInventory()),
                                 holder,
                                 p,
                                 ClassManager.manager,

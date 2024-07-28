@@ -280,7 +280,8 @@ public abstract class GenesisShop {
     public void close() {
         for (Player p : Bukkit.getOnlinePlayers()) { //NEW!
             if (ClassManager.manager.getPlugin().getAPI().isValidShop(p.getOpenInventory())) {
-                GenesisShopHolder holder = ((GenesisShopHolder) p.getOpenInventory().getTopInventory().getHolder());
+                GenesisShopHolder holder =
+                        ((GenesisShopHolder) InventoryUtil.getTopInventory(p.getOpenInventory()).getHolder());
                 if (holder.getShop() == this) {
                     p.closeInventory();
                 }
@@ -291,7 +292,8 @@ public abstract class GenesisShop {
     public boolean isBeingAccessed(Player exclusion) {
         for (Player p : Bukkit.getOnlinePlayers()) { //NEW!
             if (ClassManager.manager.getPlugin().getAPI().isValidShop(p.getOpenInventory())) {
-                GenesisShopHolder holder = ((GenesisShopHolder) p.getOpenInventory().getTopInventory().getHolder());
+                GenesisShopHolder holder =
+                        ((GenesisShopHolder) InventoryUtil.getTopInventory(p.getOpenInventory()).getHolder());
                 if (holder.getShop() == this) {
                     if (p != exclusion) {
                         return true;
