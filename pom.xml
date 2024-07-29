@@ -221,7 +221,7 @@
         <dependency>
             <groupId>com.github.FrancoBM12</groupId>
             <artifactId>API-MagicCosmetics</artifactId>
-            <version>2.2.8</version>
+            <version>2.2.9</version>
             <scope>provided</scope>
         </dependency>
 
