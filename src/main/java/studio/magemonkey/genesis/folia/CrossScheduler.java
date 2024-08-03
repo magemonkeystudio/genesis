@@ -13,7 +13,7 @@ import java.util.concurrent.Future;
 public class CrossScheduler {
 
     private static final Genesis plugin  = ClassManager.manager.getPlugin();
-    private static final boolean isFolia = Bukkit.getVersion().contains("Folia");
+    private static final boolean isFolia = Bukkit.getName().contains("Folia");
 
     public static boolean isFolia() {
         return isFolia;
