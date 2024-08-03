@@ -14,30 +14,30 @@ Main:
   OffensiveClickSpamWarning: '&4Advertencia: Por favor, no hagas clic así de rápido.'
   OffensiveClickSpamKick: '&4Expulsado por hacer spam de clic.'
   NeedItemInHand: '&cPrimero necesitas un objeto en tú mano principal para poder hacer eso.'
-  PrintedItemInfo: '&6Toda la información de los objetos ha sido guardada exitósamente aquí: &7''/plugins/BossShopPro/ItemDataStorage.yml''&6.'
+  PrintedItemInfo: '&6Toda la información de los objetos ha sido guardada exitósamente aquí: &7''/plugins/Genesis/ItemDataStorage.yml''&6.'
   ListAndSeparator: ' & '
   ListOrSeparator: ' o '
   WorldNotExisting: "&cEse mundo no existe..."
-  StartReload: "&eIniciando reinicio de BossShop..."
+  StartReload: "&eIniciando reinicio de Genesis..."
   ReloadFinish: "&eHecho!"
 Economy:
   NoAccount: '&cNo tienes una cuenta de dinero!'
 ShopCreate:
-  Success: "&aEl archivo ha sido guardado en &7/plugins/BossShopPro/shops&a."
+  Success: "&aEl archivo ha sido guardado en &7/plugins/Genesis/shops&a."
   Success2: "&cPor favor, reinicia el plugin para leer el nuevo archivo de tienda generado."
   FileExists: "&cEl mismo archivo ya existe. El archivo será sobreescrito."
   Title: "Creando tienda %shop% (Ciérralo para guardar el archivo)"
   TitleHead: "Creando tienda"
 Command:
-  Help1: "&c/BossShop - Abre la tienda principal"
-  Help2: "&c/BossShop <tienda> [entrada] - Abre la tienda nombrada"
-  Help3: "&c/BossShop open <Tienda> <Jugador> [entrada] - Abre la tienda nombrada al jugador específicado"
-  Help4: "&c/BossShop close [Jugador] - Cierra el inventario del jugador específicado"
-  Help5: "&c/BossShop simulate <jugador> <tienda> <item-de-la-tienda> - Simula un clic"
-  Help6: "&c/BossShop reload - Recarga el Plugin"
-  Help7: "&c/BossShop read - Muestra la información del objeto en tú mano principal"
-  Help8: "&c/BossShop create <tienda> <título> - crea una tienda"
-  Help: "&c/BossShop help - Muestra esto"
+  Help1: "&c/Genesis - Abre la tienda principal"
+  Help2: "&c/Genesis <tienda> [entrada] - Abre la tienda nombrada"
+  Help3: "&c/Genesis open <Tienda> <Jugador> [entrada] - Abre la tienda nombrada al jugador específicado"
+  Help4: "&c/Genesis close [Jugador] - Cierra el inventario del jugador específicado"
+  Help5: "&c/Genesis simulate <jugador> <tienda> <item-de-la-tienda> - Simula un clic"
+  Help6: "&c/Genesis reload - Recarga el Plugin"
+  Help7: "&c/Genesis read - Muestra la información del objeto en tú mano principal"
+  Help8: "&c/Genesis create <tienda> <título> - crea una tienda"
+  Help: "&c/Genesis help - Muestra esto"
 NotEnough:
   Money: '&cNo tienes suficiente Dinero!'
   Item: '&cNo tienes suficientes Objetos!'
