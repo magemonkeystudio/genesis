@@ -6,6 +6,7 @@ import studio.magemonkey.genesis.core.prices.GenesisPriceType;
 import studio.magemonkey.genesis.core.rewards.GenesisRewardType;
 import studio.magemonkey.genesis.events.GenesisPlayerPurchaseEvent;
 import studio.magemonkey.genesis.events.GenesisPlayerPurchasedEvent;
+import studio.magemonkey.genesis.folia.CrossScheduler;
 import studio.magemonkey.genesis.managers.ClassManager;
 import studio.magemonkey.genesis.managers.config.GenesisConfigShop;
 import studio.magemonkey.genesis.misc.MathTools;
@@ -21,7 +22,6 @@ import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
 import java.util.List;
@@ -436,7 +436,7 @@ public class GenesisBuy {
             return;
         }
         if (!meetsCondition(holder, p)) {
-            return; //Can only happen when player click-spams item before it is refreshed
+            return; // Can only happen when player click-spams item before it is refreshed
         }
 
         this.purchaseTry(p, shop, holder, clickType, event, plugin);
@@ -462,7 +462,7 @@ public class GenesisBuy {
         Bukkit.getPluginManager().callEvent(e1);
         if (e1.isCancelled()) {
             return;
-        }//Custom Event end
+        }// Custom Event end
 
         GenesisRewardType rewardType = getRewardType(clickType);
         GenesisPriceType  priceType  = getPriceType(clickType);
@@ -507,9 +507,7 @@ public class GenesisBuy {
         }
 
         if (ClassManager.manager.getSettings().getPurchaseAsync()) {
-            Bukkit.getScheduler()
-                    .runTaskAsynchronously(plugin,
-                            new ShopItemPurchaseTask(p, this, shop, holder, clickType, rewardType, priceType, event));
+            CrossScheduler.runAsync(new ShopItemPurchaseTask(p, this, shop, holder, clickType, rewardType, priceType, event));
         } else {
             purchase(p, shop, holder, clickType, rewardType, priceType, event, plugin, false);
         }
@@ -547,12 +545,12 @@ public class GenesisBuy {
                          final InventoryClickEvent event,
                          final Genesis plugin,
                          boolean async) {
-        //Generate message
+        // Generate message
         String message = getMessage(clickType);
         if (message != null) {
             message = transformMessage(message,
                     shop,
-                    p); //Transform message before taking price because then ItemAll works fine
+                    p); // Transform message before taking price because then ItemAll works fine
         }
 
         String o = null;
@@ -563,21 +561,16 @@ public class GenesisBuy {
         }
 
 
-        //Close shop if wanted
+        // Close shop if wanted
         if (plugin.getClassManager().getSettings().getPropertyBoolean(Settings.CLOSE_SHOP_AFTER_PURCHASE, this)) {
-            p.closeInventory(); //NEW!!! MIGHT CAUSE BUGS!! Before it was executed async and after all other actions are executed.
+            p.closeInventory(); // NEW!!! MIGHT CAUSE BUGS!! Before it was executed async and after all other actions are executed.
         }
 
         if (!priceType.overridesReward()) {
-            //Give Reward
-            //Some rewardtypes may not be async!
+            // Give Reward
+            // Some rewardtypes may not be async!
             if (async && rewardType.allowAsync()) {
-                new BukkitRunnable() {
-                    @Override
-                    public void run() {
-                        rewardType.giveReward(p, GenesisBuy.this, getReward(clickType), clickType);
-                    }
-                }.runTask(plugin);
+                CrossScheduler.run(() -> rewardType.giveReward(p, GenesisBuy.this, getReward(clickType), clickType));
             } else {
                 rewardType.giveReward(p, this, getReward(clickType), clickType);
             }
@@ -589,7 +582,7 @@ public class GenesisBuy {
         }
 
 
-        //Update message
+        // Update message
         if (message != null) {
             if (o != null && !o.equals("") && message.contains("%left%")) {
                 message = message.replace("%left%", o);
@@ -600,21 +593,21 @@ public class GenesisBuy {
                             this,
                             shop,
                             holder,
-                            p); //Transform message before taking price because then ItemAll works fine
+                            p); // Transform message before taking price because then ItemAll works fine
         }
 
         boolean needUpdate = rewardType.mightNeedShopUpdate() || priceType.mightNeedShopUpdate();
 
-        //Transactionslog
+        // Transactionslog
         if (plugin.getClassManager().getSettings().getTransactionLogEnabled()) {
             plugin.getClassManager().getTransactionLog().addTransaction(p, this, clickType);
         }
 
-        //Custom "GenesisPlayerPurchasedEvent" event
+        // Custom "GenesisPlayerPurchasedEvent" event
         GenesisPlayerPurchasedEvent e2 = new GenesisPlayerPurchasedEvent(p, shop, this, clickType);//Custom Event
         Bukkit.getPluginManager().callEvent(e2);//Custom Event end
 
-        //Send message and play sound
+        // Send message and play sound
         ClassManager.manager.getMessageHandler().sendMessageDirect(message, p);
         if (priceType != GenesisPriceType.Nothing) {
             Misc.playSound(p,
@@ -627,30 +620,13 @@ public class GenesisBuy {
             }
         }
 
-        //Update shop if needed
+        // Update shop if needed
         if (shop.isCustomizable() && needUpdate && event != null) { // 'event' is null in case of a simulated click
             if (p.getOpenInventory() == event.getView()) { // only if inventory is still open
                 if (async) {
-                    Bukkit.getScheduler().runTask(ClassManager.manager.getPlugin(), new Runnable() {
-                        @Override
-                        public void run() {
-                            shop.updateInventory(event.getInventory(),
-                                    holder,
-                                    p,
-                                    plugin.getClassManager(),
-                                    holder.getPage(),
-                                    holder.getHighestPage(),
-                                    false);
-                        }
-                    });
+                    CrossScheduler.run(() -> shop.updateInventory(event.getInventory(), holder, p, plugin.getClassManager(), holder.getPage(), holder.getHighestPage(), false));
                 } else {
-                    shop.updateInventory(event.getInventory(),
-                            holder,
-                            p,
-                            plugin.getClassManager(),
-                            holder.getPage(),
-                            holder.getHighestPage(),
-                            false);
+                    shop.updateInventory(event.getInventory(), holder, p, plugin.getClassManager(), holder.getPage(), holder.getHighestPage(), false);
                 }
             }
         }

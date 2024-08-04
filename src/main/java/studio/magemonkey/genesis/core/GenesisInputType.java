@@ -1,19 +1,17 @@
 package studio.magemonkey.genesis.core;
 
-import studio.magemonkey.genesis.Genesis;
-import studio.magemonkey.genesis.core.prices.GenesisPriceType;
-import studio.magemonkey.genesis.core.rewards.GenesisRewardType;
-import studio.magemonkey.genesis.managers.ClassManager;
-import studio.magemonkey.genesis.misc.userinput.GenesisUserInput;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
-
-import java.util.concurrent.Callable;
+import studio.magemonkey.genesis.Genesis;
+import studio.magemonkey.genesis.core.prices.GenesisPriceType;
+import studio.magemonkey.genesis.core.rewards.GenesisRewardType;
+import studio.magemonkey.genesis.folia.CrossScheduler;
+import studio.magemonkey.genesis.managers.ClassManager;
+import studio.magemonkey.genesis.misc.userinput.GenesisUserInput;
 
 public enum GenesisInputType {
-
     PLAYER {
         @Override
         @SuppressWarnings("deprecation")
@@ -37,12 +35,9 @@ public enum GenesisInputType {
                         return;
                     }
                     ClassManager.manager.getPlayerDataHandler().enteredInput(p, text);
-                    Bukkit.getScheduler().callSyncMethod(plugin, new Callable<Boolean>() {
-                        @Override
-                        public Boolean call() {
-                            buy.purchase(p, shop, holder, clickType, rewardtype, priceType, event, plugin, false);
-                            return true;
-                        }
+                    CrossScheduler.callSyncMethod(() -> {
+                        buy.purchase(p, shop, holder, clickType, rewardtype, priceType, event, plugin, false);
+                        return true;
                     });
                 }
             }.getUserInput(p, null, null, buy.getInputText(clickType));
@@ -67,19 +62,15 @@ public enum GenesisInputType {
                 @Override
                 public void receivedInput(final Player p, String text) {
                     ClassManager.manager.getPlayerDataHandler().enteredInput(p, text);
-                    Bukkit.getScheduler().callSyncMethod(plugin, new Callable<Boolean>() {
-                        @Override
-                        public Boolean call() {
-                            buy.purchase(p, shop, holder, clickType, rewardtype, priceType, event, plugin, false);
-                            return true;
-                        }
+                    CrossScheduler.callSyncMethod(() -> {
+                        buy.purchase(p, shop, holder, clickType, rewardtype, priceType, event, plugin, false);
+                        return true;
                     });
                 }
             }.getUserInput(p, null, null, buy.getInputText(clickType));
 
         }
     };
-
 
     public abstract void forceInput(final Player p,
                                     final GenesisShop shop,
@@ -90,6 +81,4 @@ public enum GenesisInputType {
                                     final GenesisPriceType priceType,
                                     final InventoryClickEvent event,
                                     final Genesis plugin);
-
-
 }

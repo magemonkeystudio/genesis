@@ -1,5 +1,6 @@
 package studio.magemonkey.genesis;
 
+import studio.magemonkey.genesis.folia.CrossScheduler;
 import studio.magemonkey.genesis.api.GenesisAPI;
 import studio.magemonkey.genesis.api.GenesisAddon;
 import studio.magemonkey.genesis.core.GenesisShop;
@@ -15,7 +16,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class Genesis extends JavaPlugin {
 
@@ -74,13 +74,10 @@ public class Genesis extends JavaPlugin {
         getServer().getPluginManager().registerEvents(pl, this);
 
         ////////////////
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                new InbuiltAddonLoader().load(Genesis.this);
-                getClassManager().setupDependentClasses();
-            }
-        }.runTaskLaterAsynchronously(this, 3);
+        CrossScheduler.runTaskLaterAsync(() -> {
+            new InbuiltAddonLoader().load(Genesis.this);
+            getClassManager().setupDependentClasses();
+        }, 3);
 
         ////////////////<- File key complete
 
@@ -157,7 +154,7 @@ public class Genesis extends JavaPlugin {
     }
 
     private void unloadClasses() {
-        Bukkit.getScheduler().cancelTasks(this);
+        CrossScheduler.cancelTasks(this);
 
         if (manager == null) {
             return;

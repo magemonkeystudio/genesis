@@ -1,24 +1,27 @@
 package studio.magemonkey.genesis.managers.serverpinging;
 
-import studio.magemonkey.genesis.Genesis;
-import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
+import studio.magemonkey.genesis.Genesis;
+import studio.magemonkey.genesis.folia.CrossScheduler;
 
 public class ServerPingingRunnableHandler {
 
     private int id = -1;
 
     public void start(int speed, Genesis plugin, ServerPingingManager manager) {
-        BukkitTask t = new ServerPingingRunnable(manager).runTaskTimerAsynchronously(plugin, speed, speed);
-        id = t.getTaskId();
+        // TODO couldn't find proper solution for folia yet
+        if (!CrossScheduler.isFolia()) {
+            BukkitTask t = new ServerPingingRunnable(manager).runTaskTimerAsynchronously(plugin, speed, speed);
+            id = t.getTaskId();
+        }
     }
 
     public void stop() {
         if (id == -1) {
             return;
         }
-        Bukkit.getScheduler().cancelTask(id);
+        CrossScheduler.cancelTask(id);
     }
 
 
