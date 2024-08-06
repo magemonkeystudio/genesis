@@ -1,5 +1,5 @@
-﻿BossShopPro
-by Felix Neubauer
+﻿Genesis
+by MageMonkeyStudio
 
 v2.0.9 [BETA]
 * [ADD] Added support for hex color codes
@@ -29,7 +29,7 @@ v2.0.5
 
 
 v2.0.4 [BETA]
-*[NOTE] Still supports Spigot 1.13.*. If you use an older Spigot version than 1.13.*  use BossShopPro v1.9.8 or older.
+*[NOTE] Still supports Spigot 1.13.*. If you use an older Spigot version than 1.13.*  use Genesis v1.9.8 or older.
 *[UPDATE] Updated to Spigot 1.14
 
 
@@ -52,16 +52,16 @@ v2.0.1
 * [FIX] Now using 1.13 ItemMeta durability/damage
 
 
-v2.0.0 [BETA] For 1.13 and above. If you use an older Spigot build, download BossShopPro v1.9.8 instead.
+v2.0.0 [BETA] For 1.13 and above. If you use an older Spigot build, download Genesis v1.9.8 instead.
 *[NOTE] When updating to 1.13.*:
 ** Material names need to be updated. List of new material names: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html or https://minecraft.gamepedia.com/1.13/Flattening
 ** Enchantment names need to be updated. List of new enchantment names: https://www.minecraftforum.net/forums/minecraft-java-edition/redstone-discussion-and/commands-command-blocks-and/2891015-1-13-full-enchantment-ids-small-give-tutorial
-*[ADD] API changes: Added clickType as property of BSPlayerPurchasedEvent and BSPlayerPurchaseEvent
+*[ADD] API changes: Added clickType as property of GenesisPlayerPurchasedEvent and GenesisPlayerPurchaseEvent
 *[FIX] Small bug fixes
 
 
 v1.9.9 [ALPHA] USE AT YOUR OWN RISK! DO NOT USE IN PRODUCTION!
-For all of you who want to try out BossShopPro using Spigot 1.13.1, I decided to upload the current development build. 
+For all of you who want to try out Genesis using Spigot 1.13.1, I decided to upload the current development build.
 Do not use this on a production server; it has not been tested well enough for that. Additionally a few changes and features
 to make upgrading shops to 1.13.1 are still missing.
 
@@ -77,12 +77,12 @@ What I will work on within the next weeks:
 * Fix small issues (for example RewardType enchantment seems to no longer detect the item in the players main hand)
 * Wiki updates; links to the new ItemData names; Showing how mob eggs can now be setup without external plugins like SilkSpawners/EpicSpawners
 * A command / script, which converts ItemData to 1.13.1, using the new names (will work for most but not all items)
-* A BossShopProConfigure update
+* A GenesisConfigure update
 * Addon updates
 * More testing
 * Change color of glass pane in main menu
 
-*[NOTE] Requires at least Spigot 1.13.1 If you use an older Spigot version simply use BossShopPro v1.9.7 or older.
+*[NOTE] Requires at least Spigot 1.13.1 If you use an older Spigot version simply use Genesis v1.9.7 or older.
 *[UPDATE] Updated to Spigot 1.13.1
 *[ADD] Added support for a list of options within numerical conditions when using the "equals" tag. Example:
     Condition:
@@ -147,7 +147,7 @@ v1.8.8
 v1.8.7
 *[ADD] Added placeholder support to customskull textures. Connecting this feature with player input you could enable your builders to spawn/buy heads with any custom textures they want. 
 *[ADD] Added a configurable player input timeout (default is 45 seconds)
-*[IMPROVE] Now you can define "PointsPlugin: none" to disable BSP points support although having a points plugin installed.
+*[IMPROVE] Now you can define "PointsPlugin: none" to disable Genesis points support although having a points plugin installed.
 *[FIX] Fixed a small issue related to serverpinging
 
 
@@ -265,7 +265,7 @@ v1.6.3
 
 
 v1.6.2
-*[FIX] Fixed BungeeCord command support (requires a copy of BossShopPro to be put in the BungeeCord plugins folder)
+*[FIX] Fixed BungeeCord command support (requires a copy of Genesis to be put in the BungeeCord plugins folder)
 
 
 v1.6.1
@@ -277,7 +277,7 @@ v1.6.1
 
 
 v1.6.0
-*[ADD] Added modulo support to all BossShopPro calculations
+*[ADD] Added modulo support to all Genesis calculations
 *[ADD] Added new API methods required for a new addon
 *[IMPROVE] Other small improvements
 
@@ -320,12 +320,12 @@ v1.5.3
 
 
 v1.5.2 (Beta)
-*[ADD] Added option to make BossShopPro execute economy related shopitem actions asynchronously (prevents lag when for example having MySQL based currencies)
+*[ADD] Added option to make Genesis execute economy related shopitem actions asynchronously (prevents lag when for example having MySQL based currencies)
 *[IMPROVE] Added WeekShop menu link to the main menu
 
 
 v1.5.1
-*[ADD] If BungeeCord is enabled BossShopPro will now send short notifications when players input shop information in the chat. That way other plugins can detect whether player input belongs to the chat or not (just needed in very few cases like for example a global BungeeCord chat)
+*[ADD] If BungeeCord is enabled Genesis will now send short notifications when players input shop information in the chat. That way other plugins can detect whether player input belongs to the chat or not (just needed in very few cases like for example a global BungeeCord chat)
 *[FIX] Huge numbers in some situations displayed wrong due to rounding issues
 
 
@@ -379,7 +379,7 @@ v1.4.4
 
 
 v1.4.3
-*[IMPROVE] Increased priority of the BossShopPro inventory listener
+*[IMPROVE] Increased priority of the Genesis inventory listener
 *[IMPROVE] Other small improvements
 
 
@@ -455,7 +455,7 @@ v1.2.8
 *[FIX] Fixed a bug related to the signlistener
 
 v1.2.7
-*[ADD] Added API method for the BossShopProConfigure tool
+*[ADD] Added API method for the GenesisConfigure tool
 *[FIX] Small message fix
 
 
@@ -531,7 +531,7 @@ v1.1.5
 v1.1.4
 *[ADD] Added configurable click delay to prevent click spam
 ** Not for long-time uses: The delay is removed when the player leaves the server
-** You can bypass the delay using the "BossShop.bypass" permission
+** You can bypass the delay using the "Genesis.bypass" permission
 *[IMPROVE] Small number display improvements (Now showing '0.1' instead of '.1')
 
 
@@ -600,7 +600,7 @@ v1.0.6
 
 
 v1.0.5
-*[ADD] Added API method for the BossShopProConfigure tool
+*[ADD] Added API method for the GenesisConfigure tool
 *[FIX] Now just ignoring features that are not supported by the used server version yet
 
 
@@ -646,7 +646,7 @@ v1.0.1
 *[IMPROVE] Small performance improvements
 *[REMOVE] Now you can optionally add actions for every kind of click (LEFT, RIGHT, MIDDLE, DOUBLE_CLICK etc.)
 *[FIX] In rare situations placeholders were not displayed properly
-*[FIX] Due to writing "PageLayout.yml" instead of "pagelayout.yml" BossShopPro broke on some operating systems
+*[FIX] Due to writing "PageLayout.yml" instead of "pagelayout.yml" Genesis broke on some operating systems
 *[REMOVE] Removed the rightclick-action feature as now all kinds of clicks can be specified
 
 
