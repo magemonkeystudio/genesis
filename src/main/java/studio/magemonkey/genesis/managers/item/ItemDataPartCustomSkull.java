@@ -1,5 +1,7 @@
 package studio.magemonkey.genesis.managers.item;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import org.bukkit.Bukkit;
@@ -42,9 +44,15 @@ public class ItemDataPartCustomSkull extends ItemDataPart {
         try {
             PlayerProfile playerProfile = Bukkit.createPlayerProfile(id);
             String        decoded       = new String(Base64.getDecoder().decode(input));
-            playerProfile.getTextures()
-                    .setSkin(new URL(decoded.substring("{\"textures\":{\"SKIN\":{\"url\":\"".length(),
-                            decoded.length() - "\"}}}".length())));
+            // Construct the json object
+            JsonObject json = new Gson().fromJson(decoded, JsonObject.class);
+            // Get the textures object
+            JsonObject texturesJson = json.getAsJsonObject("textures");
+            // Get the skin object
+            JsonObject skin = texturesJson.getAsJsonObject("SKIN");
+            // Get the url
+            String url = skin.get("url").getAsString();
+            playerProfile.getTextures().setSkin(new URL(url));
             skullMeta.setOwnerProfile(playerProfile);
         } catch (MalformedURLException | NoClassDefFoundError | NoSuchMethodError | IllegalArgumentException e) {
             try {
@@ -69,38 +77,47 @@ public class ItemDataPartCustomSkull extends ItemDataPart {
 
     public static String readSkullTexture(ItemStack i) {
         if (i.getType() == Material.PLAYER_HEAD) {
-            SkullMeta meta         = (SkullMeta) i.getItemMeta();
-            Field     profileField = null;
-            try {
-                profileField = meta.getClass().getDeclaredField("profile");
-                profileField.setAccessible(true);
+            SkullMeta meta = (SkullMeta) i.getItemMeta();
+            if (meta == null) return null;
 
-                GameProfile profile = (GameProfile) profileField.get(meta);
-                if (profile != null) {
-                    if (profile.getProperties() != null) {
-                        Collection<Property> properties = profile.getProperties().get("textures");
-                        if (properties != null) {
-                            Iterator<Property> iterator = properties.iterator();
-                            if (iterator.hasNext()) {
-                                Property property = iterator.next();
-                                try {
-                                    // We'll try to call getValue just in case the property is not a record
-                                    Method getValueMethod = property.getClass().getDeclaredMethod("getValue");
-                                    getValueMethod.setAccessible(true);
-                                    return (String) getValueMethod.invoke(property);
-                                } catch (Exception e) {
-                                    // If the property is a record...
-                                    Method valueMethod = property.getClass().getDeclaredMethod("value");
-                                    valueMethod.setAccessible(true);
-                                    return (String) valueMethod.invoke(property);
+            try {
+                PlayerProfile profile = meta.getOwnerProfile();
+                if(profile == null) return null;
+                if (profile.getTextures().getSkin() == null) return null;
+
+               return profile.getTextures().getSkin().toString();
+            } catch (NoSuchMethodError | Exception ex) {
+                try {
+                Field profileField = meta.getClass().getDeclaredField("profile");
+                    profileField.setAccessible(true);
+
+                    GameProfile profile = (GameProfile) profileField.get(meta);
+                    if (profile != null) {
+                        if (profile.getProperties() != null) {
+                            Collection<Property> properties = profile.getProperties().get("textures");
+                            if (properties != null) {
+                                Iterator<Property> iterator = properties.iterator();
+                                if (iterator.hasNext()) {
+                                    Property property = iterator.next();
+                                    try {
+                                        // We'll try to call getValue just in case the property is not a record
+                                        Method getValueMethod = property.getClass().getDeclaredMethod("getValue");
+                                        getValueMethod.setAccessible(true);
+                                        return (String) getValueMethod.invoke(property);
+                                    } catch (Exception e) {
+                                        // If the property is a record...
+                                        Method valueMethod = property.getClass().getDeclaredMethod("value");
+                                        valueMethod.setAccessible(true);
+                                        return (String) valueMethod.invoke(property);
+                                    }
                                 }
                             }
                         }
                     }
-                }
 
-            } catch (Exception e) {
-                e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
         return null;
