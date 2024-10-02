@@ -52,4 +52,7 @@ jobs:
           git push
           git push --tags
       - name: Notify Discord
-        run: pip install simplejson && python ./.github/notify_published.py ${{ secrets.BSP_WEBHOOK }} true
+        run: |
+          python -m venv .venv
+          .venv/bin/pip install simplejson
+          .venv/bin/python ./.github/notify_published.py ${{ secrets.BSP_WEBHOOK }} true
