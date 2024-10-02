@@ -1,10 +1,5 @@
 package studio.magemonkey.genesis.managers.item;
 
-import studio.magemonkey.genesis.core.GenesisBuy;
-import studio.magemonkey.genesis.core.GenesisShop;
-import studio.magemonkey.genesis.core.GenesisShopHolder;
-import studio.magemonkey.genesis.managers.ClassManager;
-import studio.magemonkey.genesis.managers.misc.StringManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
@@ -16,9 +11,15 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.inventory.meta.tags.CustomItemTagContainer;
 import org.bukkit.inventory.meta.tags.ItemTagType;
+import studio.magemonkey.genesis.core.GenesisBuy;
+import studio.magemonkey.genesis.core.GenesisShop;
+import studio.magemonkey.genesis.core.GenesisShopHolder;
+import studio.magemonkey.genesis.managers.ClassManager;
+import studio.magemonkey.genesis.managers.misc.StringManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 public class ItemStackTranslator {
@@ -180,8 +181,8 @@ public class ItemStackTranslator {
 
                 if (meta.hasLore()) {
                     List<String> lore = meta.getLore();
-                    for (int i = 0; i < lore.size(); i++) {
-                        if (s.checkStringForFeatures(shop, buy, item, lore.get(i))) {
+                    for (String string : lore) {
+                        if (s.checkStringForFeatures(shop, buy, item, string)) {
                             b = true;
                         }
                     }
@@ -190,8 +191,9 @@ public class ItemStackTranslator {
                 // Skull ItemData
                 if (meta instanceof SkullMeta) {
                     SkullMeta skullmeta = (SkullMeta) meta;
-                    if (skullmeta.hasOwner()) {
-                        if (s.checkStringForFeatures(shop, buy, item, skullmeta.getOwner())) {
+                    if (skullmeta.hasOwner() && skullmeta.getOwningPlayer() != null) {
+                        if (s.checkStringForFeatures(shop, buy, item,
+                                Objects.requireNonNull(skullmeta.getOwningPlayer().getName()))) {
                             b = true;
                         }
                     }

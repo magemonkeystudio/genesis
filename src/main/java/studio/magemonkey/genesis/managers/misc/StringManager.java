@@ -1,6 +1,7 @@
 package studio.magemonkey.genesis.managers.misc;
 
 
+import lombok.NonNull;
 import studio.magemonkey.genesis.core.GenesisBuy;
 import studio.magemonkey.genesis.core.GenesisShop;
 import studio.magemonkey.genesis.core.GenesisShopHolder;
@@ -179,7 +180,7 @@ public class StringManager {
     public boolean checkStringForFeatures(GenesisShop shop,
                                           GenesisBuy buy,
                                           ItemStack menuItem,
-                                          String s) { //Returns true if this would make a shop customizable
+                                          @NonNull String s) { //Returns true if this would make a shop customizable
         boolean b = s.matches(hexPattern.pattern());
 
 
