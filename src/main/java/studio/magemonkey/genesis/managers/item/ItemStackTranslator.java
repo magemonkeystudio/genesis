@@ -19,7 +19,6 @@ import studio.magemonkey.genesis.managers.misc.StringManager;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 
 public class ItemStackTranslator {
@@ -191,9 +190,11 @@ public class ItemStackTranslator {
                 // Skull ItemData
                 if (meta instanceof SkullMeta) {
                     SkullMeta skullmeta = (SkullMeta) meta;
-                    if (skullmeta.hasOwner() && skullmeta.getOwningPlayer() != null) {
+                    if (skullmeta.hasOwner()
+                            && skullmeta.getOwningPlayer() != null
+                            && skullmeta.getOwningPlayer().getName() != null) {
                         if (s.checkStringForFeatures(shop, buy, item,
-                                Objects.requireNonNull(skullmeta.getOwningPlayer().getName()))) {
+                                skullmeta.getOwningPlayer().getName())) {
                             b = true;
                         }
                     }

@@ -28,9 +28,11 @@ public class ItemDataPartCustomSkull extends ItemDataPart {
 
         SkullMeta skullMeta = (SkullMeta) i.getItemMeta();
         if (skullMeta == null) return i;
+        UUID id = UUID.randomUUID();
         if (input.contains("http://textures.minecraft.net/texture")) {
             try {
-                PlayerProfile pprofile = Bukkit.createPlayerProfile(UUID.randomUUID());
+                PlayerProfile pprofile =
+                        Bukkit.createPlayerProfile(id, id.toString().replace("-", "").substring(0, 16));
                 pprofile.getTextures().setSkin(new URL(input));
                 skullMeta.setOwnerProfile(pprofile);
                 i.setItemMeta(skullMeta);
@@ -40,9 +42,9 @@ public class ItemDataPartCustomSkull extends ItemDataPart {
             }
         }
 
-        UUID id = UUID.randomUUID();
         try {
-            PlayerProfile playerProfile = Bukkit.createPlayerProfile(id);
+            PlayerProfile playerProfile =
+                    Bukkit.createPlayerProfile(id, id.toString().replace("-", "").substring(0, 16));
             String        decoded       = new String(Base64.getDecoder().decode(input));
             // Construct the json object
             JsonObject json = new Gson().fromJson(decoded, JsonObject.class);
@@ -82,13 +84,13 @@ public class ItemDataPartCustomSkull extends ItemDataPart {
 
             try {
                 PlayerProfile profile = meta.getOwnerProfile();
-                if(profile == null) return null;
+                if (profile == null) return null;
                 if (profile.getTextures().getSkin() == null) return null;
 
-               return profile.getTextures().getSkin().toString();
+                return profile.getTextures().getSkin().toString();
             } catch (NoSuchMethodError | Exception ex) {
                 try {
-                Field profileField = meta.getClass().getDeclaredField("profile");
+                    Field profileField = meta.getClass().getDeclaredField("profile");
                     profileField.setAccessible(true);
 
                     GameProfile profile = (GameProfile) profileField.get(meta);
