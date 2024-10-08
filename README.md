@@ -1,5 +1,5 @@
-[![Build](https://github.com/promcteam/BossShopPro/actions/workflows/release.yml/badge.svg?branch=main)](https://s01.oss.sonatype.org/content/repositories/snapshots/studio/magemonkey/bossshoppro)
-[![Build](https://github.com/promcteam/BossShopPro/actions/workflows/devbuild.yml/badge.svg?branch=dev)](https://s01.oss.sonatype.org/content/repositories/snapshots/studio/magemonkey/bossshoppro)
+[![Build](https://github.com/promcteam/genesis/actions/workflows/release.yml/badge.svg?branch=main)](https://s01.oss.sonatype.org/content/repositories/snapshots/studio/magemonkey/genesis)
+[![Build](https://github.com/promcteam/genesis/actions/workflows/devbuild.yml/badge.svg?branch=dev)](https://s01.oss.sonatype.org/content/repositories/snapshots/studio/magemonkey/genesis)
 
 # Genesis
 
