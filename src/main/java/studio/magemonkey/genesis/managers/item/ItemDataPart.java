@@ -1,10 +1,13 @@
 package studio.magemonkey.genesis.managers.item;
 
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import studio.magemonkey.divinity.Divinity;
+import studio.magemonkey.divinity.modules.list.itemgenerator.ItemGeneratorManager;
 import studio.magemonkey.genesis.core.GenesisBuy;
 import studio.magemonkey.genesis.managers.ClassManager;
 import studio.magemonkey.genesis.misc.VersionManager;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -164,6 +167,19 @@ public abstract class ItemDataPart {
         if (shopItem == null || playerItem == null) {
             return false;
         }
+
+        // Check Divinity items
+        if (Bukkit.getPluginManager().isPluginEnabled("Divinity")) {
+            ItemGeneratorManager manager = Divinity.instance.getModuleCache().getTierManager();
+            if (manager != null) {
+                String shopItemName   = manager.getItemId(shopItem);
+                String playerItemName = manager.getItemId(playerItem);
+                if (shopItemName != null && playerItemName != null) {
+                    return shopItemName.equals(playerItemName);
+                }
+            }
+        }
+
         for (ItemDataPart part : types) {
             if (isException(exceptions, part)) {
                 continue;
