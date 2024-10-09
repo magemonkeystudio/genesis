@@ -1,7 +1,7 @@
 package studio.magemonkey.genesis.managers.serverpinging;
 
-import studio.magemonkey.genesis.core.GenesisBuy;
 import lombok.Getter;
+import studio.magemonkey.genesis.core.GenesisBuy;
 
 import java.util.LinkedHashMap;
 import java.util.List;

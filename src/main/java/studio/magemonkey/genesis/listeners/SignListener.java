@@ -14,7 +14,7 @@ import java.util.HashMap;
 
 public class SignListener implements Listener {
 
-    private boolean s;
+    private       boolean s;
     private final Genesis plugin;
 
     public SignListener(boolean s, Genesis plugin) {
@@ -32,8 +32,8 @@ public class SignListener implements Listener {
 
         for (Integer s : set.keySet()) {
 
-            GenesisShop shop = set.get(s);
-            String signtext = shop.getSignText();
+            GenesisShop shop     = set.get(s);
+            String      signtext = shop.getSignText();
 
             if (signtext != null) {
                 if (line.endsWith(signtext.toLowerCase())) {

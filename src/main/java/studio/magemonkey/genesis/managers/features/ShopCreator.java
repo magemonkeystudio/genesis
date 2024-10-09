@@ -1,9 +1,5 @@
 package studio.magemonkey.genesis.managers.features;
 
-import studio.magemonkey.genesis.Genesis;
-import studio.magemonkey.genesis.managers.ClassManager;
-import studio.magemonkey.genesis.managers.MessageHandler;
-import studio.magemonkey.genesis.managers.item.ItemDataPart;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -13,6 +9,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import studio.magemonkey.genesis.Genesis;
+import studio.magemonkey.genesis.managers.ClassManager;
+import studio.magemonkey.genesis.managers.MessageHandler;
+import studio.magemonkey.genesis.managers.item.ItemDataPart;
 
 import java.io.File;
 import java.io.IOException;

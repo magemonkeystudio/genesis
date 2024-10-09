@@ -1,9 +1,9 @@
 package studio.magemonkey.genesis.misc;
 
-import studio.magemonkey.genesis.managers.ClassManager;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.OfflinePlayer;
+import studio.magemonkey.genesis.managers.ClassManager;
 
 import java.util.List;
 

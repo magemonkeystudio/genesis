@@ -1,7 +1,5 @@
 package studio.magemonkey.genesis.managers.item;
 
-import studio.magemonkey.genesis.core.GenesisBuy;
-import studio.magemonkey.genesis.managers.ClassManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -10,6 +8,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.persistence.PersistentDataType;
+import studio.magemonkey.genesis.core.GenesisBuy;
+import studio.magemonkey.genesis.managers.ClassManager;
 
 import java.util.List;
 

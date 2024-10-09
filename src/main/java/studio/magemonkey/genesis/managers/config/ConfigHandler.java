@@ -1,13 +1,13 @@
 package studio.magemonkey.genesis.managers.config;
 
+import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
 import studio.magemonkey.genesis.Genesis;
 import studio.magemonkey.genesis.managers.ClassManager;
 import studio.magemonkey.genesis.managers.features.PointsManager;
 import studio.magemonkey.genesis.managers.features.PointsManager.PointsPlugin;
 import studio.magemonkey.genesis.pointsystem.GenesisPointsAPI;
 import studio.magemonkey.genesis.settings.Settings;
-import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.FileConfiguration;
 
 public class ConfigHandler {
 

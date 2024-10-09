@@ -1,6 +1,9 @@
 package studio.magemonkey.genesis.managers.item;
 
 
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import studio.magemonkey.genesis.core.GenesisBuy;
 import studio.magemonkey.genesis.core.GenesisShop;
 import studio.magemonkey.genesis.managers.ClassManager;
@@ -8,9 +11,6 @@ import studio.magemonkey.genesis.managers.config.GenesisConfigShop;
 import studio.magemonkey.genesis.managers.misc.InputReader;
 import studio.magemonkey.genesis.managers.misc.StringManipulationLib;
 import studio.magemonkey.genesis.misc.Misc;
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;

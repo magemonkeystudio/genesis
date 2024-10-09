@@ -1,11 +1,11 @@
 package studio.magemonkey.genesis.core.rewards;
 
+import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
 import studio.magemonkey.genesis.core.GenesisBuy;
 import studio.magemonkey.genesis.managers.ClassManager;
 import studio.magemonkey.genesis.managers.misc.InputReader;
 import studio.magemonkey.genesis.managers.misc.StringManipulationLib;
-import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.ClickType;
 
 import java.util.List;
 

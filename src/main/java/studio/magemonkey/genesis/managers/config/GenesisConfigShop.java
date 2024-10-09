@@ -1,13 +1,5 @@
 package studio.magemonkey.genesis.managers.config;
 
-import studio.magemonkey.genesis.Genesis;
-import studio.magemonkey.genesis.core.GenesisBuy;
-import studio.magemonkey.genesis.core.GenesisShop;
-import studio.magemonkey.genesis.core.GenesisShops;
-import studio.magemonkey.genesis.core.prices.GenesisPriceType;
-import studio.magemonkey.genesis.core.rewards.GenesisRewardType;
-import studio.magemonkey.genesis.events.GenesisLoadShopItemsEvent;
-import studio.magemonkey.genesis.managers.ClassManager;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -18,6 +10,14 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import studio.magemonkey.genesis.Genesis;
+import studio.magemonkey.genesis.core.GenesisBuy;
+import studio.magemonkey.genesis.core.GenesisShop;
+import studio.magemonkey.genesis.core.GenesisShops;
+import studio.magemonkey.genesis.core.prices.GenesisPriceType;
+import studio.magemonkey.genesis.core.rewards.GenesisRewardType;
+import studio.magemonkey.genesis.events.GenesisLoadShopItemsEvent;
+import studio.magemonkey.genesis.managers.ClassManager;
 
 import java.io.File;
 import java.io.IOException;

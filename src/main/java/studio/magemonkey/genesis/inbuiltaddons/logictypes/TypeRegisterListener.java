@@ -1,8 +1,8 @@
 package studio.magemonkey.genesis.inbuiltaddons.logictypes;
 
-import studio.magemonkey.genesis.events.GenesisRegisterTypesEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import studio.magemonkey.genesis.events.GenesisRegisterTypesEvent;
 
 public class TypeRegisterListener implements Listener {
 

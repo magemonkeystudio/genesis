@@ -45,7 +45,7 @@ public class ItemDataPartCustomSkull extends ItemDataPart {
         try {
             PlayerProfile playerProfile =
                     Bukkit.createPlayerProfile(id, id.toString().replace("-", "").substring(0, 16));
-            String        decoded       = new String(Base64.getDecoder().decode(input));
+            String decoded = new String(Base64.getDecoder().decode(input));
             // Construct the json object
             JsonObject json = new Gson().fromJson(decoded, JsonObject.class);
             // Get the textures object

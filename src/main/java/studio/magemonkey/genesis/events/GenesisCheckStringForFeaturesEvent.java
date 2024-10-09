@@ -1,9 +1,9 @@
 package studio.magemonkey.genesis.events;
 
-import studio.magemonkey.genesis.core.GenesisBuy;
-import studio.magemonkey.genesis.core.GenesisShop;
 import lombok.Getter;
 import org.bukkit.event.HandlerList;
+import studio.magemonkey.genesis.core.GenesisBuy;
+import studio.magemonkey.genesis.core.GenesisShop;
 
 public class GenesisCheckStringForFeaturesEvent extends GenesisEvent {
 

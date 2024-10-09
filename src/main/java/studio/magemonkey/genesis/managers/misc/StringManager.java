@@ -2,6 +2,10 @@ package studio.magemonkey.genesis.managers.misc;
 
 
 import lombok.NonNull;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import studio.magemonkey.genesis.core.GenesisBuy;
 import studio.magemonkey.genesis.core.GenesisShop;
 import studio.magemonkey.genesis.core.GenesisShopHolder;
@@ -14,10 +18,6 @@ import studio.magemonkey.genesis.managers.serverpinging.ConnectedBuyItem;
 import studio.magemonkey.genesis.misc.MathTools;
 import studio.magemonkey.genesis.misc.Misc;
 import studio.magemonkey.genesis.misc.VersionManager;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;

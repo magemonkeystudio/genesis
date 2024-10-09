@@ -5,14 +5,14 @@ import com.google.common.collect.Iterables;
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
-import studio.magemonkey.genesis.Genesis;
-import studio.magemonkey.genesis.managers.ClassManager;
-import studio.magemonkey.genesis.managers.serverpinging.ServerInfo;
-import studio.magemonkey.genesis.managers.serverpinging.ServerPingingManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.plugin.messaging.PluginMessageListener;
+import studio.magemonkey.genesis.Genesis;
+import studio.magemonkey.genesis.managers.ClassManager;
+import studio.magemonkey.genesis.managers.serverpinging.ServerInfo;
+import studio.magemonkey.genesis.managers.serverpinging.ServerPingingManager;
 
 
 public class BungeeCordManager implements PluginMessageListener {

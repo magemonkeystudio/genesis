@@ -1,11 +1,11 @@
 package studio.magemonkey.genesis.inbuiltaddons.logictypes;
 
-import studio.magemonkey.genesis.core.GenesisBuy;
-import studio.magemonkey.genesis.core.prices.GenesisPriceType;
-import studio.magemonkey.genesis.managers.ClassManager;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
+import studio.magemonkey.genesis.core.GenesisBuy;
+import studio.magemonkey.genesis.core.prices.GenesisPriceType;
+import studio.magemonkey.genesis.managers.ClassManager;
 
 import java.util.ArrayList;
 import java.util.List;

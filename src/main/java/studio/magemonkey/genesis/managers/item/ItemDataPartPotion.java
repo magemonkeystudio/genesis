@@ -1,13 +1,13 @@
 package studio.magemonkey.genesis.managers.item;
 
-import studio.magemonkey.genesis.core.GenesisBuy;
-import studio.magemonkey.genesis.managers.ClassManager;
-import studio.magemonkey.genesis.managers.misc.InputReader;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionType;
+import studio.magemonkey.genesis.core.GenesisBuy;
+import studio.magemonkey.genesis.managers.ClassManager;
+import studio.magemonkey.genesis.managers.misc.InputReader;
 
 import java.util.List;
 

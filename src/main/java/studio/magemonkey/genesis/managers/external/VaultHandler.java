@@ -1,12 +1,12 @@
 package studio.magemonkey.genesis.managers.external;
 
-import studio.magemonkey.genesis.Genesis;
-import studio.magemonkey.genesis.managers.ClassManager;
-import studio.magemonkey.genesis.misc.NoEconomy;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;
+import studio.magemonkey.genesis.Genesis;
+import studio.magemonkey.genesis.managers.ClassManager;
+import studio.magemonkey.genesis.misc.NoEconomy;
 
 public class VaultHandler {
 

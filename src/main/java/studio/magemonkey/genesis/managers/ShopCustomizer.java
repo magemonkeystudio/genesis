@@ -1,5 +1,10 @@
 package studio.magemonkey.genesis.managers;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 import studio.magemonkey.genesis.core.GenesisBuy;
 import studio.magemonkey.genesis.core.GenesisShop;
 import studio.magemonkey.genesis.core.GenesisShopHolder;
@@ -7,11 +12,6 @@ import studio.magemonkey.genesis.events.GenesisChoosePageLayoutEvent;
 import studio.magemonkey.genesis.events.GenesisDisplayItemEvent;
 import studio.magemonkey.genesis.managers.features.PageLayoutHandler;
 import studio.magemonkey.genesis.settings.Settings;
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;

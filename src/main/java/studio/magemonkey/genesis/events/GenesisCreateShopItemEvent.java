@@ -1,16 +1,16 @@
 package studio.magemonkey.genesis.events;
 
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.event.HandlerList;
 import studio.magemonkey.genesis.core.GenesisBuy;
 import studio.magemonkey.genesis.core.GenesisInputType;
 import studio.magemonkey.genesis.core.GenesisShop;
 import studio.magemonkey.genesis.core.conditions.GenesisCondition;
 import studio.magemonkey.genesis.core.prices.GenesisPriceType;
 import studio.magemonkey.genesis.core.rewards.GenesisRewardType;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.event.HandlerList;
 
 
 @Getter

@@ -1,7 +1,7 @@
 package studio.magemonkey.genesis.inbuiltaddons.logictypes;
 
-import studio.magemonkey.genesis.Genesis;
 import org.bukkit.Bukkit;
+import studio.magemonkey.genesis.Genesis;
 
 public class LogicTypes {
 

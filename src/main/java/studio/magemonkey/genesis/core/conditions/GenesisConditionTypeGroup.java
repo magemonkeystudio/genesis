@@ -1,7 +1,7 @@
 package studio.magemonkey.genesis.core.conditions;
 
-import studio.magemonkey.genesis.managers.ClassManager;
 import org.bukkit.entity.Player;
+import studio.magemonkey.genesis.managers.ClassManager;
 
 public class GenesisConditionTypeGroup extends GenesisConditionTypeMatch {
 

@@ -1,10 +1,10 @@
 package studio.magemonkey.genesis.core.conditions;
 
+import org.bukkit.entity.Player;
 import studio.magemonkey.genesis.core.GenesisBuy;
 import studio.magemonkey.genesis.core.GenesisShopHolder;
 import studio.magemonkey.genesis.managers.ClassManager;
 import studio.magemonkey.genesis.managers.misc.InputReader;
-import org.bukkit.entity.Player;
 
 public abstract class GenesisConditionTypeNumber extends GenesisConditionType {
 

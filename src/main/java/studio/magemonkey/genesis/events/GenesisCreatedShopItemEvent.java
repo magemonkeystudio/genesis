@@ -1,11 +1,11 @@
 package studio.magemonkey.genesis.events;
 
 
-import studio.magemonkey.genesis.core.GenesisBuy;
-import studio.magemonkey.genesis.core.GenesisShop;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.Plugin;
+import studio.magemonkey.genesis.core.GenesisBuy;
+import studio.magemonkey.genesis.core.GenesisShop;
 
 public class GenesisCreatedShopItemEvent extends GenesisEvent {
 

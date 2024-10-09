@@ -7,7 +7,7 @@ main: studio.magemonkey.genesis.Genesis
 folia-supported: true
 softdepend: [ Divinity, ItemsAdder, MagicCosmetics, MythicMobs, PlayerShops GUI, ItemShops, ThirdCurrency, GuiShopManager, LimitedUses, TrickyShops, Vault, PlayerPoints, Jobs, Gringotts, VotingPlugin, SilkSpawners, PlaceholderAPI ]
 loadbefore: [ LimitedUses, ItemShops, PlayerShops, ThirdCurrency, GuiShopManager ]
-libraries: [ org.apache.commons:commons-lang3:${apache.version} ]
+libraries: [ org.apache.commons:commons-lang3:${ apache.version } ]
 commands:
   gen:
     description: Genesis command

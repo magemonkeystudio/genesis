@@ -1,14 +1,14 @@
 package studio.magemonkey.genesis.core.rewards;
 
 
+import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
+import org.bukkit.inventory.ItemStack;
 import studio.magemonkey.genesis.core.GenesisBuy;
 import studio.magemonkey.genesis.core.prices.GenesisPriceTypeNumber;
 import studio.magemonkey.genesis.managers.ClassManager;
 import studio.magemonkey.genesis.managers.misc.InputReader;
 import studio.magemonkey.genesis.misc.CurrencyTools.GenesisCurrency;
-import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.ClickType;
-import org.bukkit.inventory.ItemStack;
 
 public class GenesisRewardTypeItemAll extends GenesisRewardType {
 

@@ -1,15 +1,15 @@
 package studio.magemonkey.genesis.managers;
 
-import studio.magemonkey.genesis.Genesis;
-import studio.magemonkey.genesis.core.GenesisBuy;
-import studio.magemonkey.genesis.core.GenesisShop;
-import studio.magemonkey.genesis.core.GenesisShopHolder;
-import studio.magemonkey.genesis.managers.config.FileHandler;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import studio.magemonkey.genesis.Genesis;
+import studio.magemonkey.genesis.core.GenesisBuy;
+import studio.magemonkey.genesis.core.GenesisShop;
+import studio.magemonkey.genesis.core.GenesisShopHolder;
+import studio.magemonkey.genesis.managers.config.FileHandler;
 
 import java.io.File;
 import java.io.InputStream;

@@ -1,17 +1,17 @@
 package studio.magemonkey.genesis.managers.item;
 
 import com.francobm.magicosmetics.api.MagicAPI;
-import studio.magemonkey.divinity.Divinity;
-import studio.magemonkey.divinity.modules.ModuleItem;
-import studio.magemonkey.genesis.core.GenesisBuy;
-import studio.magemonkey.genesis.managers.ClassManager;
-import studio.magemonkey.genesis.managers.misc.InputReader;
 import dev.lone.itemsadder.api.CustomStack;
 import io.lumine.mythic.bukkit.MythicBukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
+import studio.magemonkey.divinity.Divinity;
+import studio.magemonkey.divinity.modules.ModuleItem;
+import studio.magemonkey.genesis.core.GenesisBuy;
+import studio.magemonkey.genesis.managers.ClassManager;
+import studio.magemonkey.genesis.managers.misc.InputReader;
 
 import java.util.List;
 import java.util.Objects;

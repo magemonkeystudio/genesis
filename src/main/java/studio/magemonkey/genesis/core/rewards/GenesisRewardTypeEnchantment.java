@@ -1,16 +1,16 @@
 package studio.magemonkey.genesis.core.rewards;
 
 
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
+import org.bukkit.inventory.ItemStack;
 import studio.magemonkey.genesis.core.GenesisBuy;
 import studio.magemonkey.genesis.managers.ClassManager;
 import studio.magemonkey.genesis.managers.misc.InputReader;
 import studio.magemonkey.genesis.misc.Enchant;
 import studio.magemonkey.genesis.misc.Misc;
 import studio.magemonkey.genesis.settings.Settings;
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.ClickType;
-import org.bukkit.inventory.ItemStack;
 
 
 public class GenesisRewardTypeEnchantment extends GenesisRewardType {

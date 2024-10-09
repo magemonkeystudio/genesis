@@ -1,11 +1,11 @@
 package studio.magemonkey.genesis.managers.features;
 
-import studio.magemonkey.genesis.Genesis;
-import studio.magemonkey.genesis.core.GenesisBuy;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
+import studio.magemonkey.genesis.Genesis;
+import studio.magemonkey.genesis.core.GenesisBuy;
 
 import java.io.File;
 import java.io.IOException;

@@ -2,9 +2,9 @@ package studio.magemonkey.genesis.managers.external;
 
 
 import com.meowj.langutils.lang.LanguageHelper;
-import studio.magemonkey.genesis.managers.ClassManager;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
+import studio.magemonkey.genesis.managers.ClassManager;
 
 public class LanguageManager {
 

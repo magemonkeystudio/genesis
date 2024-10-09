@@ -1,8 +1,8 @@
 package studio.magemonkey.genesis.managers.features;
 
-import studio.magemonkey.genesis.Genesis;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import studio.magemonkey.genesis.Genesis;
 
 import java.io.File;
 import java.io.IOException;

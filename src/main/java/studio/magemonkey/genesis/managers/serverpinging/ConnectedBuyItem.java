@@ -1,10 +1,10 @@
 package studio.magemonkey.genesis.managers.serverpinging;
 
-import studio.magemonkey.genesis.core.GenesisBuy;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import studio.magemonkey.genesis.core.GenesisBuy;
 
 import java.util.List;
 

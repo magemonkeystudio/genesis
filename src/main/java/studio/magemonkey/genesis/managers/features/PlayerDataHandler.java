@@ -1,8 +1,8 @@
 package studio.magemonkey.genesis.managers.features;
 
+import org.bukkit.entity.Player;
 import studio.magemonkey.genesis.core.GenesisShop;
 import studio.magemonkey.genesis.misc.userinput.GenesisChatUserInput;
-import org.bukkit.entity.Player;
 
 import java.util.HashMap;
 

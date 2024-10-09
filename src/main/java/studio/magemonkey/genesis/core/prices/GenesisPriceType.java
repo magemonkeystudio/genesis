@@ -1,9 +1,9 @@
 package studio.magemonkey.genesis.core.prices;
 
-import studio.magemonkey.genesis.core.GenesisBuy;
-import studio.magemonkey.genesis.managers.ClassManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
+import studio.magemonkey.genesis.core.GenesisBuy;
+import studio.magemonkey.genesis.managers.ClassManager;
 
 import java.util.ArrayList;
 import java.util.List;

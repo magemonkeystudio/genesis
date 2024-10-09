@@ -1,12 +1,12 @@
 package studio.magemonkey.genesis.managers.serverpinging;
 
+import lombok.Getter;
+import lombok.Setter;
 import studio.magemonkey.genesis.Genesis;
 import studio.magemonkey.genesis.core.GenesisBuy;
 import studio.magemonkey.genesis.core.GenesisShop;
 import studio.magemonkey.genesis.managers.ClassManager;
 import studio.magemonkey.genesis.managers.misc.StringManipulationLib;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;

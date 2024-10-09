@@ -1,9 +1,9 @@
 package studio.magemonkey.genesis.core;
 
-import studio.magemonkey.genesis.core.prices.GenesisPriceType;
-import studio.magemonkey.genesis.managers.ClassManager;
 import lombok.Getter;
 import org.bukkit.entity.Player;
+import studio.magemonkey.genesis.core.prices.GenesisPriceType;
+import studio.magemonkey.genesis.managers.ClassManager;
 
 public class GenesisMultiplier {
     public final static int RANGE_ALL         = 0;

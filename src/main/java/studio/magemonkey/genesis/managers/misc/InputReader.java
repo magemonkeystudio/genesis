@@ -1,9 +1,6 @@
 package studio.magemonkey.genesis.managers.misc;
 
 import com.google.gson.JsonParseException;
-import studio.magemonkey.genesis.managers.ClassManager;
-import studio.magemonkey.genesis.misc.Enchant;
-import studio.magemonkey.genesis.misc.MathTools;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.chat.ComponentSerializer;
@@ -14,6 +11,9 @@ import org.bukkit.enchantments.EnchantmentWrapper;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
+import studio.magemonkey.genesis.managers.ClassManager;
+import studio.magemonkey.genesis.misc.Enchant;
+import studio.magemonkey.genesis.misc.MathTools;
 
 import java.util.ArrayList;
 import java.util.HashMap;

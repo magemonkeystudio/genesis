@@ -1,11 +1,6 @@
 package studio.magemonkey.genesis.managers;
 
 
-import studio.magemonkey.genesis.core.GenesisBuy;
-import studio.magemonkey.genesis.core.GenesisShop;
-import studio.magemonkey.genesis.managers.features.ShopCreator;
-import studio.magemonkey.genesis.managers.item.ItemDataPart;
-import studio.magemonkey.genesis.misc.Misc;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -15,6 +10,11 @@ import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import studio.magemonkey.genesis.core.GenesisBuy;
+import studio.magemonkey.genesis.core.GenesisShop;
+import studio.magemonkey.genesis.managers.features.ShopCreator;
+import studio.magemonkey.genesis.managers.item.ItemDataPart;
+import studio.magemonkey.genesis.misc.Misc;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -162,16 +162,16 @@ public class CommandManager implements TabExecutor {
                 if (args.length >= 2 && args[0].equalsIgnoreCase("open")) {
                     String      shopName = args[1].toLowerCase();
                     GenesisShop shop     = ClassManager.manager.getShops().getShop(shopName);
-                    Player p;
-                    String name;
-                    if(args.length >= 3) {
+                    Player      p;
+                    String      name;
+                    if (args.length >= 3) {
                         name = args[2];
                         p = Bukkit.getPlayer(name);
                     } else {
                         p = sender instanceof Player ? (Player) sender : null;
                         name = sender instanceof Player ? sender.getName() : "";
                     }
-                    String      argument = args.length > 3 ? args[3] : null;
+                    String argument = args.length > 3 ? args[3] : null;
 
                     if (p == null) {
                         ClassManager.manager.getMessageHandler()

@@ -1,10 +1,10 @@
 package studio.magemonkey.genesis.core.rewards;
 
 
-import studio.magemonkey.genesis.core.GenesisBuy;
-import studio.magemonkey.genesis.managers.ClassManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
+import studio.magemonkey.genesis.core.GenesisBuy;
+import studio.magemonkey.genesis.managers.ClassManager;
 
 public class GenesisRewardTypeNothing extends GenesisRewardType {
 

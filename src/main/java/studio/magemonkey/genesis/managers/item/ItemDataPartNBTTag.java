@@ -1,10 +1,10 @@
 package studio.magemonkey.genesis.managers.item;
 
-import studio.magemonkey.genesis.core.GenesisBuy;
-import studio.magemonkey.genesis.managers.ClassManager;
 import de.tr7zw.changeme.nbtapi.NBTItem;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import studio.magemonkey.genesis.core.GenesisBuy;
+import studio.magemonkey.genesis.managers.ClassManager;
 
 import java.util.List;
 import java.util.UUID;

@@ -1,10 +1,10 @@
 package studio.magemonkey.genesis.settings;
 
-import studio.magemonkey.genesis.managers.ClassManager;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.ConfigurationSection;
+import studio.magemonkey.genesis.managers.ClassManager;
 import studio.magemonkey.genesis.managers.features.PointsManager;
 
 import java.util.LinkedHashMap;

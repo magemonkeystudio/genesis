@@ -1,10 +1,14 @@
 package studio.magemonkey.genesis;
 
-import studio.magemonkey.genesis.folia.CrossScheduler;
+import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 import studio.magemonkey.genesis.api.GenesisAPI;
 import studio.magemonkey.genesis.api.GenesisAddon;
 import studio.magemonkey.genesis.core.GenesisShop;
 import studio.magemonkey.genesis.events.GenesisReloadedEvent;
+import studio.magemonkey.genesis.folia.CrossScheduler;
 import studio.magemonkey.genesis.inbuiltaddons.InbuiltAddonLoader;
 import studio.magemonkey.genesis.listeners.InventoryListener;
 import studio.magemonkey.genesis.listeners.PlayerListener;
@@ -12,10 +16,6 @@ import studio.magemonkey.genesis.listeners.SignListener;
 import studio.magemonkey.genesis.managers.ClassManager;
 import studio.magemonkey.genesis.managers.CommandManager;
 import studio.magemonkey.genesis.managers.config.ConfigKeyCompleter;
-import org.bukkit.Bukkit;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
 
 public class Genesis extends JavaPlugin {
 

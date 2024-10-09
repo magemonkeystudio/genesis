@@ -1,15 +1,15 @@
 package studio.magemonkey.genesis.managers.item;
 
-import studio.magemonkey.genesis.core.GenesisBuy;
-import studio.magemonkey.genesis.managers.ClassManager;
-import studio.magemonkey.genesis.managers.misc.InputReader;
-import studio.magemonkey.genesis.settings.Settings;
 import com.vk2gpz.tokenenchant.api.TokenEnchantAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
+import studio.magemonkey.genesis.core.GenesisBuy;
+import studio.magemonkey.genesis.managers.ClassManager;
+import studio.magemonkey.genesis.managers.misc.InputReader;
+import studio.magemonkey.genesis.settings.Settings;
 
 import java.util.List;
 import java.util.Map;

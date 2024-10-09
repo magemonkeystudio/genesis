@@ -1,15 +1,15 @@
 package studio.magemonkey.genesis.misc;
 
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import studio.magemonkey.genesis.core.GenesisBuy;
 import studio.magemonkey.genesis.core.GenesisShop;
 import studio.magemonkey.genesis.core.GenesisShopHolder;
 import studio.magemonkey.genesis.core.prices.GenesisPriceType;
 import studio.magemonkey.genesis.core.rewards.GenesisRewardType;
 import studio.magemonkey.genesis.managers.ClassManager;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.ClickType;
-import org.bukkit.event.inventory.InventoryClickEvent;
 
 import java.util.UUID;
 

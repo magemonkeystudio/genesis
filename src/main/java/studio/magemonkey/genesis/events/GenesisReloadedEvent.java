@@ -1,7 +1,7 @@
 package studio.magemonkey.genesis.events;
 
-import studio.magemonkey.genesis.Genesis;
 import org.bukkit.event.HandlerList;
+import studio.magemonkey.genesis.Genesis;
 
 public class GenesisReloadedEvent extends GenesisEvent {
 

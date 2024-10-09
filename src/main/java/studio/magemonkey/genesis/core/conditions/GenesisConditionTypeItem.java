@@ -1,7 +1,7 @@
 package studio.magemonkey.genesis.core.conditions;
 
-import studio.magemonkey.genesis.managers.misc.InputReader;
 import org.bukkit.entity.Player;
+import studio.magemonkey.genesis.managers.misc.InputReader;
 
 public class GenesisConditionTypeItem extends GenesisConditionTypeMatch {
 

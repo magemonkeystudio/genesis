@@ -1,12 +1,12 @@
 package studio.magemonkey.genesis.managers.item;
 
-import studio.magemonkey.genesis.core.GenesisBuy;
-import studio.magemonkey.genesis.managers.ClassManager;
 import org.bukkit.Material;
 import org.bukkit.entity.Axolotl;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.AxolotlBucketMeta;
+import studio.magemonkey.genesis.core.GenesisBuy;
+import studio.magemonkey.genesis.managers.ClassManager;
 
 import java.util.List;
 

@@ -1,9 +1,9 @@
 package studio.magemonkey.genesis.core.conditions;
 
+import org.bukkit.entity.Player;
 import studio.magemonkey.genesis.core.GenesisBuy;
 import studio.magemonkey.genesis.core.GenesisShopHolder;
 import studio.magemonkey.genesis.managers.ClassManager;
-import org.bukkit.entity.Player;
 
 public class GenesisConditionTypeMoney extends GenesisConditionTypeNumber {
 

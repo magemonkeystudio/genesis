@@ -1,9 +1,9 @@
 package studio.magemonkey.genesis.events;
 
 
+import org.bukkit.event.HandlerList;
 import studio.magemonkey.genesis.core.GenesisShop;
 import studio.magemonkey.genesis.core.GenesisShops;
-import org.bukkit.event.HandlerList;
 
 
 public class GenesisLoadShopItemsEvent extends GenesisEvent {

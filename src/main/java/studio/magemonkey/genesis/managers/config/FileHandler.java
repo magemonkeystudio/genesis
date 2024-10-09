@@ -1,10 +1,10 @@
 package studio.magemonkey.genesis.managers.config;
 
+import org.bukkit.plugin.Plugin;
 import studio.magemonkey.genesis.Genesis;
 import studio.magemonkey.genesis.api.GenesisAddon;
 import studio.magemonkey.genesis.api.GenesisAddonConfig;
 import studio.magemonkey.genesis.managers.ClassManager;
-import org.bukkit.plugin.Plugin;
 
 import java.io.File;
 import java.io.FileOutputStream;

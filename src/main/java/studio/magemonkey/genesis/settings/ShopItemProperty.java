@@ -1,10 +1,10 @@
 package studio.magemonkey.genesis.settings;
 
+import org.bukkit.configuration.ConfigurationSection;
 import studio.magemonkey.genesis.core.GenesisBuy;
 import studio.magemonkey.genesis.core.GenesisShop;
 import studio.magemonkey.genesis.managers.ClassManager;
 import studio.magemonkey.genesis.managers.config.GenesisConfigShop;
-import org.bukkit.configuration.ConfigurationSection;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,9 +1,9 @@
 package studio.magemonkey.genesis.misc;
 
+import org.bukkit.entity.Player;
 import studio.magemonkey.genesis.core.prices.GenesisPriceType;
 import studio.magemonkey.genesis.core.rewards.GenesisRewardType;
 import studio.magemonkey.genesis.managers.ClassManager;
-import org.bukkit.entity.Player;
 
 
 public class CurrencyTools {

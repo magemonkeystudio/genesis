@@ -1,10 +1,10 @@
 package studio.magemonkey.genesis.misc;
 
-import studio.magemonkey.genesis.managers.misc.InputReader;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import studio.magemonkey.genesis.managers.misc.InputReader;
 
 import java.util.ArrayList;
 import java.util.HashMap;

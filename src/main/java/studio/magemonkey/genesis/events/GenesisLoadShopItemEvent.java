@@ -1,12 +1,12 @@
 package studio.magemonkey.genesis.events;
 
 
-import studio.magemonkey.genesis.core.GenesisBuy;
-import studio.magemonkey.genesis.core.GenesisShop;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.event.HandlerList;
+import studio.magemonkey.genesis.core.GenesisBuy;
+import studio.magemonkey.genesis.core.GenesisShop;
 
 @Getter
 @RequiredArgsConstructor

@@ -1,5 +1,14 @@
 package studio.magemonkey.genesis.core;
 
+import lombok.Getter;
+import lombok.Setter;
+import org.bukkit.Bukkit;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 import studio.magemonkey.genesis.Genesis;
 import studio.magemonkey.genesis.core.conditions.GenesisCondition;
 import studio.magemonkey.genesis.core.prices.GenesisPriceType;
@@ -13,15 +22,6 @@ import studio.magemonkey.genesis.misc.MathTools;
 import studio.magemonkey.genesis.misc.Misc;
 import studio.magemonkey.genesis.misc.ShopItemPurchaseTask;
 import studio.magemonkey.genesis.settings.Settings;
-import lombok.Getter;
-import lombok.Setter;
-import org.bukkit.Bukkit;
-import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.ClickType;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.Plugin;
 
 import java.util.HashMap;
 import java.util.List;
@@ -507,7 +507,14 @@ public class GenesisBuy {
         }
 
         if (ClassManager.manager.getSettings().getPurchaseAsync()) {
-            CrossScheduler.runAsync(new ShopItemPurchaseTask(p, this, shop, holder, clickType, rewardType, priceType, event));
+            CrossScheduler.runAsync(new ShopItemPurchaseTask(p,
+                    this,
+                    shop,
+                    holder,
+                    clickType,
+                    rewardType,
+                    priceType,
+                    event));
         } else {
             purchase(p, shop, holder, clickType, rewardType, priceType, event, plugin, false);
         }
@@ -624,9 +631,21 @@ public class GenesisBuy {
         if (shop.isCustomizable() && needUpdate && event != null) { // 'event' is null in case of a simulated click
             if (p.getOpenInventory() == event.getView()) { // only if inventory is still open
                 if (async) {
-                    CrossScheduler.run(() -> shop.updateInventory(event.getInventory(), holder, p, plugin.getClassManager(), holder.getPage(), holder.getHighestPage(), false));
+                    CrossScheduler.run(() -> shop.updateInventory(event.getInventory(),
+                            holder,
+                            p,
+                            plugin.getClassManager(),
+                            holder.getPage(),
+                            holder.getHighestPage(),
+                            false));
                 } else {
-                    shop.updateInventory(event.getInventory(), holder, p, plugin.getClassManager(), holder.getPage(), holder.getHighestPage(), false);
+                    shop.updateInventory(event.getInventory(),
+                            holder,
+                            p,
+                            plugin.getClassManager(),
+                            holder.getPage(),
+                            holder.getHighestPage(),
+                            false);
                 }
             }
         }

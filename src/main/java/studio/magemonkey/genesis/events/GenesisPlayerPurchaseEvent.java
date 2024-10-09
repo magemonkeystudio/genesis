@@ -1,11 +1,11 @@
 package studio.magemonkey.genesis.events;
 
-import studio.magemonkey.genesis.core.GenesisBuy;
-import studio.magemonkey.genesis.core.GenesisShop;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.inventory.ClickType;
+import studio.magemonkey.genesis.core.GenesisBuy;
+import studio.magemonkey.genesis.core.GenesisShop;
 
 public class GenesisPlayerPurchaseEvent extends GenesisEvent implements Cancellable {
 

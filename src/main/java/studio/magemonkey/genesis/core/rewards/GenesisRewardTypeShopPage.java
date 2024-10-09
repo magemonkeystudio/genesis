@@ -64,8 +64,8 @@ public class GenesisRewardTypeShopPage extends GenesisRewardType {
 
 
     private int calculatePage(Player p, String reward) {
-        Inventory       inventory     = InventoryUtil.getTopInventory(p.getOpenInventory());
-        InventoryHolder holder        = inventory.getHolder();
+        Inventory       inventory = InventoryUtil.getTopInventory(p.getOpenInventory());
+        InventoryHolder holder    = inventory.getHolder();
 
         if (holder instanceof GenesisShopHolder) {
             GenesisShopHolder shopHolder = (GenesisShopHolder) holder;

@@ -1,8 +1,8 @@
 package studio.magemonkey.genesis.misc.userinput;
 
-import studio.magemonkey.genesis.managers.ClassManager;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import studio.magemonkey.genesis.managers.ClassManager;
 
 public abstract class GenesisUserInput {
 

@@ -1,8 +1,8 @@
 package studio.magemonkey.genesis.managers.config;
 
-import studio.magemonkey.genesis.managers.ClassManager;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import studio.magemonkey.genesis.managers.ClassManager;
 
 import java.io.File;
 import java.io.FileOutputStream;

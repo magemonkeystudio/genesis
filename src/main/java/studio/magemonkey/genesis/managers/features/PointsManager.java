@@ -1,11 +1,10 @@
 package studio.magemonkey.genesis.managers.features;
 
-import studio.magemonkey.genesis.Genesis;
-import studio.magemonkey.genesis.managers.ClassManager;
-import studio.magemonkey.genesis.pointsystem.*;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
+import studio.magemonkey.genesis.Genesis;
+import studio.magemonkey.genesis.managers.ClassManager;
 import studio.magemonkey.genesis.pointsystem.*;
 
 public class PointsManager {

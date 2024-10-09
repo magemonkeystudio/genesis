@@ -1,8 +1,8 @@
 package studio.magemonkey.genesis.managers.serverpinging;
 
-import studio.magemonkey.genesis.managers.ClassManager;
 import lombok.Getter;
 import lombok.Setter;
+import studio.magemonkey.genesis.managers.ClassManager;
 
 import java.net.InetSocketAddress;
 import java.util.LinkedHashSet;

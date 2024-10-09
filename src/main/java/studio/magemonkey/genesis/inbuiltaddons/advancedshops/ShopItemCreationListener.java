@@ -1,15 +1,15 @@
 package studio.magemonkey.genesis.inbuiltaddons.advancedshops;
 
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.ClickType;
 import studio.magemonkey.genesis.core.GenesisInputType;
 import studio.magemonkey.genesis.core.prices.GenesisPriceType;
 import studio.magemonkey.genesis.core.rewards.GenesisRewardType;
 import studio.magemonkey.genesis.events.GenesisCheckStringForFeaturesEvent;
 import studio.magemonkey.genesis.events.GenesisCreateShopItemEvent;
 import studio.magemonkey.genesis.managers.ClassManager;
-import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.ClickType;
 
 import java.util.HashMap;
 import java.util.Map;

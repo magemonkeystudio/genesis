@@ -1,12 +1,12 @@
 package studio.magemonkey.genesis.core.prices;
 
 
+import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
 import studio.magemonkey.genesis.core.GenesisBuy;
 import studio.magemonkey.genesis.managers.ClassManager;
 import studio.magemonkey.genesis.managers.misc.InputReader;
 import studio.magemonkey.genesis.misc.MathTools;
-import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.ClickType;
 
 public class GenesisPriceTypeExp extends GenesisPriceTypeNumber {
 

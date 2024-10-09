@@ -1,11 +1,11 @@
 package studio.magemonkey.genesis.api;
 
 import com.google.common.io.Files;
-import studio.magemonkey.genesis.managers.ClassManager;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
+import studio.magemonkey.genesis.managers.ClassManager;
 
 import java.io.File;
 import java.io.IOException;

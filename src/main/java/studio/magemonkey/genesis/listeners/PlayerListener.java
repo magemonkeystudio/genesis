@@ -1,11 +1,6 @@
 package studio.magemonkey.genesis.listeners;
 
 
-import studio.magemonkey.genesis.Genesis;
-import studio.magemonkey.genesis.core.GenesisShop;
-import studio.magemonkey.genesis.managers.ClassManager;
-import studio.magemonkey.genesis.managers.features.PlayerDataHandler;
-import studio.magemonkey.genesis.misc.userinput.GenesisChatUserInput;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -14,6 +9,11 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import studio.magemonkey.genesis.Genesis;
+import studio.magemonkey.genesis.core.GenesisShop;
+import studio.magemonkey.genesis.managers.ClassManager;
+import studio.magemonkey.genesis.managers.features.PlayerDataHandler;
+import studio.magemonkey.genesis.misc.userinput.GenesisChatUserInput;
 
 public class PlayerListener implements Listener {
 

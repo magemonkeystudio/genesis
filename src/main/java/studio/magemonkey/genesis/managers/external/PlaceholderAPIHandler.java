@@ -1,8 +1,8 @@
 package studio.magemonkey.genesis.managers.external;
 
-import studio.magemonkey.genesis.Genesis;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.entity.Player;
+import studio.magemonkey.genesis.Genesis;
 
 public class PlaceholderAPIHandler {
 
