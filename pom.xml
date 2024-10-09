@@ -1,17 +1,23 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.promcteam</groupId>
-    <artifactId>bossshoppro</artifactId>
-    <version>2.1.1-R0.1-SNAPSHOT</version>
-    <name>BossShopPro</name>
+
+    <parent>
+        <groupId>studio.magemonkey</groupId>
+        <artifactId>magemonkey-parent</artifactId>
+        <version>1.21.1-SNAPSHOT</version>
+        <relativePath/>
+    </parent>
+
+    <artifactId>genesis</artifactId>
+    <version>1.0.1-R0.6-SNAPSHOT</version>
+    <name>Genesis</name>
     <description>Create virtual chest shops</description>
     <url>
-        https://www.spigotmc.org/resources/bossshoppro-continued-now-free.104824/
+        https://www.spigotmc.org/resources/genesis-custom-gui-and-shop-creator-by-magemonkey-studio-formerly-bossshoppro.104824/
     </url>
 
     <properties>
-        <java.version>11</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <nexus.url>https://s01.oss.sonatype.org</nexus.url>
     </properties>
@@ -78,48 +84,43 @@
     </repositories>
 
     <dependencies>
+        <dependency>
+            <groupId>studio.magemonkey</groupId>
+            <artifactId>folia-bridge</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+
         <!-- Adds nbt support -->
         <dependency>
             <groupId>de.tr7zw</groupId>
             <artifactId>item-nbt-api</artifactId>
-            <version>2.12.2</version>
+            <version>2.13.2</version>
         </dependency>
 
         <!-- Adds player points support -->
         <dependency>
             <groupId>org.black_ixx</groupId>
             <artifactId>playerpoints</artifactId>
-            <version>3.2.5</version>
+            <version>3.2.7</version>
             <scope>provided</scope>
         </dependency>
 
-        <!-- Adds prorpgitems support -->
+        <!-- Adds divinity support -->
         <dependency>
-            <groupId>com.promcteam</groupId>
-            <artifactId>prorpgitems</artifactId>
-            <version>1.0.3.17-SNAPSHOT</version>
-            <scope>provided</scope>
+            <groupId>studio.magemonkey</groupId>
+            <artifactId>divinity</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.promcteam</groupId>
-            <artifactId>promccore</artifactId>
-            <version>1.0.6-R0.4-SNAPSHOT</version>
-            <scope>provided</scope>
+            <groupId>studio.magemonkey</groupId>
+            <artifactId>codex</artifactId>
         </dependency>
 
         <!-- Adds MythicMobs api -->
         <dependency>
             <groupId>io.lumine</groupId>
             <artifactId>Mythic-Dist</artifactId>
-            <version>5.2.0</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- Platform -->
-        <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot-api</artifactId>
-            <version>1.20.1-R0.1-SNAPSHOT</version>
+            <version>5.7.2</version>
             <scope>provided</scope>
         </dependency>
 
@@ -127,7 +128,7 @@
         <dependency>
             <groupId>net.md-5</groupId>
             <artifactId>bungeecord-api</artifactId>
-            <version>1.20-R0.1-SNAPSHOT</version>
+            <version>1.21-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
 
@@ -142,25 +143,17 @@
             <artifactId>adventure-platform-bukkit</artifactId>
             <version>4.3.2</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.24</version>
-            <scope>provided</scope>
-        </dependency>
 
         <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>2.6</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
         </dependency>
 
         <!-- Used for data handling -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
-            <version>2.10</version>
+            <version>2.11.0</version>
             <scope>provided</scope>
         </dependency>
 
@@ -176,7 +169,7 @@
         <dependency>
             <groupId>me.clip</groupId>
             <artifactId>placeholderapi</artifactId>
-            <version>2.11.2</version>
+            <version>2.11.6</version>
             <scope>provided</scope>
         </dependency>
 
@@ -184,7 +177,7 @@
         <dependency>
             <groupId>com.github.Zrips</groupId>
             <artifactId>Jobs</artifactId>
-            <version>4.17.2</version>
+            <version>v5.2.2.3</version>
             <scope>provided</scope>
         </dependency>
 
@@ -192,7 +185,7 @@
         <dependency>
             <groupId>com.bencodez</groupId>
             <artifactId>votingplugin</artifactId>
-            <version>6.15</version>
+            <version>6.17.1</version>
             <scope>provided</scope>
         </dependency>
 
@@ -208,7 +201,7 @@
         <dependency>
             <groupId>de.dustplanet</groupId>
             <artifactId>silkspawners</artifactId>
-            <version>7.3.0</version>
+            <version>8.1.0</version>
             <scope>provided</scope>
             <exclusions>
                 <exclusion>
@@ -218,11 +211,11 @@
             </exclusions>
         </dependency>
 
-        <!-- Used for language utils -->
+        <!-- Used for language util -->
         <dependency>
             <groupId>com.meowj</groupId>
             <artifactId>LangUtils</artifactId>
-            <version>1.6.1</version>
+            <version>1.9</version>
             <scope>provided</scope>
         </dependency>
 
@@ -230,7 +223,7 @@
         <dependency>
             <groupId>com.github.cryptomorin</groupId>
             <artifactId>kingdoms</artifactId>
-            <version>1.13.9</version><!-- 1.14.x versions are not on Maven yet-->
+            <version>1.16.20.5</version><!-- 1.14.x versions are not on Maven yet-->
             <scope>provided</scope>
         </dependency>
 
@@ -247,7 +240,7 @@
         <dependency>
             <groupId>com.github.FrancoBM12</groupId>
             <artifactId>API-MagicCosmetics</artifactId>
-            <version>2.2.6</version>
+            <version>2.2.9</version>
             <scope>provided</scope>
         </dependency>
 
@@ -255,7 +248,7 @@
         <dependency>
             <groupId>com.github.LoneDev6</groupId>
             <artifactId>api-itemsadder</artifactId>
-            <version>3.0.0</version>
+            <version>3.6.1</version>
             <scope>provided</scope>
         </dependency>
 
@@ -278,39 +271,15 @@
         <dependency>
             <groupId>com.mojang</groupId>
             <artifactId>authlib</artifactId>
-            <version>5.0.47</version>
-            <scope>provided</scope>
         </dependency>
     </dependencies>
 
 
     <build>
-        <finalName>${project.name}-${project.version}</finalName>
-        <resources>
-            <resource>
-                <targetPath>.</targetPath>
-                <filtering>true</filtering>
-                <directory>${basedir}/src/main/resources/</directory>
-                <includes>
-                    <include>**/*.yml</include>
-                </includes>
-            </resource>
-        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
-                <configuration>
-                    <source>11</source>
-                    <target>11</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.4</version>
                 <executions>
                     <execution>
                         <id>shade</id>
@@ -333,11 +302,7 @@
                     <relocations>
                         <relocation>
                             <pattern>de.tr7zw.changeme.nbtapi</pattern>
-                            <shadedPattern>org.black_ixx.bossshop.lib.nbtapi</shadedPattern>
-                        </relocation>
-                        <relocation>
-                            <pattern>org.apache.commons.lang3</pattern>
-                            <shadedPattern>org.black_ixx.bossshop.lib.commons</shadedPattern>
+                            <shadedPattern>studio.magemonkey.genesis.lib.nbtapi</shadedPattern>
                         </relocation>
                     </relocations>
                 </configuration>
@@ -354,20 +319,8 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.sonatype.plugins</groupId>
-                        <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.6.13</version>
-                        <extensions>true</extensions>
-                        <configuration>
-                            <serverId>central</serverId>
-                            <nexusUrl>${nexus.url}</nexusUrl>
-                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                        </configuration>
-                    </plugin>
-                    <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>3.2.0</version>
                         <configuration>
                             <tags>
                                 <tag>
@@ -392,51 +345,6 @@
                             </execution>
                         </executions>
                     </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-source-plugin</artifactId>
-                        <version>3.3.0</version>
-                        <executions>
-                            <execution>
-                                <id>attach-sources</id>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                                <configuration>
-                                    <attach>true</attach>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>gpg</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <version>3.1.0</version>
-                        <executions>
-                            <execution>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                                <configuration>
-                                    <gpgArguments>
-                                        <arg>--pinentry-mode</arg>
-                                        <arg>loopback</arg>
-                                    </gpgArguments>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
                 </plugins>
             </build>
         </profile>
@@ -445,15 +353,15 @@
     <licenses>
         <license>
             <name>MIT License</name>
-            <url>http://www.opensource.org/licenses/mit-license.php</url>
+            <url>https://www.opensource.org/licenses/mit-license.php</url>
         </license>
     </licenses>
 
     <developers>
         <developer>
-            <name>ProMCTeam</name>
-            <organization>ProMCTeam</organization>
-            <organizationUrl>https://promcteam.com</organizationUrl>
+            <name>MageMonkeyStudio</name>
+            <organization>MageMonkeyStudio</organization>
+            <organizationUrl>https://magemonkey.studio</organizationUrl>
         </developer>
     </developers>
 

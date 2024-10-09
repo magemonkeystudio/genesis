@@ -10,28 +10,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         name: Checkout repo
         with:
           token: ${{ secrets.ACTIONS_PAT }}
       - name: Configure git
         run: |
-          git config user.name "Auto Bot"
+          git config user.name "Build Monkey"
           git config user.email "<>"
       - name: Set up JDK 17
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
-          java-version: 17
+          java-version: 21
           server-id: ossrh # Value of the distributionManagement/repository/id field of the pom.xml
           settings-path: ${{ github.workspace }} # location for the settings.xml file
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
       - name: 'Create settings.xml'
-        uses: s4u/maven-settings-action@v2.8.0
+        uses: s4u/maven-settings-action@v3.0.0
         with:
           githubServer: false
-          servers: '[{"id": "ossrh", "username": "Travja", "password": "${{ secrets.SONATYPE_DEPLOY_KEY }}"}]'
+          servers: '[{"id": "ossrh", "username": "${{ secrets.SONATYPE_USERNAME }}", "password": "${{ secrets.SONATYPE_DEPLOY_KEY }}"}]'
       - name: Publish to Maven Central
         env:
           MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
@@ -52,4 +52,7 @@ jobs:
           git push
           git push --tags
       - name: Notify Discord
-        run: pip install simplejson && python ./.github/notify_published.py ${{ secrets.BSP_WEBHOOK }} true
+        run: |
+          python -m venv .venv
+          .venv/bin/pip install simplejson requests
+          .venv/bin/python ./.github/notify_published.py ${{ secrets.BSP_WEBHOOK }} true
