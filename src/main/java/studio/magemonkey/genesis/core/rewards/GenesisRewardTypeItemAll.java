@@ -11,8 +11,6 @@ import studio.magemonkey.genesis.managers.misc.InputReader;
 import studio.magemonkey.genesis.misc.CurrencyTools.GenesisCurrency;
 
 public class GenesisRewardTypeItemAll extends GenesisRewardType {
-
-
     public Object createObject(Object o, boolean forceFinalState) {
         if (forceFinalState) {
             ItemStack i = InputReader.readItem(o, false);
@@ -82,7 +80,7 @@ public class GenesisRewardTypeItemAll extends GenesisRewardType {
     @Override
     public String getDisplayReward(Player p, GenesisBuy buy, Object reward, ClickType clickType) {
         ItemStack item     = (ItemStack) reward;
-        String    itemName = ClassManager.manager.getItemStackTranslator().readMaterial(item);
+        String    itemName = ClassManager.manager.getItemStackTranslator().readMaterial(p, item);
         return ClassManager.manager.getMessageHandler().get("Display.ItemAllBuy").replace("%item%", itemName);
     }
 

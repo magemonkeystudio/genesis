@@ -10,8 +10,6 @@ import studio.magemonkey.genesis.managers.misc.InputReader;
 import java.util.List;
 
 public class GenesisRewardTypeItem extends GenesisRewardType {
-
-
     public Object createObject(Object o, boolean forceFinalState) {
         if (forceFinalState) {
             return InputReader.readItemList(o, false);
@@ -64,7 +62,7 @@ public class GenesisRewardTypeItem extends GenesisRewardType {
     @SuppressWarnings("unchecked")
     public String getDisplayReward(Player p, GenesisBuy buy, Object reward, ClickType clickType) {
         List<ItemStack> items          = (List<ItemStack>) reward;
-        String          itemsFormatted = ClassManager.manager.getItemStackTranslator().getFriendlyText(items);
+        String          itemsFormatted = ClassManager.manager.getItemStackTranslator().getFriendlyText(p, items);
         return ClassManager.manager.getMessageHandler().get("Display.Item").replace("%items%", itemsFormatted);
     }
 
@@ -77,10 +75,4 @@ public class GenesisRewardTypeItem extends GenesisRewardType {
     public boolean mightNeedShopUpdate() {
         return false;
     }
-
-    @Override
-    public boolean allowAsync() {
-        return false;
-    }
-
 }

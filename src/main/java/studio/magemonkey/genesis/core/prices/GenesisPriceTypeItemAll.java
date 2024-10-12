@@ -69,7 +69,7 @@ public class GenesisPriceTypeItemAll extends GenesisPriceType {
     @Override
     public String getDisplayPrice(Player p, GenesisBuy buy, Object price, ClickType clickType) {
         ItemStack item     = (ItemStack) price;
-        String    itemName = ClassManager.manager.getItemStackTranslator().readMaterial(item);
+        String    itemName = ClassManager.manager.getItemStackTranslator().readMaterial(p, item);
         return ClassManager.manager.getMessageHandler().get("Display.ItemAll").replace("%item%", itemName);
     }
 

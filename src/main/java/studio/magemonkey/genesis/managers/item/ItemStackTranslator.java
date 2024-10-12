@@ -1,5 +1,7 @@
 package studio.magemonkey.genesis.managers.item;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
@@ -16,14 +18,13 @@ import studio.magemonkey.genesis.core.GenesisShop;
 import studio.magemonkey.genesis.core.GenesisShopHolder;
 import studio.magemonkey.genesis.managers.ClassManager;
 import studio.magemonkey.genesis.managers.misc.StringManager;
+import studio.magemonkey.genesis.misc.locales.Translate;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class ItemStackTranslator {
-
-
     public ItemStack translateItemStack(GenesisBuy buy,
                                         GenesisShop shop,
                                         GenesisShopHolder holder,
@@ -133,32 +134,32 @@ public class ItemStackTranslator {
     }
 
 
-    public String getFriendlyText(List<ItemStack> items) {
+    public String getFriendlyText(Player player, List<ItemStack> items) {
         if (items != null) {
             String msg = "";
             int    x   = 0;
             for (ItemStack i : items) {
                 x++;
-                msg += readItemStack(i) + (x < items.size() ? ", " : "");
+                msg += readItemStack(player, i) + (x < items.size() ? ", " : "");
             }
             return msg;
         }
         return null;
     }
 
-    public String readItemStack(ItemStack i) {
+    public String readItemStack(Player player, ItemStack i) {
         if (ClassManager.manager.getLanguageManager() != null) {
             return i.getAmount() + " " + ClassManager.manager.getLanguageManager().getDisplayNameItem(i);
         }
-        String material = readMaterial(i);
+        String material = readMaterial(player, i);
         return i.getAmount() + " " + material;
     }
 
-    public String readEnchantment(Enchantment e) {
+    public String readEnchantment(Player player, Enchantment e) {
         if (ClassManager.manager.getLanguageManager() != null) {
             return ClassManager.manager.getLanguageManager().getDisplayNameEnchantment(e);
         }
-        return e.getName().toLowerCase().replace("_", "");
+        return Translate.getEnchantment(player, e);
     }
 
 
@@ -204,7 +205,7 @@ public class ItemStackTranslator {
         return b;
     }
 
-    public String readItemName(ItemStack item) {
+    public String readItemName(Player player, ItemStack item) {
         if (item != null) {
             if (item.hasItemMeta()) {
                 ItemMeta meta = item.getItemMeta();
@@ -212,19 +213,31 @@ public class ItemStackTranslator {
                     return meta.getDisplayName();
                 }
             }
-            return readItemStack(item);
+            return readItemStack(player, item);
         }
         return null;
     }
 
-    public String readMaterial(ItemStack item) {
+    public String readMaterial(Player player, ItemStack item) {
         if (ClassManager.manager.getLanguageManager() != null) {
             ItemStack i = new ItemStack(item.getType());
             return ClassManager.manager.getLanguageManager().getDisplayNameItem(i);
         }
-        String material = item.getType().name().toLowerCase().replace("_", " ");
+
+        /*String material = item.getType().name().toLowerCase().replace("_", " ");
         material = material.replaceFirst(material.substring(0, 1), material.substring(0, 1).toUpperCase());
-        return material;
+        return material;*/
+        ItemMeta meta = item.getItemMeta();
+        if (meta == null) {
+            return GsonComponentSerializer.gson()
+                    .serialize(Component.translatable(item.getType().getTranslationKey().replace("lang:", "")));
+        }
+        ClassManager.getAudience()
+                .sender(Bukkit.getConsoleSender())
+                .sendMessage(Component.translatable(item.getType().getTranslationKey()));
+        return item.hasItemMeta() && meta.hasDisplayName() ? item.getItemMeta().getDisplayName()
+                : GsonComponentSerializer.gson()
+                        .serialize(Component.translatable(item.getType().getTranslationKey().replace("lang:", "")));
     }
 
     public void copyTexts(ItemStack receiver, ItemStack source) {

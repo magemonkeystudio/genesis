@@ -55,7 +55,7 @@ public class GenesisBuy {
     private       GenesisCondition  condition;
     private       String            permission;
     private       boolean           permIsGroup   = false;
-    private final String            msg;
+    private       String            msg;
     private       int               location;
 
     public GenesisBuy(GenesisRewardType rewardT,
@@ -308,7 +308,7 @@ public class GenesisBuy {
 
         String name;
         if (shop != null && item != null) {
-            String itemTitle = ClassManager.manager.getItemStackTranslator().readItemName(item);
+            String itemTitle = ClassManager.manager.getItemStackTranslator().readItemName(p, item);
             if (itemTitle != null) {
                 name = itemTitle;
                 msg = msg.replace("%itemname%", name);
@@ -318,7 +318,7 @@ public class GenesisBuy {
                 msg = msg.replace("%amount%", String.valueOf(item.getAmount()));
             }
             if (msg.contains("%material%")) {
-                msg = msg.replace("%material%", ClassManager.manager.getItemStackTranslator().readMaterial(item));
+                msg = msg.replace("%material%", ClassManager.manager.getItemStackTranslator().readMaterial(p, item));
             }
             if (msg.contains("%rewardraw%")) {
                 msg = msg.replace("%rewardraw%", String.valueOf(reward));
@@ -366,6 +366,10 @@ public class GenesisBuy {
             }
         }
         return msg;
+    }
+
+    public void updateMsg(Player player) {
+        this.msg = ClassManager.manager.getStringManager().transform(msg, this, null, null, player);
     }
 
     public void updateShop(GenesisShop shop, ItemStack menuitem, ClassManager manager, boolean addItem) {

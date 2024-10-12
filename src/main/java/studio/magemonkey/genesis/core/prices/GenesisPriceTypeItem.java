@@ -65,7 +65,7 @@ public class GenesisPriceTypeItem extends GenesisPriceType {
     @SuppressWarnings("unchecked")
     public String getDisplayPrice(Player p, GenesisBuy buy, Object price, ClickType clickType) {
         List<ItemStack> items          = (List<ItemStack>) price;
-        String          itemsFormatted = ClassManager.manager.getItemStackTranslator().getFriendlyText(items);
+        String          itemsFormatted = ClassManager.manager.getItemStackTranslator().getFriendlyText(p, items);
         return ClassManager.manager.getMessageHandler().get("Display.Item").replace("%items%", itemsFormatted);
     }
 

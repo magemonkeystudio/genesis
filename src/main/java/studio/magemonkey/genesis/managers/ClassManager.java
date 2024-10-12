@@ -1,6 +1,7 @@
 package studio.magemonkey.genesis.managers;
 
 import lombok.Getter;
+import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
@@ -32,7 +33,9 @@ import studio.magemonkey.genesis.misc.MathTools;
 import studio.magemonkey.genesis.settings.Settings;
 
 public class ClassManager {
-    public static ClassManager manager;
+    public static ClassManager    manager;
+    @Getter
+    public static BukkitAudiences audience;
 
     @Getter
     private final ItemStackChecker      itemStackChecker;
@@ -89,6 +92,7 @@ public class ClassManager {
     public ClassManager(Genesis plugin) {
         this.plugin = plugin;
         manager = this;
+        audience = BukkitAudiences.create(plugin);
         settings = new Settings();
 
         new FileHandler().exportConfigs(plugin);
