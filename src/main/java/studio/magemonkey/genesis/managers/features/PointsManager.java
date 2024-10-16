@@ -43,6 +43,10 @@ public class PointsManager {
                 this.pa = new GenesisPointsPluginTokenEnchant();
                 break;
 
+            case TOKENMANAGER:
+                this.pa = new GenesisPointsPluginTokenManager();
+                break;
+
             case Jobs:
                 this.pa = new GenesisPointsPluginJobs();
                 break;
@@ -109,6 +113,7 @@ public class PointsManager {
         PLAYERPOINTS(new String[]{"PlayerPoints", "PlayerPoint", "PP"}),
         ENJIN_MINECRAFT_PLUGIN(new String[]{"EnjinMinecraftPlugin", "Enjin", "EMP"}),
         TOKENENCHANT(new String[]{"TokenEnchant", "TE", "TokenEnchants"}),
+        TOKENMANAGER(new String[]{"TokenManager", "TM"}),
         Jobs(new String[]{"Jobs", "JobsReborn"}),
         KINGDOMS(new String[]{"Kingdoms", "Kingdom"}),
         VOTINGPLUGIN(new String[]{"VotingPlugin", "VP"}),
