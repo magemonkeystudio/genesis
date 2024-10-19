@@ -19,16 +19,13 @@ import studio.magemonkey.genesis.misc.MathTools;
 import studio.magemonkey.genesis.misc.Misc;
 import studio.magemonkey.genesis.misc.VersionManager;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
 public class StringManager {
 
-    private static final Pattern hexPattern         = Pattern.compile("(#[a-fA-F0-9]{6})");
-    private static final Pattern placeholderPattern = Pattern.compile("%(.*?)%");
+    private static final Pattern hexPattern = Pattern.compile("(#[a-fA-F0-9]{6})");
 
     /**
      * Transform specific strings from one thing to another
@@ -124,18 +121,6 @@ public class StringManager {
     public String transform(String s, Player target) {
         if (s == null) {
             return null;
-        }
-
-        List<String> placeholders = new ArrayList<>();
-        Matcher      matcher      = placeholderPattern.matcher(s);
-        while (matcher.find()) {
-            placeholders.add(matcher.group(1));
-        }
-
-        for (String placeholder : placeholders) {
-            // Sometimes, we'll get %§8luckperms_has_permission.xxx.xxx% or similar
-            String replacement = ChatColor.stripColor(placeholder);
-            s = s.replace(placeholder, replacement);
         }
 
         if (target != null && s.contains("%")) {
