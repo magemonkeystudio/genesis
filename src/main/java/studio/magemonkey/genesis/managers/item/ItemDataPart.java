@@ -33,6 +33,7 @@ public abstract class ItemDataPart {
             MOBEGG,
             ITEMFLAGS,
             COLOR,
+            ARMORTRIM,
             POTIONEFFECT,
             POTION,
             UNBREAKING,
@@ -65,6 +66,7 @@ public abstract class ItemDataPart {
         CUSTOMSKULL = registerType(new ItemDataPartCustomSkull());
         ITEMFLAGS = registerType(new ItemDataPartItemflags());
         COLOR = registerType(new ItemDataPartColor());
+        ARMORTRIM = registerType(new ItemDataPartArmorTrim());
         POTIONEFFECT = registerType(new ItemDataPartPotionEffect());
         POTION = registerType(new ItemDataPartPotion());
         UNBREAKING = registerType(new ItemDataPartUnbreaking());
