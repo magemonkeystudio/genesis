@@ -29,7 +29,7 @@ public class ItemDataPartArmorTrim extends ItemDataPart{
             ClassManager.manager.getBugFinder().severe("Mistake in Config: '" + parts[0] + "' is not a valid '" + usedName + "' pattern!");
             return item;
         }
-        TrimMaterial trimMaterial = Registry.TRIM_MATERIAL.get(NamespacedKey.minecraft(parts[1]));;
+        TrimMaterial trimMaterial = Registry.TRIM_MATERIAL.get(NamespacedKey.minecraft(parts[1]));
         if (trimMaterial == null) {
             trimMaterial = TrimMaterial.IRON;
             ClassManager.manager.getBugFinder().severe("Mistake in Config: '" + parts[1] + "' is not a valid '" + usedName + "' material!");
@@ -47,7 +47,22 @@ public class ItemDataPartArmorTrim extends ItemDataPart{
 
     @Override
     public boolean isSimilar(ItemStack shopItem, ItemStack playerItem, GenesisBuy buy, Player p) {
-        return false;
+        if (shopItem.getItemMeta() instanceof ArmorMeta) {
+            if (!(playerItem.getItemMeta() instanceof ArmorMeta)) {
+                return false;
+            }
+            ArmorMeta shopMeta = (ArmorMeta) shopItem.getItemMeta();
+            ArmorMeta itemMeta = (ArmorMeta) playerItem.getItemMeta();
+            if (shopMeta.hasTrim()) {
+                if (!itemMeta.hasTrim()) {
+                    return false;
+                }
+                ArmorTrim shopTrim = shopMeta.getTrim();
+                ArmorTrim itemTrim = itemMeta.getTrim();
+                return shopTrim.getPattern() == itemTrim.getPattern() && shopTrim.getMaterial() == itemTrim.getMaterial();
+            }
+        }
+        return true;
     }
 
     @Override
