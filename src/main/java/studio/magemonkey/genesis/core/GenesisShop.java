@@ -181,7 +181,7 @@ public abstract class GenesisShop {
         holder.setPage(page);
         holder.setHighestPage(highestPage);
         if (ClassManager.manager.getStringManager().checkStringForFeatures(this, null, null, getDisplayName())
-                & !getValidDisplayName(p, holder).equals(p.getOpenInventory().getTitle())
+                & !getValidDisplayName(p, holder).equals(InventoryUtil.getTitle(p.getOpenInventory()))
                 & !autoRefresh) { // Title is customizable as well but shall only be updated through main thread to prevent errors
             Inventory created = manager.getShopCustomizer()
                     .createInventory(this, items, p, manager, page, highestPage, holder.getPreviousShopHolder());

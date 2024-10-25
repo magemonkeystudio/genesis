@@ -10,6 +10,7 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import studio.magemonkey.genesis.Genesis;
+import studio.magemonkey.genesis.api.InventoryUtil;
 import studio.magemonkey.genesis.managers.ClassManager;
 import studio.magemonkey.genesis.managers.MessageHandler;
 import studio.magemonkey.genesis.managers.item.ItemDataPart;
@@ -42,7 +43,7 @@ public class ShopCreator implements Listener {
     private void Listen(InventoryCloseEvent e) {
         if (e.getPlayer() instanceof Player) {
             Player p = (Player) e.getPlayer();
-            if (p.getOpenInventory().getTitle().startsWith(this.mh.get("ShopCreate.TitleHead"))) {
+            if (InventoryUtil.getTitle(p.getOpenInventory()).startsWith(this.mh.get("ShopCreate.TitleHead"))) {
                 if (p.hasPermission("Genesis.create") || e.getPlayer().isOp()) {
                     Inventory inv = e.getInventory();
                     if (inv.getSize() == 54) {

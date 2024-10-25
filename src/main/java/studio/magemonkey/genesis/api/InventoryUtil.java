@@ -23,6 +23,16 @@ public class InventoryUtil {
         return getTopInventory(view);
     }
 
+    public static String getTitle(Object view) {
+        try {
+            Method getTitle = view.getClass().getMethod("getTitle");
+            getTitle.setAccessible(true);
+            return (String) getTitle.invoke(view);
+        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static Inventory getTopInventory(Object view) {
         try {
             Method getTopInventory = view.getClass().getMethod("getTopInventory");
