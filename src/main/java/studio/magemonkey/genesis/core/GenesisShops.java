@@ -36,27 +36,21 @@ public class GenesisShops {
 
     private boolean loadShops(File folder, Settings settings, String parentPath) {
         boolean enableShopCommands = false;
-
+    
         for (File f : folder.listFiles()) {
             if (f != null) {
                 if (f.isDirectory()) {
                     if (settings.getLoadSubFoldersEnabled()) {
-                        if (loadShops(f, settings, f.getName() + File.separator)) {
+                        if (loadShops(f, settings, parentPath + f.getName() + File.separator)) {
                             enableShopCommands = true;
                         }
                     }
-                    continue;
-                }
-
-                if (f.isFile()) {
-                    if (f.getName().contains(".yml")) {
-                        GenesisShop shop = loadShop(f, parentPath);
-
-                        if (shop.getCommands() != null) {
-                            enableShopCommands = true;
-                        }
+                } else if (f.isFile() && f.getName().endsWith(".yml")) {
+                    GenesisShop shop = loadShop(f, parentPath);
+    
+                    if (shop.getCommands() != null) {
+                        enableShopCommands = true;
                     }
-
                 }
             }
         }
