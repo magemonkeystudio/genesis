@@ -49,7 +49,7 @@ public class ItemDataPartNBTTag extends ItemDataPart {
             default:
                 ClassManager.manager.getBugFinder().severe("Mistake in Config: '" + parts[0] +
                         "': Wrong data type. The currently supported data types are INT, LONG, STRING, FLOAT, BOOLEAN, DOUBLE, BYTE, SHORT, UUID and OBJECT(OBJ)");
-                return item;
+                return i.getItem();
         }
         return i.getItem();
     }
