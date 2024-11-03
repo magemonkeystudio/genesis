@@ -133,8 +133,12 @@ public class StringManager {
         }
 
         for (String placeholder : placeholders) {
-            // Sometimes, we'll get %§8luckperms_has_permission.xxx.xxx% or similar
-            String replacement = ChatColor.stripColor(placeholder);
+            // Sometimes, we'll get %luckperms_has_permission_xxx.xxx% or similar
+            // and these get interpreted as a url for whatever reason.
+            String replacement = placeholder.replace(ChatColor.COLOR_CHAR, '&');
+            if (placeholder.matches("%" + ChatColor.COLOR_CHAR + ".*?%")) {
+                replacement = ChatColor.stripColor(placeholder);
+            }
             s = s.replace(placeholder, replacement);
         }
 
