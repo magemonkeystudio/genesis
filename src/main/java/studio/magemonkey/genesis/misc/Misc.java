@@ -1,5 +1,6 @@
 package studio.magemonkey.genesis.misc;
 
+import org.bukkit.Keyed;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
@@ -83,10 +84,12 @@ public class Misc {
                 String[] parts = sound.split(":");
                 String   s     = null;
 
-                // If splitted into 3, its a normal bukkit sound, else its custom
+                // If split into 3, it's a normal bukkit sound, else its custom
                 if (parts.length == 3) {
-                    for (Sound e : Sound.values()) {
-                        if (e.name().equalsIgnoreCase(parts[0]) || e.getKey().getKey().equalsIgnoreCase(parts[0])) {
+                    for (Keyed e : EnumUT.values(Sound.class)) {
+                        if (EnumUT.name(e).equalsIgnoreCase(parts[0]) || e.getKey()
+                                .getKey()
+                                .equalsIgnoreCase(parts[0])) {
                             s = e.getKey().getKey();
                             break;
                         }
