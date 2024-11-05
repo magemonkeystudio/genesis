@@ -1,5 +1,6 @@
 package studio.magemonkey.genesis.listeners;
 
+import lombok.Setter;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.event.EventHandler;
@@ -10,33 +11,33 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import studio.magemonkey.genesis.Genesis;
 import studio.magemonkey.genesis.core.GenesisShop;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class SignListener implements Listener {
 
-    private       boolean s;
+    @Setter
+    private       boolean signsEnabled;
     private final Genesis plugin;
 
-    public SignListener(boolean s, Genesis plugin) {
-        this.s = s;
+    public SignListener(boolean signsEnabled, Genesis plugin) {
+        this.signsEnabled = signsEnabled;
         this.plugin = plugin;
     }
 
     private GenesisShop getGenesisSign(String line) {
-
-        if (line == null || line == "") {
+        if (line == null || line.isBlank()) {
             return null;
         }
         line = line.toLowerCase();
-        HashMap<Integer, GenesisShop> set = plugin.getClassManager().getShops().getShops();
+        Map<Integer, GenesisShop> set = plugin.getClassManager().getShops().getShops();
 
         for (Integer s : set.keySet()) {
 
             GenesisShop shop     = set.get(s);
-            String      signtext = shop.getSignText();
+            String      signText = shop.getSignText();
 
-            if (signtext != null) {
-                if (line.endsWith(signtext.toLowerCase())) {
+            if (signText != null) {
+                if (line.endsWith(signText.toLowerCase())) {
                     return shop;
                 }
             }
@@ -49,8 +50,7 @@ public class SignListener implements Listener {
 
     @EventHandler
     public void createSign(SignChangeEvent e) {
-
-        if (!s) {
+        if (!signsEnabled) {
             return;
         }
 
@@ -84,7 +84,7 @@ public class SignListener implements Listener {
 
     @EventHandler
     public void interactSign(PlayerInteractEvent e) {
-        if (!s) {
+        if (!signsEnabled) {
             return;
         }
 
@@ -117,11 +117,4 @@ public class SignListener implements Listener {
             }
         }
     }
-
-
-    public void setSignsEnabled(boolean b) {
-        s = b;
-    }
-
-
 }

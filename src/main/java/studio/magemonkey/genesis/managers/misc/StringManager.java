@@ -133,11 +133,14 @@ public class StringManager {
         }
 
         for (String placeholder : placeholders) {
-            // Sometimes, we'll get %luckperms_has_permission_xxx.xxx% or similar
+            // Sometimes, we'll get %§Xluckperms_has_permission_xxx.xxx% or similar
             // and these get interpreted as a url for whatever reason.
-            String replacement = placeholder.replace(ChatColor.COLOR_CHAR, '&');
-            if (placeholder.matches("%" + ChatColor.COLOR_CHAR + ".*?%")) {
-                replacement = ChatColor.stripColor(placeholder);
+            String replacement = placeholder;
+            if (placeholder.matches(ChatColor.COLOR_CHAR + ".*?")) {
+                // Replace only the color codes at the beginning of the string
+                // The regex would have to match a color char followed by a letter/number OR
+                // a color char followed by 'xHEX'
+                replacement = placeholder.replaceAll("^(" + ChatColor.COLOR_CHAR + "(x[0-9a-fA-F]{6}|\\w))+", "");
             }
             s = s.replace(placeholder, replacement);
         }

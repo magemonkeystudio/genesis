@@ -97,7 +97,7 @@ public class ShopCustomizer {
                                      int page) {
         holder.setPage(page);
         //Adding all possible items in a map
-        HashMap<Integer, GenesisBuy> everything = new LinkedHashMap<>();
+        Map<Integer, GenesisBuy> everything = new LinkedHashMap<>();
 
         PageLayoutHandler layout = ClassManager.manager.getPageLayoutHandler();
 
