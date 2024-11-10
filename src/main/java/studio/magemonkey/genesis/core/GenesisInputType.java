@@ -28,7 +28,7 @@ public enum GenesisInputType {
             new GenesisUserInput() {
                 @Override
                 public void receivedInput(final Player p, String text) {
-                    if (Bukkit.getServer().getPlayer(text) == null) {
+                    if (Bukkit.getServer().getPlayerExact(text) == null) {
                         ClassManager.manager.getMessageHandler()
                                 .sendMessage("Main.PlayerNotFound", p, text, null, shop, holder, buy);
                         shop.openInventory(p, holder.getPage(), true);
