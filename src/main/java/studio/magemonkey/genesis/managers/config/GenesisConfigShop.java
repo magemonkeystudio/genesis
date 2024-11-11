@@ -113,6 +113,49 @@ public class GenesisConfigShop extends GenesisShop {
         finishedAddingItems();
     }
 
+    @Override
+    public void finishedAddingItems() {
+        super.finishedAddingItems();
+        fillInventory();
+    }
+
+    public void fillInventory() {
+        if (config.isSet("InventoryFill")) {
+            Material material;
+            try {
+                material = Material.valueOf(config.getString("InventoryFill").toUpperCase(Locale.ENGLISH));
+            } catch (Exception ignored) {
+                material = Material.BLACK_STAINED_GLASS_PANE;
+                Genesis.log("Your InventoryFill parameter is invalid and was replaced with its default: "
+                        + config.getString("InventoryFill"));
+            }
+            for (int i = 0; i < getInventorySize(); i++) {
+                if (isFilled(i))
+                    continue;
+                GenesisBuy buy = new GenesisBuy(GenesisRewardType.Nothing,
+                        GenesisPriceType.Nothing,
+                        null,
+                        null,
+                        null,
+                        i,
+                        null,
+                        "internal_placeholder_" + i,
+                        null,
+                        null,
+                        null);
+                ItemStack fillerItem = new ItemStack(material);
+
+                // Maybe there already is an existing method for it?
+                ItemMeta meta = fillerItem.getItemMeta();
+                meta.setDisplayName(" ");
+                fillerItem.setItemMeta(meta);
+                buy.setItem(fillerItem, false);
+
+                this.addShopItem(buy, buy.getItem(), ClassManager.manager);
+            }
+        }
+    }
+
     //////////////////////////////////
 
     public ConfigurationSection getConfigurationSection() {
@@ -200,41 +243,6 @@ public class GenesisConfigShop extends GenesisShop {
         if (c != null) {
             for (String key : c.getKeys(false)) {
                 ClassManager.manager.getBuyItemHandler().loadItem(c, this, key);
-            }
-        }
-
-        if (config.isSet("InventoryFill")) {
-            Material material;
-            try {
-                material = Material.valueOf(config.getString("InventoryFill").toUpperCase(Locale.ENGLISH));
-            } catch (Exception ignored) {
-                material = Material.BLACK_STAINED_GLASS_PANE;
-                Genesis.log("Your InventoryFill parameter is invalid and was replaced with its default: "
-                        + config.getString("InventoryFill"));
-            }
-            for (int i = 0; i < getInventorySize(); i++) {
-                if (isFilled(i))
-                    continue;
-                GenesisBuy buy = new GenesisBuy(GenesisRewardType.Nothing,
-                        GenesisPriceType.Nothing,
-                        null,
-                        null,
-                        null,
-                        i,
-                        null,
-                        "internal_placeholder_" + i,
-                        null,
-                        null,
-                        null);
-                ItemStack fillerItem = new ItemStack(material);
-
-                // Maybe there already is an existing method for it?
-                ItemMeta meta = fillerItem.getItemMeta();
-                meta.setDisplayName(" ");
-                fillerItem.setItemMeta(meta);
-                buy.setItem(fillerItem, false);
-
-                this.addShopItem(buy, buy.getItem(), ClassManager.manager);
             }
         }
     }
