@@ -1,9 +1,12 @@
 package studio.magemonkey.genesis.managers.item;
 
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import studio.magemonkey.codex.core.Version;
 import studio.magemonkey.genesis.core.GenesisBuy;
 import studio.magemonkey.genesis.managers.ClassManager;
 
@@ -27,6 +30,15 @@ public class ItemDataPartItemflags extends ItemDataPart {
                 }
                 try {
                     ItemFlag itemflag = ItemFlag.valueOf(flag.toUpperCase());
+
+                    if (itemflag == ItemFlag.HIDE_ATTRIBUTES && Version.CURRENT.isAtLeast(Version.V1_20_R4)) {
+                        // We have to add a default attribute in order to hide attributes
+                        meta.addAttributeModifier(Attribute.ATTACK_DAMAGE,
+                                new AttributeModifier(Attribute.ATTACK_DAMAGE.getKey().getKey(),
+                                        0,
+                                        AttributeModifier.Operation.ADD_NUMBER));
+                    }
+
                     meta.addItemFlags(itemflag);
                 } catch (Exception e) {
                     ClassManager.manager.getBugFinder()
