@@ -65,7 +65,7 @@ public class ItemDataPartCustomSkull extends ItemDataPart {
                 profileField.setAccessible(true);
                 profileField.set(skullMeta, profile);
             } catch (NoSuchFieldException | SecurityException | IllegalAccessException e1) {
-                ClassManager.manager.getBugFinder().warn("Could not set profile texture.");
+                ClassManager.manager.getBugFinder().warn("Could not set profile texture: " + input);
                 e1.printStackTrace();
             }
         }
