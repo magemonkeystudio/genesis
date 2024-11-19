@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>genesis</artifactId>
-    <version>1.0.2-R0.10-SNAPSHOT</version>
+    <version>1.0.2-R0.11-SNAPSHOT</version>
     <name>Genesis</name>
     <description>Create virtual chest shops</description>
     <url>
