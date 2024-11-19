@@ -22,14 +22,15 @@ import java.util.*;
 public class ItemDataPartCustomSkull extends ItemDataPart {
 
     public static ItemStack transformSkull(ItemStack i, String input) {
-        if (input == null || input.isEmpty()) {
+        if (input == null || input.isEmpty() || input.equalsIgnoreCase("%input%")) {
             return i;
         }
 
         SkullMeta skullMeta = (SkullMeta) i.getItemMeta();
         if (skullMeta == null) return i;
         UUID id = UUID.randomUUID();
-        if (input.contains("http://textures.minecraft.net/texture")) {
+        if (input.contains("http://textures.minecraft.net/texture")
+                || input.contains("https://textures.minecraft.net/texture")) {
             try {
                 PlayerProfile pprofile =
                         Bukkit.createPlayerProfile(id, id.toString().replace("-", "").substring(0, 16));
