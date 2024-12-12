@@ -24,11 +24,13 @@ public abstract class GenesisConditionTypeMatch extends GenesisConditionType {
 
     private boolean isCorrect(Player p, boolean hasToMatch, String condition) {
         for (String singleCondition : condition.split(",")) {
-            if (matches(p, singleCondition) == hasToMatch) {
+            if (hasToMatch && matches(p, singleCondition) == hasToMatch) {
                 return true;
+            } else if (!hasToMatch && matches(p,singleCondition)) {
+                return false;
             }
         }
-        return false;
+        return !hasToMatch;
     }
 
 

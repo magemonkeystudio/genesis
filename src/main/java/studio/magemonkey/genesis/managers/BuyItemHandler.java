@@ -129,7 +129,7 @@ public class BuyItemHandler {
                                         + shopName + "]");
                     }
                 }
-            }
+            } else inventoryLocations.add(-1);
 
             stage = "Price- and RewardType Detection";
 
