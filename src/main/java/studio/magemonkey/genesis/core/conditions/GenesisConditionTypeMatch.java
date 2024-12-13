@@ -26,7 +26,7 @@ public abstract class GenesisConditionTypeMatch extends GenesisConditionType {
         for (String singleCondition : condition.split(",")) {
             if (hasToMatch && matches(p, singleCondition) == hasToMatch) {
                 return true;
-            } else if (!hasToMatch && matches(p,singleCondition)) {
+            } else if (!hasToMatch && matches(p, singleCondition)) {
                 return false;
             }
         }

@@ -13,7 +13,7 @@ import studio.magemonkey.genesis.managers.ClassManager;
 
 import java.util.List;
 
-public class ItemDataPartArmorTrim extends ItemDataPart{
+public class ItemDataPartArmorTrim extends ItemDataPart {
     @Override
     public ItemStack transform(ItemStack item, String usedName, String argument) {
         String[] parts = argument.split("#");
@@ -26,22 +26,25 @@ public class ItemDataPartArmorTrim extends ItemDataPart{
 
         TrimPattern trimPattern = Registry.TRIM_PATTERN.get(NamespacedKey.minecraft(parts[0]));
         if (trimPattern == null) {
-            ClassManager.manager.getBugFinder().severe("Mistake in Config: '" + parts[0] + "' is not a valid '" + usedName + "' pattern!");
+            ClassManager.manager.getBugFinder()
+                    .severe("Mistake in Config: '" + parts[0] + "' is not a valid '" + usedName + "' pattern!");
             return item;
         }
         TrimMaterial trimMaterial = Registry.TRIM_MATERIAL.get(NamespacedKey.minecraft(parts[1]));
         if (trimMaterial == null) {
             trimMaterial = TrimMaterial.IRON;
-            ClassManager.manager.getBugFinder().severe("Mistake in Config: '" + parts[1] + "' is not a valid '" + usedName + "' material!");
+            ClassManager.manager.getBugFinder()
+                    .severe("Mistake in Config: '" + parts[1] + "' is not a valid '" + usedName + "' material!");
         }
         if (item.getItemMeta() instanceof ArmorMeta) {
             ArmorTrim armorTrim = new ArmorTrim(trimMaterial, trimPattern);
-            ArmorMeta itemMeta = (ArmorMeta) item.getItemMeta();
+            ArmorMeta itemMeta  = (ArmorMeta) item.getItemMeta();
             itemMeta.setTrim(armorTrim);
             item.setItemMeta(itemMeta);
             return item;
         }
-        ClassManager.manager.getBugFinder().severe("Mistake in Config: Unable to add '" + usedName + "' to '" + item.getType().name() + "'!");
+        ClassManager.manager.getBugFinder()
+                .severe("Mistake in Config: Unable to add '" + usedName + "' to '" + item.getType().name() + "'!");
         return item;
     }
 
@@ -59,7 +62,8 @@ public class ItemDataPartArmorTrim extends ItemDataPart{
                 }
                 ArmorTrim shopTrim = shopMeta.getTrim();
                 ArmorTrim itemTrim = itemMeta.getTrim();
-                return shopTrim.getPattern() == itemTrim.getPattern() && shopTrim.getMaterial() == itemTrim.getMaterial();
+                return shopTrim.getPattern() == itemTrim.getPattern()
+                        && shopTrim.getMaterial() == itemTrim.getMaterial();
             }
         }
         return true;
@@ -70,7 +74,7 @@ public class ItemDataPartArmorTrim extends ItemDataPart{
         if (i.getItemMeta() instanceof ArmorMeta) {
             ArmorMeta armorMeta = (ArmorMeta) i.getItemMeta();
             if (armorMeta.getTrim() != null) {
-                String pattern = armorMeta.getTrim().getPattern().getKey().getKey();
+                String pattern  = armorMeta.getTrim().getPattern().getKey().getKey();
                 String material = armorMeta.getTrim().getMaterial().getKey().getKey();
                 output.add("armortrim:" + pattern + "#" + material);
             }

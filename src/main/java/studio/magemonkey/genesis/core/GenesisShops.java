@@ -36,7 +36,7 @@ public class GenesisShops {
 
     private boolean loadShops(File folder, Settings settings, String parentPath) {
         boolean enableShopCommands = false;
-    
+
         for (File f : folder.listFiles()) {
             if (f != null) {
                 if (f.isDirectory()) {
@@ -47,7 +47,7 @@ public class GenesisShops {
                     }
                 } else if (f.isFile() && f.getName().endsWith(".yml")) {
                     GenesisShop shop = loadShop(f, parentPath);
-    
+
                     if (shop.getCommands() != null) {
                         enableShopCommands = true;
                     }

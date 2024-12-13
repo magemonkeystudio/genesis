@@ -104,12 +104,12 @@ public class ItemDataPartCustomSkull extends ItemDataPart {
                                     Property property = iterator.next();
                                     try {
                                         // We'll try to call getValue just in case the property is not a record
-                                        Method getValueMethod = property.getClass().getDeclaredMethod("getValue");
+                                        Method getValueMethod = Property.class.getDeclaredMethod("getValue");
                                         getValueMethod.setAccessible(true);
                                         return (String) getValueMethod.invoke(property);
                                     } catch (Exception e) {
                                         // If the property is a record...
-                                        Method valueMethod = property.getClass().getDeclaredMethod("value");
+                                        Method valueMethod = Property.class.getDeclaredMethod("value");
                                         valueMethod.setAccessible(true);
                                         return (String) valueMethod.invoke(property);
                                     }

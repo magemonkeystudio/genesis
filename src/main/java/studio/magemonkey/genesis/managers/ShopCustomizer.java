@@ -13,7 +13,6 @@ import studio.magemonkey.genesis.events.GenesisDisplayItemEvent;
 import studio.magemonkey.genesis.managers.features.PageLayoutHandler;
 import studio.magemonkey.genesis.settings.Settings;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
