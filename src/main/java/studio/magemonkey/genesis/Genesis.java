@@ -121,12 +121,14 @@ public class Genesis extends JavaPlugin {
         manager.getMessageHandler().reloadConfig();
 
         if (manager.getShops() != null) {
-            for (String s : manager.getShops().getShopIds().keySet()) {
-                GenesisShop shop = manager.getShops().getShops().get(s);
-                if (shop != null) {
-                    shop.reloadShop();
+            CrossScheduler.runTaskLaterAsync(() -> {
+                for (String s : manager.getShops().getShopIds().keySet()) {
+                    GenesisShop shop = manager.getShops().getShops().get(s);
+                    if (shop != null) {
+                        shop.reloadShop();
+                    }
                 }
-            }
+            }, 3);
         }
         for (Player p : Bukkit.getOnlinePlayers()) {
             if (api.isValidShop(p.getOpenInventory())) {
