@@ -4,6 +4,7 @@ package studio.magemonkey.genesis.managers.item;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.components.CustomModelDataComponent;
 import studio.magemonkey.genesis.core.GenesisBuy;
 import studio.magemonkey.genesis.core.GenesisShop;
 import studio.magemonkey.genesis.managers.ClassManager;

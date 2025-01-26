@@ -1,5 +1,6 @@
 package studio.magemonkey.genesis.managers.item;
 
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -8,19 +9,24 @@ import studio.magemonkey.genesis.managers.ClassManager;
 import studio.magemonkey.genesis.managers.misc.InputReader;
 
 import java.util.List;
+import java.util.Objects;
 
-public class ItemDataPartCustomModelData extends ItemDataPart {
+public class ItemDataPartItemModel extends ItemDataPart {
     @Override
     public ItemStack transform(ItemStack item, String usedName, String argument) {
-        int customModelData = InputReader.getInt(argument, -1);
-        if (customModelData == -1) {
+        String itemModel = InputReader.readString(argument, true);
+        if (itemModel == null || itemModel.isBlank()) {
             ClassManager.manager.getBugFinder()
                     .severe("Mistake in Config: '" + argument + "' is not a valid '" + usedName
-                            + "'. It needs to be a number like '1', '12' or '64'.");
+                            + "'. It needs to be a string.");
             return item;
         }
         ItemMeta meta = item.getItemMeta();
-        meta.setCustomModelData(customModelData);
+        if (meta == null) {
+            return item;
+        }
+
+        meta.setItemModel(NamespacedKey.fromString(itemModel));
         item.setItemMeta(meta);
         return item;
     }
@@ -28,18 +34,16 @@ public class ItemDataPartCustomModelData extends ItemDataPart {
     @Override
     public boolean isSimilar(ItemStack shopItem, ItemStack playerItem, GenesisBuy buy, Player p) {
         if (shopItem.hasItemMeta() && playerItem.hasItemMeta()) {
-            return shopItem.getItemMeta().getCustomModelData() == playerItem.getItemMeta().getCustomModelData();
+            return Objects.equals(shopItem.getItemMeta().getItemModel(), playerItem.getItemMeta().getItemModel());
         }
         return true;
     }
 
     @Override
     public List<String> read(ItemStack i, List<String> output) {
-        if (i.hasItemMeta()) {
-            int d = i.getItemMeta().getCustomModelData();
-            if (d != -1) {
-                output.add("CustomModelData:" + d);
-            }
+        if (i.hasItemMeta() && i.getItemMeta().hasItemModel()) {
+            String d = i.getItemMeta().getItemModel().getKey();
+            output.add("ItemModel:" + d);
         }
         return output;
     }
@@ -56,6 +60,6 @@ public class ItemDataPartCustomModelData extends ItemDataPart {
 
     @Override
     public String[] createNames() {
-        return new String[]{"CustomModelData"};
+        return new String[]{"ItemModel"};
     }
 }
