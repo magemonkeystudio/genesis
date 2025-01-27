@@ -215,7 +215,7 @@
         <dependency>
             <groupId>com.bencodez</groupId>
             <artifactId>votingplugin</artifactId>
-            <version>6.18</version>
+            <version>6.18.2</version>
             <scope>provided</scope>
         </dependency>
 
