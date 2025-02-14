@@ -63,18 +63,18 @@ public class ItemDataPartLore extends ItemDataPart {
 
     @Override
     public boolean isSimilar(ItemStack shopItem, ItemStack playerItem, GenesisBuy buy, Player p) {
-        ItemMeta ms = shopItem.getItemMeta();
-        ItemMeta mp = playerItem.getItemMeta();
-        if (ms.hasLore()) {
-            if (!mp.hasLore()) {
+        ItemMeta shopMeta   = shopItem.getItemMeta();
+        ItemMeta playerMeta = playerItem.getItemMeta();
+        if (shopMeta.hasLore()) {
+            if (!playerMeta.hasLore()) {
                 return false;
             }
 
-            if (ms.getLore().size() > mp.getLore().size()) {
+            if (shopMeta.getLore().size() > playerMeta.getLore().size()) {
                 return false;
             }
-            for (int i = 0; i < ms.getLore().size(); i++) {
-                String shopItemLoreLine = ms.getLore().get(i);
+            for (int i = 0; i < shopMeta.getLore().size(); i++) {
+                String shopItemLoreLine = shopMeta.getLore().get(i);
                 if (ClassManager.manager.getStringManager()
                         .checkStringForFeatures(buy == null ? null : buy.getShop(),
                                 buy,
@@ -83,7 +83,7 @@ public class ItemDataPartLore extends ItemDataPart {
                     shopItemLoreLine = ClassManager.manager.getStringManager()
                             .transform(shopItemLoreLine, buy, buy == null ? null : buy.getShop(), null, p);
                 }
-                if (!mp.getLore().get(i).equals(shopItemLoreLine)) {
+                if (!playerMeta.getLore().get(i).equals(shopItemLoreLine)) {
                     return false;
                 }
             }
