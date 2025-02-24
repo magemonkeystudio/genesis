@@ -32,7 +32,7 @@ public class ItemDataPartBanner extends ItemDataPart {
             item.setItemMeta(meta);
             return item;
         } else {
-            if (!Tag.BANNERS.isTagged(item.getType())) {
+            if (!Tag.BANNERS.isTagged(item.getType()) && !item.getType().equals(Material.SHIELD)) {
                 ClassManager.manager.getBugFinder()
                         .severe("Mistake in Config: '" + argument + "' is not a valid '" + usedName + "'.");
                 return item;
