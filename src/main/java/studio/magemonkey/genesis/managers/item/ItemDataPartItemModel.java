@@ -36,7 +36,7 @@ public class ItemDataPartItemModel extends ItemDataPart {
         if (shopItem.hasItemMeta() && playerItem.hasItemMeta()) {
             return Objects.equals(shopItem.getItemMeta().getItemModel(), playerItem.getItemMeta().getItemModel());
         }
-        return true;
+        return false;
     }
 
     @Override
