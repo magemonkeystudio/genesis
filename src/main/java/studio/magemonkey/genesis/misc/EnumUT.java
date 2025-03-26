@@ -14,18 +14,21 @@ public class EnumUT {
     }
 
     public static String name(Object obj) {
+        String name = null;
         // Attempt to find and call the name method
         try {
             Method method = obj.getClass().getMethod("name");
-            return (String) method.invoke(obj);
+            name = (String) method.invoke(obj);
         } catch (Exception e) {
             // try the super class if applicable
             try {
                 Method method = obj.getClass().getSuperclass().getMethod("name");
-                return (String) method.invoke(obj);
+                name = (String) method.invoke(obj);
             } catch (Exception e2) {
-                return null;
             }
         }
+
+        if (name != null) name = name.replace('.', '_');
+        return name;
     }
 }

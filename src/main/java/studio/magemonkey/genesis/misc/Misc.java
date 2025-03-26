@@ -79,44 +79,42 @@ public class Misc {
      * @param sound the sound to play
      */
     public static void playSound(Player p, String sound) {
-        if (sound != null) {
-            if (!sound.isEmpty()) {
-                String[] parts = sound.split(":");
-                String   s     = null;
+        if (sound == null || sound.isEmpty()) return;
 
-                // If split into 3, it's a normal bukkit sound, else its custom
-                if (parts.length == 3) {
-                    for (Keyed e : EnumUT.values(Sound.class)) {
-                        if (EnumUT.name(e).equalsIgnoreCase(parts[0]) || e.getKey()
-                                .getKey()
-                                .equalsIgnoreCase(parts[0])) {
-                            s = e.getKey().getKey();
-                            break;
-                        }
-                    }
-                } else {
-                    s = parts[0] + ":" + parts[1];
-                }
+        String[] parts = sound.split(":");
+        String   s     = null;
 
-                if (s != null) {
-                    boolean isCustomSound = s.contains(":");
-                    float   volume;
-                    float   pitch         = 1;
-                    // Parsing volume & pitch based on bukkit or custom sound
-                    if (!isCustomSound) {
-                        volume = (float) InputReader.getDouble(parts[1], 1);
-                        if (parts.length >= 3) {
-                            pitch = (float) InputReader.getDouble(parts[2], 1);
-                        }
-                    } else {
-                        volume = (float) InputReader.getDouble(parts[2], 1);
-                        if (parts.length >= 4) {
-                            pitch = (float) InputReader.getDouble(parts[3], 1);
-                        }
-                    }
-                    p.playSound(p.getLocation(), s, SoundCategory.NEUTRAL, volume, pitch);
+        // If split into 3, it's a normal bukkit sound, else its custom
+        if (parts.length == 3) {
+            for (Keyed e : EnumUT.values(Sound.class)) {
+                if (EnumUT.name(e).equalsIgnoreCase(parts[0]) || e.getKey()
+                        .getKey()
+                        .equalsIgnoreCase(parts[0])) {
+                    s = e.getKey().getKey();
+                    break;
                 }
             }
+        } else {
+            s = parts[0] + ":" + parts[1];
+        }
+
+        if (s != null) {
+            boolean isCustomSound = s.contains(":");
+            float   volume;
+            float   pitch         = 1;
+            // Parsing volume & pitch based on bukkit or custom sound
+            if (!isCustomSound) {
+                volume = (float) InputReader.getDouble(parts[1], 1);
+                if (parts.length >= 3) {
+                    pitch = (float) InputReader.getDouble(parts[2], 1);
+                }
+            } else {
+                volume = (float) InputReader.getDouble(parts[2], 1);
+                if (parts.length >= 4) {
+                    pitch = (float) InputReader.getDouble(parts[3], 1);
+                }
+            }
+            p.playSound(p.getLocation(), s, SoundCategory.NEUTRAL, volume, pitch);
         }
     }
 

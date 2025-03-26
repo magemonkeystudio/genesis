@@ -62,7 +62,7 @@ public class ConfigHandler {
 
 
     public PointsPlugin findPointsPlugin(String configPointsPlugin) {
-        //Try out if pre-installed Points plugins fit with given name
+        // Try out if pre-installed Points plugins fit with given name
         if (configPointsPlugin != null) {
             for (PointsPlugin pp : PointsPlugin.values()) {
                 for (String nick : pp.getNicknames()) {
@@ -73,13 +73,13 @@ public class ConfigHandler {
             }
         }
 
-        //Try out if custom Points plugins fit with given name
+        // Try out if custom Points plugins fit with given name
         if (GenesisPointsAPI.get(configPointsPlugin) != null) {
             PointsManager.PointsPlugin.CUSTOM.setCustom(configPointsPlugin);
             return PointsManager.PointsPlugin.CUSTOM;
         }
 
-        //Use first available plugin
+        // Use first available plugin
         for (PointsPlugin pp : PointsPlugin.values()) {
             String pluginName = pp.getPluginName();
             if ((pluginName != null) && (Bukkit.getPluginManager().getPlugin(pluginName) != null)) {
