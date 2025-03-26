@@ -27,7 +27,8 @@ public class ItemDataPartCustomModelData extends ItemDataPart {
 
     @Override
     public boolean isSimilar(ItemStack shopItem, ItemStack playerItem, GenesisBuy buy, Player p) {
-        if (shopItem.hasItemMeta() && playerItem.hasItemMeta()) {
+        if (shopItem.hasItemMeta() && playerItem.hasItemMeta()
+                && shopItem.getItemMeta().hasCustomModelData() && playerItem.getItemMeta().hasCustomModelData()) {
             return shopItem.getItemMeta().getCustomModelData() == playerItem.getItemMeta().getCustomModelData();
         }
         return false;
