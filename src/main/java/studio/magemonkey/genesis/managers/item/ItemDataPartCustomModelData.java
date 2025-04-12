@@ -27,10 +27,24 @@ public class ItemDataPartCustomModelData extends ItemDataPart {
 
     @Override
     public boolean isSimilar(ItemStack shopItem, ItemStack playerItem, GenesisBuy buy, Player p) {
-        if (shopItem.hasItemMeta() && playerItem.hasItemMeta()
-                && shopItem.getItemMeta().hasCustomModelData() && playerItem.getItemMeta().hasCustomModelData()) {
-            return shopItem.getItemMeta().getCustomModelData() == playerItem.getItemMeta().getCustomModelData();
+        if (shopItem.hasItemMeta() == playerItem.hasItemMeta()) {
+            // If both don't have item meta, they should be considered similar here
+            if (!shopItem.hasItemMeta()) return true;
+
+            boolean modelPresenceMatch =
+                    shopItem.getItemMeta().hasCustomModelData() == playerItem.getItemMeta().hasCustomModelData();
+            if (modelPresenceMatch) {
+                // If both have item meta, we can check the custom model data, otherwise, they don't have model data and are "similar"
+                if (!shopItem.getItemMeta().hasCustomModelData()) return true;
+
+                return shopItem.getItemMeta().getCustomModelData() == playerItem.getItemMeta().getCustomModelData();
+            }
+
+            // If the model presence does not match, we can assume that they are not similar
+            return false;
         }
+
+        // If the hasItemMeta does not match, we can assume that they are not similar
         return false;
     }
 
