@@ -20,6 +20,13 @@ public class ItemDataPartItemflags extends ItemDataPart {
 
         if (argument.equalsIgnoreCase("true") || argument.equalsIgnoreCase("all")) {
             meta.addItemFlags(ItemFlag.values());
+            if (Version.CURRENT.isAtLeast(Version.V1_20_R4)) {
+                // We have to add a default attribute in order to hide attributes
+                meta.addAttributeModifier(Attribute.ATTACK_DAMAGE,
+                        new AttributeModifier(Attribute.ATTACK_DAMAGE.getKey().getKey(),
+                                0,
+                                AttributeModifier.Operation.ADD_NUMBER));
+            }
         } else {
             String[] flags = argument.split("#");
 
