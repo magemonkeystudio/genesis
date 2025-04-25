@@ -17,10 +17,7 @@ import studio.magemonkey.genesis.managers.external.BungeeCordManager;
 import studio.magemonkey.genesis.managers.external.LanguageManager;
 import studio.magemonkey.genesis.managers.external.PlaceholderAPIHandler;
 import studio.magemonkey.genesis.managers.external.VaultHandler;
-import studio.magemonkey.genesis.managers.external.spawners.ISpawnEggHandler;
-import studio.magemonkey.genesis.managers.external.spawners.ISpawnerHandler;
-import studio.magemonkey.genesis.managers.external.spawners.SpawnersHandlerEpicSpawners;
-import studio.magemonkey.genesis.managers.external.spawners.SpawnersHandlerSilkSpawners;
+import studio.magemonkey.genesis.managers.external.spawners.*;
 import studio.magemonkey.genesis.managers.features.*;
 import studio.magemonkey.genesis.managers.item.ItemDataPart;
 import studio.magemonkey.genesis.managers.item.ItemStackChecker;
@@ -136,10 +133,10 @@ public class ClassManager {
                                 +
                                 "Others are simply ignored.");
             }
-        }
-
-        if (Bukkit.getPluginManager().isPluginEnabled("EpicSpawners")) {
+        }else if (Bukkit.getPluginManager().isPluginEnabled("EpicSpawners")) {
             spawnerHandler = new SpawnersHandlerEpicSpawners();
+        } else {
+            spawnerHandler = new studio.magemonkey.genesis.managers.external.spawners.SpawnerHandlerVanilla();
         }
 
     }

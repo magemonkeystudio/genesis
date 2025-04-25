@@ -1,6 +1,7 @@
 package studio.magemonkey.genesis.managers.item;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import studio.magemonkey.divinity.Divinity;
@@ -162,7 +163,7 @@ public abstract class ItemDataPart {
         return output;
     }
 
-    public static boolean isSimilar(ItemStack shopItem,
+    public static boolean isMetaSimilar(ItemStack shopItem,
                                     ItemStack playerItem,
                                     ItemDataPart[] exceptions,
                                     GenesisBuy buy,
@@ -255,6 +256,26 @@ public abstract class ItemDataPart {
         }
     }
 
+    public boolean isMetaSimilar(ItemStack shopItem, ItemStack playerItem, GenesisBuy buy, Player p) {
+        return shopItem.getType() == playerItem.getType()
+                && ((shopItem.getType() == Material.SPAWNER) ?
+                isSimilarSpawner(shopItem, playerItem, buy, p) : shopItem.getItemMeta().equals(playerItem.getItemMeta()));
+    }
+
+    public boolean isSimilarSpawner(ItemStack shopItem, ItemStack playerItem, GenesisBuy buy, Player p) {
+        if (shopItem.getType() == Material.SPAWNER) {
+            if (playerItem.getType() != Material.SPAWNER) {
+                return false;
+            }
+
+            if (ClassManager.manager.getSpawnerHandler() != null) {
+                String spawners = ClassManager.manager.getSpawnerHandler().readSpawner(shopItem);
+                String spawnerp = ClassManager.manager.getSpawnerHandler().readSpawner(playerItem);
+                return spawners.equalsIgnoreCase(spawnerp);
+            }
+        }
+        return true;
+    }
 
     @Deprecated
     public abstract ItemStack transform(ItemStack item,
