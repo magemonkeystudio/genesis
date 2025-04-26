@@ -27,9 +27,9 @@ public class GenesisBuyAdvanced extends GenesisBuy {
                               String name,
                               GenesisCondition condition,
                               GenesisInputType inputType,
-                              String inputmessage,
+                              String inputMessage,
                               Map<ClickType, ActionSet> actions) {
-        super(rewardT, priceT, reward, price, msg, location, permission, name, condition, inputType, inputmessage);
+        super(rewardT, priceT, reward, price, msg, location, permission, name, condition, inputType, inputMessage);
         this.actions = actions;
     }
 

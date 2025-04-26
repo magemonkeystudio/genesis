@@ -62,11 +62,13 @@ public class ItemStackTranslator {
                         if (placeholder != null) {
                             String pName =
                                     ClassManager.manager.getStringManager().transform(placeholder, target);
-                            OfflinePlayer transformedPlayer = Bukkit.getOfflinePlayer(pName);
-                            if (transformedPlayer != null) {
-                                skullmeta.setOwningPlayer(transformedPlayer);
-                            } else {
-                                skullmeta.setOwner(pName);
+                            if (!ClassManager.manager.getStringManager().checkStringForFeatures(shop, buy,  item, pName)) {
+                                OfflinePlayer transformedPlayer = Bukkit.getOfflinePlayer(pName);
+                                if (transformedPlayer != null) {
+                                    skullmeta.setOwningPlayer(transformedPlayer);
+                                } else {
+                                    skullmeta.setOwner(pName);
+                                }
                             }
                         }
                     }
@@ -91,11 +93,18 @@ public class ItemStackTranslator {
                                       ItemStack item,
                                       GenesisShopHolder holder,
                                       Player target) {
-        String skullTexture = ItemDataPartCustomSkull.readSkullTexture(item);
-        if (skullTexture != null) {
-            if (ClassManager.manager.getStringManager().checkStringForFeatures(shop, buy, item, skullTexture)) {
-                item = ItemDataPartCustomSkull.transformSkull(item,
-                        ClassManager.manager.getStringManager().transform(skullTexture, buy, shop, holder, target));
+        ItemMeta meta = item.getItemMeta();
+        NamespacedKey key =
+                new NamespacedKey(ClassManager.manager.getPlugin(), "skullTexturePlaceholder");
+        CustomItemTagContainer tagContainer = meta.getCustomTagContainer();
+        if (tagContainer.hasCustomTag(key, ItemTagType.STRING)) {
+            String placeholder = tagContainer.getCustomTag(key, ItemTagType.STRING);
+            if (placeholder != null) {
+                String texture =
+                        ClassManager.manager.getStringManager().transform(placeholder, target);
+                if (!ClassManager.manager.getStringManager().checkStringForFeatures(shop, buy,  item, texture)) {
+                    ItemDataPartCustomSkull.transformSkull(item, texture);
+                }
             }
         }
     }

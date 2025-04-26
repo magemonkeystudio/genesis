@@ -86,7 +86,7 @@ public class ShopItemCreationListener implements Listener {
 
 
                 String           inputTypename = c.getString("ForceInput_" + s);
-                String           inputtext     = c.getString("ForceInputMessage_" + s);
+                String           inputText     = c.getString("ForceInputMessage_" + s);
                 GenesisInputType inputType     = null;
                 if (inputTypename != null) {
                     for (GenesisInputType it : GenesisInputType.values()) {
@@ -104,7 +104,7 @@ public class ShopItemCreationListener implements Listener {
 
 
                 map.put(clickType,
-                        new ActionSet(rewardT, priceT, reward, price, message, permission, inputType, inputtext));
+                        new ActionSet(rewardT, priceT, reward, price, message, permission, inputType, inputText));
 
             }
         }
@@ -123,7 +123,6 @@ public class ShopItemCreationListener implements Listener {
                 event.getInputText(),
                 map);
         event.useCustomShopItem(buy);
-
     }
 
 
