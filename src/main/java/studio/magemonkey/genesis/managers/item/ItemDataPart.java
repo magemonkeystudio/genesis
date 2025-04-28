@@ -256,12 +256,6 @@ public abstract class ItemDataPart {
         }
     }
 
-    public boolean isSimilar(ItemStack shopItem, ItemStack playerItem, GenesisBuy buy, Player p) {
-        return shopItem.getType() == playerItem.getType()
-                && ((shopItem.getType() == Material.SPAWNER) ?
-                isSimilarSpawner(shopItem, playerItem, buy, p) : shopItem.getItemMeta().equals(playerItem.getItemMeta()));
-    }
-
     public boolean isSimilarSpawner(ItemStack shopItem, ItemStack playerItem, GenesisBuy buy, Player p) {
         if (shopItem.getType() == Material.SPAWNER) {
             if (playerItem.getType() != Material.SPAWNER) {
