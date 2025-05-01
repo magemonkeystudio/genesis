@@ -9,7 +9,7 @@ public class SpawnerHandlerVanilla implements ISpawnerHandler {
 
     @Override
     public ItemStack transformSpawner(ItemStack monsterSpawner, String entityName) {
-        EntityType entityType = EntityType.valueOf(entityName.toUpperCase());
+        EntityType entityType;
         try {
             entityType = EntityType.valueOf(entityName.toUpperCase());
         } catch (IllegalArgumentException e) {
@@ -17,6 +17,8 @@ public class SpawnerHandlerVanilla implements ISpawnerHandler {
             return null;
         }
         BlockStateMeta spawnerMeta = (BlockStateMeta) monsterSpawner.getItemMeta();
+        if (spawnerMeta == null) return monsterSpawner;
+
         CreatureSpawner creatureSpawner = (CreatureSpawner) spawnerMeta.getBlockState();
         creatureSpawner.setSpawnedType(entityType);
         spawnerMeta.setBlockState(creatureSpawner);
@@ -28,7 +30,11 @@ public class SpawnerHandlerVanilla implements ISpawnerHandler {
     @Override
     public String readSpawner(ItemStack monsterSpawner) {
         BlockStateMeta spawnerMeta = (BlockStateMeta) monsterSpawner.getItemMeta();
+        if (spawnerMeta == null) return "";
+
         CreatureSpawner creatureSpawner = (CreatureSpawner) spawnerMeta.getBlockState();
+        if (creatureSpawner.getSpawnedType() == null) return "";
+
         return creatureSpawner.getSpawnedType().toString();
     }
 }

@@ -1,7 +1,6 @@
 package studio.magemonkey.genesis.managers.item;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import studio.magemonkey.divinity.Divinity;
@@ -64,7 +63,7 @@ public abstract class ItemDataPart {
         PLAYERHEAD = registerType(new ItemDataPartPlayerhead());
         CUSTOMMODELDATA = registerType(new ItemDataPartCustomModelData());
         ITEMMODEL = registerType(new ItemDataPartItemModel());
-        MOBSPAWNER = registerType(new ItemDataPartMobspawner());
+        MOBSPAWNER = registerType(new ItemDataPartMobSpawner());
         MOBEGG = registerType(new ItemDataPartMobEgg());
         CUSTOMSKULL = registerType(new ItemDataPartCustomSkull());
         ITEMFLAGS = registerType(new ItemDataPartItemflags());
@@ -254,21 +253,6 @@ public abstract class ItemDataPart {
                             + ". Seems like it is not supported by your server version yet.");
             return item;
         }
-    }
-
-    public boolean isSimilarSpawner(ItemStack shopItem, ItemStack playerItem, GenesisBuy buy, Player p) {
-        if (shopItem.getType() == Material.SPAWNER) {
-            if (playerItem.getType() != Material.SPAWNER) {
-                return false;
-            }
-
-            if (ClassManager.manager.getSpawnerHandler() != null) {
-                String spawners = ClassManager.manager.getSpawnerHandler().readSpawner(shopItem);
-                String spawnerp = ClassManager.manager.getSpawnerHandler().readSpawner(playerItem);
-                return spawners.equalsIgnoreCase(spawnerp);
-            }
-        }
-        return true;
     }
 
     @Deprecated
