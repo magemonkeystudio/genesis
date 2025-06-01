@@ -54,7 +54,7 @@ public class ItemDataPartName extends ItemDataPart {
         ItemMeta ms = shopItem.getItemMeta();
         ItemMeta mp = playerItem.getItemMeta();
         if (ms != null && ms.hasDisplayName()) {
-            if (ms == null || !mp.hasDisplayName()) {
+            if (mp == null || !mp.hasDisplayName()) {
                 return false;
             }
             String shopItemName = ms.getDisplayName();
