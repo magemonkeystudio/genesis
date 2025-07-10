@@ -28,6 +28,11 @@ public class CommandManager implements TabExecutor {
                 .equalsIgnoreCase("gen")) {
 
             if (args.length > 0) {
+                if (args[0].equalsIgnoreCase("help")) {
+                    sendCommandList(sender);
+                    return true;
+                }
+
                 if (args[0].equalsIgnoreCase("reload")) {
                     if (sender.hasPermission("Genesis.reload")) {
                         if (args.length == 2) {
@@ -193,7 +198,6 @@ public class CommandManager implements TabExecutor {
 
                     return true;
                 }
-
             }
 
             if (sender instanceof Player) {
