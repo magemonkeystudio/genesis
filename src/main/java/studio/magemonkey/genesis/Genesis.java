@@ -18,7 +18,6 @@ import studio.magemonkey.genesis.managers.CommandManager;
 import studio.magemonkey.genesis.managers.config.ConfigKeyCompleter;
 
 public class Genesis extends JavaPlugin {
-
     public final static String            NAME = "Genesis";
     private             ClassManager      manager;
     private             InventoryListener il;
