@@ -402,15 +402,4 @@
         <developerConnection>scm:git:ssh://github.com:magemonkeystudio/${project.artifactId}.git</developerConnection>
         <url>https://github.com/magemonkeystudio/${project.artifactId}</url>
     </scm>
-
-    <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>${nexus.url}/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>ossrh</id>
-            <url>${nexus.url}/service/local/staging/deploy/maven2/</url>
-        </repository>
-    </distributionManagement>
 </project>
