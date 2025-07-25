@@ -33,10 +33,9 @@ public class ItemDataPartItemModel extends ItemDataPart {
 
     @Override
     public boolean isSimilar(ItemStack shopItem, ItemStack playerItem, GenesisBuy buy, Player p) {
-        if (shopItem.hasItemMeta() && playerItem.hasItemMeta()) {
-            return Objects.equals(shopItem.getItemMeta().getItemModel(), playerItem.getItemMeta().getItemModel());
-        }
-        return false;
+        NamespacedKey shopItemModel   = shopItem.hasItemMeta() ? shopItem.getItemMeta().getItemModel() : null;
+        NamespacedKey playerItemModel = playerItem.hasItemMeta() ? playerItem.getItemMeta().getItemModel() : null;
+        return Objects.equals(shopItemModel, playerItemModel);
     }
 
     @Override
