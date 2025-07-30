@@ -20,7 +20,7 @@ public class ItemDataPartItemflags extends ItemDataPart {
 
         if (argument.equalsIgnoreCase("true") || argument.equalsIgnoreCase("all")) {
             meta.addItemFlags(ItemFlag.values());
-            if (Genesis.getVersionWeight() >= Genesis.getVersionWeight("1.20.4")) {
+            if (Genesis.getVersionWeight() > Genesis.getVersionWeight("1.20.4")) {
                 // We have to add a default attribute in order to hide attributes
                 meta.addAttributeModifier(Attribute.ATTACK_DAMAGE,
                         new AttributeModifier(Attribute.ATTACK_DAMAGE.getKey().getKey(),
