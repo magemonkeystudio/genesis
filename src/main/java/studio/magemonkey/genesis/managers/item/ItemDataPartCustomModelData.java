@@ -40,12 +40,12 @@ public class ItemDataPartCustomModelData extends ItemDataPart {
                 return shopItem.getItemMeta().getCustomModelData() == playerItem.getItemMeta().getCustomModelData();
             }
 
-            // If the model presence does not match, we can assume that they are not similar
-            return false;
+            // If the model presence does not match, they are similar only if the shop item does not have custom model data
+            return !shopItem.getItemMeta().hasCustomModelData();
         }
 
-        // If the hasItemMeta does not match, we can assume that they are not similar
-        return false;
+        // If the hasItemMeta does not match, they are similar only if the shop item does not have item meta
+        return !shopItem.hasItemMeta();
     }
 
     @Override
