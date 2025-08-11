@@ -1,0 +1,77 @@
+Main:
+  NoPermission: '&cVocê não tem permissão para fazer isso!'
+  AlreadyBought: '&cVocê já comprou isso!'
+  ShopNotExisting: '&cEssa loja não existe...'
+  ShopItemNotExisting: '&cEsse item da loja não existe...'
+  OpenShop: ''
+  OpenShopOtherPlayer: '&6Abrindo a loja &c%shop% &6para %player%&6.'
+  CloseShopOtherPlayer: '&6Fechou o inventário de %player%&6.'
+  CloseShop: ''
+  InventoryFull: '&cSeu inventário não tem espaço suficiente!'
+  PlayerNotFound: '&cJogador %name% não encontrado!'
+  ClickSpamWarning: '&cAguarde mais %time_left% segundos para usar isso novamente.'
+  OffensiveClickSpamWarning: '&4Aviso: Por favor, não clique tão rápido.'
+  OffensiveClickSpamKick: '&4Expulso por clique excessivo.'
+  NeedItemInHand: '&cVocê precisa de um item na mão principal para executar este comando.'
+  PrintedItemInfo: '&6Todas as informações do item foram salvas com sucesso em: &7''/plugins/Genesis/ItemDataStorage.yml''&6.'
+  ListAndSeparator: ' & '
+  ListOrSeparator: ' ou '
+  WorldNotExisting: "&cEsse mundo não existe..."
+  StartReload: "&eReiniciando Genesis..."
+  ReloadFinish: "&eConcluído!"
+Economy:
+  NoAccount: '&cVocê não tem uma conta econômica!'
+ShopCreate:
+  Success: "&aO arquivo foi salvo em &7/plugins/Genesis/shops&a."
+  Success2: "&cPor favor, recarregue o plugin para ler o novo arquivo de loja gerado."
+  FileExists: "&cEsse arquivo já existe. Ele será sobrescrito."
+  Title: "Criando loja %shop% (Feche para salvar o arquivo)"
+  TitleHead: "Criando loja"
+Command:
+  Help1: "&c/Genesis - Abre a loja principal"
+  Help2: "&c/Genesis <shop> [input] - Abre a loja especificada"
+  Help3: "&c/Genesis open <Shop> <Player> [input] - Abre a loja especificada para o jogador especificado"
+  Help4: "&c/Genesis close [Player] - Fecha o inventário do jogador especificado"
+  Help5: "&c/Genesis simulate <player> <shop> <shopitem> - Simula o clique"
+  Help6: "&c/Genesis reload - Recarrega o plugin"
+  Help7: "&c/Genesis read - Exibe os dados do item na mão principal"
+  Help8: "&c/Genesis create <shop> <title> - cria uma loja"
+  Help: "&c/Genesis help - Mostra esta ajuda"
+NotEnough:
+  Money: '&cVocê não tem dinheiro suficiente!'
+  Item: '&cVocê não tem itens suficientes!'
+  Points: '&cVocê não tem pontos suficientes!'
+  Exp: '&cVocê não tem EXP suficiente!'
+  Or: '&cVocê não tem recursos suficientes!'
+Enchantment:
+  Invalid: '&cVocê não pode encantar o item na sua mão principal com este encantamento!'
+  EmptyHand: '&cVocê precisa estar segurando um item!'
+Display:
+  Exp: '%levels% Níveis de Exp'
+  Money: '%money% Dinheiro'
+  Points: '%points% Pontos'
+  Item: '%items%'
+  ItemAll: 'todos %item%'
+  ItemAllBuy: 'um inventário cheio de %item%'
+  ItemAllEach: '%value% cada'
+  Nothing: 'nada'
+  BungeeCordServer: 'Teleportar para o servidor %server%'
+  BungeeCordCommand: 'Comandos BungeeCord: %commands%'
+  Close: 'Fechar loja'
+  Command: 'Comandos do console: %commands%'
+  Custom: 'Desconhecido'
+  Enchantment: 'Encantamento: %type% nível %level%'
+  Permission: 'Permissões: %permissions%'
+  PlayerCommand: 'Comandos: %commands%'
+  PlayerCommandOp: 'Comandos: %commands%'
+  Shop: 'Abrir loja %shop%'
+  Page: 'Abrir página da loja %page%'
+  Teleport: 'Teleportar para %world% x:%x% y:%y% z:%z%'
+  TeleportWorld: 'Teleportar para %world%'
+  Message: 'Mensagens: %messages%'
+Time:
+  Seconds: '%time% segundos'
+  Minutes: '%time% minutos'
+  Hours: '%time% horas'
+  Days: '%time% dias'
+  Weeks: '%time% semanas'
