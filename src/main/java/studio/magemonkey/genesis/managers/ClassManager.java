@@ -133,10 +133,10 @@ public class ClassManager {
                                 +
                                 "Others are simply ignored.");
             }
-        }else if (Bukkit.getPluginManager().isPluginEnabled("EpicSpawners")) {
+        } else if (Bukkit.getPluginManager().isPluginEnabled("EpicSpawners")) {
             spawnerHandler = new SpawnersHandlerEpicSpawners();
         } else {
-            spawnerHandler = new studio.magemonkey.genesis.managers.external.spawners.SpawnerHandlerVanilla();
+            spawnerHandler = new SpawnerHandlerVanilla();
         }
 
     }
