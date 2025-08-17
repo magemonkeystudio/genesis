@@ -22,7 +22,7 @@ public class SpawnerHandlerVanilla implements ISpawnerHandler {
      * - If the name is invalid, logs the error and returns {@code null}.
      * - If the item lacks {@link BlockStateMeta}, returns the original item unchanged.
      * - Otherwise, updates the underlying {@link CreatureSpawner} to the parsed type,
-     *   updates the meta, and sets a display name in the form "{entityName} &7Spawner".
+     *   updates the meta, and sets a display name in the form "{entityName} &amp;7Spawner".
      *
      * <p>Note: The provided {@link ItemStack} is mutated in place and also returned.
      *
