@@ -18,7 +18,6 @@ import studio.magemonkey.genesis.managers.CommandManager;
 import studio.magemonkey.genesis.managers.config.ConfigKeyCompleter;
 
 public class Genesis extends JavaPlugin {
-
     public final static String            NAME = "Genesis";
     private             ClassManager      manager;
     private             InventoryListener il;
@@ -197,5 +196,43 @@ public class Genesis extends JavaPlugin {
                 shop.close();
             }
         }
+    }
+
+    public static long getVersionWeight(String version) {
+        // If the format doesn't match X.X(.X), return 0
+        if (!version.matches("\\d+(\\.\\d+){1,2}")) {
+            return 0;
+        }
+
+        String[] parts  = version.split("\\.");
+        long     weight = 0;
+        // The major version is multiplied by 10000
+        // The minor version is multiplied by 100
+        // The patch version is added as is
+        if (parts.length >= 1) {
+            weight += Long.parseLong(parts[0]) * 10000; // Major version
+        }
+        if (parts.length >= 2) {
+            weight += Long.parseLong(parts[1]) * 100; // Minor version
+        }
+        if (parts.length >= 3) {
+            weight += Long.parseLong(parts[2]); // Patch version
+        }
+        return weight;
+    }
+
+    public static long getVersionWeight() {
+        String version = Bukkit.getServer().getBukkitVersion();
+        // This should be in the format of "1.21.8-R0.1-SNAPSHOT"
+        // We just want the 1.21.8 part
+        String[] parts       = version.split("-");
+        String   versionPart = parts[0];
+        long     weight      = getVersionWeight(versionPart);
+
+        if (weight == 0) {
+            throw new IllegalArgumentException("Invalid version format: " + version);
+        }
+
+        return weight;
     }
 }

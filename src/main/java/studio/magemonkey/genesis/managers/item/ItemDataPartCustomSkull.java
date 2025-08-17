@@ -6,9 +6,11 @@ import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.profile.PlayerProfile;
 import studio.magemonkey.genesis.core.GenesisBuy;
 import studio.magemonkey.genesis.managers.ClassManager;
@@ -22,52 +24,57 @@ import java.util.*;
 public class ItemDataPartCustomSkull extends ItemDataPart {
 
     public static ItemStack transformSkull(ItemStack i, String input) {
-        if (input == null || input.isEmpty() || input.equalsIgnoreCase("%input%")) {
+        if (input == null || input.isEmpty()) {
             return i;
         }
 
         SkullMeta skullMeta = (SkullMeta) i.getItemMeta();
         if (skullMeta == null) return i;
-        UUID id = UUID.randomUUID();
-        if (input.contains("http://textures.minecraft.net/texture")
-                || input.contains("https://textures.minecraft.net/texture")) {
-            try {
-                PlayerProfile pprofile =
-                        Bukkit.createPlayerProfile(id, id.toString().replace("-", "").substring(0, 16));
-                pprofile.getTextures().setSkin(new URL(input));
-                skullMeta.setOwnerProfile(pprofile);
-                i.setItemMeta(skullMeta);
-                return i;
-            } catch (MalformedURLException e) {
-                throw new RuntimeException("Could not convert url to texture: " + input, e);
+        if (ClassManager.manager.getStringManager().checkStringForFeatures(null, null, null, input)) {
+            NamespacedKey key = new NamespacedKey(ClassManager.manager.getPlugin(), "skullTexturePlaceholder");
+            skullMeta.getPersistentDataContainer().set(key, PersistentDataType.STRING, input);
+        } else {
+            UUID id = UUID.randomUUID();
+            if (input.contains("http://textures.minecraft.net/texture")
+                    || input.contains("https://textures.minecraft.net/texture")) {
+                try {
+                    PlayerProfile pprofile =
+                            Bukkit.createPlayerProfile(id, id.toString().replace("-", "").substring(0, 16));
+                    pprofile.getTextures().setSkin(new URL(input));
+                    skullMeta.setOwnerProfile(pprofile);
+                    i.setItemMeta(skullMeta);
+                    return i;
+                } catch (MalformedURLException e) {
+                    throw new RuntimeException("Could not convert url to texture: " + input, e);
+                }
             }
-        }
 
-        try {
-            PlayerProfile playerProfile =
-                    Bukkit.createPlayerProfile(id, id.toString().replace("-", "").substring(0, 16));
-            String decoded = new String(Base64.getDecoder().decode(input));
-            // Construct the json object
-            JsonObject json = new Gson().fromJson(decoded, JsonObject.class);
-            // Get the textures object
-            JsonObject texturesJson = json.getAsJsonObject("textures");
-            // Get the skin object
-            JsonObject skin = texturesJson.getAsJsonObject("SKIN");
-            // Get the url
-            String url = skin.get("url").getAsString();
-            playerProfile.getTextures().setSkin(new URL(url));
-            skullMeta.setOwnerProfile(playerProfile);
-        } catch (MalformedURLException | NoClassDefFoundError | NoSuchMethodError | IllegalArgumentException e) {
             try {
-                String      cleaned = id.toString().replace("-", "");
-                GameProfile profile = new GameProfile(id, cleaned.substring(0, Math.min(cleaned.length(), 16)));
-                profile.getProperties().put("textures", getProperty(input));
-                Field profileField = skullMeta.getClass().getDeclaredField("profile");
-                profileField.setAccessible(true);
-                profileField.set(skullMeta, profile);
-            } catch (NoSuchFieldException | SecurityException | IllegalAccessException e1) {
-                ClassManager.manager.getBugFinder().warn("Could not set profile texture: " + input);
-                e1.printStackTrace();
+                PlayerProfile playerProfile =
+                        Bukkit.createPlayerProfile(id, id.toString().replace("-", "").substring(0, 16));
+                String decoded = new String(Base64.getDecoder().decode(input));
+                // Construct the json object
+                JsonObject json = new Gson().fromJson(decoded, JsonObject.class);
+                // Get the textures object
+                JsonObject texturesJson = json.getAsJsonObject("textures");
+                // Get the skin object
+                JsonObject skin = texturesJson.getAsJsonObject("SKIN");
+                // Get the url
+                String url = skin.get("url").getAsString();
+                playerProfile.getTextures().setSkin(new URL(url));
+                skullMeta.setOwnerProfile(playerProfile);
+            } catch (MalformedURLException | NoClassDefFoundError | NoSuchMethodError | IllegalArgumentException e) {
+                try {
+                    String      cleaned = id.toString().replace("-", "");
+                    GameProfile profile = new GameProfile(id, cleaned.substring(0, Math.min(cleaned.length(), 16)));
+                    profile.getProperties().put("textures", getProperty(input));
+                    Field profileField = skullMeta.getClass().getDeclaredField("profile");
+                    profileField.setAccessible(true);
+                    profileField.set(skullMeta, profile);
+                } catch (NoSuchFieldException | SecurityException | IllegalAccessException e1) {
+                    ClassManager.manager.getBugFinder().warn("Could not set profile texture: " + input);
+                    e1.printStackTrace();
+                }
             }
         }
         i.setItemMeta(skullMeta);

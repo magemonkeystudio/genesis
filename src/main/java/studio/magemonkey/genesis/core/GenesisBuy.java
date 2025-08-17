@@ -491,7 +491,7 @@ public class GenesisBuy {
      * @param rewardType RewardType.
      * @param priceType  PriceType.
      * @param event      Click event which caused purchase. Can be null (for example when click is simulated).
-     * @param plugin     Bossshop plugin.
+     * @param plugin     Genesis plugin.
      */
     public void purchaseTask(final Player p,
                              final GenesisShop shop,

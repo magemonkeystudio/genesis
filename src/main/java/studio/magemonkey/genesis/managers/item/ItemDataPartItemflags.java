@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import studio.magemonkey.codex.core.Version;
+import studio.magemonkey.genesis.Genesis;
 import studio.magemonkey.genesis.core.GenesisBuy;
 import studio.magemonkey.genesis.managers.ClassManager;
 
@@ -20,7 +20,7 @@ public class ItemDataPartItemflags extends ItemDataPart {
 
         if (argument.equalsIgnoreCase("true") || argument.equalsIgnoreCase("all")) {
             meta.addItemFlags(ItemFlag.values());
-            if (Version.CURRENT.isAtLeast(Version.V1_20_R4)) {
+            if (Genesis.getVersionWeight() > Genesis.getVersionWeight("1.20.4")) {
                 // We have to add a default attribute in order to hide attributes
                 meta.addAttributeModifier(Attribute.ATTACK_DAMAGE,
                         new AttributeModifier(Attribute.ATTACK_DAMAGE.getKey().getKey(),
@@ -38,7 +38,8 @@ public class ItemDataPartItemflags extends ItemDataPart {
                 try {
                     ItemFlag itemflag = ItemFlag.valueOf(flag.toUpperCase());
 
-                    if (itemflag == ItemFlag.HIDE_ATTRIBUTES && Version.CURRENT.isAtLeast(Version.V1_20_R4)) {
+                    if (itemflag == ItemFlag.HIDE_ATTRIBUTES &&
+                            Genesis.getVersionWeight() >= Genesis.getVersionWeight("1.20.4")) {
                         // We have to add a default attribute in order to hide attributes
                         meta.addAttributeModifier(Attribute.ATTACK_DAMAGE,
                                 new AttributeModifier(Attribute.ATTACK_DAMAGE.getKey().getKey(),
