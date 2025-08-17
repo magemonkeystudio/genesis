@@ -63,7 +63,7 @@ public abstract class ItemDataPart {
         PLAYERHEAD = registerType(new ItemDataPartPlayerhead());
         CUSTOMMODELDATA = registerType(new ItemDataPartCustomModelData());
         ITEMMODEL = registerType(new ItemDataPartItemModel());
-        MOBSPAWNER = registerType(new ItemDataPartMobspawner());
+        MOBSPAWNER = registerType(new ItemDataPartMobSpawner());
         MOBEGG = registerType(new ItemDataPartMobEgg());
         CUSTOMSKULL = registerType(new ItemDataPartCustomSkull());
         ITEMFLAGS = registerType(new ItemDataPartItemflags());
@@ -254,7 +254,6 @@ public abstract class ItemDataPart {
             return item;
         }
     }
-
 
     @Deprecated
     public abstract ItemStack transform(ItemStack item,

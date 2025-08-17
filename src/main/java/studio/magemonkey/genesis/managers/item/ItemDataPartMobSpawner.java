@@ -9,7 +9,7 @@ import studio.magemonkey.genesis.managers.ClassManager;
 import java.util.List;
 
 
-public class ItemDataPartMobspawner extends ItemDataPart {
+public class ItemDataPartMobSpawner extends ItemDataPart {
 
     @Override
     public ItemStack transform(ItemStack item, String usedName, String argument) {
