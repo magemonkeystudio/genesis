@@ -5,7 +5,7 @@
     <parent>
         <groupId>studio.magemonkey</groupId>
         <artifactId>magemonkey-parent</artifactId>
-        <version>1.21.8-R1</version>
+        <version>1.21.8-R1.1</version>
         <relativePath/>
     </parent>
 
@@ -18,7 +18,7 @@
     </url>
 
     <properties>
-        <divinity.version>1.0.2-R0.47-SNAPSHOT</divinity.version>
+        <divinity.version>1.0.2-R0.50-SNAPSHOT</divinity.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <nexus.url>https://central.sonatype.com</nexus.url>
