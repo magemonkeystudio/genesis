@@ -200,10 +200,10 @@ public class ItemStackTranslator {
                 if (meta instanceof SkullMeta) {
                     SkullMeta skullmeta = (SkullMeta) meta;
                     if (skullmeta.hasOwner()
-                            && skullmeta.getOwningPlayer() != null
-                            && skullmeta.getOwningPlayer().getName() != null) {
+                            && skullmeta.getOwnerProfile() != null
+                            && skullmeta.getOwnerProfile().getName() != null) {
                         if (s.checkStringForFeatures(shop, buy, item,
-                                skullmeta.getOwningPlayer().getName())) {
+                                skullmeta.getOwnerProfile().getName())) {
                             b = true;
                         }
                     }

@@ -86,7 +86,7 @@ public class ItemDataPartPlayerhead extends ItemDataPart {
                     return false;
                 }
 
-                return ms.getOwningPlayer().getUniqueId().equals(mp.getOwningPlayer().getUniqueId());
+                return ms.getOwnerProfile().getUniqueId().equals(mp.getOwnerProfile().getUniqueId());
             }
         }
         return true;
