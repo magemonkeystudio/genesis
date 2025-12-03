@@ -46,6 +46,8 @@ public class BuyItemHandler {
 
         if (buy == null) { //If addons did not create own item create a default one here!
             buyItems.addAll(createBuyItem(shop, name, c));
+        } else {
+            buyItems.add(buy);
         }
 
         if (shop != null) {
