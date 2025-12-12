@@ -227,6 +227,15 @@ public class InputReader {
         return exception;
     }
 
+    public static boolean isInt(String s) {
+        try {
+            Integer.parseInt(s);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
     /**
      * Get an int from an object
      *

@@ -24,11 +24,11 @@ public class ItemDataPartMaterial extends ItemDataPart {
         Material m;
 
         if (argument.contains(":")) { // Can be used for durability
-            String[] parts = argument.split(":");
-            if (parts.length > 1) {
+            String[] parts = argument.split(":", 2);
+            if (parts.length > 1 && InputReader.isInt(parts[1].trim())) {
                 durability = (short) InputReader.getInt(parts[1].trim(), 0);
+                argument = parts[0].trim();
             }
-            argument = parts[0].trim();
         }
 
         if (argument.contains("/")) {
