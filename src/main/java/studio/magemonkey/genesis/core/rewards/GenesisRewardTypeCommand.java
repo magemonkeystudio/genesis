@@ -43,7 +43,7 @@ public class GenesisRewardTypeCommand extends GenesisRewardType {
 
         for (String s : commands) {
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
-                    ClassManager.manager.getStringManager().transform(s, buy, null, null, p));
+                    ClassManager.manager.getStringManager().transform(s, buy, null, null, p, false));
         }
         if (p.getOpenInventory() != null & !ClassManager.manager.getPlugin()
                 .getAPI()

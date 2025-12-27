@@ -37,6 +37,10 @@ public class StringManager {
      * @return transformed string
      */
     public String transform(String s) {
+        return transform(s, true);
+    }
+
+    public String transform(String s, boolean colorize) {
         if (s == null) {
             return null;
         }
@@ -66,7 +70,9 @@ public class StringManager {
                 .replace("[up]", "↑")
                 .replace("[down]", "↓");
 
-        s = colorize(s);
+        if (colorize) {
+            s = colorize(s);
+        }
 
         if (ClassManager.manager.getSettings().getServerPingingEnabled(true)) {
             s = ClassManager.manager.getServerPingingManager().transform(s);
@@ -92,6 +98,15 @@ public class StringManager {
     }
 
     public String transform(String s, GenesisBuy item, GenesisShop shop, GenesisShopHolder holder, Player target) {
+        return transform(s, item, shop, holder, target, true);
+    }
+
+    public String transform(String s,
+                            GenesisBuy item,
+                            GenesisShop shop,
+                            GenesisShopHolder holder,
+                            Player target,
+                            boolean colorize) {
         if (s == null) {
             return null;
         }
@@ -118,10 +133,14 @@ public class StringManager {
             s = event.getText();
         }
 
-        return transform(s, target);
+        return transform(s, target, colorize);
     }
 
     public String transform(String s, Player target) {
+        return transform(s, target, true);
+    }
+
+    public String transform(String s, Player target, boolean colorize) {
         if (s == null) {
             return null;
         }
@@ -180,7 +199,7 @@ public class StringManager {
             }
         }
 
-        return transform(s);
+        return transform(s, colorize);
     }
 
 
