@@ -1,4 +1,4 @@
-[![Build](https://github.com/magemonkeystudio/genesis/actions/workflows/release.yml/badge.svg?branch=main)](https://repo.travja.dev/snapshots/studio/magemonkey/genesis)
+[![Build](https://github.com/magemonkeystudio/genesis/actions/workflows/release.yml/badge.svg?branch=main)](https://repo.travja.dev/releases/studio/magemonkey/genesis)
 [![Build](https://github.com/magemonkeystudio/genesis/actions/workflows/devbuild.yml/badge.svg?branch=dev)](https://repo.travja.dev/snapshots/studio/magemonkey/genesis)
 
 # Genesis
