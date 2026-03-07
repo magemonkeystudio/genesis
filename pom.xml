@@ -14,7 +14,7 @@
     <name>Genesis</name>
     <description>Create virtual chest shops</description>
     <url>
-        https://www.spigotmc.org/resources/genesis-custom-gui-and-shop-creator-by-magemonkey-studio-formerly-bossshoppro.104824/
+        https://www.spigotmc.org/resources/genesis-custom-gui-and-shop-creator-by-voidedge-formerly-bossshoppro.104824/
     </url>
 
     <properties>
@@ -395,9 +395,9 @@
 
     <developers>
         <developer>
-            <name>MageMonkeyStudio</name>
-            <organization>MageMonkeyStudio</organization>
-            <organizationUrl>https://magemonkey.studio</organizationUrl>
+            <name>VoidEdge</name>
+            <organization>VoidEdge</organization>
+            <organizationUrl>https://void.travja.dev</organizationUrl>
         </developer>
     </developers>
 

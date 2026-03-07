@@ -30,7 +30,7 @@ embed = {
         'url': 'https://github.com/magemonkeystudio/' + name
     },
     'image': {
-        'url': 'https://fabled.magemonkey.studio/' + ('dev_build.gif' if is_dev else 'release_build.gif')
+        'url': 'https://fabled.travja.dev/' + ('dev_build.gif' if is_dev else 'release_build.gif')
     },
     'title': version,
     'description': 'Click the link above to download the new build!',
