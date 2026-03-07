@@ -21,7 +21,7 @@
         <divinity.version>1.0.2-R0.50-SNAPSHOT</divinity.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <nexus.url>https://central.sonatype.com</nexus.url>
+        <nexus.url>https://repo.travja.dev</nexus.url>
     </properties>
 
     <repositories>
