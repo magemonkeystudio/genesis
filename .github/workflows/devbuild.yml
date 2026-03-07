@@ -52,7 +52,7 @@ jobs:
           git push
           git push --tags
       - name: Notify Discord
-        run: |
-          python -m venv .venv
-          .venv/bin/pip install simplejson requests
-          .venv/bin/python ./.github/notify_published.py ${{ secrets.BSP_WEBHOOK }} true
+        uses: magemonkeystudio/.github/actions/notify-discord@main
+        with:
+          webhook_urls: ${{ secrets.WEBHOOK_URLS }}
+          is_dev: 'true'
