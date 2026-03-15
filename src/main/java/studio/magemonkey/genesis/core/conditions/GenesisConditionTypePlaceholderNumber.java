@@ -36,22 +36,26 @@ public class GenesisConditionTypePlaceholderNumber extends GenesisConditionType 
             n %= divisor;
         }
 
+        // Resolve any placeholders in the comparison value
+        String resolvedCondition = ClassManager.manager.getStringManager()
+                .transform(condition, shopItem, shopItem.getShop(), null, p).trim();
+
         // Basic operations
         if (conditiontype.equalsIgnoreCase("over") || conditiontype.equalsIgnoreCase(">")) {
-            double d = InputReader.getDouble(condition, -1);
+            double d = InputReader.getDouble(resolvedCondition, -1);
             return n > d;
         }
         if (conditiontype.equalsIgnoreCase("under") || conditiontype.equalsIgnoreCase("<")
                 || conditiontype.equalsIgnoreCase("below")) {
-            double d = InputReader.getDouble(condition, -1);
+            double d = InputReader.getDouble(resolvedCondition, -1);
             return n < d;
         }
         if (conditiontype.equalsIgnoreCase("equals") || conditiontype.equalsIgnoreCase("=")) {
-            return equals(n, condition.split(","));
+            return equals(n, resolvedCondition.split(","));
         }
 
         if (conditiontype.equalsIgnoreCase("between") || conditiontype.equalsIgnoreCase("inbetween")) {
-            String[] parts = condition.split("-");
+            String[] parts = resolvedCondition.split("-");
             if (parts.length == 2) {
                 double start = InputReader.getDouble(parts[0], -1);
                 double end   = InputReader.getDouble(parts[1], -1);
@@ -104,7 +108,8 @@ public class GenesisConditionTypePlaceholderNumber extends GenesisConditionType 
 
     @Override
     public String[] showStructure() {
-        return new String[]{"[string]:over:[double]", "[string]:under:[double]", "[string]:equals:[double]", "[string]:between:[double]-[double]"};
+        return new String[]{"[string]:over:[number or placeholder]", "[string]:under:[number or placeholder]",
+                "[string]:equals:[number or placeholder]", "[string]:between:[number or placeholder]-[number or placeholder]"};
     }
 
 }
