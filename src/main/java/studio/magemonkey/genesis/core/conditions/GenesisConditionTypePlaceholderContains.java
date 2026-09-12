@@ -42,10 +42,7 @@ public class GenesisConditionTypePlaceholderContains extends GenesisConditionTyp
                                   String condition) {
         String[] parts = condition.split(":", 2);
         if (parts.length < 2) {
-            ClassManager.manager.getBugFinder()
-                    .warn("Unable to read placeholdercontains condition " + conditionType + ":" + condition
-                            + " of shopitem " + shopItem.getName()
-                            + ". It should look like following: '<Placeholder text>:<contains/notcontains>:<text>'.");
+            warnBadFormat(shopItem, conditionType, condition);
             return false;
         }
         if (parts[0].equalsIgnoreCase("contains")) {
@@ -54,11 +51,15 @@ public class GenesisConditionTypePlaceholderContains extends GenesisConditionTyp
         if (parts[0].equalsIgnoreCase("notcontains")) {
             return isCorrect(p, false, parts[1], conditionType);
         }
+        warnBadFormat(shopItem, conditionType, condition);
+        return false;
+    }
+
+    private void warnBadFormat(GenesisBuy shopItem, String conditionType, String condition) {
         ClassManager.manager.getBugFinder()
                 .warn("Unable to read placeholdercontains condition " + conditionType + ":" + condition
                         + " of shopitem " + shopItem.getName()
                         + ". It should look like following: '<Placeholder text>:<contains/notcontains>:<text>'.");
-        return false;
     }
 
 
