@@ -40,7 +40,8 @@ public abstract class GenesisConditionType {
             WORLD,
             WEATHER,
             PLACEHOLDERNUMBER,
-            PLACEHOLDERMATCH;
+            PLACEHOLDERMATCH,
+            PLACEHOLDERCONTAINS;
 
 
     private static List<GenesisConditionType> types;
@@ -77,6 +78,7 @@ public abstract class GenesisConditionType {
         WEATHER = registerType(new GenesisConditionTypeWeather());
         PLACEHOLDERNUMBER = registerType(new GenesisConditionTypePlaceholderNumber());
         PLACEHOLDERMATCH = registerType(new GenesisConditionTypePlaceholderMatch());
+        PLACEHOLDERCONTAINS = registerType(new GenesisConditionTypePlaceholderContains());
     }
 
     public static GenesisConditionType registerType(GenesisConditionType type) {
