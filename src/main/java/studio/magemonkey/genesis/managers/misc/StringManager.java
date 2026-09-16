@@ -4,8 +4,10 @@ package studio.magemonkey.genesis.managers.misc;
 import lombok.NonNull;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import studio.magemonkey.genesis.core.GenesisBuy;
 import studio.magemonkey.genesis.core.GenesisShop;
 import studio.magemonkey.genesis.core.GenesisShopHolder;
@@ -20,15 +22,19 @@ import studio.magemonkey.genesis.misc.Misc;
 import studio.magemonkey.genesis.misc.VersionManager;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
 public class StringManager {
 
-    private static final Pattern hexPattern         = Pattern.compile("(#[a-fA-F0-9]{6})");
-    private static final Pattern placeholderPattern = Pattern.compile("%(.*?)%");
+    private static final Pattern hexPattern              = Pattern.compile("(#[a-fA-F0-9]{6})");
+    private static final Pattern placeholderPattern      = Pattern.compile("%(.*?)%");
+    private static final Pattern enchantLevelPattern     = Pattern.compile("%item_in_hand_enchant_([a-zA-Z0-9_]+)%",
+            Pattern.CASE_INSENSITIVE);
 
     /**
      * Transform specific strings from one thing to another
@@ -190,6 +196,31 @@ public class StringManager {
                 s = s.replace("%item_in_hand%", Misc.getItemInMainHand(target).getType().name());
             }
 
+            if (s.contains("%item_in_hand_enchant_")) {
+                ItemStack           handItem     = Misc.getItemInMainHand(target);
+                Matcher             em           = enchantLevelPattern.matcher(s);
+                Map<String, String> replacements = new LinkedHashMap<>();
+                while (em.find()) {
+                    String      enchantName = em.group(1);
+                    Enchantment enchantment = InputReader.readEnchantment(enchantName);
+                    int         level       = 0;
+                    if (enchantment != null && handItem != null && !handItem.getType().isAir()) {
+                        if (handItem.getEnchantments().containsKey(enchantment)) {
+                            level = handItem.getEnchantments().get(enchantment);
+                        } else if (handItem.getItemMeta() instanceof EnchantmentStorageMeta) {
+                            EnchantmentStorageMeta meta = (EnchantmentStorageMeta) handItem.getItemMeta();
+                            if (meta.getStoredEnchants().containsKey(enchantment)) {
+                                level = meta.getStoredEnchants().get(enchantment);
+                            }
+                        }
+                    }
+                    replacements.put(em.group(0), String.valueOf(level));
+                }
+                for (Map.Entry<String, String> entry : replacements.entrySet()) {
+                    s = s.replace(entry.getKey(), entry.getValue());
+                }
+            }
+
             if (s.contains("%input%")) {
                 s = s.replace("%input%", ClassManager.manager.getPlayerDataHandler().getInput(target));
             }
@@ -234,6 +265,10 @@ public class StringManager {
             }
 
             if (s.contains("%world%")) {
+                b = true;
+            }
+
+            if (s.contains("%item_in_hand%") || s.contains("%item_in_hand_enchant_")) {
                 b = true;
             }
 
