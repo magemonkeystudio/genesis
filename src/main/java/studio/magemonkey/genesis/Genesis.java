@@ -230,6 +230,12 @@ public class Genesis extends JavaPlugin {
         long     weight      = getVersionWeight(versionPart);
 
         if (weight == 0) {
+            // In case '-' is not found, we might assume that newer version use '.' and need to be split on 26.1.2'.build'.2592-stable
+            parts = version.split(".build");
+            versionPart = parts[0];
+            weight = getVersionWeight(versionPart);
+            if(weight != 0)
+                return weight;
             throw new IllegalArgumentException("Invalid version format: " + version);
         }
 

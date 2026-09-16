@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>genesis</artifactId>
-    <version>1.0.2-R0.37-SNAPSHOT</version>
+    <version>1.0.2-R0.38-SNAPSHOT</version>
     <name>Genesis</name>
     <description>Create virtual chest shops</description>
     <url>
@@ -87,10 +87,6 @@
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
         </repository>
-        <repository>
-            <id>matteodev</id>
-            <url>https://maven.devs.beer/</url>
-        </repository>
     </repositories>
 
     <dependencies>
@@ -105,14 +101,14 @@
         <dependency>
             <groupId>de.tr7zw</groupId>
             <artifactId>item-nbt-api</artifactId>
-            <version>2.15.5</version>
+            <version>2.16.0</version>
         </dependency>
 
         <!-- Adds player points support -->
         <dependency>
             <groupId>org.black_ixx</groupId>
             <artifactId>playerpoints</artifactId>
-            <version>3.3.3</version>
+            <version>3.3.5</version>
             <scope>provided</scope>
         </dependency>
 
@@ -130,7 +126,7 @@
         <dependency>
             <groupId>io.lumine</groupId>
             <artifactId>Mythic-Dist</artifactId>
-            <version>5.11.2</version>
+            <version>5.13.0</version>
             <scope>provided</scope>
         </dependency>
 
@@ -193,7 +189,7 @@
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
-            <version>2.13.2</version>
+            <version>2.14.0</version>
             <scope>provided</scope>
         </dependency>
 
@@ -209,7 +205,7 @@
         <dependency>
             <groupId>me.clip</groupId>
             <artifactId>placeholderapi</artifactId>
-            <version>2.12.2</version>
+            <version>2.12.3</version>
             <scope>provided</scope>
         </dependency>
 
@@ -225,7 +221,7 @@
         <dependency>
             <groupId>com.bencodez</groupId>
             <artifactId>votingplugin</artifactId>
-            <version>7.0</version>
+            <version>7.1.1</version>
             <scope>provided</scope>
         </dependency>
 
@@ -286,9 +282,9 @@
 
         <!-- Adds itemsadder support -->
         <dependency>
-            <groupId>dev.lone</groupId>
-            <artifactId>api-itemsadder</artifactId>
-            <version>4.0.10</version>
+            <groupId>beer.devs</groupId>
+            <artifactId>itemsadder-api</artifactId>
+            <version>4.0.17</version>
             <scope>provided</scope>
         </dependency>
 
